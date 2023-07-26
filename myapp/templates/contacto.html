@@ -9,23 +9,23 @@
             <form id="contact-form" class="p-4 p-md-5" method="post">
               {% csrf_token %}
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="floatingName" name="name">
+                <input type="text" class="form-control" id="floatingName" name="name" placeholder="Nombre">
                 <label for="floatingName">Nombre</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="floatingLastName" name="last_name">
+                <input type="text" class="form-control" id="floatingLastName" name="last_name" placeholder="Apellido">
                 <label for="floatingLastName">Apellido</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInput" name="email">
+                <input type="email" class="form-control" id="floatingInput" name="email" placeholder="Email">
                 <label for="floatingInput">Email</label>
               </div>
               <div class="form-floating mb-3">
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="text"></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="text" placeholder="Texto"></textarea>
                 <label for="exampleFormControlTextarea1">Texto</label>
               </div>
 
-              <button class="w-100 btn btn-lg btn-primary" type="submit">Enviar</button>
+              <button id="submit-btn" class="w-100 btn btn-lg btn-primary" type="submit">Enviar</button>
             </form>
           </div>
         </div>
@@ -45,27 +45,80 @@
         $("#contact-form").submit(function (e) {
           e.preventDefault();
           var formData = $(this).serialize();
+          var submitBtn = $("#submit-btn");
+          var originalText = submitBtn.text(); // Guardamos el contenido original del botón
+    
+          // Validación de campos antes de enviar el formulario
+          var name = $("#floatingName").val().trim();
+          var lastName = $("#floatingLastName").val().trim();
+          var email = $("#floatingInput").val().trim();
+          var text = $("#exampleFormControlTextarea1").val().trim();
+          var isValid = true;
+    
+          if (name === "") {
+            $("#floatingName").addClass("is-invalid");
+            isValid = false;
+          } else {
+            $("#floatingName").removeClass("is-invalid");
+          }
+    
+          if (lastName === "") {
+            $("#floatingLastName").addClass("is-invalid");
+            isValid = false;
+          } else {
+            $("#floatingLastName").removeClass("is-invalid");
+          }
+    
+          if (email === "" || !isValidEmail(email)) {
+            $("#floatingInput").addClass("is-invalid");
+            isValid = false;
+          } else {
+            $("#floatingInput").removeClass("is-invalid");
+          }
+    
+          if (text === "") {
+            $("#exampleFormControlTextarea1").addClass("is-invalid");
+            isValid = false;
+          } else {
+            $("#exampleFormControlTextarea1").removeClass("is-invalid");
+          }
+    
+          if (!isValid) {
+            return; // Detener el envío del formulario si hay campos inválidos
+          }
     
           $.ajax({
             type: "POST",
             url: "{% url 'contacto' %}",
             data: formData,
+            beforeSend: function () {
+              submitBtn.text("Enviando..."); // Cambiar el texto del botón mientras se envía
+            },
             success: function (response) {
-              $("#contact-form")[0].reset();
               var toast = $("#success-toast");
               toast.find(".toast-body").text(response.message);
               toast.show();
               setTimeout(function () {
                 toast.hide();
-              }, 10000); // Hide the toast after 10 seconds
+              }, 8000); // Ocultar el toast después de 8 segundos
     
               $("#contact-form")[0].reset(); // Limpiar el formulario
             },
             error: function (error) {
               console.error(error);
-            }
+            },
+            complete: function () {
+              submitBtn.text(originalText); // Restaurar el contenido original del botón después de completar la solicitud
+            },
           });
         });
+    
+        // Función para validar el formato del correo electrónico
+        function isValidEmail(email) {
+          // Expresión regular para validar el formato del correo electrónico
+          var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          return emailPattern.test(email);
+        }
       });
     </script>
     
