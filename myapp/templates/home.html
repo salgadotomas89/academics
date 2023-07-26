@@ -1,1 +1,182 @@
-<h1>hola mundo</h1>
+{% extends 'layout.html' %}
+
+{% block content %}
+    
+   <div class="px-4 py-5  text-center  shadow-bottom ">
+    <img class="d-block mx-auto mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+    <h1 class="display-5 fw-bold text-body-emphasis">Soluciones Web para Colegios</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">Ofrecemos webs a medida para colegios, brindando soluciones digitales para su comunidad educativa. Nuestros sitios web son completamente responsivos y cuentan con un conjunto de características para facilitar la comunicación y el acceso a información relevante.</p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Conoce más</button>
+        <a href="{% url 'contacto' %}" type="button" class="btn btn-outline-secondary btn-lg px-4">Contáctanos</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid  py-5 shadow-bottom ">
+    <div class="container col-xxl-8 px-4 py-5">
+      <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-10 col-sm-8 col-lg-6">
+          <img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+        </div>
+        <div class="col-lg-6">
+          <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Comunicados</h1>
+          <p class="lead">Mantener <span id="word-change">informados</span> a la comunidad educativa con las últimas noticias y novedades. Aquí encontrarás artículos relevantes y actualizados sobre eventos, logros, actividades y todo lo relacionado con nuestra comunidad educativa.</p>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container-fluid bg-light py-5 shadow-top">
+    <div class="container col-xxl-8 px-4 py-5">
+        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+            <div class="col-10 col-sm-8 col-lg-6">
+                <img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+            </div>
+            <div class="col-lg-6">
+                <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Noticias</h1>
+                <p class="lead text">Mantener informados a la comunidad educativa con las últimas noticias y novedades. Aquí encontrarás artículos relevantes y actualizados sobre eventos, logros, actividades y todo lo relacionado con nuestra comunidad educativa.</p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
+                    <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid  py-5  ">
+  <div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col-10 col-sm-8 col-lg-6">
+        <img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+      </div>
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Comunicados</h1>
+        <p class="lead">Mantener <span id="word-change">informados</span> a la comunidad educativa con las últimas noticias y novedades. Aquí encontrarás artículos relevantes y actualizados sobre eventos, logros, actividades y todo lo relacionado con nuestra comunidad educativa.</p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
+          <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="myCarousel" class="carousel slide mb-6 bg-dark" data-bs-ride="carousel" data-bs-theme="light">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    
+    <div class="carousel-item active bg-info">
+     
+    </div>
+    
+    <div class="carousel-item">
+      <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
+      <div class="container">
+        <div class="carousel-caption">
+          <h1>Another example headline.</h1>
+          <p>Some representative placeholder content for the second slide of the carousel.</p>
+          <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
+      <div class="container">
+        <div class="carousel-caption text-end">
+          <h1>One more for good measure.</h1>
+          <p>Some representative placeholder content for the third slide of this carousel.</p>
+          <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+
+
+
+
+  <div class="container-fluid bg-light py-5  ">
+    <div class="container col-xxl-8 px-4 py-5">
+        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+            <div class="col-10 col-sm-8 col-lg-6">
+                <img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+            </div>
+            <div class="col-lg-6">
+                <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Calendario de evaluaciones</h1>
+                <p class="lead text">Mantener informados a la comunidad educativa con las últimas noticias y novedades. Aquí encontrarás artículos relevantes y actualizados sobre eventos, logros, actividades y todo lo relacionado con nuestra comunidad educativa.</p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
+                    <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+  <div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col-10 col-sm-8 col-lg-6">
+        <img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+      </div>
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Fotos</h1>
+        <p class="lead">Mantener informados a la comunidad educativa con las últimas noticias y novedades. Aquí encontrarás artículos relevantes y actualizados sobre eventos, logros, actividades y todo lo relacionado con nuestra comunidad educativa.</p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
+          <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <div class="container col-xl-10 col-xxl-8 px-4">
+        <div class="row align-items-center g-lg-5 py-5">
+          <div class="col-lg-7 text-center text-lg-start">
+            <h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">Versatil formulario de contacto</h1>
+            <p class="col-lg-10 fs-4">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+          </div>
+          <div class="col-md-10 mx-auto col-lg-5">
+            <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingName" >
+                <label for="floatingName">Nombre</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="floatingInput" >
+                <label for="floatingInput">Email</label>
+              </div>
+              <div class="form-floating mb-3">
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
+
+                <label for="exampleFormControlTextarea1">Texto</label>
+              </div>
+
+              <div class=" mb-3">
+                <input class="form-control" type="file" id="formFile">
+              </div>
+              
+              <button class="w-100 btn btn-lg btn-primary" type="submit">Enviar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      {% endblock %}
+
+
