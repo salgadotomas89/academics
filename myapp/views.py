@@ -2,14 +2,37 @@ from django.http import BadHeaderError, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
+from twilio.rest import Client
+
 from django.conf import settings
 from django.contrib import messages
 
-# Create your views here.
 
+def enviar_mensaje(numero_destino, mensaje):
+    client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+    client.messages.create(
+        to=numero_destino,
+        from_=settings.TWILIO_PHONE_NUMBER,
+        body=mensaje
+    )
+
+
+def enviar_mensaje_view(request):
+    # Código para obtener el número de destino y el mensaje desde el formulario o cualquier otra fuente
+    numero_destino = '+56997966996'  # Reemplaza con el número de teléfono de destino
+    mensaje = 'Mañana no hay clases, por haber una reunion de trabajdores'
+    enviar_mensaje(numero_destino, mensaje)
+    print('mensaje enviado')
+    return render(request, 'mensajes.html')
+
+def mensajes(request):
+    return render(request, 'mensajes.html')
 
 def home(request):
     return render(request, 'home.html')
+
+def precios(request):
+    return render(request, 'precios.html')
 
 @csrf_exempt
 def contacto(request):
@@ -39,3 +62,20 @@ def contacto(request):
 
     else:
         return render(request, 'contacto.html')
+    
+def periodo_prueba(request):
+
+    return render(request, 'periodo_prueba.html')
+    
+def preguntas_frecuentes(request):
+
+    return render(request, 'preguntas.html')
+
+def nosotros(request):
+
+    return render(request, 'nosotros.html')
+
+
+def artefactos(request):
+
+    return render(request, 'artefactos.html')

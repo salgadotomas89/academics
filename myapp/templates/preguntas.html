@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<div class="px-4 py-5 text-center d-flex align-items-center" style="height: 800px;">
+  <div class="container">
+      <h1 class="display-5 fw-bold text-body-emphasis mb-4">Preguntas frecuentes</h1>
+      <div class="col-lg-8 mx-auto">
+          <p class="lead mb-4 justificado">Con más de 6 años de experiencia en el sector educativo, hemos desarrollado y perfeccionado una amplia gama de recursos y soluciones destinadas a mejorar la gestión y la experiencia educativa en los colegios. A continuación, respondemos algunas de las preguntas más comunes sobre nuestros servicios.</p>
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  ¿Cuánto tiempo toma implementar un sitio web para mi colegio?
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  El tiempo de implementación varía según las necesidades específicas de cada colegio, pero generalmente toma entre 2 y 4 semanas. Esto incluye el diseño inicial, la personalización, la carga de contenido básico y la capacitación para el uso del sistema de gestión de contenidos. Trabajamos de cerca con cada cliente para asegurar que el proceso sea eficiente y se ajuste a sus tiempos y necesidades.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  ¿Qué tipo de soporte ofrecen después de la implementación?
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  Ofrecemos soporte continuo después de la implementación. Esto incluye asistencia técnica, actualizaciones de seguridad, y soporte para la gestión de contenidos. Nuestro equipo está disponible para resolver dudas y problemas, y también ofrecemos sesiones de capacitación adicionales si son necesarias. Además, realizamos mantenimiento regular para asegurar que tu sitio web funcione de manera óptima en todo momento.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  ¿Puedo personalizar el diseño de mi sitio web?
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  ¡Absolutamente! Ofrecemos un alto grado de personalización para que tu sitio web refleje la identidad única de tu colegio. Esto incluye la adaptación de colores, fuentes, y diseño general para que coincida con tu imagen institucional. También podemos incorporar funcionalidades específicas que tu colegio pueda necesitar. Nuestro objetivo es crear un sitio web que no solo sea funcional, sino que también represente fielmente a tu institución.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                  ¿Cómo garantizan la seguridad de la información en el sitio web?
+                </button>
+              </h2>
+              <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  La seguridad es nuestra prioridad. Implementamos medidas de seguridad robustas, incluyendo certificados SSL para encriptar la información, protección contra ataques DDoS, y copias de seguridad regulares. También ofrecemos diferentes niveles de acceso para los administradores del sitio, asegurando que solo el personal autorizado pueda modificar contenido sensible. Además, mantenemos nuestros sistemas actualizados con los últimos parches de seguridad y realizamos auditorías regulares para identificar y abordar cualquier vulnerabilidad potencial.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+</div>
+
+{% endblock %}

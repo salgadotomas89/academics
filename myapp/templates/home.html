@@ -1,36 +1,111 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    
-   <div class="px-4 py-5  text-center  shadow-bottom ">
-    <img class="d-block mx-auto mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-    <h1 class="display-5 fw-bold text-body-emphasis">Soluciones Web para Colegios</h1>
-    <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4">Ofrecemos webs a medida para colegios, brindando soluciones digitales para su comunidad educativa. Nuestros sitios web son completamente responsivos y cuentan con un conjunto de características para facilitar la comunicación y el acceso a información relevante.</p>
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Conoce más</button>
-        <a href="{% url 'contacto' %}" type="button" class="btn btn-outline-secondary btn-lg px-4">Contáctanos</a>
-      </div>
-    </div>
-  </div>
+{% load static %}
 
-  <div class="container-fluid  py-5 shadow-bottom ">
-    <div class="container col-xxl-8 px-4 py-5">
-      <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-        <div class="col-10 col-sm-8 col-lg-6">
-          <img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
-        </div>
-        <div class="col-lg-6">
-          <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Comunicados</h1>
-          <p class="lead">Mantener <span id="word-change">informados</span> a la comunidad educativa con las últimas noticias y novedades. Aquí encontrarás artículos relevantes y actualizados sobre eventos, logros, actividades y todo lo relacionado con nuestra comunidad educativa.</p>
-          <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-            <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
-            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+
+    
+<div class="d-flex align-items-center" style="min-height: 700px;">
+  <div class="container-fluid px-4">
+    <div class="row align-items-center justify-content-center g-0">
+      <div class="col-lg-5 text-lg-start ">
+        <div class="ms-5 py-5 ">
+          <h1 class="display-3 fw-bold text-body-emphasis mb-4">Webs para Colegios</h1>
+          <p class="lead mb-4 text-start">Potenciamos la comunicación y el acceso a la información con nuestras soluciones digitales, diseñadas específicamente para satisfacer las necesidades de colegios modernos.</p>          <div class="d-grid gap-3 d-sm-flex justify-content-sm-start">
+            <a href="{% url 'artefactos' %}" class="btn btn-primary btn-lg px-4 me-sm-3">Conoce más</a>
+            <a href="{% url 'contacto' %}" class="btn btn-outline-secondary btn-lg px-4">Contáctanos</a>
           </div>
         </div>
       </div>
+      <div class="col-lg-5 d-flex justify-content-center align-items-center ">
+        <img class="img-fluid py-5" src="{% static 'images/academics.png' %}" alt="Ilustración de académicos" style="max-width: 500px;">
+      </div>
     </div>
   </div>
+</div>
+
+
+<section class="shadow-bottom py-5">
+  <div class="container">
+      <h1 class="text-center display-5 fw-bold text-body-emphasis mb-4">Algunas caracteristicas</h1>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+          <div class="col">
+              <div class="card h-100 border-0">
+                  <div class="card-body text-center">
+                      <img src="/api/placeholder/80/80" alt="Diseño responsivo" class="mb-3" style="max-width: 80px;">
+                      <h5 class="card-title">Responsivo</h5>
+                      <p class="card-text">Diseñamos interfaces adaptables a cualquier dispositivo, garantizando una experiencia óptima en todos los tamaños de pantalla.</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col">
+              <div class="card h-100 border-0">
+                  <div class="card-body text-center">
+                      <img src="{% static 'images/automation.png' %}" alt="Autoadministrable" class="mb-3" style="max-width: 80px;">
+                      <h5 class="card-title">Autoadministrable</h5>
+                      <p class="card-text">Como usuarios, pueden modificar toda la información de su web de manera sencilla e intuitiva.</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col">
+              <div class="card h-100 border-0">
+                  <div class="card-body text-center">
+                      <img src="/api/placeholder/80/80" alt="Inteligencia artificial" class="mb-3" style="max-width: 80px;">
+                      <h5 class="card-title">Inteligencia artificial</h5>
+                      <p class="card-text">Integramos IA en tareas complejas para optimizar el tiempo y mejorar la eficiencia de los procesos.</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col">
+              <div class="card h-100 border-0">
+                  <div class="card-body text-center">
+                      <img src="/api/placeholder/80/80" alt="Información multilingüe" class="mb-3" style="max-width: 80px;">
+                      <h5 class="card-title">Información para todos</h5>
+                      <p class="card-text">Traducimos entre varios idiomas en tiempo real, practicamos gramática y creamos contenido multilingüe accesible.</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<div class="container-fluid py-5 shadow-bottom">
+  <div class="container col-xxl-8 px-4 py-5">
+      <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+          <div class="col-10 col-sm-8 col-lg-6">
+            <ul class="list-group  text-start">
+              <li class="list-group-item">Agregar y editar noticias, eventos y comunicados escolares con facilidad.</li>
+              <li class="list-group-item">Administrar galerías de fotos y videos para mostrar actividades escolares y logros estudiantiles.</li>
+              <li class="list-group-item">Actualizar información de contacto, horarios, personal docente y más.</li>
+              <li class="list-group-item">Publicar documentos importantes y boletines informativos.</li>
+              <li class="list-group-item">Personalizar el diseño y la estructura del sitio según las necesidades de su institución educativa.</li>
+          </ul>          </div>
+          <div class="col-lg-6">
+              <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Rapido despliegue</h1>
+              <div class="word-change-container">
+                  <p class="lead">Esto significa que usted y su equipo tendrán el control total sobre el contenido del sitio, permitiéndoles actualizar información importante de manera rápida y sencilla, sin depender de programadores o diseñadores web.</p>
+                  <!--
+                  <p class="lead">Con nuestras soluciones, usted podrá:</p>
+                  <ul class="list-group list-group-flush text-start">
+                      <li class="list-group-item">Agregar y editar noticias, eventos y comunicados escolares con facilidad.</li>
+                      <li class="list-group-item">Administrar galerías de fotos y videos para mostrar actividades escolares y logros estudiantiles.</li>
+                      <li class="list-group-item">Actualizar información de contacto, horarios, personal docente y más.</li>
+                      <li class="list-group-item">Publicar documentos importantes y boletines informativos.</li>
+                      <li class="list-group-item">Personalizar el diseño y la estructura del sitio según las necesidades de su institución educativa.</li>
+                  </ul>-->
+              </div>
+              <!--
+              <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                  <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
+                  <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+              </div>-->
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
 
 
   <div class="container-fluid bg-light py-5 shadow-top">
@@ -40,8 +115,8 @@
                 <img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
             </div>
             <div class="col-lg-6">
-                <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Noticias</h1>
-                <p class="lead text">Mantener informados a la comunidad educativa con las últimas noticias y novedades. Aquí encontrarás artículos relevantes y actualizados sobre eventos, logros, actividades y todo lo relacionado con nuestra comunidad educativa.</p>
+                <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Intuitiva</h1>
+                <p class="lead text"> texto relacionado a la seccion.</p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                     <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
                     <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
@@ -51,6 +126,8 @@
     </div>
 </div>
 
+<div class="position-relative">
+
 <div class="container-fluid  py-5  ">
   <div class="container col-xxl-8 px-4 py-5">
     <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
@@ -58,7 +135,7 @@
         <img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
       </div>
       <div class="col-lg-6">
-        <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Comunicados</h1>
+        <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">alguna otra seccion</h1>
         <p class="lead">Mantener <span id="word-change">informados</span> a la comunidad educativa con las últimas noticias y novedades. Aquí encontrarás artículos relevantes y actualizados sobre eventos, logros, actividades y todo lo relacionado con nuestra comunidad educativa.</p>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
           <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
@@ -69,43 +146,31 @@
   </div>
 </div>
 
-<div id="myCarousel" class="carousel slide mb-6 bg-dark" data-bs-ride="carousel" data-bs-theme="light">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    
-    <div class="carousel-item active bg-info">
-     
-    </div>
-    
-    <div class="carousel-item">
-      <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-      <div class="container">
-        <div class="carousel-caption">
-          <h1>Another example headline.</h1>
-          <p>Some representative placeholder content for the second slide of the carousel.</p>
-          <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
-        </div>
+
+
+
+<!-- Rectángulo negro entre las secciones -->
+<div class="position-absolute start-50 translate-middle bg-primary" style="width: 70%; height: 200px;  z-index: 1; display: flex; justify-content: center; align-items: center;">
+  <!-- Contenedor de los elementos -->
+  <div style="display: flex; align-items: center;">
+      <!-- Icono -->
+      <div style="margin-right: 10px;">
+          <!-- Inserta aquí tu icono -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-mailbox-flag" viewBox="0 0 16 16">
+            <path d="M10.5 8.5V3.707l.854-.853A.5.5 0 0 0 11.5 2.5v-2A.5.5 0 0 0 11 0H9.5a.5.5 0 0 0-.5.5v8zM5 7c0 .334-.164.264-.415.157C4.42 7.087 4.218 7 4 7s-.42.086-.585.157C3.164 7.264 3 7.334 3 7a1 1 0 0 1 2 0"/>
+            <path d="M4 3h4v1H6.646A4 4 0 0 1 8 7v6h7V7a3 3 0 0 0-3-3V3a4 4 0 0 1 4 4v6a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V7a4 4 0 0 1 4-4m0 1a3 3 0 0 0-3 3v6h6V7a3 3 0 0 0-3-3"/>
+          </svg>
       </div>
+      <!-- Texto -->
+      <div style="margin-right: 10px; color: white;">
+        Tu texto aquí
     </div>
-    <div class="carousel-item">
-      <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-      <div class="container">
-        <div class="carousel-caption text-end">
-          <h1>One more for good measure.</h1>
-          <p>Some representative placeholder content for the third slide of this carousel.</p>
-          <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
-        </div>
+      <!-- Botón -->
+      <div>
+          <button type="button" class="btn btn-dark">Botón</button>
       </div>
-    </div>
   </div>
-  
 </div>
-
-
 
 
 
@@ -113,20 +178,22 @@
     <div class="container col-xxl-8 px-4 py-5">
         <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
             <div class="col-10 col-sm-8 col-lg-6">
-                <img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+                <img src="{% static 'images/periodoPrueba.jpg.avif' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
             </div>
             <div class="col-lg-6">
-                <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Calendario de evaluaciones</h1>
-                <p class="lead text">Mantener informados a la comunidad educativa con las últimas noticias y novedades. Aquí encontrarás artículos relevantes y actualizados sobre eventos, logros, actividades y todo lo relacionado con nuestra comunidad educativa.</p>
+                <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Periodo de prueba</h1>
+                <p class="lead text">
+                  período de prueba gratuito de 15 dias.
+                </p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                    <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
-                    <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+                    <a href="{% url 'periodo_prueba' %}" type="button" class="btn btn-primary btn-lg px-4 me-md-2">Saber más</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+</div>
 
   <div class="container col-xxl-8 px-4 py-5">
     <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
@@ -134,48 +201,80 @@
         <img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
       </div>
       <div class="col-lg-6">
-        <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Fotos</h1>
-        <p class="lead">Mantener informados a la comunidad educativa con las últimas noticias y novedades. Aquí encontrarás artículos relevantes y actualizados sobre eventos, logros, actividades y todo lo relacionado con nuestra comunidad educativa.</p>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Ventaja competitiva</h1>
+        <p class="lead">
+
+          Destaca lo que hace a tu empresa única y por qué los colegios deberían elegirte. Puedes mencionar tu experiencia en el sector educativo, la calidad de tus diseños, el soporte personalizado que brindas a tus clientes, etc.
+        </p>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-start">
           <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
           <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
         </div>
       </div>
     </div>
   </div>
+ 
+  <div class="container-fluid bg-primary text-white py-5">
+    <div class="container text-center">
+      <h2 class="mb-3">¿Listo para transformar la comunicación en tu colegio?</h2>
+      <a href="{% url 'contacto' %}" class="btn btn-light btn-lg">Solicita una demo gratuita</a>
+    </div>
+  </div>
 
-
-    <div class="container col-xl-10 col-xxl-8 px-4">
-        <div class="row align-items-center g-lg-5 py-5">
-          <div class="col-lg-7 text-center text-lg-start">
-            <h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">Versatil formulario de contacto</h1>
-            <p class="col-lg-10 fs-4">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
-          </div>
-          <div class="col-md-10 mx-auto col-lg-5">
-            <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="floatingName" >
-                <label for="floatingName">Nombre</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInput" >
-                <label for="floatingInput">Email</label>
-              </div>
-              <div class="form-floating mb-3">
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
-
-                <label for="exampleFormControlTextarea1">Texto</label>
-              </div>
-
-              <div class=" mb-3">
-                <input class="form-control" type="file" id="formFile">
-              </div>
-              
-              <button class="w-100 btn btn-lg btn-primary" type="submit">Enviar</button>
-            </form>
-          </div>
+  
+  <div class="container-fluid bg-gradient py-5" style="background: linear-gradient(45deg, #007bff, #00c6ff);">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <h1 class="display-4 fw-bold t mb-4">Soporte técnico de primera clase</h1>
+                <p class="lead mb-4">
+                    Nuestro equipo de expertos está disponible 24/7 para asegurar que tu sitio web escolar funcione sin problemas. Ofrecemos:
+                </p>
+                
+                <div class="d-grid gap-3 d-sm-flex justify-content-sm-start">
+                    <a href="#" class="btn btn-outline-dark btn-lg px-4">Contactar soporte</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="bg-white p-5 rounded-lg shadow">
+                    <h3 class="h4 mb-4">¿Por qué elegir nuestro soporte?</h3>
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-primary rounded-circle p-3 me-3">
+                            <i class="bi bi-headset text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="h5 mb-1">Soporte 24/7</h4>
+                            <p class="mb-0 text-muted">Estamos aquí para ti, en cualquier momento</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-primary rounded-circle p-3 me-3">
+                            <i class="bi bi-shield-check text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="h5 mb-1">Resolución rápida de problemas</h4>
+                            <p class="mb-0 text-muted">Protegemos tu información y la de tus estudiantes</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="bg-primary rounded-circle p-3 me-3">
+                            <i class="bi bi-arrow-repeat text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="h5 mb-1">Actualizaciones constantes</h4>
+                            <p class="mb-0 text-muted">Mejoramos continuamente nuestros servicios</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+    </div>
+</div>
+
+
+  
+
+    
 
       {% endblock %}
 

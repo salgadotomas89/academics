@@ -1,0 +1,165 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static "css/estiloEncabzados.css" %}">
+<link rel="stylesheet" href="{% static 'css/scrollAnimation.css' %}">
+ 
+<header class="px-4 text-center d-flex align-items-center" style="height: 800px;">
+  <div class="container">
+      <h1 class="display-3 fw-bold text-body-emphasis">
+          <span class="word">Creados</span>
+          <span class="word">a</span>
+          <span class="word">partir</span>
+          <span class="word">de</span> 
+      </h1>
+
+      <h1 class="display-3 fw-bold text-body-emphasis">
+        <span class="word">10</span>
+        <span class="word">años</span>
+        <span class="word">de</span>
+        <span class="word">experiencia</span>
+      </h1>
+     
+      <div class="col-lg-8 mx-auto">
+          <p class="lead mb-4 justificado">Con más de 6 años de experiencia en el sector educativo, hemos desarrollado y perfeccionado una amplia gama de recursos y soluciones destinadas a mejorar la gestión y la experiencia educativa en los colegios. A estos recursos los llamamos "artefactos", y son el resultado de nuestra dedicación y compromiso con la mejora continua en la educación. Nuestros artefactos están diseñados para abordar diversas necesidades y desafíos que enfrentan las instituciones educativas en la actualidad.</p>
+      </div>
+  </div>
+</header>
+
+<section class="py-5 text-white bg-black" style="height: 300px; display: flex; justify-content: center; align-items: center;">
+  <h4 class="">Integramos GPT en los artefactos</h4>
+  <img src="{% static 'images/openai.png' %}" alt="Descripción de la imagen" style="max-width: 100%; max-height: 100%;" class="">
+</section>
+
+<main>
+  <section class="py-5">
+    <div class="container col-xxl-8 px-4 py-5">
+        <div class="row align-items-center g-5 py-5">
+            <div class="col-lg-6 fade-in-element fade-in-left">
+                <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Comunicados</h2>
+                <div class="word-change-container">
+                    <p class="lead">Mantener informados a la comunidad educativa con las últimas noticias y novedades. Aquí encontrarás artículos relevantes y actualizados sobre eventos, logros, actividades y todo lo relacionado con nuestra comunidad educativa.</p>
+                </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
+                    <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+                </div>
+            </div>
+            <div class="col-10 col-sm-8 col-lg-6 fade-in-element fade-in-right">
+                <img src="{% static 'images/comunicados.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <section class="bg-light py-5">
+    <div class="container col-xxl-8 px-4 py-5">
+        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+            <div class="col-lg-6 fade-in-element fade-in-right">
+                <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Noticias</h2>
+                <p class="lead">Mantener informados a la comunidad educativa con las últimas noticias y novedades. Aquí encontrarás artículos relevantes y actualizados sobre eventos, logros, actividades y todo lo relacionado con nuestra comunidad educativa.</p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
+                    <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+                </div>
+            </div>
+            <div class="col-10 col-sm-8 col-lg-6 fade-in-element fade-in-left">
+              <img src="{% static 'images/noticias.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <section class="py-5">
+    <div class="container col-xxl-8 px-4 py-5">
+      <div class="row align-items-center g-5 py-5">
+        <div class="col-lg-6 fade-in-element fade-in-left">
+          <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Eventos</h2>
+          <p class="lead">Mantener <span id="word-change">informados</span> a la comunidad educativa con las últimas noticias y novedades. Aquí encontrarás artículos relevantes y actualizados sobre eventos, logros, actividades y todo lo relacionado con nuestra comunidad educativa.</p>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+          </div>
+        </div>
+        <div class="col-10 col-sm-8 col-lg-6 fade-in-element fade-in-right">
+          <img src="{% static 'images/eventos.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-light py-5">
+    <div class="container col-xxl-8 px-4 py-5">
+        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+            <div class="col-lg-6 fade-in-element fade-in-right">
+                <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Calendario de evaluaciones</h2>
+                <p class="lead">Mantener informados a la comunidad educativa con las últimas noticias y novedades. Aquí encontrarás artículos relevantes y actualizados sobre eventos, logros, actividades y todo lo relacionado con nuestra comunidad educativa.</p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
+                    <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+                </div>
+            </div>
+            <div class="col-10 col-sm-8 col-lg-6 fade-in-element fade-in-left">
+              <img src="{% static 'images/calendario.jpg' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <section class="py-5">
+    <div class="container col-xxl-8 px-4 py-5">
+      <div class="row align-items-center g-5 py-5">
+        <div class="col-lg-6 fade-in-element fade-in-left">
+          <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Fotos</h2>
+          <p class="lead">Mantener informados a la comunidad educativa con las últimas noticias y novedades. Aquí encontrarás artículos relevantes y actualizados sobre eventos, logros, actividades y todo lo relacionado con nuestra comunidad educativa.</p>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+          </div>
+        </div>
+        <div class="col-10 col-sm-8 col-lg-6 fade-in-element fade-in-right">
+          <img src="{% static 'images/fotos.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<section class="py-5">
+  <div class="container col-xl-10 col-xxl-8 px-4">
+      <div class="row align-items-center g-lg-5 py-5">
+        <div class="col-lg-7 text-center text-lg-start fade-in-element fade-in-left">
+          <h2 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">Versátil formulario de contacto</h2>
+          <p class="col-lg-10 fs-4">Below is an example form built entirely with Bootstrap's form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+        </div>
+        <div class="col-md-10 mx-auto col-lg-5 fade-in-element fade-in-right">
+          <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="floatingName">
+              <label for="floatingName">Nombre</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control" id="floatingInput">
+              <label for="floatingInput">Email</label>
+            </div>
+            <div class="form-floating mb-3">
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
+              <label for="exampleFormControlTextarea1">Texto</label>
+            </div>
+            <div class="mb-3">
+              <input class="form-control" type="file" id="formFile">
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Enviar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+</section>
+
+<script src="{% static 'js/efectoEncabzados.js' %}"></script>   
+<script src="{% static 'js/scrollAnimation.js' %}"></script>  
+
+{% endblock %}
