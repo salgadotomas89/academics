@@ -31,6 +31,9 @@ def mensajes(request):
 def home(request):
     return render(request, 'home.html')
 
+def juego(request):
+    return render(request, 'juego.html')
+
 def precios(request):
     return render(request, 'precios.html')
 
@@ -72,8 +75,10 @@ def preguntas_frecuentes(request):
     return render(request, 'preguntas.html')
 
 def nosotros(request):
-
-    return render(request, 'nosotros.html')
+    context = {
+        'is_nosotros_page': True
+    }
+    return render(request, 'nosotros.html', context)
 
 
 def artefactos(request):

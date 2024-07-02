@@ -1,0 +1,59 @@
+.navbar-nav {
+    padding: 0.5rem 0;
+}
+
+.navbar-nav .nav-item {
+    position: relative;
+    z-index: 1;
+}
+
+.navbar-nav .nav-link {
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+}
+
+#menu-background-morph,
+#contact-background-morph {
+    background-color: rgba(0, 0, 0, 0.05);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 0;
+    height: 70%;
+    transition: all 0.3s ease;
+    opacity: 0;
+    border-radius: 15px;
+    transform: translateY(-50%);
+}
+
+.navbar-nav .nav-item:hover ~ #menu-background-morph,
+.navbar-nav .contact-item:hover ~ #contact-background-morph {
+    opacity: 1;
+}
+
+.navbar-nav .nav-item:nth-child(1):hover ~ #menu-background-morph {
+    width: 90px;
+    left: 0;
+}
+
+.navbar-nav .nav-item:nth-child(2):hover ~ #menu-background-morph {
+    width: 110px;
+    left: 90px;
+}
+
+.navbar-nav .nav-item:nth-child(3):hover ~ #menu-background-morph {
+    width: 100px;
+    left: 200px;
+}
+
+.navbar-nav .nav-item:nth-child(4):hover ~ #menu-background-morph {
+    width: 90px;
+    left: 300px;
+}
+
+/* Estilo para el ítem de contacto */
+.navbar-nav .contact-item:hover ~ #contact-background-morph {
+    width: 100px;
+    left: 0;
+    opacity: 1;
+}
