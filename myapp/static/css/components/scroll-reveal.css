@@ -1,0 +1,17 @@
+.fade-in-element {
+    opacity: 0;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-element.is-visible {
+    opacity: 1;
+    transform: translateX(0) !important;
+}
+
+.fade-in-left {
+    transform: translateX(-100%);
+}
+
+.fade-in-right {
+    transform: translateX(100%);
+}

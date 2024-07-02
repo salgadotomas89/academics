@@ -1,0 +1,14 @@
+.section-title {
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 3rem;
+}
+
+.join-us-section {
+    background: linear-gradient(45deg, #007bff, #00c6ff);
+}

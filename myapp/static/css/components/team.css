@@ -1,0 +1,24 @@
+.team-member {
+    transition: transform 0.3s ease-in-out;
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+}
+
+.team-member .image-container {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    position: relative;
+}
+
+.team-member .image-container img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

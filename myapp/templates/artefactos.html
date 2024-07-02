@@ -4,10 +4,13 @@
 
 {% load static %}
 
-<link rel="stylesheet" href="{% static "css/estiloEncabzados.css" %}">
-<link rel="stylesheet" href="{% static 'css/scrollAnimation.css' %}">
- 
-<header class="px-4 text-center d-flex align-items-center" style="height: 800px;">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+<link rel="stylesheet" href="{% static 'css/components/animated-header.css' %}">
+<link rel="stylesheet" href="{% static 'css/components/scroll-reveal.css' %}">
+<link rel="stylesheet" href="{% static 'css/sections.css' %}">
+<link rel="stylesheet" href="{% static 'css/utilities.css' %}">
+
+<header class="animated-header px-4 text-center d-flex align-items-center" style="height: 600px;">
   <div class="container">
       <h1 class="display-3 fw-bold text-body-emphasis">
           <span class="word">Creados</span>
@@ -15,14 +18,12 @@
           <span class="word">partir</span>
           <span class="word">de</span> 
       </h1>
-
       <h1 class="display-3 fw-bold text-body-emphasis">
         <span class="word">10</span>
         <span class="word">años</span>
         <span class="word">de</span>
         <span class="word">experiencia</span>
       </h1>
-     
       <div class="col-lg-8 mx-auto">
           <p class="lead mb-4 justificado">Con más de 6 años de experiencia en el sector educativo, hemos desarrollado y perfeccionado una amplia gama de recursos y soluciones destinadas a mejorar la gestión y la experiencia educativa en los colegios. A estos recursos los llamamos "artefactos", y son el resultado de nuestra dedicación y compromiso con la mejora continua en la educación. Nuestros artefactos están diseñados para abordar diversas necesidades y desafíos que enfrentan las instituciones educativas en la actualidad.</p>
       </div>
@@ -159,7 +160,7 @@
     </div>
 </section>
 
-<script src="{% static 'js/efectoEncabzados.js' %}"></script>   
-<script src="{% static 'js/scrollAnimation.js' %}"></script>  
+<script src="{% static 'js/components/animated-header.js' %}"></script>
+<script src="{% static 'js/components/scroll-reveal.js' %}"></script>
 
 {% endblock %}
