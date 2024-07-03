@@ -37,6 +37,9 @@ def juego(request):
 def precios(request):
     return render(request, 'precios.html')
 
+def seleccion_plan(request):
+    return render(request, 'seleccion_plan.html')
+
 @csrf_exempt
 def contacto(request):
     if request.method == 'POST':
