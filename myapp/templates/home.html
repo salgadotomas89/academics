@@ -3,8 +3,20 @@
 {% block content %}
 {% load static %}
 
+<style>
+  .features .card {
+      transition: transform 0.3s ease-in-out;
+      border-radius: 15px;  /* Esquinas más redondeadas */
+      background-color: #FBF5E4;  /* Color crema pastel */
+  }
+  .features .card:hover {
+      transform: translateY(-5px);
+  }
+  .features .badge {
+      font-weight: normal;
+  }
+</style>
 
-    
 <div class="d-flex align-items-center" style="min-height: 700px;">
   <div class="container-fluid px-4">
     <div class="row align-items-center justify-content-center g-0">
@@ -25,43 +37,41 @@
 </div>
 
 
-<section class="shadow-bottom py-5">
+
+<section class="features py-5 bg-white">  <!-- Cambiado a fondo blanco -->
   <div class="container">
-      <h1 class="text-center display-5 fw-bold text-body-emphasis mb-4">Algunas caracteristicas</h1>
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-          <div class="col">
-              <div class="card h-100 border-0">
-                  <div class="card-body text-center">
-                      <img src="/api/placeholder/80/80" alt="Diseño responsivo" class="mb-3" style="max-width: 80px;">
-                      <h5 class="card-title">Responsivo</h5>
-                      <p class="card-text">Diseñamos interfaces adaptables a cualquier dispositivo, garantizando una experiencia óptima en todos los tamaños de pantalla.</p>
+      <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 class="display-6 fw-bold">Características Destacadas</h2>
+          <a href="#" class="text-decoration-none">Ver todas</a>
+      </div>
+      <div class="row g-4">
+          <div class="col-md-6 col-lg-4">
+              <div class="card h-100 border-0 shadow-sm">
+                  <div class="card-body">
+                      <span class="badge bg-white text-dark mb-4">Diseño</span>
+                      <h5 class="card-title fw-bold">Responsivo</h5>
+                      <p class="card-text text-muted mb-5">Interfaces adaptables a cualquier dispositivo, garantizando una experiencia óptima.</p>
+                      <div class="text-muted small">Jun 20, 2024</div>
                   </div>
               </div>
           </div>
-          <div class="col">
-              <div class="card h-100 border-0">
-                  <div class="card-body text-center">
-                      <img src="{% static 'images/automation.png' %}" alt="Autoadministrable" class="mb-3" style="max-width: 80px;">
-                      <h5 class="card-title">Autoadministrable</h5>
-                      <p class="card-text">Como usuarios, pueden modificar toda la información de su web de manera sencilla e intuitiva.</p>
+          <div class="col-md-6 col-lg-4">
+              <div class="card h-100 border-0 shadow-sm">
+                  <div class="card-body">
+                      <span class="badge bg-white text-dark mb-4">Gestión</span>
+                      <h5 class="card-title fw-bold">Autoadministrable</h5>
+                      <p class="card-text text-muted mb-5">Modifica la información de tu web de manera sencilla e intuitiva.</p>
+                      <div class="text-muted small ">Jun 15, 2024</div>
                   </div>
               </div>
           </div>
-          <div class="col">
-              <div class="card h-100 border-0">
-                  <div class="card-body text-center">
-                      <img src="/api/placeholder/80/80" alt="Inteligencia artificial" class="mb-3" style="max-width: 80px;">
-                      <h5 class="card-title">Inteligencia artificial</h5>
-                      <p class="card-text">Integramos IA en tareas complejas para optimizar el tiempo y mejorar la eficiencia de los procesos.</p>
-                  </div>
-              </div>
-          </div>
-          <div class="col">
-              <div class="card h-100 border-0">
-                  <div class="card-body text-center">
-                      <img src="/api/placeholder/80/80" alt="Información multilingüe" class="mb-3" style="max-width: 80px;">
-                      <h5 class="card-title">Información para todos</h5>
-                      <p class="card-text">Traducimos entre varios idiomas en tiempo real, practicamos gramática y creamos contenido multilingüe accesible.</p>
+          <div class="col-md-6 col-lg-4">
+              <div class="card h-100 border-0 shadow-sm">
+                  <div class="card-body">
+                      <span class="badge bg-white text-dark mb-4">Tecnología</span>
+                      <h5 class="card-title fw-bold">Inteligencia Artificial</h5>
+                      <p class="card-text text-muted mb-5">Optimizamos procesos con IA integrada para mejorar la eficiencia.</p>
+                      <div class="text-muted small">Jun 10, 2024</div>
                   </div>
               </div>
           </div>

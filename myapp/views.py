@@ -1,3 +1,6 @@
+from email.message import EmailMessage
+import ssl
+import certifi
 from django.http import BadHeaderError, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
@@ -6,6 +9,12 @@ from twilio.rest import Client
 
 from django.conf import settings
 from django.contrib import messages
+
+
+import os
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+
 
 
 def enviar_mensaje(numero_destino, mensaje):
@@ -32,6 +41,7 @@ def home(request):
     return render(request, 'home.html')
 
 def juego(request):
+        
     return render(request, 'juego.html')
 
 def precios(request):
@@ -39,6 +49,17 @@ def precios(request):
 
 def seleccion_plan(request):
     return render(request, 'seleccion_plan.html')
+
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render
+from django.conf import settings
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+import logging
+
+logger = logging.getLogger(__name__)
 
 @csrf_exempt
 def contacto(request):
@@ -49,25 +70,36 @@ def contacto(request):
         text = request.POST.get('text')
 
         try:
-            # Envía el correo electrónico
-            subject = 'Formulario de contacto'
-            message = f'Nombre: {name}\nApellido: {last_name}\nEmail: {email}\nMensaje: {text}'
-            sender_email = settings.EMAIL_HOST_USER
-            recipient_list = ['salgadotomas@icloud.com']  # Coloca aquí la dirección de correo a la que quieres enviar el formulario
-            send_mail(subject, message, sender_email, recipient_list, fail_silently=False)
+            message_body = f"""
+            Nombre: {name}
+            Apellido: {last_name}
+            Email: {email}
+            Mensaje: {text}
+            """
             
-            return JsonResponse({'message': 'Mensaje enviado exitosamente.'})
-        
-        except BadHeaderError:
-            return JsonResponse({'message': 'Error en el encabezado del mensaje.'}, status=500)
-        
-        except Exception as e:
-            # Si ocurre cualquier otra excepción, puedes imprimir el mensaje de error para depuración
-            print('Error en el envío del correo:', str(e))
-            return JsonResponse({'message': 'Error al enviar el mensaje.'}, status=500)
+            message = Mail(
+                from_email='salgadotomas@outlook.com',
+                to_emails='salgadotomas@icloud.com',
+                subject='Nuevo mensaje de contacto',
+                html_content=f'<pre>{message_body}</pre>'
+            )
 
-    else:
-        return render(request, 'contacto.html')
+
+            sg = SendGridAPIClient(os.getenv('SENDGRID_API_KEY'))
+
+            response = sg.send(message)
+
+            if response.status_code == 202:
+                return JsonResponse({'message': 'Mensaje enviado exitosamente.'})
+            else:
+                logger.error(f"SendGrid responded with status code {response.status_code}")
+                return JsonResponse({'message': 'Error al enviar el mensaje. Por favor, intente más tarde.'}, status=500)
+
+        except Exception as e:
+            logger.error(f'Error en el envío del correo: {str(e)}')
+            return JsonResponse({'message': 'Error al enviar el mensaje. Por favor, intente más tarde.'}, status=500)
+
+    return render(request, 'contacto.html')
     
 def periodo_prueba(request):
 

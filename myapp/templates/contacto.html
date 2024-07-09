@@ -97,17 +97,20 @@
               submitBtn.text("Enviando..."); // Cambiar el texto del botón mientras se envía
             },
             success: function (response) {
-              var toast = $("#success-toast");
-              toast.find(".toast-body").text(response.message);
-              toast.show();
-              setTimeout(function () {
-                toast.hide();
-              }, 8000); // Ocultar el toast después de 8 segundos
-    
-              $("#contact-form")[0].reset(); // Limpiar el formulario
+              if (response.message) {
+                var toast = $("#success-toast");
+                toast.find(".toast-body").text(response.message);
+                toast.show();
+                setTimeout(function () {
+                  toast.hide();
+                }, 8000);
+                $("#contact-form")[0].reset();
+              } else {
+                alert("Ocurrió un error al enviar el mensaje.");
+              }
             },
-            error: function (error) {
-              console.error(error);
+            error: function (xhr, status, error) {
+              alert("Error al enviar el mensaje: " + xhr.responseText);
             },
             complete: function () {
               submitBtn.text(originalText); // Restaurar el contenido original del botón después de completar la solicitud
