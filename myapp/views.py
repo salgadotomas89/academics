@@ -41,6 +41,19 @@ def home(request):
     return render(request, 'home.html')
 
 def juego(request):
+    message = Mail(
+    from_email='salgadotomas@outlook.com',
+    to_emails='salgadotomas@icloud.com',
+    subject='Sending with Twilio SendGrid is Fun',
+    html_content='<strong>and easy to do anywhere, even with Python</strong>')
+    try:
+        sg = SendGridAPIClient(os.getenv('SENDGRID_API_KEY'))
+        response = sg.send(message)
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
+    except Exception as e:
+        print(e)
         
     return render(request, 'juego.html')
 
@@ -68,7 +81,6 @@ def contacto(request):
         last_name = request.POST.get('last_name')
         email = request.POST.get('email')
         text = request.POST.get('text')
-
         try:
             message_body = f"""
             Nombre: {name}
@@ -76,29 +88,21 @@ def contacto(request):
             Email: {email}
             Mensaje: {text}
             """
-            
             message = Mail(
-                from_email='salgadotomas@outlook.com',
+                from_email=settings.DEFAULT_FROM_EMAIL,
                 to_emails='salgadotomas@icloud.com',
                 subject='Nuevo mensaje de contacto',
                 html_content=f'<pre>{message_body}</pre>'
             )
-
-
-            sg = SendGridAPIClient(os.getenv('SENDGRID_API_KEY'))
-
+            sg = SendGridAPIClient(settings.SENDGRID_API_KEY)
             response = sg.send(message)
-
             if response.status_code == 202:
-                return JsonResponse({'message': 'Mensaje enviado exitosamente.'})
+                return JsonResponse({'message': 'Mensaje enviado exitosamente.', 'status': 'success'})
             else:
-                logger.error(f"SendGrid responded with status code {response.status_code}")
-                return JsonResponse({'message': 'Error al enviar el mensaje. Por favor, intente más tarde.'}, status=500)
-
+                return JsonResponse({'message': 'Error al enviar el mensaje. Por favor, intente más tarde.', 'status': 'error'}, status=500)
         except Exception as e:
             logger.error(f'Error en el envío del correo: {str(e)}')
-            return JsonResponse({'message': 'Error al enviar el mensaje. Por favor, intente más tarde.'}, status=500)
-
+            return JsonResponse({'message': 'Error al enviar el mensaje. Por favor, intente más tarde.', 'status': 'error'}, status=500)
     return render(request, 'contacto.html')
     
 def periodo_prueba(request):
