@@ -1,0 +1,283 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+{% load static %}
+
+<style>
+  .features .card {
+      transition: transform 0.3s ease-in-out;
+      border-radius: 15px;  /* Esquinas más redondeadas */
+      background-color: #FBF5E4;  /* Color crema pastel */
+  }
+  .features .card:hover {
+      transform: translateY(-5px);
+  }
+  .features .badge {
+      font-weight: normal;
+  }
+</style>
+
+<div class="d-flex align-items-center" style="min-height: 700px;">
+  <div class="container-fluid px-4">
+    <div class="row align-items-center justify-content-center g-0">
+      <div class="col-lg-5 text-lg-start ">
+        <div class="ms-5 py-5 ">
+          <h1 class="display-3 fw-bold text-body-emphasis mb-4">Webs para Colegios</h1>
+          <p class="lead mb-4 text-start">Potenciamos la comunicación y el acceso a la información con nuestras soluciones digitales, diseñadas específicamente para satisfacer las necesidades de colegios modernos.</p>          <div class="d-grid gap-3 d-sm-flex justify-content-sm-start">
+            <a href="{% url 'artefactos' %}" class="btn btn-primary btn-lg px-4 me-sm-3">Conoce más</a>
+            <a href="{% url 'contacto' %}" class="btn btn-outline-secondary btn-lg px-4">Contáctanos</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 d-flex justify-content-center align-items-center ">
+        <img class="img-fluid py-5" src="{% static 'images/academics.png' %}" alt="Ilustración de académicos" style="max-width: 500px;">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<section class="features py-5 bg-white">  <!-- Cambiado a fondo blanco -->
+  <div class="container">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 class="display-6 fw-bold">Características Destacadas</h2>
+          <a href="#" class="text-decoration-none">Ver todas</a>
+      </div>
+      <div class="row g-4">
+          <div class="col-md-6 col-lg-4">
+              <div class="card h-100 border-0 shadow-sm">
+                  <div class="card-body">
+                      <span class="badge bg-white text-dark mb-4">Diseño</span>
+                      <h5 class="card-title fw-bold">Responsivo</h5>
+                      <p class="card-text text-muted mb-5">Interfaces adaptables a cualquier dispositivo, garantizando una experiencia óptima.</p>
+                      <div class="text-muted small">Jun 20, 2024</div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+              <div class="card h-100 border-0 shadow-sm">
+                  <div class="card-body">
+                      <span class="badge bg-white text-dark mb-4">Gestión</span>
+                      <h5 class="card-title fw-bold">Autoadministrable</h5>
+                      <p class="card-text text-muted mb-5">Modifica la información de tu web de manera sencilla e intuitiva.</p>
+                      <div class="text-muted small ">Jun 15, 2024</div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+              <div class="card h-100 border-0 shadow-sm">
+                  <div class="card-body">
+                      <span class="badge bg-white text-dark mb-4">Tecnología</span>
+                      <h5 class="card-title fw-bold">Inteligencia Artificial</h5>
+                      <p class="card-text text-muted mb-5">Optimizamos procesos con IA integrada para mejorar la eficiencia.</p>
+                      <div class="text-muted small">Jun 10, 2024</div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<div class="d-flex align-items-center" style="min-height: 700px;">
+  <div class="container-fluid px-4">
+    <div class="row align-items-center justify-content-center g-0">
+      <div class="col-lg-5 text-lg-start">
+        <div class="ms-5 py-5">
+          <h1 class="display-3 fw-bold text-body-emphasis mb-4">Despliegue Ultra Rápido</h1>
+          <p class="lead mb-4 text-start">Olvídese de largos tiempos de espera. Su sitio web estará en línea en cuestión de horas, no días o semanas.</p>
+          <ul class="list-unstyled mb-4">
+            <li class="mb-2"><i class="bi bi-lightning-charge-fill text-warning me-2"></i> Proceso optimizado de configuración y lanzamiento</li>
+            <li class="mb-2"><i class="bi bi-clock-history text-info me-2"></i> De la idea a la realidad en solo unas horas</li>
+            <li class="mb-2"><i class="bi bi-tools text-success me-2"></i> Configuración inicial rápida y sencilla</li>
+            <li class="mb-2"><i class="bi bi-arrow-repeat text-danger me-2"></i> Actualizaciones y cambios implementados al instante</li>
+          </ul>
+          
+        </div>
+      </div>
+      <div class="col-lg-5 d-flex justify-content-center align-items-center">
+        <div class="position-relative">
+          <img class="img-fluid py-5" src="/api/placeholder/500/400" alt="Ilustración de despliegue rápido" style="max-width: 500px;">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  <div class="container-fluid bg-light py-5 shadow-top">
+    <div class="container col-xxl-8 px-4 py-5">
+        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+            <div class="col-10 col-sm-8 col-lg-6">
+                <img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+            </div>
+            <div class="col-lg-6">
+                <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Intuitiva</h1>
+                <p class="lead text"> texto relacionado a la seccion.</p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
+                    <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="position-relative">
+
+
+
+<div class="container-fluid  py-5  ">
+  <div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col-10 col-sm-8 col-lg-6">
+        <img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+      </div>
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">alguna otra seccion</h1>
+        <p class="lead">Mantener <span id="word-change">informados</span> a la comunidad educativa con las últimas noticias y novedades. Aquí encontrarás artículos relevantes y actualizados sobre eventos, logros, actividades y todo lo relacionado con nuestra comunidad educativa.</p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
+          <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Rectángulo negro entre las secciones -->
+<div class="position-absolute start-50 translate-middle bg-primary" style="width: 70%; height: 200px;  z-index: 1; display: flex; justify-content: center; align-items: center;">
+  <!-- Contenedor de los elementos -->
+  <div style="display: flex; align-items: center;">
+      <!-- Icono -->
+      <div style="margin-right: 10px;">
+          <!-- Inserta aquí tu icono -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-mailbox-flag" viewBox="0 0 16 16">
+            <path d="M10.5 8.5V3.707l.854-.853A.5.5 0 0 0 11.5 2.5v-2A.5.5 0 0 0 11 0H9.5a.5.5 0 0 0-.5.5v8zM5 7c0 .334-.164.264-.415.157C4.42 7.087 4.218 7 4 7s-.42.086-.585.157C3.164 7.264 3 7.334 3 7a1 1 0 0 1 2 0"/>
+            <path d="M4 3h4v1H6.646A4 4 0 0 1 8 7v6h7V7a3 3 0 0 0-3-3V3a4 4 0 0 1 4 4v6a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V7a4 4 0 0 1 4-4m0 1a3 3 0 0 0-3 3v6h6V7a3 3 0 0 0-3-3"/>
+          </svg>
+      </div>
+      <!-- Texto -->
+      <div style="margin-right: 10px; color: white;">
+        Tu texto aquí
+    </div>
+      <!-- Botón -->
+      <div>
+          <button type="button" class="btn btn-dark">Botón</button>
+      </div>
+  </div>
+</div>
+
+
+
+  <div class="container-fluid bg-light py-5  ">
+    <div class="container col-xxl-8 px-4 py-5">
+        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+            <div class="col-10 col-sm-8 col-lg-6">
+                <img src="{% static 'images/periodoPrueba.jpg.avif' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+            </div>
+            <div class="col-lg-6">
+                <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Periodo de prueba</h1>
+                <p class="lead text">
+                  período de prueba gratuito de 15 dias.
+                </p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <a href="{% url 'periodo_prueba' %}" type="button" class="btn btn-primary btn-lg px-4 me-md-2">Saber más</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+  <div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col-10 col-sm-8 col-lg-6">
+        <img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+      </div>
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Ventaja competitiva</h1>
+        <p class="lead">
+
+          Destaca lo que hace a tu empresa única y por qué los colegios deberían elegirte. Puedes mencionar tu experiencia en el sector educativo, la calidad de tus diseños, el soporte personalizado que brindas a tus clientes, etc.
+        </p>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
+          <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="container-fluid bg-primary text-white py-5">
+    <div class="container text-center">
+      <h2 class="mb-3">¿Listo para transformar la comunicación en tu colegio?</h2>
+    </div>
+  </div>
+
+  
+  <div class="container-fluid bg-gradient py-5" style="background: linear-gradient(45deg, #007bff, #00c6ff);">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <h1 class="display-4 fw-bold t mb-4">Soporte técnico de primera clase</h1>
+                <p class="lead mb-4">
+                    Nuestro equipo de expertos está disponible 24/7 para asegurar que tu sitio web escolar funcione sin problemas. Ofrecemos:
+                </p>
+                
+                <div class="d-grid gap-3 d-sm-flex justify-content-sm-start">
+                    <a href="#" class="btn btn-outline-dark btn-lg px-4">Contactar soporte</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="bg-white p-5 rounded-lg shadow">
+                    <h3 class="h4 mb-4">¿Por qué elegir nuestro soporte?</h3>
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-primary rounded-circle p-3 me-3">
+                            <i class="bi bi-headset text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="h5 mb-1">Soporte 24/7</h4>
+                            <p class="mb-0 text-muted">Estamos aquí para ti, en cualquier momento</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-primary rounded-circle p-3 me-3">
+                            <i class="bi bi-shield-check text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="h5 mb-1">Resolución rápida de problemas</h4>
+                            <p class="mb-0 text-muted">Protegemos tu información y la de tus estudiantes</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="bg-primary rounded-circle p-3 me-3">
+                            <i class="bi bi-arrow-repeat text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="h5 mb-1">Actualizaciones constantes</h4>
+                            <p class="mb-0 text-muted">Mejoramos continuamente nuestros servicios</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+  
+
+    
+
+      {% endblock %}
+
+
