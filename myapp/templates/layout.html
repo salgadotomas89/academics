@@ -91,12 +91,12 @@
                     </ul>
                 </div>
                 <div class="col-md-5 mb-3">
-                    <form class="bg-white p-4 rounded">
+                    <form id="contactForm" class="bg-white p-4 rounded">
                         <h5 class="text-dark mb-3">Contáctanos</h5>
-                        <p class="text-muted small">Nos pondremos en contacto contigo lo más rápido posible.</p>
+                        <p class="text-muted small">Déjanos tu número. Nos pondremos en contacto contigo lo más rápido posible.</p>
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="nombre@ejemplo.com">
-                            <label for="floatingInput">Correo electrónico</label>
+                          <input type="tel" class="form-control" id="phoneInput" placeholder="+569 88880000">
+                          <label for="phoneInput">Teléfono</label>
                         </div>
                         <button class="btn btn-primary w-100" type="submit">Enviar</button>
                     </form>
@@ -116,6 +116,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
     <script src="{% static 'js/evitar.js' %}"></script>   
+    <script src="{% static 'js/phoneContact.js' %}"></script>   
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -168,6 +169,8 @@
             // Reiniciar los fondos cuando se cambia el tamaño de la ventana
             window.addEventListener('resize', resetBackgrounds);
         });
+
+        
         </script>
 </body>
 </html>
