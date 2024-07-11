@@ -15,6 +15,16 @@ import os
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render
+from django.conf import settings
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 
 def enviar_mensaje(numero_destino, mensaje):
@@ -64,15 +74,7 @@ def seleccion_plan(request):
     return render(request, 'seleccion_plan.html')
 
 
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render
-from django.conf import settings
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
-import logging
 
-logger = logging.getLogger(__name__)
 
 @csrf_exempt
 def contacto(request):

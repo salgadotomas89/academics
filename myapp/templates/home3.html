@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+{% load static %}
+
+<style>
+  .features .card {
+      transition: transform 0.3s ease-in-out;
+      border-radius: 15px;  /* Esquinas más redondeadas */
+      background-color: #FBF5E4;  /* Color crema pastel */
+  }
+  .features .card:hover {
+      transform: translateY(-5px);
+  }
+  .features .badge {
+      font-weight: normal;
+  }
+</style>
+
+<div class="d-flex align-items-center" style="min-height: 700px;">
+  <div class="container-fluid px-4">
+    <div class="row align-items-center justify-content-center g-0">
+      <div class="col-lg-5 text-lg-start ">
+        <div class="ms-5 py-5 ">
+          <h1 class="display-3 fw-bold text-body-emphasis mb-4">Webs para Colegios</h1>
+          <p class="lead mb-4 text-start">Potenciamos la comunicación y el acceso a la información con nuestras soluciones digitales, diseñadas específicamente para satisfacer las necesidades de colegios modernos.</p>          <div class="d-grid gap-3 d-sm-flex justify-content-sm-start">
+            <a href="{% url 'artefactos' %}" class="btn btn-primary btn-lg px-4 me-sm-3">Conoce más</a>
+            <a href="{% url 'contacto' %}" class="btn btn-outline-secondary btn-lg px-4">Contáctanos</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 d-flex justify-content-center align-items-center ">
+        <img class="img-fluid py-5" src="{% static 'images/academics.png' %}" alt="Ilustración de académicos" style="max-width: 500px;">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+    
+
+      {% endblock %}
+
+
