@@ -3,19 +3,7 @@
 {% block content %}
 {% load static %}
 
-<style>
-  .features .card {
-      transition: transform 0.3s ease-in-out;
-      border-radius: 15px;  /* Esquinas más redondeadas */
-      background-color: #FBF5E4;  /* Color crema pastel */
-  }
-  .features .card:hover {
-      transform: translateY(-5px);
-  }
-  .features .badge {
-      font-weight: normal;
-  }
-</style>
+<link rel="stylesheet" href="{% static "css/home.css" %}"></link>
 
 <div class="d-flex align-items-center" style="min-height: 700px;">
   <div class="container-fluid px-4">
@@ -106,7 +94,7 @@
  
   <div class="container-fluid bg-dark text-white py-5">
     <div class="container text-center">
-      <h2 class="mb-3">¿Listo para transformar la comunicación en tu colegio?</h2>
+      <h2 class="mb-3 hover-orange">¿Listo para transformar la comunicación en tu colegio?</h2>
     </div>
   </div>
 

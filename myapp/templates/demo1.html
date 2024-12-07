@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colegio Ejemplo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="{% static 'css/demo1.css' %}" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Colegio Ejemplo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#inicio">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Colegio <span class="dropdown-icon">&gt;</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-wide" aria-labelledby="navbarDropdown">
+                            <li>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <a class="dropdown-item" href="#eventos">Eventos</a>
+                                        <a class="dropdown-item" href="#comunicados">Comunicados</a>
+                                        <a class="dropdown-item" href="#profesores">Profesores</a>
+                                        <a class="dropdown-item" href="#pie">PIE</a>
+                                    </div>
+                                    <div class="col-6">
+                                        <a class="dropdown-item" href="#historia">Historia</a>
+                                        <a class="dropdown-item" href="#mision">Misión y Visión</a>
+                                        <a class="dropdown-item" href="#infraestructura">Infraestructura</a>
+                                        <a class="dropdown-item" href="#actividades">Actividades Extracurriculares</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#noticias">Noticias</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#fotos">Fotos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header id="inicio" class="hero-section">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12 text-center">
+                    <h1 class="fw-bold">Bienvenidos al Colegio Ejemplo</h1>
+                    <p class="lead">Educación de calidad para un futuro brillante</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="noticias" class="py-5">
+            <div class="container">
+                <h2 class="text-center mb-4">Noticias</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="card news-card">
+                            <img src="/placeholder.svg?height=200&width=400" class="card-img-top" alt="Noticia 1">
+                            <div class="card-body">
+                                <h5 class="card-title">Título de la noticia 1</h5>
+                                <p class="card-text">Breve descripción de la noticia 1...</p>
+                                <a href="#" class="btn btn-primary">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card news-card">
+                            <img src="/placeholder.svg?height=200&width=400" class="card-img-top" alt="Noticia 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Título de la noticia 2</h5>
+                                <p class="card-text">Breve descripción de la noticia 2...</p>
+                                <a href="#" class="btn btn-primary">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card news-card">
+                            <img src="/placeholder.svg?height=200&width=400" class="card-img-top" alt="Noticia 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Título de la noticia 3</h5>
+                                <p class="card-text">Breve descripción de la noticia 3...</p>
+                                <a href="#" class="btn btn-primary">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="eventos" class="py-5 bg-light">
+            <div class="container">
+                <h2 class="text-center mb-4">Próximos Eventos</h2>
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="event-card">
+                            <div class="event-date">
+                                <span class="day">15</span>
+                                <span class="month">MAY</span>
+                            </div>
+                            <div class="event-details">
+                                <h5>Feria de Ciencias</h5>
+                                <p>Exhibición de proyectos científicos de nuestros estudiantes.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="event-card">
+                            <div class="event-date">
+                                <span class="day">22</span>
+                                <span class="month">JUN</span>
+                            </div>
+                            <div class="event-details">
+                                <h5>Día del Deporte</h5>
+                                <p>Competencias deportivas y actividades recreativas para toda la comunidad escolar.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="comunicados" class="py-5">
+            <div class="container">
+                <h2 class="text-center mb-4">Comunicados</h2>
+                <div class="accordion" id="accordionComunicados">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                Comunicado 1: Inicio del año escolar
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionComunicados">
+                            <div class="accordion-body">
+                                Contenido del comunicado sobre el inicio del año escolar...
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                Comunicado 2: Reunión de apoderados
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionComunicados">
+                            <div class="accordion-body">
+                                Contenido del comunicado sobre la próxima reunión de apoderados...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="profesores" class="py-5 bg-light">
+            <div class="container">
+                <h2 class="text-center mb-4">Nuestros Profesores</h2>
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 mb-4">
+                        <div class="teacher-card">
+                            <img src="/placeholder.svg?height=300&width=300" alt="Profesor 1" class="img-fluid rounded-circle mb-3">
+                            <h5>Nombre del Profesor 1</h5>
+                            <p>Asignatura</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-4">
+                        <div class="teacher-card">
+                            <img src="/placeholder.svg?height=300&width=300" alt="Profesor 2" class="img-fluid rounded-circle mb-3">
+                            <h5>Nombre del Profesor 2</h5>
+                            <p>Asignatura</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-4">
+                        <div class="teacher-card">
+                            <img src="/placeholder.svg?height=300&width=300" alt="Profesor 3" class="img-fluid rounded-circle mb-3">
+                            <h5>Nombre del Profesor 3</h5>
+                            <p>Asignatura</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-4">
+                        <div class="teacher-card">
+                            <img src="/placeholder.svg?height=300&width=300" alt="Profesor 4" class="img-fluid rounded-circle mb-3">
+                            <h5>Nombre del Profesor 4</h5>
+                            <p>Asignatura</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pie" class="py-5">
+            <div class="container">
+                <h2 class="text-center mb-4">Programa de Integración Escolar (PIE)</h2>
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <img src="/placeholder.svg?height=400&width=600" alt="Programa de Integración Escolar" class="img-fluid rounded">
+                    </div>
+                    <div class="col-md-6">
+                        <h3>¿Qué es el PIE?</h3>
+                        <p>El Programa de Integración Escolar (PIE) es una estrategia inclusiva del sistema escolar, que tiene el propósito de contribuir al mejoramiento continuo de la calidad de la educación que se imparte en el establecimiento educacional, favoreciendo la presencia en la sala de clases, la participación y el logro de los objetivos de aprendizaje de todos y cada uno de los estudiantes, especialmente de aquellos que presentan Necesidades Educativas Especiales (NEE), sean éstas de carácter permanente o transitorio.</p>
+                        <a href="#" class="btn btn-primary">Más información</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="fotos" class="py-5 bg-light">
+            <div class="container">
+                <h2 class="text-center mb-4">Galería de Fotos</h2>
+                <div class="row" id="lightgallery">
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <a href="/placeholder.svg?height=600&width=800" class="gallery-item">
+                            <img src="/placeholder.svg?height=300&width=400" alt="Imagen 1" class="img-fluid">
+                        </a>
+                    </div>
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <a href="/placeholder.svg?height=600&width=800" class="gallery-item">
+                            <img src="/placeholder.svg?height=300&width=400" alt="Imagen 2" class="img-fluid">
+                        </a>
+                    </div>
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <a href="/placeholder.svg?height=600&width=800" class="gallery-item">
+                            <img src="/placeholder.svg?height=300&width=400" alt="Imagen 3" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-light py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Contacto</h5>
+                    <p>Dirección: Calle Ejemplo 123, Ciudad</p>
+                    <p>Teléfono: (123) 456-7890</p>
+                    <p>Email: info@colegioejemplo.com</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Enlaces rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#noticias">Noticias</a></li>
+                        <li><a href="#eventos">Eventos</a></li>
+                        <li><a href="#comunicados">Comunicados</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Síguenos</h5>
+                    <a href="#" class="text-light me-2"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-light me-2"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-light me-2"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <hr>
+            <p class="text-center mb-0">&copy; 2023 Colegio Ejemplo. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.5.0/lightgallery.min.js"></script>
+    <script src="{% static 'js/demo1.js' %}"></script>
+</body>
+</html>

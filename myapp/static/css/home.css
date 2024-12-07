@@ -1,0 +1,12 @@
+/*cards del home */
+.features .card {
+    transition: transform 0.3s ease-in-out;
+    border-radius: 15px;  /* Esquinas más redondeadas */
+    background-color: #fce0c9;  /* Color crema pastel */
+}
+.features .card:hover {
+    transform: translateY(-5px);
+}
+.features .badge {
+    font-weight: normal;
+}

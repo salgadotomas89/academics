@@ -14,5 +14,5 @@ urlpatterns = [
     path('preguntas-frecuentes', views.preguntas_frecuentes, name="preguntas"),
     path('juego', views.juego, name = 'juego'),
     path('seleccion-plan', views.seleccion_plan, name='seleccion_plan'),
-
+    path('demo1', views.demo1, name='demo1'),
 ]

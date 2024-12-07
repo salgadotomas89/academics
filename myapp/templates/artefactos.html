@@ -37,21 +37,25 @@
 </section>
 
 <main>
+  
   <section class="py-5">
-    <div class="container col-xxl-8 px-4 py-5">
-        <div class="row align-items-center g-5 py-5">
-            <div class="col-lg-6 fade-in-element fade-in-left">
+    <div class="container col-xxl-10 px-4 py-5 ">
+        <div class="row align-items-center g-5 py-5 ">
+            <div class="col-lg-6 fade-in-element fade-in-left ">
                 <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Comunicados</h2>
                 <div class="word-change-container">
-                    <p class="lead">Mantener informados a la comunidad educativa con las últimas noticias y novedades. Aquí encontrarás artículos relevantes y actualizados sobre eventos, logros, actividades y todo lo relacionado con nuestra comunidad educativa.</p>
-                </div>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                    <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
-                    <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+                    <p class="lead">Esencial para mantener a toda la comunidad educativa informada de manera rápida y eficiente. Este espacio está dedicado a la publicación de anuncios oficiales y urgentes que requieren la atención inmediata de padres, apoderados y estudiantes.</p>
                 </div>
             </div>
             <div class="col-10 col-sm-8 col-lg-6 fade-in-element fade-in-right">
-                <img src="{% static 'images/comunicados.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+                <div class="image-container rounded-4 overflow-hidden mb-3">
+                    <img id="comunicados-image" src="{% static 'images/comunicados1.png' %}" class="d-block w-100 h-100 object-fit-cover" alt="Comunicados">
+                </div>
+                <div class="d-flex justify-content-center gap-3">
+                    <button class="btn btn-outline-dark image-selector" data-image="comunicados1.png">Leer</button>
+                    <button class="btn btn-outline-dark image-selector" data-image="comunicados2.png">Redactar</button>
+                    <button class="btn btn-outline-dark image-selector" data-image="comunicados1.png">Compartir</button>
+                </div>
             </div>
         </div>
     </div>
@@ -62,11 +66,16 @@
         <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
             <div class="col-lg-6 fade-in-element fade-in-right">
                 <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Noticias</h2>
-                <p class="lead">Mantener informados a la comunidad educativa con las últimas noticias y novedades. Aquí encontrarás artículos relevantes y actualizados sobre eventos, logros, actividades y todo lo relacionado con nuestra comunidad educativa.</p>
+                <p class="lead"> Noticias es una ventana a la vida diaria de
+                   la comunidad educativa. Aquí compartimos los logros, eventos y actividades 
+                   que enriquecen la experiencia escolar. Desde éxitos académicos hasta eventos culturales, 
+                   este espacio ofrece una visión completa y actualizada del vibrante ambiente de nuestro colegio, 
+                   manteniendo a padres y estudiantes conectados con todos los aspectos de nuestra institución.</p>
+                <!--
                 <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                     <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
                     <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
-                </div>
+                </div>-->
             </div>
             <div class="col-10 col-sm-8 col-lg-6 fade-in-element fade-in-left">
               <img src="{% static 'images/noticias.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
@@ -81,10 +90,11 @@
         <div class="col-lg-6 fade-in-element fade-in-left">
           <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Eventos</h2>
           <p class="lead">Mantener <span id="word-change">informados</span> a la comunidad educativa con las últimas noticias y novedades. Aquí encontrarás artículos relevantes y actualizados sobre eventos, logros, actividades y todo lo relacionado con nuestra comunidad educativa.</p>
+          <!--
           <div class="d-grid gap-2 d-md-flex justify-content-md-start">
             <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
             <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
-          </div>
+          </div>-->
         </div>
         <div class="col-10 col-sm-8 col-lg-6 fade-in-element fade-in-right">
           <img src="{% static 'images/eventos.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
@@ -99,10 +109,11 @@
             <div class="col-lg-6 fade-in-element fade-in-right">
                 <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Calendario de evaluaciones</h2>
                 <p class="lead">Mantener informados a la comunidad educativa con las últimas noticias y novedades. Aquí encontrarás artículos relevantes y actualizados sobre eventos, logros, actividades y todo lo relacionado con nuestra comunidad educativa.</p>
+                <!--
                 <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                     <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
                     <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
-                </div>
+                </div>-->
             </div>
             <div class="col-10 col-sm-8 col-lg-6 fade-in-element fade-in-left">
               <img src="{% static 'images/calendario.jpg' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
@@ -117,10 +128,11 @@
         <div class="col-lg-6 fade-in-element fade-in-left">
           <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Fotos</h2>
           <p class="lead">Mantener informados a la comunidad educativa con las últimas noticias y novedades. Aquí encontrarás artículos relevantes y actualizados sobre eventos, logros, actividades y todo lo relacionado con nuestra comunidad educativa.</p>
+          <!--
           <div class="d-grid gap-2 d-md-flex justify-content-md-start">
             <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
             <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
-          </div>
+          </div>-->
         </div>
         <div class="col-10 col-sm-8 col-lg-6 fade-in-element fade-in-right">
           <img src="{% static 'images/fotos.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
@@ -160,8 +172,16 @@
       </div>
     </div>
 </section>
+
+<section>
+  <div class="container">
+    <h1>Demo 1</h1>
+    <a href="{% url 'demo1' %}">Demo 1</a>
+  </div>
+</section>
 </div>
 <script src="{% static 'js/components/animated-header.js' %}"></script>
 <script src="{% static 'js/components/scroll-reveal.js' %}"></script>
+<script src="{% static 'js/components/image-switcher.js' %}"></script>
 
 {% endblock %}

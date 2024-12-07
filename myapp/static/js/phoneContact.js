@@ -75,7 +75,6 @@ document.addEventListener('DOMContentLoaded', function() {
     submitButton.classList.remove('btn-primary');
     submitButton.classList.add('btn-success');
     submitButton.textContent = 'Teléfono enviado exitosamente';
-    showToast('Teléfono enviado exitosamente', 'success');
   }
 
   function resetButtonState() {

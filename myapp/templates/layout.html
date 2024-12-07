@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/">
     <link rel="stylesheet" href="{% static 'css/menu-styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <style>
         body {
             -webkit-user-select: none;
@@ -74,29 +75,30 @@
                 <div class="col-6 col-md-2 mb-3">
                     <h5 class="text-white mb-3">Navegación</h5>
                     <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="{% url 'home' %}" class="nav-link p-0 text-light">Inicio</a></li>
-                        <li class="nav-item mb-2"><a href="{% url 'nosotros' %}" class="nav-link p-0 text-light">Nosotros</a></li>
-                        <li class="nav-item mb-2"><a href="{% url 'contacto' %}" class="nav-link p-0 text-light">Contacto</a></li>
-                        <li class="nav-item mb-2"><a href="{% url 'preguntas' %}" class="nav-link p-0 text-light">Preguntas frecuentes</a></li>
+                      <li class="nav-item mb-2"><a href="{% url 'home' %}" class="nav-link p-0 text-light hover-orange">Inicio</a></li>
+                      <li class="nav-item mb-2"><a href="{% url 'nosotros' %}" class="nav-link p-0 text-light hover-orange">Nosotros</a></li>
+                      <li class="nav-item mb-2"><a href="{% url 'contacto' %}" class="nav-link p-0 text-light hover-orange">Contacto</a></li>
+                      <li class="nav-item mb-2"><a href="{% url 'preguntas' %}" class="nav-link p-0 text-light hover-orange">Preguntas frecuentes</a></li>
                     </ul>
-                </div>
-                <div class="col-6 col-md-2 mb-3">
+                  </div>
+                  
+                  <div class="col-6 col-md-2 mb-3">
                     <h5 class="text-white mb-3">Artefactos</h5>
                     <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Comunicados</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Noticias</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Eventos</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Calendario</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Galería</a></li>
+                      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light hover-orange">Comunicados</a></li>
+                      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light hover-orange">Noticias</a></li>
+                      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light hover-orange">Eventos</a></li>
+                      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light hover-orange">Calendario</a></li>
+                      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light hover-orange">Galería</a></li>
                     </ul>
-                </div>
+                  </div>
                 <div class="col-md-5 mb-3">
                     <form id="contactForm" class="bg-white p-4 rounded">
                         <h5 class="text-dark mb-3">Contáctanos</h5>
                         <p class="text-muted small">Déjanos tu número. Nos pondremos en contacto contigo lo más rápido posible.</p>
                         <div class="form-floating mb-3">
-                          <input type="tel" class="form-control" id="phoneInput" placeholder="+569 88880000">
-                          <label for="phoneInput">Teléfono</label>
+                          <input type="tel" class="form-control" id="phoneInput" placeholder="+56988880000">
+                          <label for="phoneInput">ejemplo: +56988880000</label>
                         </div>
                         <button class="btn btn-primary w-100" type="submit">Enviar</button>
                     </form>
@@ -117,60 +119,6 @@
 
     <script src="{% static 'js/evitar.js' %}"></script>   
     <script src="{% static 'js/phoneContact.js' %}"></script>   
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuItems = document.querySelectorAll('.navbar-nav:not(.ml-auto) .nav-item');
-            const menuBackground = document.querySelector('#menu-background-morph');
-            const contactItem = document.querySelector('.navbar-nav .contact-item');
-            const contactBackground = document.querySelector('#contact-background-morph');
-        
-            function handleHover(item, background) {
-                item.addEventListener('mouseenter', function() {
-                    if (window.innerWidth >= 992) {
-                        // Efecto horizontal para pantallas grandes
-                        const itemRect = this.getBoundingClientRect();
-                        const navRect = this.closest('.navbar-nav').getBoundingClientRect();
-        
-                        background.style.width = `${itemRect.width}px`;
-                        background.style.height = '70%';
-                        background.style.left = `${itemRect.left - navRect.left}px`;
-                        background.style.top = '50%';
-                        background.style.transform = 'translateY(-50%)';
-                    } else {
-                        // Efecto vertical para pantallas pequeñas
-                        const itemRect = this.getBoundingClientRect();
-                        const navRect = this.closest('.navbar-nav').getBoundingClientRect();
-        
-                        background.style.width = '100%';
-                        background.style.height = `${itemRect.height}px`;
-                        background.style.left = '0';
-                        background.style.top = `${itemRect.top - navRect.top}px`;
-                        background.style.transform = 'none';
-                    }
-                    background.style.opacity = '1';
-                });
-        
-                item.addEventListener('mouseleave', function() {
-                    background.style.opacity = '0';
-                });
-            }
-        
-            function resetBackgrounds() {
-                menuBackground.style.opacity = '0';
-                if (contactBackground) contactBackground.style.opacity = '0';
-            }
-        
-            menuItems.forEach(item => handleHover(item, menuBackground));
-            if (contactItem && contactBackground) {
-                handleHover(contactItem, contactBackground);
-            }
-        
-            // Reiniciar los fondos cuando se cambia el tamaño de la ventana
-            window.addEventListener('resize', resetBackgrounds);
-        });
-
-        
-        </script>
+    <script src="{% static 'js/menu/navMenu.js' %}"></script>
 </body>
 </html>
