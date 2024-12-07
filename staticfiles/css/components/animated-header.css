@@ -1,0 +1,30 @@
+.animated-header .word {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+}
+
+.animated-header .word span {
+    display: inline-block;
+    transform: translateY(100%);
+    transition: transform 0.5s ease;
+}
+
+.animated-header .changing-word {
+    transition: color 0.5s ease;
+}
+
+.animated-header h1 {
+    margin-bottom: 0.5rem;
+}
+
+.animated-header p {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.animated-header.animation-complete p {
+    opacity: 1;
+    transform: translateY(0);
+}

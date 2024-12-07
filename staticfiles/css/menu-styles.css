@@ -1,0 +1,43 @@
+.navbar-nav {
+    padding: 0.5rem 0;
+}
+
+.navbar-nav .nav-item {
+    position: relative;
+    z-index: 1;
+}
+
+.navbar-nav .nav-link {
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+}
+
+#menu-background-morph,
+#contact-background-morph {
+    background-color: rgba(0, 0, 0, 0.05);
+    position: absolute;
+    transition: all 0.3s ease;
+    opacity: 0;
+    border-radius: 15px;
+}
+
+@media (max-width: 991px) {
+    .navbar-nav .nav-item {
+        margin-bottom: 5px;
+    }
+
+    #menu-background-morph,
+    #contact-background-morph {
+        border-radius: 5px;
+    }
+
+    .navbar-nav {
+        position: relative;
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar-nav .nav-item {
+        margin-right: 5px;
+    }
+}

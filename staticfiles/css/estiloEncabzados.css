@@ -1,0 +1,16 @@
+.word {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+}
+
+.word span {
+    display: inline-block;
+    transform: translateY(100%);
+    transition: transform 0.5s ease;
+}
+
+.changing-word {
+    transition: color 0.5s ease;
+}
+

@@ -1,0 +1,304 @@
+body {
+    padding-top: 80px; /* Ajustar según la nueva altura del navbar */
+}
+
+
+.hero-section {
+    background: url('/placeholder.svg?height=800&width=1200') no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.news-card {
+    transition: transform 0.3s ease-in-out;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+}
+
+.event-card {
+    display: flex;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.event-date {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 80px;
+}
+
+.event-date .day {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.event-date .month {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.event-details {
+    padding: 15px;
+}
+
+.teacher-card {
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.teacher-card:hover {
+    transform: translateY(-5px);
+}
+
+.gallery-item {
+    display: block;
+    overflow: hidden;
+    position: relative;
+}
+
+.gallery-item img {
+    transition: transform 0.3s ease-in-out;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.gallery-item:hover::after {
+    opacity: 1;
+}
+
+/* Estilos para la barra de navegación */
+.navbar {
+    background-color: #000000; /* Color negro */
+    height: 80px; /* Altura aumentada */
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333333; /* Color casi negro para el nombre del colegio */
+    transition: color 0.3s ease;
+}
+
+.navbar-brand:hover {
+    color: #666666; /* Color gris más claro al pasar el mouse */
+}
+
+.navbar-nav .nav-item {
+    margin-right: 10px;
+}
+
+.navbar-nav .nav-link {
+    color: #333333; /* Color casi negro para los enlaces */
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #666666; /* Color gris más claro al pasar el mouse */
+}
+
+.navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #666666; /* Color de la línea al pasar el mouse */
+    transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::after {
+    width: 100%;
+}
+
+/* Estilos para el submenú */
+.dropdown-menu {
+    background-color: #000000; /* Color de fondo negro para el submenú */
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.dropdown-item {
+    color: #333333; /* Color casi negro para los items del dropdown */
+    transition: all 0.3s ease;
+    padding: 10px 20px;
+}
+
+.dropdown-item:hover {
+    background-color: #1A1A1A; /* Color de fondo al pasar el mouse */
+    color: #666666; /* Color gris más claro al pasar el mouse */
+    transform: translateX(5px);
+}
+
+/* Estilo para el nuevo ícono de dropdown */
+.dropdown-icon {
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+    color: #333333; /* Color casi negro para el ícono */
+}
+
+/* Rotar el ícono cuando el dropdown está abierto */
+.show .dropdown-icon {
+    transform: rotate(90deg);
+    color: #666666; /* Color gris más claro cuando está abierto */
+}
+
+/* Estilos para el submenú ancho */
+.dropdown-menu-wide {
+    background-color: #000000; /* Color de fondo negro para el submenú ancho */
+}
+
+.dropdown-menu-wide .dropdown-item {
+    color: #333333; /* Color casi negro para los items del submenú ancho */
+}
+
+.dropdown-menu-wide .dropdown-item:hover {
+    background-color: #1A1A1A;
+    color: #666666; /* Color gris más claro al pasar el mouse */
+}
+
+/* Ajustar el espaciado del dropdown */
+.navbar-nav .dropdown-menu {
+    margin-top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Asegurar que el menú desplegable no se salga de la pantalla en dispositivos móviles */
+@media (max-width: 767px) {
+    .dropdown-menu-wide {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .dropdown-menu-wide .row {
+        flex-direction: column;
+    }
+    
+    .dropdown-menu-wide .col-6 {
+        width: 100%;
+    }
+}
+
+/* Estilos existentes ... */
+
+/* Estilos para el submenú */
+.dropdown-menu-wide {
+    width: 500px; /* Aumentado de 400px a 500px */
+    padding: 20px; /* Aumentado de 15px a 20px */
+    max-width: 90vw; /* Asegura que no sea más ancho que el 90% del viewport en dispositivos pequeños */
+    background-color: #1A1A1A; /* Color de fondo negro más claro para el submenú ancho */
+}
+
+.dropdown-menu-wide .row {
+    margin: 0;
+    width: 100%;
+}
+
+.dropdown-menu-wide .col-6 {
+    padding: 0 10px; /* Añadido padding horizontal */
+}
+
+.dropdown-menu-wide .dropdown-item {
+    padding: 10px 15px;
+    white-space: normal; /* Permite que el texto se envuelva */
+    font-size: 0.9rem; /* Reduce ligeramente el tamaño de la fuente */
+    color: #FFFFFF;
+}
+
+.dropdown-menu-wide .dropdown-item:hover {
+    background-color: #333333;
+    color: #CCCCCC;
+}
+
+/* Ajustar el espaciado del dropdown */
+.navbar-nav .dropdown-menu {
+    margin-top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Asegurar que el menú desplegable se ajuste en dispositivos móviles */
+@media (max-width: 767px) {
+    .dropdown-menu-wide {
+        width: 100%;
+        max-width: 300px;
+        padding: 15px; /* Reduce el padding en dispositivos móviles */
+    }
+    
+    .dropdown-menu-wide .row {
+        flex-direction: column;
+    }
+    
+    .dropdown-menu-wide .col-6 {
+        width: 100%;
+        padding: 0; /* Elimina el padding en dispositivos móviles */
+    }
+    
+    .dropdown-menu-wide .dropdown-item {
+        padding: 8px 10px; /* Reduce el padding de los items en dispositivos móviles */
+    }
+}
+
+/* Resto de los estilos existentes ... */
+
+/* Añade esto al final del archivo CSS */
+
+/* Estilos para mostrar el submenú al pasar el mouse */
+.navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Ajustar la posición del submenú */
+.navbar-nav .nav-item.dropdown {
+    position: static;
+}
+
+.navbar-nav .nav-item.dropdown .dropdown-menu {
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 0;
+}
+
+/* Añadir una pequeña transición para suavizar la aparición */
+.dropdown-menu {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+    opacity: 1;
+}
