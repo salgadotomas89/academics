@@ -2,3 +2,4 @@ sendgrid.env
 .env
 __pycache__/
 *.pyc
+ceds_models/static/json_data/
