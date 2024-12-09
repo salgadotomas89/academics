@@ -1,0 +1,2005 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Configuración</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/alumnos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cursos.css' %}">
+    <style>
+        /* Estilos personalizados */
+        :root {
+            --sidebar-width: 250px;
+            --sidebar-width-collapsed: 70px;
+            --topbar-height: 60px;
+        }
+
+        .wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: #2c3e50;
+            color: white;
+            transition: all 0.3s;
+            position: fixed;
+            height: 100vh;
+            z-index: 1000;
+        }
+
+        .sidebar.collapsed {
+            width: var(--sidebar-width-collapsed);
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            background: #243342;
+            height: var(--topbar-height);
+        }
+
+        .sidebar-menu {
+            padding: 0;
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            padding: 10px 20px;
+            border-bottom: 1px solid #34495e;
+        }
+
+        .sidebar-menu li a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-text {
+            margin-left: 10px;
+        }
+
+        .collapsed .menu-text {
+            display: none;
+        }
+
+        /* Contenido principal */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            transition: all 0.3s;
+        }
+
+        .main-content.expanded {
+            margin-left: var(--sidebar-width-collapsed);
+        }
+
+        /* Barra superior */
+        .topbar {
+            height: var(--topbar-height);
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            position: sticky;
+            top: 0;
+            z-index: 900;
+        }
+
+        /* Área de contenido */
+        .content-area {
+            padding: 20px;
+        }
+
+        /* Submenu */
+        .submenu {
+            padding-left: 20px;
+            display: none;
+        }
+
+        .submenu.show {
+            display: block;
+        }
+
+        /* Tarjetas de configuración */
+        .config-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+
+        /* Estilos para las tarjetas de estadísticas */
+        .dashboard-stats {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .stats-card {
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
+        }
+        
+        .stats-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Estilos para el contador de estudiantes en el sidebar */
+        .sidebar-stats {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #34495e;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .mini-counter {
+            color: white;
+        }
+
+        .counter-icon-small {
+            background: linear-gradient(45deg, #2980b9, #3498db);
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
+        }
+
+        .counter-number-small {
+            font-size: 1.2rem;
+            font-weight: bold;
+            line-height: 1;
+            color: #fff;
+        }
+
+        .counter-label-small {
+            font-size: 0.7rem;
+            color: #bdc3c7;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Ajuste para cuando el sidebar está colapsado */
+        .sidebar.collapsed .counter-info {
+            display: none;
+        }
+
+        .sidebar.collapsed .counter-icon-small {
+            margin: 0 auto;
+        }
+
+        .timeline-container {
+            padding: 1rem;
+        }
+
+        .timeline-bar {
+            height: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .timeline-period {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-period .progress {
+            background: transparent;
+        }
+
+        .timeline-period .progress-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            cursor: pointer;
+        }
+
+        .timeline-marker:hover::after {
+            content: attr(data-description);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            z-index: 1000;
+        }
+
+        .celda-horario {
+            height: 80px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .celda-horario:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        .hora-column {
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h5 class="menu-text">Configuración</h5>
+            </div>
+            <div class="sidebar-stats">
+                <div class="mini-counter d-flex align-items-center">
+                    <div class="counter-icon-small">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="counter-info ms-2">
+                        <div class="counter-number-small" id="sidebarTotalAlumnos">325</div>
+                        <div class="counter-label-small">estudiantes</div>
+                    </div>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
+                <!-- Alumnos - Nueva sección -->
+                <li>
+                    <a href="#" class="menu-item" id="alumnosLink">
+                        <i class="fas fa-user-graduate"></i>
+                        <span class="menu-text">Alumnos</span>
+                    </a>
+                </li>
+
+                <!-- Usuarios - Nueva sección -->
+                <li>
+                    <a href="#" class="menu-item" id="usuariosLink">
+                        <i class="fas fa-users"></i>
+                        <span class="menu-text">Usuarios</span>
+                    </a>
+                </li>
+
+                <!-- Libro de Clases - Nueva sección -->
+                <li>
+                    <a href="#" class="menu-item" id="libroClasesLink">
+                        <i class="fas fa-book-reader"></i>
+                        <span class="menu-text">Libro de Clases</span>
+                    </a>
+                </li>
+                
+                <!-- Cursos -->
+                <li>
+                    <a href="#" class="menu-item" id="cursosLink">
+                        <i class="fas fa-chalkboard"></i>
+                        <span class="menu-text">Cursos</span>
+                    </a>
+                </li>
+
+                <!-- Colegio - Nueva sección -->
+                <li>
+                    <a href="#" class="menu-item" id="colegioLink">
+                        <i class="fas fa-school"></i>
+                        <span class="menu-text">Colegio</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Contenido Principal -->
+        <div class="main-content">
+            <!-- Barra Superior -->
+            <div class="topbar">
+                <button class="btn btn-link" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="ms-auto">
+                    <div class="dropdown">
+                        <button class="btn btn-link dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Admin</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Perfil</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Configuración</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Área de Contenido -->
+            <div class="content-area">
+                <!-- Contenido por defecto -->
+                <div id="defaultContent" class="content-section">
+                    <!-- Contenido por defecto -->
+                    <div class="row">
+                        <div class="col-12">
+                            <h2>Panel de Configuración</h2>
+                            <p>Seleccione una opción del menú para comenzar.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tarjetas de Configuración -->
+                    <div class="row mt-4">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="config-card">
+                                <h5><i class="fas fa-users me-2"></i>Gestión de Personas</h5>
+                                <p>Configure la información personal, direcciones y contactos.</p>
+                                <button class="btn btn-primary">Configurar</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="config-card">
+                                <h5><i class="fas fa-school me-2"></i>Configuración Escolar</h5>
+                                <p>Gestione escuelas, calendarios y períodos académicos.</p>
+                                <button class="btn btn-primary">Configurar</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="config-card">
+                                <h5><i class="fas fa-book me-2"></i>Gestión Académica</h5>
+                                <p>Configure cursos, secciones y programas académicos.</p>
+                                <button class="btn btn-primary">Configurar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contenido de Alumnos -->
+                <div id="alumnosContent" class="content-section" style="display: none;">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h2>Listado de Alumnos</h2>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nuevoAlumnoModal" 
+                                    data-bs-toggle="tooltip" data-bs-placement="left" title="Agregar nuevo alumno">
+                                    <i class="fas fa-plus me-2"></i>Nuevo Alumno
+                                </button>
+                            </div>
+                            
+                            <!-- Panel de Filtros -->
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-3">
+                                            <label class="form-label">Buscar por nombre</label>
+                                            <input type="text" class="form-control" id="searchNombre" placeholder="Nombre o apellido..." 
+                                                data-bs-toggle="tooltip" data-bs-placement="top" 
+                                                title="Buscar por nombre o apellido del alumno">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Grado</label>
+                                            <select class="form-select" id="filterGrado" 
+                                                data-bs-toggle="tooltip" data-bs-placement="top" 
+                                                title="Filtrar alumnos por grado">
+                                                <option value="">Todos los grados</option>
+                                                <option value="1">Primer Grado</option>
+                                                <option value="2">Segundo Grado</option>
+                                                <option value="3">Tercer Grado</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Sección</label>
+                                            <select class="form-select" id="filterSeccion">
+                                                <option value="">Todas las secciones</option>
+                                                <option value="A">Sección A</option>
+                                                <option value="B">Sección B</option>
+                                                <option value="C">Sección C</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Estado</label>
+                                            <select class="form-select" id="filterEstado">
+                                                <option value="">Todos</option>
+                                                <option value="activo">Activo</option>
+                                                <option value="inactivo">Inactivo</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="d-flex gap-2">
+                                                <button class="btn btn-primary" onclick="aplicarFiltros()" 
+                                                    data-bs-toggle="tooltip" data-bs-placement="top" 
+                                                    title="Buscar alumnos con los filtros seleccionados">
+                                                    <i class="fas fa-search me-2"></i>Aplicar Filtros
+                                                </button>
+                                                <button class="btn btn-secondary" onclick="limpiarFiltros()"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top" 
+                                                    title="Restablecer todos los filtros">
+                                                    <i class="fas fa-undo me-2"></i>Limpiar Filtros
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tabla de Alumnos -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Nombre</th>
+                                                    <th>Apellido</th>
+                                                    <th>Email</th>
+                                                    <th>Grado</th>
+                                                    <th>Sección</th>
+                                                    <th>Estado</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="alumnosTableBody">
+                                                <!-- Los alumnos se cargarán aquí dinámicamente -->
+                                            </tbody>
+                                        </table>
+                                        <!-- Paginación -->
+                                        <nav aria-label="Page navigation" class="mt-4">
+                                            <ul class="pagination justify-content-center" id="paginacion">
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#" tabindex="-1">Anterior</a>
+                                                </li>
+                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#">Siguiente</a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contenido de Cursos -->
+                <div id="cursosContent" class="content-section" style="display: none;">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h2>Gestión de Cursos</h2>
+                                <button id="nuevoCursoBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nuevoCursoModal">
+                                    <i class="fas fa-plus me-2"></i>Nuevo Curso
+                                </button>
+                            </div>
+
+                            <!-- Pestañas de navegación -->
+                            <ul class="nav nav-tabs mb-4" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="cursos-lista-tab" data-bs-toggle="tab" href="#cursos-lista" role="tab">
+                                        <i class="fas fa-list me-2"></i>Lista de Cursos
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="horarios-tab" data-bs-toggle="tab" href="#horarios" role="tab">
+                                        <i class="fas fa-clock me-2"></i>Horarios
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <!-- Contenido de las pestañas -->
+                            <div class="tab-content">
+                                <!-- Pestaña de Lista de Cursos -->
+                                <div class="tab-pane fade show active" id="cursos-lista" role="tabpanel">
+                                    <!-- Panel de Filtros -->
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <div class="row g-3">
+                                                <div class="col-md-4">
+                                                    <label class="form-label">Buscar por nombre</label>
+                                                    <input type="text" class="form-control" id="searchCurso" placeholder="Nombre del curso...">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="form-label">Nivel</label>
+                                                    <select class="form-select" id="filterNivel">
+                                                        <option value="">Todos los niveles</option>
+                                                        <option value="1">1° Básico</option>
+                                                        <option value="2">2° Básico</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="form-label">Profesor Jefe</label>
+                                                    <select class="form-select" id="filterProfesor">
+                                                        <option value="">Todos los profesores</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Contenedor de Cursos -->
+                                    <div class="row" id="cursosContainer">
+                                        <!-- Tarjeta de curso -->
+                                        <div class="col-md-4 mb-4">
+                                            <div class="card h-100">
+                                                <div class="card-header bg-primary bg-opacity-10">
+                                                    <h5 class="card-title mb-0">1° Básico A</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="mb-3">
+                                                        <small class="text-muted">Profesor Jefe</small>
+                                                        <p class="mb-0">Juan Pérez</p>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <small class="text-muted">Cantidad de Alumnos</small>
+                                                        <p class="mb-0">35 estudiantes</p>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <small class="text-muted">Sala</small>
+                                                        <p class="mb-0">101</p>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between align-items-center mt-3">
+                                                        <span class="badge bg-success">Activo</span>
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-sm btn-outline-primary" onclick="editarCurso(1)">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-outline-danger" onclick="eliminarCurso(1)">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-outline-info" onclick="verHorario(1)">
+                                                                <i class="fas fa-clock"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Otra tarjeta de curso -->
+                                        <div class="col-md-4 mb-4">
+                                            <div class="card h-100">
+                                                <div class="card-header bg-primary bg-opacity-10">
+                                                    <h5 class="card-title mb-0">1° Básico B</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="mb-3">
+                                                        <small class="text-muted">Profesor Jefe</small>
+                                                        <p class="mb-0">María González</p>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <small class="text-muted">Cantidad de Alumnos</small>
+                                                        <p class="mb-0">32 estudiantes</p>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <small class="text-muted">Sala</small>
+                                                        <p class="mb-0">102</p>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between align-items-center mt-3">
+                                                        <span class="badge bg-success">Activo</span>
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-sm btn-outline-primary" onclick="editarCurso(2)">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-outline-danger" onclick="eliminarCurso(2)">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-outline-info" onclick="verHorario(2)">
+                                                                <i class="fas fa-clock"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Otra tarjeta de curso -->
+                                        <div class="col-md-4 mb-4">
+                                            <div class="card h-100">
+                                                <div class="card-header bg-primary bg-opacity-10">
+                                                    <h5 class="card-title mb-0">2° Básico A</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="mb-3">
+                                                        <small class="text-muted">Profesor Jefe</small>
+                                                        <p class="mb-0">Carlos Rodríguez</p>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <small class="text-muted">Cantidad de Alumnos</small>
+                                                        <p class="mb-0">33 estudiantes</p>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <small class="text-muted">Sala</small>
+                                                        <p class="mb-0">201</p>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between align-items-center mt-3">
+                                                        <span class="badge bg-success">Activo</span>
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-sm btn-outline-primary" onclick="editarCurso(3)">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-outline-danger" onclick="eliminarCurso(3)">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-outline-info" onclick="verHorario(3)">
+                                                                <i class="fas fa-clock"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pestaña de Horarios -->
+                                <div class="tab-pane fade" id="horarios" role="tabpanel">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <!-- Selector de Curso -->
+                                            <div class="row mb-4">
+                                                <div class="col-md-4">
+                                                    <label class="form-label">Seleccionar Curso</label>
+                                                    <select class="form-select" id="horarioCursoSelect">
+                                                        <option value="">Seleccione un curso...</option>
+                                                        <option value="1">1° Básico A</option>
+                                                        <option value="2">1° Básico B</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <!-- Horario Semanal -->
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered text-center">
+                                                    <thead>
+                                                        <tr class="bg-light">
+                                                            <th style="width: 100px;">Hora</th>
+                                                            <th>Lunes</th>
+                                                            <th>Martes</th>
+                                                            <th>Miércoles</th>
+                                                            <th>Jueves</th>
+                                                            <th>Viernes</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="horarioTableBody">
+                                                        <!-- Las horas se generarán dinámicamente -->
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <!-- Botones de Acción -->
+                                            <div class="d-flex justify-content-end gap-2 mt-3">
+                                                <button class="btn btn-secondary" onclick="limpiarHorario()">
+                                                    <i class="fas fa-undo me-2"></i>Limpiar Horario
+                                                </button>
+                                                <button class="btn btn-primary" onclick="guardarHorario()">
+                                                    <i class="fas fa-save me-2"></i>Guardar Horario
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contenido de Usuarios -->
+                <div id="usuariosContent" class="content-section" style="display: none;">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h2>Gestión de Usuarios</h2>
+                                <button class="btn btn-primary" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#nuevoUsuarioModal" 
+                                    data-bs-toggle="tooltip" 
+                                    data-bs-placement="left" 
+                                    title="Agregar un nuevo usuario al sistema">
+                                    <i class="fas fa-plus me-2"></i>Nuevo Usuario
+                                </button>
+                            </div>
+                            
+                            <!-- Panel de Filtros -->
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-3">
+                                            <label class="form-label">Buscar por nombre</label>
+                                            <input type="text" class="form-control" id="searchUsuario" 
+                                                placeholder="Nombre o apellido..." 
+                                                data-bs-toggle="tooltip" 
+                                                data-bs-placement="top" 
+                                                title="Buscar usuario por nombre o apellido">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Rol</label>
+                                            <select class="form-select" id="filterRol"
+                                                data-bs-toggle="tooltip" 
+                                                data-bs-placement="top" 
+                                                title="Filtrar usuarios por rol">
+                                                <option value="">Todos los roles</option>
+                                                <option value="admin">Administrador</option>
+                                                <option value="profesor">Profesor</option>
+                                                <option value="secretaria">Secretaria</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Estado</label>
+                                            <select class="form-select" id="filterEstadoUsuario"
+                                                data-bs-toggle="tooltip" 
+                                                data-bs-placement="top" 
+                                                title="Filtrar usuarios por estado">
+                                                <option value="">Todos</option>
+                                                <option value="activo">Activo</option>
+                                                <option value="inactivo">Inactivo</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="d-flex gap-2">
+                                                <button class="btn btn-primary" onclick="aplicarFiltrosUsuarios()"
+                                                    data-bs-toggle="tooltip" 
+                                                    data-bs-placement="top" 
+                                                    title="Aplicar filtros seleccionados">
+                                                    <i class="fas fa-search me-2"></i>Aplicar Filtros
+                                                </button>
+                                                <button class="btn btn-secondary" onclick="limpiarFiltrosUsuarios()"
+                                                    data-bs-toggle="tooltip" 
+                                                    data-bs-placement="top" 
+                                                    title="Limpiar todos los filtros">
+                                                    <i class="fas fa-undo me-2"></i>Limpiar Filtros
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tabla de Usuarios -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Nombre</th>
+                                                    <th>Apellido</th>
+                                                    <th>Email</th>
+                                                    <th>Rol</th>
+                                                    <th>Estado</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="usuariosTableBody">
+                                                <!-- Los usuarios se cargarán aquí dinámicamente -->
+                                            </tbody>
+                                        </table>
+                                        <!-- Paginación -->
+                                        <nav aria-label="Page navigation" class="mt-4">
+                                            <ul class="pagination justify-content-center" id="paginacionUsuarios">
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#" tabindex="-1">Anterior</a>
+                                                </li>
+                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#">Siguiente</a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agregar la nueva sección de contenido después de los otros content-section -->
+                <div id="libroClasesContent" class="content-section" style="display: none;">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="mb-4">Libro de Clases</h2>
+                            
+                            <!-- Agregar las estadísticas aquí -->
+                            <div class="dashboard-stats mb-4">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="stats-card bg-white p-3 rounded shadow-sm">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h6 class="text-muted mb-1">Total Alumnos</h6>
+                                                    <h3 class="mb-0" id="totalAlumnos">0</h3>
+                                                </div>
+                                                <div class="stats-icon bg-primary bg-opacity-10 rounded p-3">
+                                                    <i class="fas fa-user-graduate text-primary fa-2x"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="stats-card bg-white p-3 rounded shadow-sm">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h6 class="text-muted mb-1">Asistencia Hoy</h6>
+                                                    <h3 class="mb-0" id="asistenciaHoy">0%</h3>
+                                                </div>
+                                                <div class="stats-icon bg-success bg-opacity-10 rounded p-3">
+                                                    <i class="fas fa-clipboard-check text-success fa-2x"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="stats-card bg-white p-3 rounded shadow-sm">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h6 class="text-muted mb-1">Total Cursos</h6>
+                                                    <h3 class="mb-0" id="totalCursos">0</h3>
+                                                </div>
+                                                <div class="stats-icon bg-warning bg-opacity-10 rounded p-3">
+                                                    <i class="fas fa-chalkboard text-warning fa-2x"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="stats-card bg-white p-3 rounded shadow-sm">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h6 class="text-muted mb-1">Promedio por Curso</h6>
+                                                    <h3 class="mb-0" id="promedioCurso">0</h3>
+                                                </div>
+                                                <div class="stats-icon bg-info bg-opacity-10 rounded p-3">
+                                                    <i class="fas fa-users text-info fa-2x"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Pestañas de navegación -->
+                            <ul class="nav nav-tabs mb-4" id="libroClasesTabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="asistencia-tab" data-bs-toggle="tab" href="#asistencia" role="tab">
+                                        <i class="fas fa-clipboard-check me-2"></i>Asistencia
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="certificados-tab" data-bs-toggle="tab" href="#certificados" role="tab">
+                                        <i class="fas fa-certificate me-2"></i>Certificados
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="fichas-tab" data-bs-toggle="tab" href="#fichas" role="tab">
+                                        <i class="fas fa-folder-open me-2"></i>Fichas de Alumnos
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <!-- Contenido de las pestañas -->
+                            <div class="tab-content" id="libroClasesContent">
+                                <!-- Pestaña de Asistencia -->
+                                <div class="tab-pane fade show active" id="asistencia" role="tabpanel">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row mb-3">
+                                                <div class="col-md-3">
+                                                    <label class="form-label">Curso</label>
+                                                    <select class="form-select">
+                                                        <option value="">Seleccionar curso...</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="form-label">Fecha</label>
+                                                    <input type="date" class="form-control">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="form-label">Período</label>
+                                                    <select class="form-select">
+                                                        <option value="manana">Mañana</option>
+                                                        <option value="tarde">Tarde</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Alumno</th>
+                                                            <th>Estado</th>
+                                                            <th>Observaciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <!-- Se llenará dinámicamente -->
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pestaña de Certificados -->
+                                <div class="tab-pane fade" id="certificados" role="tabpanel">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row mb-3">
+                                                <div class="col-md-4">
+                                                    <label class="form-label">Tipo de Certificado</label>
+                                                    <select class="form-select">
+                                                        <option value="">Seleccionar tipo...</option>
+                                                        <option value="alumno_regular">Alumno Regular</option>
+                                                        <option value="notas">Certificado de Notas</option>
+                                                        <option value="conducta">Informe de Conducta</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="form-label">Alumno</label>
+                                                    <select class="form-select">
+                                                        <option value="">Seleccionar alumno...</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="form-label">&nbsp;</label>
+                                                    <button class="btn btn-primary d-block w-100">
+                                                        <i class="fas fa-file-pdf me-2"></i>Generar Certificado
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pestaña de Fichas de Alumnos -->
+                                <div class="tab-pane fade" id="fichas" role="tabpanel">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row mb-3">
+                                                <div class="col-md-4">
+                                                    <label class="form-label">Buscar Alumno</label>
+                                                    <input type="text" class="form-control" placeholder="Nombre o RUT...">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="form-label">Curso</label>
+                                                    <select class="form-select">
+                                                        <option value="">Todos los cursos</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Alumno</th>
+                                                            <th>Curso</th>
+                                                            <th>Última Actualización</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <!-- Se llenará dinámicamente -->
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agregar la nueva sección de contenido después de los otros content-section -->
+                <div id="colegioContent" class="content-section" style="display: none;">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="mb-4">Configuración del Colegio</h2>
+                            
+                            <!-- Pestañas de navegación -->
+                            <ul class="nav nav-tabs mb-4" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="calendario-tab" data-bs-toggle="tab" href="#calendario" role="tab">
+                                        <i class="fas fa-calendar-alt me-2"></i>Calendario Escolar
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="establecimiento-tab" data-bs-toggle="tab" href="#establecimiento" role="tab">
+                                        <i class="fas fa-building me-2"></i>Datos del Establecimiento
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <!-- Contenido de las pestañas -->
+                            <div class="tab-content">
+                                <!-- Pestaña de Calendario Escolar -->
+                                <div class="tab-pane fade show active" id="calendario" role="tabpanel">
+                                    <div class="card mb-4">
+                                        <div class="card-header bg-dark bg-opacity-10">
+                                            <h5 class="card-title mb-0">
+                                                <i class="fas fa-timeline me-2"></i>Línea de Tiempo Escolar 2024
+                                            </h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="timeline-container">
+                                                <div class="timeline-header d-flex justify-content-between mb-2">
+                                                    <span>Marzo</span>
+                                                    <span>Julio</span>
+                                                    <span>Diciembre</span>
+                                                </div>
+                                                <div class="timeline-bar position-relative mb-3">
+                                                    <!-- Barra principal -->
+                                                    <div class="progress" style="height: 25px;">
+                                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 100%"></div>
+                                                    </div>
+                                                    
+                                                    <!-- Primer Semestre -->
+                                                    <div class="timeline-period" style="left: 0%; width: 40%;">
+                                                        <div class="progress" style="height: 25px;">
+                                                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%">
+                                                                1er Semestre
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <!-- Vacaciones de Invierno -->
+                                                    <div class="timeline-period" style="left: 40%; width: 10%;">
+                                                        <div class="progress" style="height: 25px;">
+                                                            <div class="progress-bar bg-info" role="progressbar" style="width: 100%">
+                                                                Vacaciones
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <!-- Segundo Semestre -->
+                                                    <div class="timeline-period" style="left: 50%; width: 40%;">
+                                                        <div class="progress" style="height: 25px;">
+                                                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%">
+                                                                2do Semestre
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <!-- Marcadores de días libres -->
+                                                    <div id="timelineMarkers" class="position-absolute w-100" style="top: -15px;">
+                                                        <!-- Los marcadores se agregarán dinámicamente -->
+                                                    </div>
+                                                </div>
+                                                <div id="timelineLegend" class="d-flex justify-content-start gap-3 mt-3">
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="badge bg-success me-2">■</span>
+                                                        <small>Período Lectivo</small>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="badge bg-info me-2">■</span>
+                                                        <small>Vacaciones</small>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="badge bg-danger me-2">■</span>
+                                                        <small>Feriados</small>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="badge bg-warning me-2">■</span>
+                                                        <small>Suspensión</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Resto de las tarjetas -->
+                                    <div class="row">
+                                        <!-- Tarjeta de Año Escolar -->
+                                        <div class="col-md-6 mb-4">
+                                            <div class="card h-100">
+                                                <div class="card-header bg-primary bg-opacity-10">
+                                                    <h5 class="card-title mb-0">
+                                                        <i class="fas fa-calendar-day me-2"></i>Año Escolar
+                                                    </h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <form id="anoEscolarForm">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Inicio Año Escolar</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text"><i class="fas fa-calendar-plus"></i></span>
+                                                                <input type="date" class="form-control" name="inicio_ano">
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Fin Año Escolar</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text"><i class="fas fa-calendar-minus"></i></span>
+                                                                <input type="date" class="form-control" name="fin_ano">
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-grid">
+                                                            <button type="submit" class="btn btn-primary">
+                                                                <i class="fas fa-save me-2"></i>Guardar Fechas
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Tarjeta de Semestres -->
+                                        <div class="col-md-6 mb-4">
+                                            <div class="card h-100">
+                                                <div class="card-header bg-success bg-opacity-10">
+                                                    <h5 class="card-title mb-0">
+                                                        <i class="fas fa-clock me-2"></i>Períodos Académicos
+                                                    </h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <form id="semestresForm">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Primer Semestre</label>
+                                                            <div class="input-group mb-2">
+                                                                <span class="input-group-text">Inicio</span>
+                                                                <input type="date" class="form-control" name="semestre1_inicio">
+                                                            </div>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text">Fin</span>
+                                                                <input type="date" class="form-control" name="semestre1_fin">
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Segundo Semestre</label>
+                                                            <div class="input-group mb-2">
+                                                                <span class="input-group-text">Inicio</span>
+                                                                <input type="date" class="form-control" name="semestre2_inicio">
+                                                            </div>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text">Fin</span>
+                                                                <input type="date" class="form-control" name="semestre2_fin">
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-grid">
+                                                            <button type="submit" class="btn btn-success">
+                                                                <i class="fas fa-save me-2"></i>Guardar Períodos
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Tarjeta de Vacaciones -->
+                                        <div class="col-md-6 mb-4">
+                                            <div class="card h-100">
+                                                <div class="card-header bg-info bg-opacity-10">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <h5 class="card-title mb-0">
+                                                            <i class="fas fa-umbrella-beach me-2"></i>Períodos de Vacaciones
+                                                        </h5>
+                                                        <button type="button" class="btn btn-sm btn-info" id="agregarVacaciones">
+                                                            <i class="fas fa-plus me-1"></i>Agregar
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Período</th>
+                                                                    <th>Fechas</th>
+                                                                    <th>Acciones</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="vacacionesTableBody">
+                                                                <tr>
+                                                                    <td>Vacaciones de Invierno</td>
+                                                                    <td>10/07/2024 - 21/07/2024</td>
+                                                                    <td>
+                                                                        <button class="btn btn-sm btn-danger">
+                                                                            <i class="fas fa-trash"></i>
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Tarjeta de Días Libres -->
+                                        <div class="col-md-6 mb-4">
+                                            <div class="card h-100">
+                                                <div class="card-header bg-warning bg-opacity-10">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <h5 class="card-title mb-0">
+                                                            <i class="fas fa-calendar-check me-2"></i>Días Libres
+                                                        </h5>
+                                                        <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#diaLibreModal">
+                                                            <i class="fas fa-plus me-1"></i>Agregar
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Fecha</th>
+                                                                    <th>Descripción</th>
+                                                                    <th>Tipo</th>
+                                                                    <th>Acciones</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="diasLibresTableBody">
+                                                                <!-- Se llena dinámicamente -->
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pestaña de Datos del Establecimiento -->
+                                <div class="tab-pane fade" id="establecimiento" role="tabpanel">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form id="establecimientoForm">
+                                                <div class="row mb-3">
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Nombre del Establecimiento</label>
+                                                        <input type="text" class="form-control" name="nombre_establecimiento">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">RBD</label>
+                                                        <input type="text" class="form-control" name="rbd">
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Director/a</label>
+                                                        <input type="text" class="form-control" name="director">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Email Institucional</label>
+                                                        <input type="email" class="form-control" name="email">
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <div class="col-md-12">
+                                                        <label class="form-label">Dirección</label>
+                                                        <input type="text" class="form-control" name="direccion">
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <div class="col-md-4">
+                                                        <label class="form-label">Comuna</label>
+                                                        <input type="text" class="form-control" name="comuna">
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="form-label">Ciudad</label>
+                                                        <input type="text" class="form-control" name="ciudad">
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="form-label">Región</label>
+                                                        <input type="text" class="form-control" name="region">
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Teléfono</label>
+                                                        <input type="tel" class="form-control" name="telefono">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Sitio Web</label>
+                                                        <input type="url" class="form-control" name="sitio_web">
+                                                    </div>
+                                                </div>
+
+                                                <div class="text-end">
+                                                    <button type="submit" class="btn btn-primary">
+                                                        <i class="fas fa-save me-2"></i>Guardar Datos
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Agregar el modal después del div.wrapper -->
+    <div class="modal fade" id="nuevoAlumnoModal" tabindex="-1" aria-labelledby="nuevoAlumnoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="nuevoAlumnoModalLabel">Agregar Nuevo Alumno</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="nuevoAlumnoForm">
+                        <!-- Información Personal Básica -->
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Nombre*</label>
+                                <input type="text" class="form-control" name="first_name" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Segundo Nombre</label>
+                                <input type="text" class="form-control" name="middle_name">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Apellidos*</label>
+                                <input type="text" class="form-control" name="last_name" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Fecha de Nacimiento*</label>
+                                <input type="date" class="form-control" name="birthdate" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Sexo*</label>
+                                <select class="form-select" name="ref_sex_id" required>
+                                    <option value="">Seleccionar...</option>
+                                    <option value="1">Masculino</option>
+                                    <option value="2">Femenino</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Etnia Hispana/Latina</label>
+                                <select class="form-select" name="hispanic_latino_ethnicity">
+                                    <option value="true">Sí</option>
+                                    <option value="false">No</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Información de Matrícula -->
+                        <h6 class="mt-4 mb-3">Información de Matrícula</h6>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Grado de Ingreso*</label>
+                                <select class="form-select" name="ref_entry_grade_level_id" required>
+                                    <option value="">Seleccionar...</option>
+                                    <option value="1">1° Grado</option>
+                                    <option value="2">2° Grado</option>
+                                    <option value="3">3° Grado</option>
+                                    <!-- Agregar más grados según necesidad -->
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Estado de Matrícula*</label>
+                                <select class="form-select" name="ref_enrollment_status_id" required>
+                                    <option value="">Seleccionar...</option>
+                                    <option value="1">Activo</option>
+                                    <option value="2">Inactivo</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Fecha de Ingreso*</label>
+                                <input type="date" class="form-control" name="first_entry_date_into_us_school" required>
+                            </div>
+                        </div>
+
+                        <!-- Información de Contacto -->
+                        <h6 class="mt-4 mb-3">Información de Contacto</h6>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" name="email">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Teléfono</label>
+                                <input type="tel" class="form-control" name="telephone_number">
+                            </div>
+                        </div>
+
+                        <!-- Dirección -->
+                        <h6 class="mt-4 mb-3">Dirección</h6>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Calle y Número*</label>
+                                <input type="text" class="form-control" name="street_number_and_name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Ciudad*</label>
+                                <input type="text" class="form-control" name="city" required>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="guardarNuevoAlumno()">Guardar Alumno</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Nuevo Curso -->
+    <div class="modal fade" id="nuevoCursoModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Crear Nuevo Curso</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- ... contenido del modal ... -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Nuevo Usuario -->
+    <div class="modal fade" id="nuevoUsuarioModal" tabindex="-1" aria-labelledby="nuevoUsuarioModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="nuevoUsuarioModalLabel">Agregar Nuevo Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="nuevoUsuarioForm">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Nombre*</label>
+                                <input type="text" class="form-control" name="first_name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Apellidos*</label>
+                                <input type="text" class="form-control" name="last_name" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Email*</label>
+                                <input type="email" class="form-control" 
+                                    name="email" required
+                                    data-bs-toggle="tooltip" 
+                                    data-bs-placement="top" 
+                                    title="Ingrese un email válido">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Rol*</label>
+                                <select class="form-select" 
+                                    name="role" required
+                                    data-bs-toggle="tooltip" 
+                                    data-bs-placement="top" 
+                                    title="Seleccione el nivel de acceso del usuario">
+                                    <option value="">Seleccionar...</option>
+                                    <option value="admin">Administrador</option>
+                                    <option value="profesor">Profesor</option>
+                                    <option value="secretaria">Secretaria</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Contraseña*</label>
+                                <input type="password" class="form-control" name="password" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Confirmar Contraseña*</label>
+                                <input type="password" class="form-control" name="confirm_password" required>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="guardarNuevoUsuario()">Guardar Usuario</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Agregar el modal de días libres después de los otros modales -->
+    <div class="modal fade" id="diaLibreModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Agregar Día Libre</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="diaLibreForm">
+                        <div class="mb-3">
+                            <label class="form-label">Fecha</label>
+                            <input type="date" class="form-control" id="fechaDiaLibre" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Descripción</label>
+                            <input type="text" class="form-control" id="descripcionDiaLibre" 
+                                placeholder="Ej: Feriado Nacional" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Tipo</label>
+                            <select class="form-select" id="tipoDiaLibre" required>
+                                <option value="">Seleccionar tipo...</option>
+                                <option value="feriado">Feriado Nacional</option>
+                                <option value="suspension">Suspensión de Clases</option>
+                                <option value="interferiado">Interferiado</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="guardarDiaLibre()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Agregar el Modal para asignar clase -->
+    <div class="modal fade" id="asignarClaseModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Asignar Clase</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="asignarClaseForm">
+                        <input type="hidden" id="selectedDay">
+                        <input type="hidden" id="selectedHour">
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Asignatura</label>
+                            <select class="form-select" id="asignaturaSelect" required>
+                                <option value="">Seleccione una asignatura...</option>
+                                <option value="1">Matemáticas</option>
+                                <option value="2">Lenguaje</option>
+                                <option value="3">Ciencias</option>
+                                <option value="4">Historia</option>
+                                <option value="5">Educación Física</option>
+                                <option value="6">Artes</option>
+                                <option value="7">Música</option>
+                                <!-- Se llenará dinámicamente -->
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Profesor</label>
+                            <select class="form-select" id="profesorSelect" required>
+                                <option value="">Seleccione un profesor...</option>
+                                <!-- Se llenará dinámicamente -->
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Color de fondo</label>
+                            <input type="color" class="form-control form-control-color" id="colorSelect" 
+                                   value="#0d6efd" title="Elegir color para la asignatura">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger me-auto" id="btnEliminarClase" style="display: none;">
+                        <i class="fas fa-trash me-2"></i>Eliminar
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="guardarClase()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/alumnos.js' %}"></script>
+    <script src="{% static 'js/cursos.js' %}"></script>
+    <script src="{% static 'js/usuarios.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Referencias a los elementos del menú
+            const alumnosLink = document.getElementById('alumnosLink');
+            const usuariosLink = document.getElementById('usuariosLink');
+            const cursosLink = document.getElementById('cursosLink');
+            const libroClasesLink = document.getElementById('libroClasesLink');
+            const colegioLink = document.getElementById('colegioLink');
+
+            // Referencias a las secciones de contenido
+            const defaultContent = document.getElementById('defaultContent');
+            const alumnosContent = document.getElementById('alumnosContent');
+            const usuariosContent = document.getElementById('usuariosContent');
+            const cursosContent = document.getElementById('cursosContent');
+            const libroClasesContent = document.getElementById('libroClasesContent');
+            const colegioContent = document.getElementById('colegioContent');
+
+            // Función para ocultar todas las secciones
+            function hideAllSections() {
+                const sections = document.querySelectorAll('.content-section');
+                sections.forEach(section => section.style.display = 'none');
+            }
+
+            // Función para mostrar una sección específica
+            function showSection(sectionId) {
+                hideAllSections();
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    section.style.display = 'block';
+                    // Guardar la sección actual en localStorage
+                    localStorage.setItem('currentSection', sectionId);
+                }
+            }
+
+            // Event listeners para los links del menú
+            alumnosLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                showSection('alumnosContent');
+            });
+
+            usuariosLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                showSection('usuariosContent');
+            });
+
+            cursosLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                showSection('cursosContent');
+            });
+
+            libroClasesLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                showSection('libroClasesContent');
+            });
+
+            colegioLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                showSection('colegioContent');
+            });
+
+            // Toggle del sidebar
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebar = document.querySelector('.sidebar');
+            const mainContent = document.querySelector('.main-content');
+
+            sidebarToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+                mainContent.classList.toggle('expanded');
+            });
+
+            // Cargar la última sección activa al cargar la página
+            const lastActiveSection = localStorage.getItem('currentSection');
+            if (lastActiveSection) {
+                showSection(lastActiveSection);
+            } else {
+                // Si no hay sección guardada, mostrar el contenido por defecto
+                showSection('defaultContent');
+            }
+
+            // Función para actualizar las estadísticas
+            function actualizarEstadisticas() {
+                // Obtener el total de alumnos (ejemplo)
+                const totalAlumnos = '325';
+                
+                // Actualizar todos los contadores
+                document.getElementById('totalAlumnos').textContent = totalAlumnos;
+                document.getElementById('sidebarTotalAlumnos').textContent = totalAlumnos;
+                document.getElementById('asistenciaHoy').textContent = '92%';
+                document.getElementById('totalCursos').textContent = '12';
+                document.getElementById('promedioCurso').textContent = '27';
+            }
+
+            // Llamar a la función cuando se carga la página
+            actualizarEstadisticas();
+
+            // Actualizar cada 5 minutos
+            setInterval(actualizarEstadisticas, 300000);
+
+            // Funcionalidad para días libres
+            window.diasLibres = [];
+
+            window.guardarDiaLibre = function() {
+                const fecha = document.getElementById('fechaDiaLibre').value;
+                const descripcion = document.getElementById('descripcionDiaLibre').value;
+                const tipo = document.getElementById('tipoDiaLibre').value;
+
+                if (!fecha || !descripcion || !tipo) {
+                    alert('Por favor complete todos los campos');
+                    return;
+                }
+
+                const diaLibre = {
+                    fecha: fecha,
+                    descripcion: descripcion,
+                    tipo: tipo
+                };
+
+                diasLibres.push(diaLibre);
+                actualizarTablaDiasLibres();
+
+                // Cerrar modal y limpiar formulario
+                const modal = bootstrap.Modal.getInstance(document.getElementById('diaLibreModal'));
+                modal.hide();
+                document.getElementById('diaLibreForm').reset();
+            };
+
+            function actualizarTablaDiasLibres() {
+                const tbody = document.getElementById('diasLibresTableBody');
+                tbody.innerHTML = '';
+
+                diasLibres.sort((a, b) => new Date(a.fecha) - new Date(b.fecha)).forEach((dia, index) => {
+                    const tr = document.createElement('tr');
+                    const fecha = new Date(dia.fecha).toLocaleDateString('es-ES', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric'
+                    });
+
+                    tr.innerHTML = `
+                        <td>${fecha}</td>
+                        <td>
+                            <span class="badge ${getBadgeClass(dia.tipo)} me-2">${dia.tipo}</span>
+                            ${dia.descripcion}
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-danger" onclick="eliminarDiaLibre(${index})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+
+            window.eliminarDiaLibre = function(index) {
+                if (confirm('¿Está seguro de eliminar este día libre?')) {
+                    diasLibres.splice(index, 1);
+                    actualizarTablaDiasLibres();
+                }
+            };
+
+            function getBadgeClass(tipo) {
+                const clases = {
+                    'feriado': 'bg-danger',
+                    'suspension': 'bg-warning',
+                    'interferiado': 'bg-info',
+                    'otro': 'bg-secondary'
+                };
+                return clases[tipo] || 'bg-secondary';
+            }
+
+            // Limpiar el formulario cuando se cierra el modal
+            document.getElementById('diaLibreModal').addEventListener('hidden.bs.modal', function () {
+                document.getElementById('diaLibreForm').reset();
+            });
+
+            function actualizarLineaTiempo() {
+                const markers = document.getElementById('timelineMarkers');
+                markers.innerHTML = '';
+
+                // Ejemplo de cómo agregar marcadores de días libres
+                diasLibres.forEach(dia => {
+                    const fecha = new Date(dia.fecha);
+                    const inicioAno = new Date(fecha.getFullYear(), 2, 1); // 1 de marzo
+                    const finAno = new Date(fecha.getFullYear(), 11, 31); // 31 de diciembre
+                    const totalDias = (finAno - inicioAno) / (1000 * 60 * 60 * 24);
+                    const diasTranscurridos = (fecha - inicioAno) / (1000 * 60 * 60 * 24);
+                    
+                    const porcentaje = (diasTranscurridos / totalDias) * 100;
+                    
+                    const marker = document.createElement('div');
+                    marker.className = 'timeline-marker';
+                    marker.style.left = `${porcentaje}%`;
+                    marker.style.backgroundColor = getBadgeColor(dia.tipo);
+                    marker.setAttribute('data-description', `${fecha.toLocaleDateString('es-ES')}: ${dia.descripcion}`);
+                    
+                    markers.appendChild(marker);
+                });
+            }
+
+            function getBadgeColor(tipo) {
+                const colores = {
+                    'feriado': '#dc3545',
+                    'suspension': '#ffc107',
+                    'interferiado': '#0dcaf0',
+                    'otro': '#6c757d'
+                };
+                return colores[tipo] || '#6c757d';
+            }
+
+            // Actualizar la línea de tiempo cuando se agregan o eliminan días libres
+            const originalGuardarDiaLibre = window.guardarDiaLibre;
+            window.guardarDiaLibre = function() {
+                originalGuardarDiaLibre();
+                actualizarLineaTiempo();
+            };
+
+            const originalEliminarDiaLibre = window.eliminarDiaLibre;
+            window.eliminarDiaLibre = function(index) {
+                originalEliminarDiaLibre(index);
+                actualizarLineaTiempo();
+            };
+
+            // Generar horario
+            generarHorario();
+
+            // Event listener para celdas del horario
+            document.getElementById('horarioTableBody').addEventListener('click', function(e) {
+                const cell = e.target.closest('td');
+                if (cell && !cell.classList.contains('hora-column')) {
+                    abrirModalAsignarClase(cell);
+                }
+            });
+        });
+
+        function generarHorario() {
+            const tbody = document.getElementById('horarioTableBody');
+            const horasClase = [
+                { inicio: '08:00', fin: '08:45' },
+                { inicio: '08:45', fin: '09:30' },
+                { inicio: '09:45', fin: '10:30' },
+                { inicio: '10:30', fin: '11:15' },
+                { inicio: '11:30', fin: '12:15' },
+                { inicio: '12:15', fin: '13:00' },
+                { inicio: '14:00', fin: '14:45' },
+                { inicio: '14:45', fin: '15:30' }
+            ];
+
+            tbody.innerHTML = '';
+            horasClase.forEach((hora, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="hora-column bg-light">
+                        <small>${hora.inicio}<br>-<br>${hora.fin}</small>
+                    </td>
+                    <td class="celda-horario" data-day="1" data-hour="${index}"></td>
+                    <td class="celda-horario" data-day="2" data-hour="${index}"></td>
+                    <td class="celda-horario" data-day="3" data-hour="${index}"></td>
+                    <td class="celda-horario" data-day="4" data-hour="${index}"></td>
+                    <td class="celda-horario" data-day="5" data-hour="${index}"></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function abrirModalAsignarClase(cell) {
+            const modal = new bootstrap.Modal(document.getElementById('asignarClaseModal'));
+            const day = cell.dataset.day;
+            const hour = cell.dataset.hour;
+            
+            document.getElementById('selectedDay').value = day;
+            document.getElementById('selectedHour').value = hour;
+
+            // Mostrar botón de eliminar si la celda ya tiene una clase asignada
+            const btnEliminar = document.getElementById('btnEliminarClase');
+            btnEliminar.style.display = cell.hasAttribute('data-class') ? 'block' : 'none';
+
+            if (cell.hasAttribute('data-class')) {
+                // Cargar datos existentes
+                const classData = JSON.parse(cell.getAttribute('data-class'));
+                document.getElementById('asignaturaSelect').value = classData.asignatura;
+                document.getElementById('profesorSelect').value = classData.profesor;
+                document.getElementById('colorSelect').value = classData.color;
+            } else {
+                document.getElementById('asignarClaseForm').reset();
+            }
+
+            modal.show();
+        }
+
+        function guardarClase() {
+            const day = document.getElementById('selectedDay').value;
+            const hour = document.getElementById('selectedHour').value;
+            const asignatura = document.getElementById('asignaturaSelect').value;
+            const profesor = document.getElementById('profesorSelect').value;
+            const color = document.getElementById('colorSelect').value;
+
+            if (!asignatura || !profesor) {
+                alert('Por favor complete todos los campos');
+                return;
+            }
+
+            const cell = document.querySelector(`td[data-day="${day}"][data-hour="${hour}"]`);
+            const classData = {
+                asignatura: asignatura,
+                profesor: profesor,
+                color: color
+            };
+
+            cell.setAttribute('data-class', JSON.stringify(classData));
+            cell.style.backgroundColor = color;
+            cell.style.color = getContrastColor(color);
+            cell.innerHTML = `
+                <strong>${document.getElementById('asignaturaSelect').options[asignaturaSelect.selectedIndex].text}</strong><br>
+                <small>${document.getElementById('profesorSelect').options[profesorSelect.selectedIndex].text}</small>
+            `;
+
+            bootstrap.Modal.getInstance(document.getElementById('asignarClaseModal')).hide();
+        }
+
+        function getContrastColor(hexcolor) {
+            // Convertir hex a RGB
+            const r = parseInt(hexcolor.substr(1,2), 16);
+            const g = parseInt(hexcolor.substr(3,2), 16);
+            const b = parseInt(hexcolor.substr(5,2), 16);
+            
+            // Calcular luminancia
+            const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+            return (yiq >= 128) ? 'black' : 'white';
+        }
+
+        function limpiarHorario() {
+            if (confirm('¿Está seguro de querer limpiar todo el horario?')) {
+                document.querySelectorAll('.celda-horario').forEach(cell => {
+                    cell.removeAttribute('data-class');
+                    cell.style.backgroundColor = '';
+                    cell.style.color = '';
+                    cell.innerHTML = '';
+                });
+            }
+        }
+
+        function guardarHorario() {
+            const curso = document.getElementById('horarioCursoSelect').value;
+            if (!curso) {
+                alert('Por favor seleccione un curso');
+                return;
+            }
+
+            const horario = [];
+            document.querySelectorAll('.celda-horario').forEach(cell => {
+                if (cell.hasAttribute('data-class')) {
+                    horario.push({
+                        day: cell.dataset.day,
+                        hour: cell.dataset.hour,
+                        classData: JSON.parse(cell.getAttribute('data-class'))
+                    });
+                }
+            });
+
+            // Aquí irá la lógica para guardar en el backend
+            console.log('Horario a guardar:', horario);
+            alert('Horario guardado correctamente');
+        }
+    </script>
+</body>
+</html>
