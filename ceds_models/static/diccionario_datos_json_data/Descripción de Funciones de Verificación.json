@@ -1,0 +1,596 @@
+[
+  {
+    "Sección": "Registro de salidas",
+    "función": "fn0FA",
+    "subsección": "7.0 Registro de salidas o retiros",
+    "Condición que verifica": "Cada estudiante tiene al menos una persona autorizada para retirarlo del establecimiento."
+  },
+  {
+    "Sección": "Registro de salidas",
+    "función": "fn0FB",
+    "subsección": "7.0 Registro de salidas o retiros",
+    "Condición que verifica": "Cuando hay un retiro, está escaneado el documento o está registrado el verificador de identidad."
+  },
+  {
+    "Sección": "Registro entrega de información",
+    "función": "fn1FA",
+    "subsección": "8.0 De la entrega de información",
+    "Condición que verifica": "Los alumnos retirados tienen un incidente creado, fecha, registro de entrega de información, firma digital del profesor, documento o firma digital del apoderado."
+  },
+  {
+    "Sección": "Registro entrega de información",
+    "función": "fn1FB",
+    "subsección": "8.0 De la entrega de información",
+    "Condición que verifica": "Los documentos de interés general fueron entregados a un apoderado, tutor, padre o madre."
+  },
+  {
+    "Sección": "Registro entrega de información",
+    "función": "fn1FC",
+    "subsección": "8.0 De la entrega de información",
+    "Condición que verifica": "A los alumnos retirados se les ha entregado a sus apoderados los documentos para continuidad de estudios."
+  },
+  {
+    "Sección": "Registro de matrícula",
+    "función": "fn28A",
+    "subsección": "5.8 De los estudiantes migrantes",
+    "Condición que verifica": "Los estudiantes migrantes tienen su IPE y documento de convalidación de estudios."
+  },
+  {
+    "Sección": "Registro de matrícula",
+    "función": "fn28B",
+    "subsección": "5.8 De los estudiantes migrantes",
+    "Condición que verifica": "Los estudiantes migrantes tienen su IPE y el documento de convalidación de estudios no es nulo."
+  },
+  {
+    "Sección": "Registro de matrícula",
+    "función": "fn29A",
+    "subsección": "5.7 De los estudiantes en práctica",
+    "Condición que verifica": "Los estudiantes en práctica han terminado al menos el primer semestre del tercer año."
+  },
+  {
+    "Sección": "Registro de matrícula",
+    "función": "fn29B",
+    "subsección": "5.7 De los estudiantes en práctica",
+    "Condición que verifica": "Si la práctica se realiza durante la jornada escolar o en vacaciones existe solo un registro de matricula para el estudiante."
+  },
+  {
+    "Sección": "Registro de matrícula",
+    "función": "fn29C",
+    "subsección": "5.7 De los estudiantes en práctica",
+    "Condición que verifica": "Los estudiantes egresados de cuarto medio y que estén realizando su práctica tienen asignado un profesor tutor."
+  },
+  {
+    "Sección": "Registro de matrícula",
+    "función": "fn2AA",
+    "subsección": "5.6 De los estudiantes de intercambio",
+    "Condición que verifica": "Existe cargada en el sistema la resolución que autoriza al estudiante de intercambio."
+  },
+  {
+    "Sección": "Registro de matrícula",
+    "función": "fn2BA",
+    "subsección": "5.5 De los estudiantes excedentes",
+    "Condición que verifica": "Existe cargada en el sistema la resolución que autoriza al estudiante excedente."
+  },
+  {
+    "Sección": "Registro de matrícula",
+    "función": "fn2CA",
+    "subsección": "5.4 De las bajas en el registro de matrícula",
+    "Condición que verifica": "Existe la fecha, motivo y declaración jurada del requirente o su verificador de identidad cargado en el sistema."
+  },
+  {
+    "Sección": "Registro de matrícula",
+    "función": "fn2CB",
+    "subsección": "5.4 De las bajas en el registro de matrícula",
+    "Condición que verifica": "Todos los estudiantes retirados definitivamente tienen documento e indicente relacionado a la entrega de estos."
+  },
+  {
+    "Sección": "Registro de matrícula",
+    "función": "fn2DA",
+    "subsección": "5.3 De las altas en el registro de matrícula.",
+    "Condición que verifica": "Todos los alumnos nuevos con matricula definitiva poseen documento."
+  },
+  {
+    "Sección": "Registro de matrícula",
+    "función": "fn2DB",
+    "subsección": "5.3 De las altas en el registro de matrícula.",
+    "Condición que verifica": "Todos los estudiantes matriculados bajo el decreto 152 artículo 60 tienen su documento escaneado."
+  },
+  {
+    "Sección": "Registro de matrícula",
+    "función": "fn2EA",
+    "subsección": "5.2 Contenido mínimo del registro de matrícula.",
+    "Condición que verifica": "Los alumnos tienen todos sus datos obligatorios."
+  },
+  {
+    "Sección": "Registro de matrícula",
+    "función": "fn2FA",
+    "subsección": "5.1 Estructura del registro de matrícula.",
+    "Condición que verifica": "El total de alumnos matriculados menos las bajas, es igual a la suma de los estudiantes inscritos en los libros de clases."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3C3",
+    "subsección": NaN,
+    "Condición que verifica": "Las Organizaciones tienen bien definida su localización."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3C4",
+    "subsección": NaN,
+    "Condición que verifica": "El campo MaximumCapacity cumple con la siguiente expresión regular: '^[1-9]{1}\\d{1,3}$' y todas las organizaciones de la tabla CourseSection son de tipo ASIGNATURA."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3C5",
+    "subsección": NaN,
+    "Condición que verifica": "Verificador de identidad (OTP) cumple la expresión regular."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3CA",
+    "subsección": NaN,
+    "Condición que verifica": "Existen campos relacionados a la asistencia."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3D0",
+    "subsección": NaN,
+    "Condición que verifica": "Cada asignatura se encuentra asociada a un curso."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3D1",
+    "subsección": NaN,
+    "Condición que verifica": "Las asignaturas tienen una capacidad máxima."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3D2",
+    "subsección": NaN,
+    "Condición que verifica": "El campo de Asistencia no se encuentra vacío."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3D3",
+    "subsección": NaN,
+    "Condición que verifica": "Los ClassMeetingDays corresponden a los días de la semana, y los ClassPeriod a los bloques."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3D9",
+    "subsección": NaN,
+    "Condición que verifica": "Las asignaturas tienen sus sesiones de calendario (cuándo será la clase) y sus asistencias."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3DA",
+    "subsección": NaN,
+    "Condición que verifica": "Existe asistencia diaria y las tasas de asistencia estan bien calculadas."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3DD",
+    "subsección": NaN,
+    "Condición que verifica": "El establecimiento tiene su información mínima ingresada."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3E0",
+    "subsección": NaN,
+    "Condición que verifica": "Hay docentes registrados (vista personList filtrada por docente)"
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3E1",
+    "subsección": NaN,
+    "Condición que verifica": "Todos los docentes tienen su título y la institución de educación ingresados en el sistema."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3E2",
+    "subsección": NaN,
+    "Condición que verifica": "Los establecimientos tienen su RBD (identificador)"
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3E3",
+    "subsección": NaN,
+    "Condición que verifica": "El código identificador del establecimiento RBD es correcto de acuerdo al formato."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3E4",
+    "subsección": NaN,
+    "Condición que verifica": "Los cursos tienen una organización, rbd, nivel, jornada, etc."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3E5",
+    "subsección": NaN,
+    "Condición que verifica": "La modalidad de cada curso está dentro de la lista permitida."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3E6",
+    "subsección": NaN,
+    "Condición que verifica": "La jornada está dentro de la lista permitida."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3E7",
+    "subsección": NaN,
+    "Condición que verifica": "El nivel está dentro de la lista permitida."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3E8",
+    "subsección": NaN,
+    "Condición que verifica": "La rama está dentro de la lista permitida."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3E9",
+    "subsección": NaN,
+    "Condición que verifica": "El sector está dentro de la lista permitida."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3EA",
+    "subsección": NaN,
+    "Condición que verifica": "La especialidad está dentro de la lista permitida."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3EB",
+    "subsección": NaN,
+    "Condición que verifica": "Los tipos de curso están dentro de la lista permitida."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3EC",
+    "subsección": NaN,
+    "Condición que verifica": "Los códigos de enseñanza están dentro de la lista permitida."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3ED",
+    "subsección": NaN,
+    "Condición que verifica": "El grado está dentro de la lista permitida."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3EE",
+    "subsección": NaN,
+    "Condición que verifica": "La letra del curso está dentro de la lista permitida."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3EF",
+    "subsección": NaN,
+    "Condición que verifica": "Los id del curso son equivalentes en las tablas course y organization."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3F0",
+    "subsección": NaN,
+    "Condición que verifica": "La conexión con la base de datos es exitosa"
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3F1",
+    "subsección": NaN,
+    "Condición que verifica": "La integridad referencial de los datos es correcta."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3F2",
+    "subsección": NaN,
+    "Condición que verifica": "Hay personas registradas en el sistema (vista personList)."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3F3",
+    "subsección": NaN,
+    "Condición que verifica": "Los RUT's ingresados son válidos de acuerdo al formato."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3F4",
+    "subsección": NaN,
+    "Condición que verifica": "Los IPE ingresados son válidos de acuerdo al formato."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3F5",
+    "subsección": NaN,
+    "Condición que verifica": "Los e-mails ingresados cumplen con el formato"
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3F6",
+    "subsección": NaN,
+    "Condición que verifica": "La lista de teléfonos cumple con el formato."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3F7",
+    "subsección": NaN,
+    "Condición que verifica": "El número de lista cumple con el formato"
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3F8",
+    "subsección": NaN,
+    "Condición que verifica": "El número de matrícula cumple con el formato"
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3F9",
+    "subsección": NaN,
+    "Condición que verifica": "Las fechas ingresadas cumplen con el formato."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3FA",
+    "subsección": NaN,
+    "Condición que verifica": "La lista de afiliaciones tribales se encuentra dentro de la lista permitida"
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3FB",
+    "subsección": NaN,
+    "Condición que verifica": "La cantidad de #Matricula == #lista == #FechasIncorporaciones"
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3FC",
+    "subsección": NaN,
+    "Condición que verifica": "La cantidad de emails corresponde con los tipos de emails ingresados"
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3FD",
+    "subsección": NaN,
+    "Condición que verifica": "La cantidad de teléfonos corresponde con los tipos de teléfonos ingresados."
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3FE",
+    "subsección": NaN,
+    "Condición que verifica": "Los estudiantes tienen sus datos de nacimiento"
+  },
+  {
+    "Sección": "Integridad de datos",
+    "función": "fn3FF",
+    "subsección": NaN,
+    "Condición que verifica": "Todos los estudiantes tienen país, región y ciudad de nacimiento."
+  },
+  {
+    "Sección": "Registro de antecedentes generales de los estudiantes por curso",
+    "función": "fn4FA",
+    "subsección": "6.2 Contenido mínimo, letra a",
+    "Condición que verifica": "Los estudiantes tienen sus datos mínimos."
+  },
+  {
+    "Sección": "Registro de control de asignatura",
+    "función": "fn5D0",
+    "subsección": "6.2 Contenido mínimo, letra b.3",
+    "Condición que verifica": "No existen asistencias de Class/section duplicadas"
+  },
+  {
+    "Sección": "Registro de control de asignatura",
+    "función": "fn5E0",
+    "subsección": "6.2 Contenido mínimo, letra b.1",
+    "Condición que verifica": "El registro de asistencia bloque a bloque es válido."
+  },
+  {
+    "Sección": "Registro de control de asignatura",
+    "función": "fn5E1",
+    "subsección": "6.2 Contenido mínimo, letra b.2",
+    "Condición que verifica": "Al final de la jornada existe el registro de alumnos matriculados en el curso y el total de la asistencia diaria.."
+  },
+  {
+    "Sección": "Registro de control de asignatura",
+    "función": "fn5E2",
+    "subsección": "6.2 Contenido mínimo, letra b.2",
+    "Condición que verifica": "Cuando falta docente, existe la observación con los datos de éste"
+  },
+  {
+    "Sección": "Registro de control de asignatura",
+    "función": "fn5E3",
+    "subsección": "6.2 Contenido mínimo, letra b.2",
+    "Condición que verifica": "La clase con reemplazante no idóneo no es contabilizada en el cumplimiento del plan de estudio."
+  },
+  {
+    "Sección": "Registro de control de asignatura",
+    "función": "fn5E4",
+    "subsección": "6.2 Contenido mínimo, letra b.2",
+    "Condición que verifica": "La asistencia se encuentra tomada, es decir, cada estudiante tiene alguno de los siguientes estados: Presente, ausente o atrasado."
+  },
+  {
+    "Sección": "Registro de control de asignatura",
+    "función": "fn5E5",
+    "subsección": "6.2 Contenido mínimo, letra b.2",
+    "Condición que verifica": "La hora del registro de control de subvenciones corresponde con la segunda hora del registro de control de asignatura"
+  },
+  {
+    "Sección": "Registro de control de asignatura",
+    "función": "fn5F0",
+    "subsección": "6.2 Contenido mínimo, letra b.1",
+    "Condición que verifica": "La información relacionada con el cumplimiento de los programas de estudio y asistencia de los estudiantes es válida."
+  },
+  {
+    "Sección": "Registro control mensual de asistencia o control de subvenciones",
+    "función": "fn680",
+    "subsección": "6.2 Contenido mínimo, letra c.8",
+    "Condición que verifica": "Los registros reportados semanalmente por la empresa se encuentran ingresados en el sistema"
+  },
+  {
+    "Sección": "Registro control mensual de asistencia o control de subvenciones",
+    "función": "fn681",
+    "subsección": "6.2 Contenido mínimo, letra c.8",
+    "Condición que verifica": "Los estudiantes de formación dual se encuentran identificados en el sistema."
+  },
+  {
+    "Sección": "Registro control mensual de asistencia o control de subvenciones",
+    "función": "fn682",
+    "subsección": "6.2 Contenido mínimo, letra c.8",
+    "Condición que verifica": "Los estudiantes de formación dual se encuentran identificados en el registro de control de asistencia y asignatura."
+  },
+  {
+    "Sección": "Registro control mensual de asistencia o control de subvenciones",
+    "función": "fn6B0",
+    "subsección": "6.2 Contenido mínimo, letra c.5",
+    "Condición que verifica": "Todas las correcciones realizadas al registro de asistencia y asignatura se registren indicando su fecha, hora, verificador de identidad del funcionario que la realiza dicha acción y motivo del cambio.y estan visadas por el director del establecimiento o el funcionario que él haya designado."
+  },
+  {
+    "Sección": "Registro control mensual de asistencia o control de subvenciones",
+    "función": "fn6C0",
+    "subsección": "6.2 Contenido mínimo, letra c.4",
+    "Condición que verifica": "Los estudiantes excedentes estan registrados en el control de asistencia solo para efectos pedagógicos"
+  },
+  {
+    "Sección": "Registro control mensual de asistencia o control de subvenciones",
+    "función": "fn6C2",
+    "subsección": "6.2 Contenido mínimo, letra c.4",
+    "Condición que verifica": "Los alumnos excedentes (con derecho a pago) que sustituyan a otros estudiantes retirados del establecimiento cuentan con la autorización de la secretaría ministerial"
+  },
+  {
+    "Sección": "Registro control mensual de asistencia o control de subvenciones",
+    "función": "fn6D0",
+    "subsección": "6.2 Contenido mínimo, letra c.3",
+    "Condición que verifica": "Las bajas y altas realizadas en el transcurso del periodo escolar son identificadas y establecida su fecha como insumo para otras verificaciones."
+  },
+  {
+    "Sección": "Registro control mensual de asistencia o control de subvenciones",
+    "función": "fn6D1",
+    "subsección": "6.2 Contenido mínimo, letra c.3",
+    "Condición que verifica": "No se declara la asistencia de un estudiante dado de baja."
+  },
+  {
+    "Sección": "Registro control mensual de asistencia o control de subvenciones",
+    "función": "fn6E0",
+    "subsección": "6.2 Contenido mínimo, letra c.2",
+    "Condición que verifica": "La hora del registro de control de asistencia corresponda con la segunda hora del registro de control de asignatura."
+  },
+  {
+    "Sección": "Registro control mensual de asistencia o control de subvenciones",
+    "función": "fn6E1",
+    "subsección": "6.2 Contenido mínimo, letra c.2",
+    "Condición que verifica": "Existe el justificativo de aquellos estudiantes que ingresaron con posterioridad a la 2da hora de clases."
+  },
+  {
+    "Sección": "Registro control mensual de asistencia o control de subvenciones",
+    "función": "fn6E2",
+    "subsección": "6.2 Contenido mínimo, letra c.2",
+    "Condición que verifica": "La información es consistente en aquellos casos en los cuales se ha informado a la comunidad escolar la suspensión de clases."
+  },
+  {
+    "Sección": "Registro control mensual de asistencia o control de subvenciones",
+    "función": "fn6E3",
+    "subsección": "6.2 Contenido mínimo, letra c.2",
+    "Condición que verifica": "En los casos de suspensión de clases, existe ingresado en el sistema la aprobación del calendario de recuperación de la secretaría ministerial."
+  },
+  {
+    "Sección": "Registro control mensual de asistencia o control de subvenciones",
+    "función": "fn6E4",
+    "subsección": "6.2 Contenido mínimo, letra c.2",
+    "Condición que verifica": "Se encuentran bien registrados los cambios de actividades al calendario escolar."
+  },
+  {
+    "Sección": "Registro control mensual de asistencia o control de subvenciones",
+    "función": "fn6F0",
+    "subsección": "6.2 Contenido mínimo, letra c",
+    "Condición que verifica": "Existe el registro de asistencia en aquellos casos en los cuales se realizó la clase al estudiante."
+  },
+  {
+    "Sección": "Registro control mensual de asistencia o control de subvenciones",
+    "función": "fn6F1",
+    "subsección": "6.2 Contenido mínimo, letra c",
+    "Condición que verifica": "El registro contiene la información mínima"
+  },
+  {
+    "Sección": "Registro de evaluaciones y sectores educativos",
+    "función": "fn7F0",
+    "subsección": "6.2 Contenido mínimo, letra d",
+    "Condición que verifica": "Las evaluaciones de los estudiantes estan todas clasificadas en formativas o sumativas."
+  },
+  {
+    "Sección": "Registro de evaluaciones y sectores educativos",
+    "función": "fn7F1",
+    "subsección": "6.2 Contenido mínimo, letra d",
+    "Condición que verifica": "Las calificaciones de las evaluaciones sumativas son representadas en una escala de 1 a 7 hasta con un decimal."
+  },
+  {
+    "Sección": "Registro de evaluaciones y sectores educativos",
+    "función": "fn7F2",
+    "subsección": "6.2 Contenido mínimo, letra d",
+    "Condición que verifica": "La calificación final mínima de aprobación del estudiante es un 4.0."
+  },
+  {
+    "Sección": "Registro de evaluaciones y sectores educativos",
+    "función": "fn7F3",
+    "subsección": "6.2 Contenido mínimo, letra d",
+    "Condición que verifica": "verificar que se encuentre cargado en el sistema la cantidad de calificaciones y ponderaciones que se utilizan para calcular la calificación final de los estudiantes en cada asignatura o módulo de cada curso."
+  },
+  {
+    "Sección": "Registro de evaluaciones y sectores educativos",
+    "función": "fn7F4",
+    "subsección": "6.2 Contenido mínimo, letra d",
+    "Condición que verifica": "Los cambios realizados a las escalas o ponderaciones tienen el verificador de identidad del docente y del jefe técnico-pedagógico."
+  },
+  {
+    "Sección": "Registro de evaluaciones y sectores educativos",
+    "función": "fn7F5",
+    "subsección": "6.2 Contenido mínimo, letra d",
+    "Condición que verifica": "Existe un registro de los objetivos y contenidos de materias o actividades que son entregados por el docente en cada sector educativo, asignatura o módulo."
+  },
+  {
+    "Sección": "Registro de anotaciones de convivencia escolar por estudiante",
+    "función": "fn8F0",
+    "subsección": "6.2 Contenido mínimo, letra e",
+    "Condición que verifica": "Existe registro de la siguiente información\n- Anotaciones negativas de su comportamiento\n- Citaciones a los apoderados sobre temas relativos a sus pupilos.\n- Medidas disciplinarias que sean aplicadas al estudiante.\n- Reconocimientos por destacado cumplimiento del reglamento interno (positivas)."
+  },
+  {
+    "Sección": "Registro de anotaciones de convivencia escolar por estudiante",
+    "función": "fn8F1",
+    "subsección": "6.2 Contenido mínimo, letra e",
+    "Condición que verifica": "La aplicación y seguimiento de medidas disciplinarias relacionadas con el reglamento interno es correcto."
+  },
+  {
+    "Sección": "Registro de anotaciones de convivencia escolar por estudiante",
+    "función": "fn8F2",
+    "subsección": "6.2 Contenido mínimo, letra e",
+    "Condición que verifica": "El contenido de cada registro de convivencia es correcto"
+  },
+  {
+    "Sección": "Registro de anotaciones de convivencia escolar por estudiante",
+    "función": "fn8F3",
+    "subsección": "6.2 Contenido mínimo, letra e",
+    "Condición que verifica": "Las entrevistas con el apoderado y su contenido se encuentran ingresados en el sistema."
+  },
+  {
+    "Sección": "Registro de atención de profesionales y de recursos relacionados con la formación del estudiante",
+    "función": "fn9F0",
+    "subsección": "6.2 Contenido mínimo, letra f",
+    "Condición que verifica": "La información del equipo de docentes y profesionales relacionados con la formación del estudiante se encuentran registrados en el sistema."
+  },
+  {
+    "Sección": "Registro de atención de profesionales y de recursos relacionados con la formación del estudiante",
+    "función": "fn9F1",
+    "subsección": "6.2 Contenido mínimo, letra f",
+    "Condición que verifica": "La planificación del proceso formativo del estudiante se encuentra registrada en el sistema."
+  },
+  {
+    "Sección": "Registro de atención de profesionales y de recursos relacionados con la formación del estudiante",
+    "función": "fn9F2",
+    "subsección": "6.2 Contenido mínimo, letra f",
+    "Condición que verifica": "El registro de la implementación y evaluación del proceso formativo del estudiante se encuentra en el sistema."
+  },
+  {
+    "Sección": "Registro de atención de profesionales y de recursos relacionados con la formación del estudiante",
+    "función": "fn9F3",
+    "subsección": "6.2 Contenido mínimo, letra f",
+    "Condición que verifica": "El registro de actividades con la familia y la comunidad se encuentra en el sistema."
+  }
+]

@@ -1,0 +1,3666 @@
+[
+  {
+    "Table": "_CEDSElements",
+    "Description": NaN
+  },
+  {
+    "Table": "_CEDStoNDSMapping",
+    "Description": NaN
+  },
+  {
+    "Table": "Activity",
+    "Description": NaN
+  },
+  {
+    "Table": "ActivityRecognition",
+    "Description": "Recognition given to the student for accomplishments in a co-curricular, or extra-curricular activity."
+  },
+  {
+    "Table": "AeCourse",
+    "Description": "The organization of subject matter and related learning experiences provided for the instruction of students on a regular or systematic basis, usually for a predetermined period of time (e.g., a semester or two-week workshop) to an individual or group of students (e.g., a class). "
+  },
+  {
+    "Table": "AeProvider",
+    "Description": "Information on an adult education provider organization."
+  },
+  {
+    "Table": "AeStaff",
+    "Description": "Adult education staff information."
+  },
+  {
+    "Table": "AeStudentAcademicRecord",
+    "Description": "Adult education student's academic information attributes."
+  },
+  {
+    "Table": "AeStudentEmployment",
+    "Description": "Employment information for an adult education student."
+  },
+  {
+    "Table": "ApipInteraction",
+    "Description": "Accessible portable item protocol interaction."
+  },
+  {
+    "Table": "Application",
+    "Description": "A data system or application."
+  },
+  {
+    "Table": "Assessment",
+    "Description": "An instrument used to evaluate a person with at least one form, section, and Assessment Item. (A summative assessment typically addresses a particular level, subject, and date range. A person's individual responses during the summative assessment administration are evaluated then the results are scored using one or more Assessment Sub Test Scoring Rules.) "
+  },
+  {
+    "Table": "Assessment_AssessmentAdministration",
+    "Description": "The association of an Assessment to an instance of Assessment Administration."
+  },
+  {
+    "Table": "AssessmentAccommodation",
+    "Description": NaN
+  },
+  {
+    "Table": "AssessmentAdministration",
+    "Description": "Information related to an assessment event or administration period. It includes information related to the time period of administration, and place(s) of administration ."
+  },
+  {
+    "Table": "AssessmentAdministration_Organization",
+    "Description": "Association of an Assessment Administration to one or more Organizations."
+  },
+  {
+    "Table": "AssessmentAsset",
+    "Description": "Content used to compose an assessment item, is referenced by an item but not part of the item content itself, or is content that is included as part of a section within an assessment form. Assets can be static content such as art work or dynamic assets such as calculators or other tools."
+  },
+  {
+    "Table": "AssessmentELDevelopmentalDomain",
+    "Description": "Developmental domains related to early learning and used for assessing a child's kindergarten readiness."
+  },
+  {
+    "Table": "AssessmentForm",
+    "Description": "An instance of an assessment that can equate scores with another instance of that same assessment. "
+  },
+  {
+    "Table": "AssessmentForm_AssessmentAsset",
+    "Description": "The association of an Assessment Form to an Assessment Asset."
+  },
+  {
+    "Table": "AssessmentForm_AssessmentFormSection",
+    "Description": "The association of an AssessmentForm to one or many AssessmentFormSections."
+  },
+  {
+    "Table": "AssessmentFormSection",
+    "Description": "A section for an Assessment Form."
+  },
+  {
+    "Table": "AssessmentFormSection_AssessmentAsset",
+    "Description": "The association of an Assessment Form Section to an Assessment Asset."
+  },
+  {
+    "Table": "AssessmentFormSection_AssessmentItem",
+    "Description": "The association of an Assessment Item to an Assessment Form Section."
+  },
+  {
+    "Table": "AssessmentItem",
+    "Description": "A specific prompt, that defines a question or protocol for a measurable activity that triggers a response from a person used to determine whether the person has mastered a learning objective. "
+  },
+  {
+    "Table": "AssessmentItemApip",
+    "Description": "The templates, processing and declaration data for an assessment item APIP."
+  },
+  {
+    "Table": "AssessmentItemApipDescription",
+    "Description": NaN
+  },
+  {
+    "Table": "AssessmentItemCharacteristic",
+    "Description": "The type and value for a psychometric measure."
+  },
+  {
+    "Table": "AssessmentItemPossibleResponse",
+    "Description": "The collection of possible response options and values for an assessment item."
+  },
+  {
+    "Table": "AssessmentItemResponse",
+    "Description": "Information related to a specific response to an assessment item by the person being assessed. The entity includes the response, a score or indication that the response was correct or incorrect and other information such as response time. "
+  },
+  {
+    "Table": "AssessmentItemResponseTheory",
+    "Description": NaN
+  },
+  {
+    "Table": "AssessmentItemRubricCriterionResult",
+    "Description": NaN
+  },
+  {
+    "Table": "AssessmentLanguage",
+    "Description": "The association of an Assessment to one or more languages."
+  },
+  {
+    "Table": "AssessmentLevelsForWhichDesigned",
+    "Description": "The association of an Assessment to one or more grade levels for which the assessment is designed."
+  },
+  {
+    "Table": "AssessmentNeedApipContent",
+    "Description": "Used as part of an Assessment Personal Needs Profile to define the content preferences and representation."
+  },
+  {
+    "Table": "AssessmentNeedApipControl",
+    "Description": "Used as part of an Assessment Personal Needs Profile to define the control attributes."
+  },
+  {
+    "Table": "AssessmentNeedApipDisplay",
+    "Description": "Used as part of an Assessment Personal Needs Profile to define the display attributes."
+  },
+  {
+    "Table": "AssessmentNeedBraille",
+    "Description": "Defines as part of an Assessment Personal Needs Profile the attributes for Braille display"
+  },
+  {
+    "Table": "AssessmentNeedScreenEnhancement",
+    "Description": "Defines as part of an Assessment Personal Needs Profile the attributes for screen enhancement."
+  },
+  {
+    "Table": "AssessmentParticipantSession",
+    "Description": "An entity that includes information about a specific person's participation in an Assessment Session. "
+  },
+  {
+    "Table": "AssessmentParticipantSession_Accommodation",
+    "Description": "The association of an Assessment Participant Session to one or more Accommodations."
+  },
+  {
+    "Table": "AssessmentPerformanceLevel",
+    "Description": "Information about levels of performance used to classify or label the results of an assessment.  Four styles are supported:\n   1. Specification of performance level by lower and upper cut scores\n   2. Specification of performance level by cut score - lower only\n   3. Specification of performance level without any mapping to scores\n   4. Specification of performance level with mapping to other scores"
+  },
+  {
+    "Table": "AssessmentPersonalNeedLanguageLearner",
+    "Description": NaN
+  },
+  {
+    "Table": "AssessmentPersonalNeedScreenReader",
+    "Description": "Defines as part of an Assessment Personal Needs Profile the attributes for a screen reader."
+  },
+  {
+    "Table": "AssessmentPersonalNeedsProfile",
+    "Description": "Identifies a type of need identified for a learner as part of an assessment need profile."
+  },
+  {
+    "Table": "AssessmentPersonalNeedsProfileContent",
+    "Description": NaN
+  },
+  {
+    "Table": "AssessmentPersonalNeedsProfileControl",
+    "Description": NaN
+  },
+  {
+    "Table": "AssessmentPersonalNeedsProfileDisplay",
+    "Description": NaN
+  },
+  {
+    "Table": "AssessmentPersonalNeedsProfileScreenEnhancement",
+    "Description": NaN
+  },
+  {
+    "Table": "AssessmentRegistration",
+    "Description": "Information related to a specific person registered for an Assessment Administration, assigned a specific  Assessment Form for participation in one or more Assessment Sessions."
+  },
+  {
+    "Table": "AssessmentRegistration_Accommodation",
+    "Description": "The accommodation(s) associated to an Assessment Registration."
+  },
+  {
+    "Table": "AssessmentResult",
+    "Description": "An entity that includes information about a person's results from an assessment which may be for the entire assessment or one aspect of evaluation. The scoring method is defined by the related Assessment Subtest. The entity includes the score value and information about the score, such as a diagnostic statement. "
+  },
+  {
+    "Table": "AssessmentResult_PerformanceLevel",
+    "Description": NaN
+  },
+  {
+    "Table": "AssessmentResultRubricCriterionResult",
+    "Description": NaN
+  },
+  {
+    "Table": "AssessmentSession",
+    "Description": "Information related to an instance of delivering an assessment during a specific period of time. "
+  },
+  {
+    "Table": "AssessmentSessionStaffRole",
+    "Description": "The association of a Person to an Assessment identifying the role of the person."
+  },
+  {
+    "Table": "AssessmentSubtest",
+    "Description": "Information for scoring an Assessment Form based on a set of Assessment Item responses with explicit rules to produce an Assessment Subtest Result, which may be for the entire Assessment Form or one aspect of evaluation based on a subset of Assessment Items. "
+  },
+  {
+    "Table": "AssessmentSubtest_AssessmentItem",
+    "Description": "The weighing factors for an Assessment Item on an Assessment Subtest."
+  },
+  {
+    "Table": "AssessmentSubtest_CompetencyFrameworkItem",
+    "Description": NaN
+  },
+  {
+    "Table": "AssessmentSubtestELDevelopmentalDomain",
+    "Description": "Developmental domains related to early learning and used for assessing a child's kindergarten readiness."
+  },
+  {
+    "Table": "AssessmentSubtestLevelsForWhichDesigned",
+    "Description": "Association of an Assessment Subtest to one or more Grade Levels."
+  },
+  {
+    "Table": "Authentication",
+    "Description": "An application or service that can authenticate the identity of a person. The CEDS entity that includes information about an authentication provider, the login identifier used to authenticate a person's identity, and other information related to authentication of a person's identity. "
+  },
+  {
+    "Table": "Authorization",
+    "Description": "The CEDS entity that includes information about a data system or application which an authenticated person may access. "
+  },
+  {
+    "Table": "AuthorizationDocument",
+    "Description": NaN
+  },
+  {
+    "Table": "BuildingSpace",
+    "Description": NaN
+  },
+  {
+    "Table": "BuildingSpaceUtilization",
+    "Description": NaN
+  },
+  {
+    "Table": "BuildingSystemCategory",
+    "Description": NaN
+  },
+  {
+    "Table": "BuildingSystemComponent",
+    "Description": NaN
+  },
+  {
+    "Table": "BuildingSystemComponentService",
+    "Description": NaN
+  },
+  {
+    "Table": "Classroom",
+    "Description": "A room where educational services are provided by a school, school system, state, or other agency or entity."
+  },
+  {
+    "Table": "CompetencyFramework",
+    "Description": NaN
+  },
+  {
+    "Table": "CompetencyFrameworkItem",
+    "Description": NaN
+  },
+  {
+    "Table": "CompetencyFrameworkItemAssociation",
+    "Description": NaN
+  },
+  {
+    "Table": "CompetencyFrameworkItemEducationLevel",
+    "Description": NaN
+  },
+  {
+    "Table": "CompetencyItem_CompetencySet",
+    "Description": "The association of a learning standard item (competency item) to a competency set."
+  },
+  {
+    "Table": "CompetencySet",
+    "Description": "The set of one or more competencies and criteria for completion of a learning goal, unit, course, program, degree, certification, or other achievement.   (The criteria may be ‘all’ competencies in the set or ‘at-least’ # of competencies. Sets may be nested, e.g. all in subset A and 3 of 5 from subset B.)"
+  },
+  {
+    "Table": "CoreKnowledgeArea",
+    "Description": "The core knowledge areas addressed by a professional development activity."
+  },
+  {
+    "Table": "Course",
+    "Description": "The organization of subject matter and related learning experiences provided for the instruction of students on a regular or systematic basis, usually for a predetermined period of time (e.g., a semester or two-week workshop) to an individual or group of students (e.g., a class). "
+  },
+  {
+    "Table": "CourseSection",
+    "Description": "A setting in which organized instruction of course content is provided to one or more students (including cross-age groupings) for a given period of time. (A course may be offered to more than one class/section.) Instruction, provided by one or more teachers or other staff members, may be delivered in person or via a different medium. Classes/Sections that share space should be considered as separate classes/sections if they function as separate units for more than 50 percent of the time. "
+  },
+  {
+    "Table": "CourseSectionAssessmentReporting",
+    "Description": "The method(s) that the instructor of the course uses to report the performance and achievement of all students. It may be a qualitative method such as individualized teacher comments or a quantitative method such as a letter or a numerical grade. "
+  },
+  {
+    "Table": "CourseSectionLevel",
+    "Description": NaN
+  },
+  {
+    "Table": "CourseSectionLocation",
+    "Description": "The location where a Course Section meets."
+  },
+  {
+    "Table": "CourseSectionSchedule",
+    "Description": "The days and times when a Course Section meets."
+  },
+  {
+    "Table": "Credential",
+    "Description": NaN
+  },
+  {
+    "Table": "CredentialAward",
+    "Description": NaN
+  },
+  {
+    "Table": "CredentialAwardCredit",
+    "Description": NaN
+  },
+  {
+    "Table": "CredentialAwardEvidence",
+    "Description": NaN
+  },
+  {
+    "Table": "CredentialCategory",
+    "Description": NaN
+  },
+  {
+    "Table": "CredentialCreator",
+    "Description": NaN
+  },
+  {
+    "Table": "CredentialCreatorCredential",
+    "Description": NaN
+  },
+  {
+    "Table": "CredentialCriteria",
+    "Description": NaN
+  },
+  {
+    "Table": "CredentialCriteriaCourse",
+    "Description": NaN
+  },
+  {
+    "Table": "CredentialIdentifier",
+    "Description": NaN
+  },
+  {
+    "Table": "CredentialIssuer",
+    "Description": NaN
+  },
+  {
+    "Table": "CredentialIssuerCredential",
+    "Description": NaN
+  },
+  {
+    "Table": "CteCourse",
+    "Description": "The organization of subject matter and related learning experiences provided for the instruction of students on a regular or systematic basis, usually for a predetermined period of time (e.g., a semester or two-week workshop) to an individual or group of students (e.g., a class). "
+  },
+  {
+    "Table": "CteStudentAcademicRecord",
+    "Description": "Summary academic record information for a career and technical education student.  "
+  },
+  {
+    "Table": "EarlyChildhoodCredential",
+    "Description": "The credential related to early childhood education or development held by a person."
+  },
+  {
+    "Table": "EarlyChildhoodProgramTypeOffered",
+    "Description": "The type(s) of  early childhood programs offered."
+  },
+  {
+    "Table": "ELChildDemographic",
+    "Description": NaN
+  },
+  {
+    "Table": "ELChildDevelopmentalAssessment",
+    "Description": NaN
+  },
+  {
+    "Table": "ELChildHealth",
+    "Description": NaN
+  },
+  {
+    "Table": "ELChildIndividualizedProgram",
+    "Description": NaN
+  },
+  {
+    "Table": "ELChildOutcomeSummary",
+    "Description": NaN
+  },
+  {
+    "Table": "ELChildProgramEligibility",
+    "Description": NaN
+  },
+  {
+    "Table": "ELChildService",
+    "Description": NaN
+  },
+  {
+    "Table": "ELChildServicesApplication",
+    "Description": NaN
+  },
+  {
+    "Table": "ELChildTransitionPlan",
+    "Description": NaN
+  },
+  {
+    "Table": "ELClassSection",
+    "Description": "A cohort of children receiving services together, or in some cases individually, usually for a predetermined amount of time, with at least one assigned primary teacher. "
+  },
+  {
+    "Table": "ELClassSectionService",
+    "Description": "The services provided in an early leaning class/section."
+  },
+  {
+    "Table": "ELEnrollment",
+    "Description": "Enrollment of early learners in a program, class, or section."
+  },
+  {
+    "Table": "ELEnrollmentOtherFunding",
+    "Description": NaN
+  },
+  {
+    "Table": "ELFacilityLicensing",
+    "Description": "The status and attributes of the facility license for an early learning organization."
+  },
+  {
+    "Table": "EligibilityEvaluation",
+    "Description": NaN
+  },
+  {
+    "Table": "ELOrganization",
+    "Description": NaN
+  },
+  {
+    "Table": "ELOrganizationAvailability",
+    "Description": "Information on the early learning organization's availability to include time, groups served, facilities, and environment."
+  },
+  {
+    "Table": "ELOrganizationFunds",
+    "Description": NaN
+  },
+  {
+    "Table": "ELOrganizationMonitoring",
+    "Description": NaN
+  },
+  {
+    "Table": "ELProgramLicensing",
+    "Description": "The status and attributes of the licensing for an early learning program."
+  },
+  {
+    "Table": "ELQualityInitiative",
+    "Description": NaN
+  },
+  {
+    "Table": "ELQualityRatingImprovement",
+    "Description": "The early learning organization's Quality Rating and Improvement System (QRIS) attributes."
+  },
+  {
+    "Table": "ELServicePartner",
+    "Description": NaN
+  },
+  {
+    "Table": "ELStaff",
+    "Description": "Early learning staff attributes."
+  },
+  {
+    "Table": "ELStaffAssignment",
+    "Description": NaN
+  },
+  {
+    "Table": "ELStaffEducation",
+    "Description": "Early childhood credentials and education credits held by an early learning staff member."
+  },
+  {
+    "Table": "ELStaffEmployment",
+    "Description": "Attributes for early learning staff employment.  Extends from Staff."
+  },
+  {
+    "Table": "Facility",
+    "Description": "Information about a piece of land, a building site, a building, or part of a building owned by and/or used for activities of an organizational unit such as a school, school system, program, or institution. "
+  },
+  {
+    "Table": "FacilityAudit",
+    "Description": NaN
+  },
+  {
+    "Table": "FacilityCompliance",
+    "Description": NaN
+  },
+  {
+    "Table": "FacilityDesign",
+    "Description": NaN
+  },
+  {
+    "Table": "FacilityDesignConstruction",
+    "Description": NaN
+  },
+  {
+    "Table": "FacilityEnergy",
+    "Description": NaN
+  },
+  {
+    "Table": "FacilityFinance",
+    "Description": NaN
+  },
+  {
+    "Table": "FacilityFinancial",
+    "Description": NaN
+  },
+  {
+    "Table": "FacilityHazard",
+    "Description": NaN
+  },
+  {
+    "Table": "FacilityJointUse",
+    "Description": NaN
+  },
+  {
+    "Table": "FacilityLease",
+    "Description": NaN
+  },
+  {
+    "Table": "FacilityLocation",
+    "Description": NaN
+  },
+  {
+    "Table": "FacilityManagement",
+    "Description": NaN
+  },
+  {
+    "Table": "FacilityManagementPlan",
+    "Description": NaN
+  },
+  {
+    "Table": "FacilityMandate",
+    "Description": NaN
+  },
+  {
+    "Table": "FacilityMortgage",
+    "Description": NaN
+  },
+  {
+    "Table": "FacilityMortgageFee",
+    "Description": NaN
+  },
+  {
+    "Table": "FacilityRelationship",
+    "Description": NaN
+  },
+  {
+    "Table": "FacilitySchoolDesign",
+    "Description": NaN
+  },
+  {
+    "Table": "FacilitySite",
+    "Description": NaN
+  },
+  {
+    "Table": "FacilityUtilization",
+    "Description": NaN
+  },
+  {
+    "Table": "FinancialAccount",
+    "Description": NaN
+  },
+  {
+    "Table": "FinancialAccountProgram",
+    "Description": NaN
+  },
+  {
+    "Table": "FinancialAidApplication",
+    "Description": "An application for financial aid submitted by a current or prospective student/learner."
+  },
+  {
+    "Table": "FinancialAidAward",
+    "Description": "An award of financial aid for a student/learner."
+  },
+  {
+    "Table": "Goal",
+    "Description": NaN
+  },
+  {
+    "Table": "GoalMeasurement",
+    "Description": NaN
+  },
+  {
+    "Table": "GoalMeasurementCriterion",
+    "Description": NaN
+  },
+  {
+    "Table": "GoalPerformance",
+    "Description": NaN
+  },
+  {
+    "Table": "IDEAEligibilityEvaluationCategory",
+    "Description": NaN
+  },
+  {
+    "Table": "IEPAuthorization",
+    "Description": NaN
+  },
+  {
+    "Table": "IEPAuthorizationRejected",
+    "Description": NaN
+  },
+  {
+    "Table": "IEPPresentLevel",
+    "Description": NaN
+  },
+  {
+    "Table": "Incident",
+    "Description": "The details for an incident involving a student or school."
+  },
+  {
+    "Table": "IncidentPerson",
+    "Description": NaN
+  },
+  {
+    "Table": "IndividualizedProgram",
+    "Description": "Information on the type, design, dates, and participation of a student in an individualized program."
+  },
+  {
+    "Table": "IndividualizedProgramAccommodation",
+    "Description": NaN
+  },
+  {
+    "Table": "IndividualizedProgramAccommodationSubject",
+    "Description": NaN
+  },
+  {
+    "Table": "IndividualizedProgramAmendment",
+    "Description": NaN
+  },
+  {
+    "Table": "IndividualizedProgramAssessment",
+    "Description": NaN
+  },
+  {
+    "Table": "IndividualizedProgramAssessmentAccommodation",
+    "Description": NaN
+  },
+  {
+    "Table": "IndividualizedProgramEligibility",
+    "Description": NaN
+  },
+  {
+    "Table": "IndividualizedProgramEligibilityEvaluation",
+    "Description": NaN
+  },
+  {
+    "Table": "IndividualizedProgramGoal",
+    "Description": NaN
+  },
+  {
+    "Table": "IndividualizedProgramMeeting",
+    "Description": NaN
+  },
+  {
+    "Table": "IndividualizedProgramMeetingAttendee",
+    "Description": NaN
+  },
+  {
+    "Table": "IndividualizedProgramProgressGoal",
+    "Description": NaN
+  },
+  {
+    "Table": "IndividualizedProgramProgressReport",
+    "Description": NaN
+  },
+  {
+    "Table": "IndividualizedProgramProgressReportPlan",
+    "Description": NaN
+  },
+  {
+    "Table": "IndividualizedProgramService",
+    "Description": NaN
+  },
+  {
+    "Table": "IndividualizedProgramServicesReceived",
+    "Description": NaN
+  },
+  {
+    "Table": "IPEDSFinance",
+    "Description": NaN
+  },
+  {
+    "Table": "K12Course",
+    "Description": "The organization of subject matter and related learning experiences provided for the instruction of students on a regular or systematic basis, usually for a predetermined period of time (e.g., a semester or two-week workshop) to an individual or group of students (e.g., a class). "
+  },
+  {
+    "Table": "K12Lea",
+    "Description": "An administrative unit within K-12 education at the local level which exists primarily to operate schools or to contract for educational services. These units may or may not be co-extensive with county, city, or town boundaries. "
+  },
+  {
+    "Table": "K12LeaFederalFunds",
+    "Description": "Information on the federal funds received and distributed by the LEA under various programs."
+  },
+  {
+    "Table": "K12LeaFederalReporting",
+    "Description": "Federal reporting status values and counts for an LEA."
+  },
+  {
+    "Table": "K12LeaPreKEligibility",
+    "Description": "The groups of students for whom pre-kindergarten is available."
+  },
+  {
+    "Table": "K12LeaPreKEligibleAgesIDEA",
+    "Description": "The ages of children not served under IDEA to whom the LEA's pre-kindergarten services are available."
+  },
+  {
+    "Table": "K12LeaSafeDrugFree",
+    "Description": "Information about the LEA's performance under the Safe and Drug-Free Schools and Communities act."
+  },
+  {
+    "Table": "K12LeaTitleIIIProfessionalDevelopment",
+    "Description": "The type of Title III professional development utilized by an LEA."
+  },
+  {
+    "Table": "K12LeaTitleISupportService",
+    "Description": "The type of support services provided to students in Title I programs by an LEA. "
+  },
+  {
+    "Table": "K12OrganizationStudentResponsibility",
+    "Description": "The type of services/instruction the organization is responsible for the student."
+  },
+  {
+    "Table": "K12ProgramOrService",
+    "Description": "Information on the programs and services offered by an LEA or school."
+  },
+  {
+    "Table": "K12School",
+    "Description": "An institution that provides educational services; has one or more grade groups (PK through 12); has one or more teachers; is located in one or more buildings; has an assigned administrator(s). "
+  },
+  {
+    "Table": "K12SchoolCorrectiveAction",
+    "Description": "The types of corrective actions utilized by a K12 school under ESEA as amended."
+  },
+  {
+    "Table": "K12SchoolGradeOffered",
+    "Description": "The specific grade or combination of grades offered by an education institution."
+  },
+  {
+    "Table": "K12SchoolImprovement",
+    "Description": "Information on the improvement status for a K12 school."
+  },
+  {
+    "Table": "K12SchoolStatus",
+    "Description": "The collection of status values for a K12 school."
+  },
+  {
+    "Table": "K12Sea",
+    "Description": "The SEA is the state-level entity primarily responsible for the supervision of the state's public elementary and secondary schools."
+  },
+  {
+    "Table": "K12SeaAlternateFundUse",
+    "Description": "Purposes that funds available under ESEA section 6111 (Grants for State Assessments and Related Activities) were used for purposes other than the costs of the development of the State assessments and standards required by section 1111(b)."
+  },
+  {
+    "Table": "K12SeaFederalFundAllocation",
+    "Description": "The federal funds allocated by an SEA."
+  },
+  {
+    "Table": "K12SeaFederalFunds",
+    "Description": "Information on the federal funds received by the SEA."
+  },
+  {
+    "Table": "K12StaffAssignment",
+    "Description": "Describes a person's assignment to a K12 organization."
+  },
+  {
+    "Table": "K12StaffEmployment",
+    "Description": "Employment attributes for a K12 Staff Member."
+  },
+  {
+    "Table": "K12StudentAcademicHonor",
+    "Description": "Academic distinctions earned or awarded to a K12 student."
+  },
+  {
+    "Table": "K12StudentAcademicRecord",
+    "Description": "The summary level academic record for a K12 student including graduation information."
+  },
+  {
+    "Table": "K12StudentActivity",
+    "Description": NaN
+  },
+  {
+    "Table": "K12StudentCohort",
+    "Description": "Information on the cohort for a K12 student."
+  },
+  {
+    "Table": "K12StudentCourseSection",
+    "Description": "The attributes for a K12 student enrolled in a course section."
+  },
+  {
+    "Table": "K12StudentCourseSectionMark",
+    "Description": "Defines information about a mark associated with a student for a course section, including flags to indicate if the mark is a final grade or a midterm grade."
+  },
+  {
+    "Table": "K12StudentDiscipline",
+    "Description": "The detail information for the reason and action taken for a discipline event of a K12 student."
+  },
+  {
+    "Table": "K12StudentEmployment",
+    "Description": "Employment information for a K12 Student."
+  },
+  {
+    "Table": "K12StudentEnrollment",
+    "Description": "Information about a student officially registered on the roll of a school or schools."
+  },
+  {
+    "Table": "K12StudentGraduationPlan",
+    "Description": NaN
+  },
+  {
+    "Table": "K12StudentLiteracyAssessment",
+    "Description": "Information about literacy assessment given to a K12 student."
+  },
+  {
+    "Table": "K12StudentSession",
+    "Description": "Information specific to a K12 student and session."
+  },
+  {
+    "Table": "K12TitleIIILanguageInstruction",
+    "Description": "The collection of Title III language instructional programs offered by an LEA."
+  },
+  {
+    "Table": "LearnerAction",
+    "Description": "The information about detailed actions taken by a learner while engaging in learning activities, such as asking for a hint when taking an online formative assessment."
+  },
+  {
+    "Table": "LearnerActivity",
+    "Description": "The work assigned to a learner and/or performed by a learner which can comprise of interaction with learning resources, and assessments. "
+  },
+  {
+    "Table": "LearnerActivity_LearningResource",
+    "Description": "The collection of learning resources for a learner activity."
+  },
+  {
+    "Table": "LearningResource",
+    "Description": "Describes the content, materials, or informational resources that support learning."
+  },
+  {
+    "Table": "LearningResourceAdaptation",
+    "Description": NaN
+  },
+  {
+    "Table": "LearningResourceEducationLevel",
+    "Description": "The education level(s) associated to a learning resource."
+  },
+  {
+    "Table": "LearningResourceMediaFeature",
+    "Description": NaN
+  },
+  {
+    "Table": "LearningResourcePeerRating",
+    "Description": "An individual score, rating or level assigned to a Learning Resource by a person within the boundaries set by a Peer Rating System."
+  },
+  {
+    "Table": "LearningResourcePhysicalMedia",
+    "Description": NaN
+  },
+  {
+    "Table": "Location",
+    "Description": "A location such as a physical address or mailing address."
+  },
+  {
+    "Table": "LocationAddress",
+    "Description": "Location that contains a address, city, state, zip."
+  },
+  {
+    "Table": "Organization",
+    "Description": "An entity that represents any type of organization.  It includes information common to all types of organizations.  CEDS also defines specific types of organizations such as Early Learning Organization, K12 School and Post Secondary Institution."
+  },
+  {
+    "Table": "OrganizationAccreditation",
+    "Description": "The accreditation status of an organization and accreditation agency."
+  },
+  {
+    "Table": "OrganizationCalendar",
+    "Description": "A set of dates associated with an organization. "
+  },
+  {
+    "Table": "OrganizationCalendarCrisis",
+    "Description": "Information about a crisis that caused the displacement of students"
+  },
+  {
+    "Table": "OrganizationCalendarDay",
+    "Description": "A calendar day as described by the organization.  Used for the school day, typically used for the bell schedule."
+  },
+  {
+    "Table": "OrganizationCalendarEvent",
+    "Description": "The scheduled or unscheduled event."
+  },
+  {
+    "Table": "OrganizationCalendarSession",
+    "Description": "A prescribed span of time when an education institution is open, instruction is provided, and students are under the direction and guidance of teachers and/or education institution administration."
+  },
+  {
+    "Table": "OrganizationEmail",
+    "Description": "An email address for an organization."
+  },
+  {
+    "Table": "OrganizationEmployeeBenefit",
+    "Description": NaN
+  },
+  {
+    "Table": "OrganizationFederalAccountability",
+    "Description": "Information on the status of the organization on various federal accountability measures."
+  },
+  {
+    "Table": "OrganizationFinancial",
+    "Description": "The intersection of FinancialAccount and OrganizationCalendarSession (representing an AccountingPeriod) and containing the values for that accounting period."
+  },
+  {
+    "Table": "OrganizationIdentifier",
+    "Description": " A unique number or alphanumeric code assigned to an organization by a school, school system, a state, or other agency or entity."
+  },
+  {
+    "Table": "OrganizationImage",
+    "Description": NaN
+  },
+  {
+    "Table": "OrganizationIndicator",
+    "Description": "Describes any sort of indicator/metric/measure that is tracked at the organization level"
+  },
+  {
+    "Table": "OrganizationLocation",
+    "Description": "An association of a Location to an Organization."
+  },
+  {
+    "Table": "OrganizationOperationalStatus",
+    "Description": "The classification of the operational condition of an organization."
+  },
+  {
+    "Table": "OrganizationPersonRole",
+    "Description": "The association of an organization (e.g. school, section, employer) to a person with the role (e.g. student, staff)."
+  },
+  {
+    "Table": "OrganizationPolicy",
+    "Description": "Organizational policies. Examples would include Immunization Policy, Referral Policy, Language Translation Policy, Employee Policy."
+  },
+  {
+    "Table": "OrganizationProgramType",
+    "Description": "The instructional or non-instructional programs, activities and procedures designed to accomplish a predetermined educational objective or set of objectives or to provide support services to person and/or the community."
+  },
+  {
+    "Table": "OrganizationRelationship",
+    "Description": "The relationship of one organization to another."
+  },
+  {
+    "Table": "OrganizationService",
+    "Description": NaN
+  },
+  {
+    "Table": "OrganizationTechnicalAssistance",
+    "Description": NaN
+  },
+  {
+    "Table": "OrganizationTelephone",
+    "Description": "A telephone number for an organization."
+  },
+  {
+    "Table": "OrganizationWebsite",
+    "Description": "The website URL for an organization."
+  },
+  {
+    "Table": "PDActivityEducationLevel",
+    "Description": NaN
+  },
+  {
+    "Table": "PeerRatingSystem",
+    "Description": "The peer rating / scaling system used to rate a Learning Resource."
+  },
+  {
+    "Table": "Person",
+    "Description": "A person, including Students, Staff and Parents."
+  },
+  {
+    "Table": "Person_AssessmentPersonalNeedsProfile",
+    "Description": NaN
+  },
+  {
+    "Table": "PersonAddress",
+    "Description": "An address (e.g. physical or mailing) for a person."
+  },
+  {
+    "Table": "PersonAllergy",
+    "Description": NaN
+  },
+  {
+    "Table": "PersonBirthplace",
+    "Description": "The city, state, and country where a person was born."
+  },
+  {
+    "Table": "PersonCareerEducationPlan",
+    "Description": NaN
+  },
+  {
+    "Table": "PersonCredential",
+    "Description": "The credential awarded to a person."
+  },
+  {
+    "Table": "PersonDegreeOrCertificate",
+    "Description": "The name of the degree or certificate earned by an individual. This includes honorary degrees conferred upon an individual."
+  },
+  {
+    "Table": "PersonDemographicRace",
+    "Description": "The associations of a person to a race.  Multiple associations are allowed."
+  },
+  {
+    "Table": "PersonDisability",
+    "Description": "The disability status for an individual and their primary disability."
+  },
+  {
+    "Table": "PersonEmailAddress",
+    "Description": "The electronic mail (e-mail) address for a person.  "
+  },
+  {
+    "Table": "PersonFamily",
+    "Description": "The attributes of a person's family."
+  },
+  {
+    "Table": "PersonHealth",
+    "Description": "Data points of a person's health"
+  },
+  {
+    "Table": "PersonHealthBirth",
+    "Description": "Data points of a person's health and status at time of birth."
+  },
+  {
+    "Table": "PersonHomelessness",
+    "Description": "Persons who lack a fixed, regular, and adequate nighttime residence."
+  },
+  {
+    "Table": "PersonIdentifier",
+    "Description": "Identifiers assigned to an individual."
+  },
+  {
+    "Table": "PersonImmunization",
+    "Description": "The immunizations that a person has satisfactorily received."
+  },
+  {
+    "Table": "PersonLanguage",
+    "Description": "Languages that a person uses to communicate."
+  },
+  {
+    "Table": "PersonMilitary",
+    "Description": NaN
+  },
+  {
+    "Table": "PersonOtherName",
+    "Description": "Other names or aliases for a person."
+  },
+  {
+    "Table": "PersonProgramParticipation",
+    "Description": "Identifies the type of participation for a person participating in a program."
+  },
+  {
+    "Table": "PersonReferral",
+    "Description": NaN
+  },
+  {
+    "Table": "PersonRelationship",
+    "Description": "Identifies two people and the nature of their relationship."
+  },
+  {
+    "Table": "PersonStatus",
+    "Description": "Identifies a status (yes/no) for a person for a status type."
+  },
+  {
+    "Table": "PersonTelephone",
+    "Description": "Telephone number for a person."
+  },
+  {
+    "Table": "ProfessionalDevelopmentActivity",
+    "Description": "An activity designed for the purpose of developing somebody professionally."
+  },
+  {
+    "Table": "ProfessionalDevelopmentRequirement",
+    "Description": "Professional development requirements."
+  },
+  {
+    "Table": "ProfessionalDevelopmentSession",
+    "Description": "An Session designed for the purpose of developing somebody professionally."
+  },
+  {
+    "Table": "ProfessionalDevelopmentSessionInstructor",
+    "Description": NaN
+  },
+  {
+    "Table": "Program",
+    "Description": NaN
+  },
+  {
+    "Table": "ProgramParticipationAE",
+    "Description": "Information on a person participating in an adult education program."
+  },
+  {
+    "Table": "ProgramParticipationCte",
+    "Description": "Information on a person participating in a career and technical education program."
+  },
+  {
+    "Table": "ProgramParticipationFoodService",
+    "Description": "Information on a person participating in a food service program."
+  },
+  {
+    "Table": "ProgramParticipationMigrant",
+    "Description": "Information on a person participating in a migrant student education program."
+  },
+  {
+    "Table": "ProgramParticipationNeglected",
+    "Description": "Information on a person participating in a neglected or delinquent student education program."
+  },
+  {
+    "Table": "ProgramParticipationSpecialEducation",
+    "Description": "Information on a person participating in a special education program."
+  },
+  {
+    "Table": "ProgramParticipationTeacherPrep",
+    "Description": "Information on a person participating in a teacher preparation education program."
+  },
+  {
+    "Table": "ProgramParticipationTitleI",
+    "Description": "Information on a person participating in a Title I education program."
+  },
+  {
+    "Table": "ProgramParticipationTitleIIILep",
+    "Description": "Information on a person participating in a Title III limited English proficiency education program."
+  },
+  {
+    "Table": "PsCourse",
+    "Description": "The organization of subject matter and related learning experiences provided for the instruction of students on a regular or systematic basis, usually for a predetermined period of time (e.g., a semester or two-week workshop) to an individual or group of students (e.g., a class). "
+  },
+  {
+    "Table": "PsInstitution",
+    "Description": "An organization that provides educational programs for individuals who have completed or otherwise left educational programs in secondary school(s)."
+  },
+  {
+    "Table": "PsPriceOfAttendance",
+    "Description": "The price of attendance data for a postsecondary institution and a given session."
+  },
+  {
+    "Table": "PsProgram",
+    "Description": "The attributes for a postsecondary program that define the type program, the program length, and other requirements for a degree or certificate. "
+  },
+  {
+    "Table": "PsSection",
+    "Description": NaN
+  },
+  {
+    "Table": "PsSectionLocation",
+    "Description": NaN
+  },
+  {
+    "Table": "PsStaffEmployment",
+    "Description": "Attributes for postsecondary staff employment. Extends from Staff."
+  },
+  {
+    "Table": "PsStudentAcademicAward",
+    "Description": "An award conferred by a college, university, or other postsecondary education institution as official recognition for the successful completion of a program of study."
+  },
+  {
+    "Table": "PsStudentAcademicRecord",
+    "Description": "The summary level academic record for a postsecondary student including graduation information."
+  },
+  {
+    "Table": "PsStudentAdmissionTest",
+    "Description": "A student's performance on a test prepared and administered by an agency that is independent of any postsecondary education institution and is typically used for admissions purposes."
+  },
+  {
+    "Table": "PsStudentApplication",
+    "Description": "Information on an individual who submits an application for admission to a postsecondary institution."
+  },
+  {
+    "Table": "PsStudentCohort",
+    "Description": NaN
+  },
+  {
+    "Table": "PsStudentCourseSectionMark",
+    "Description": NaN
+  },
+  {
+    "Table": "PsStudentDemographic",
+    "Description": "Additional attributes for a postsecondary student (beyond those demographic attributes stored in PersonDemographic)"
+  },
+  {
+    "Table": "PsStudentEmployment",
+    "Description": "Employment information for a postsecondary student."
+  },
+  {
+    "Table": "PsStudentEnrollment",
+    "Description": "Attributes of a person enrolled at a postsecondary institution."
+  },
+  {
+    "Table": "PsStudentFinancialAid",
+    "Description": "Information on a person who applies for financial aid to participate in postsecondary education."
+  },
+  {
+    "Table": "PSStudentProgram",
+    "Description": "The classification of a program of a postsecondary student."
+  },
+  {
+    "Table": "PsStudentSection",
+    "Description": "A postsecondary student's performance in a class/section."
+  },
+  {
+    "Table": "QuarterlyEmploymentRecord",
+    "Description": "The CEDS entity that includes person-level employment and earnings information from quarterly employment and earnings-related data from sources such as State UI Wage Records, the Wage Record Interchange System, or the Federal Employment Data Exchange System (FEDES). "
+  },
+  {
+    "Table": "RefAbsentAttendanceCategory",
+    "Description": " The category that describes how the student spends his or her time not physically present on school grounds and not participating in instruction or instruction-related activities at an approved off-grounds location."
+  },
+  {
+    "Table": "RefAcademicAwardLevel",
+    "Description": "An indicator of the category of award conferred by a college, university, or other postsecondary education institution as official recognition for the successful completion of a program of study.   "
+  },
+  {
+    "Table": "RefAcademicAwardPrerequisiteType",
+    "Description": "Prerequisite conditions for earning an academic award."
+  },
+  {
+    "Table": "RefAcademicHonorType",
+    "Description": "A designation of the type of academic distinctions earned by or awarded to the student."
+  },
+  {
+    "Table": "RefAcademicRank",
+    "Description": "The academic rank of staff whose primary responsibility is instruction, research, and/or public service.  Institutions without standard academic ranks should code staff whose primary responsibility is instruction, research, and/or public service as \"No Academic Rank.\""
+  },
+  {
+    "Table": "RefAcademicSubject",
+    "Description": "The description of the academic content or subject area (e.g., arts, mathematics, reading, or a foreign language) being evaluated."
+  },
+  {
+    "Table": "RefAcademicTermDesignator",
+    "Description": "The academic term for which the data apply."
+  },
+  {
+    "Table": "RefAccommodationsNeededType",
+    "Description": "Codes identifying the set of health accommodations."
+  },
+  {
+    "Table": "RefAccommodationType",
+    "Description": "The specific accommodation necessary for assessment or instruction."
+  },
+  {
+    "Table": "RefAccreditationAgency",
+    "Description": "The agency that accredited a program."
+  },
+  {
+    "Table": "RefActivityRecognitionType",
+    "Description": "The nature of recognition given to the student for accomplishments in a co-curricular, or extra-curricular activity."
+  },
+  {
+    "Table": "RefActivityTimeMeasurementType",
+    "Description": "The type of measurement for the amount of time the student participated in the events and procedures of an activity, such as a co-curricular or extra-curricular activity that is offered at an education institution."
+  },
+  {
+    "Table": "RefAdditionalCreditType",
+    "Description": "The type of credits or units of value available for the completion of a course in addition to Carnegie Units."
+  },
+  {
+    "Table": "RefAddressType",
+    "Description": "List of identification system types."
+  },
+  {
+    "Table": "RefAdministrativeFundingControl",
+    "Description": "The type of education institution as classified by its funding source."
+  },
+  {
+    "Table": "RefAdmissionConsiderationLevel",
+    "Description": "The level of consideration given a type of admission criteria used at an institution during the selection process."
+  },
+  {
+    "Table": "RefAdmissionConsiderationType",
+    "Description": "The type of admission consideration used at an institution during the selection process."
+  },
+  {
+    "Table": "RefAdmittedStudent",
+    "Description": "Applicant who has been granted an official offer to enroll in a postsecondary institution. Admitted applicants should include wait-listed students who were subsequently offered admission."
+  },
+  {
+    "Table": "RefAdvancedPlacementCourseCode",
+    "Description": "Course areas for advanced placement or credit.  For a list of codes see http://apcentral.collegeboard.com/apc/public/courses/teachers_corner/index.html ."
+  },
+  {
+    "Table": "RefAeCertificationType",
+    "Description": "An indication of the category of certification a person holds."
+  },
+  {
+    "Table": "RefAeFunctioningLevelAtIntake",
+    "Description": "An individual's entering skill level, as defined by the National Reporting System for Adult Education and determined by an approved standardized assessment at program intake."
+  },
+  {
+    "Table": "RefAeFunctioningLevelAtPosttest",
+    "Description": "An individual's skill level, as defined by the National Reporting System for Adult Education and determined by an approved standardized assessment after a set time period or number of instructional hours."
+  },
+  {
+    "Table": "RefAeInstructionalProgramType",
+    "Description": "The type of instructional program in which an adult is enrolled."
+  },
+  {
+    "Table": "RefAePostsecondaryTransitionAction",
+    "Description": "The action taken with respect to postsecondary enrollment by the learner after program exit or when co-enrolled in ABE and postsecondary with respect to enrollment in a postsecondary educational or occupational skills program building on prior services or training received."
+  },
+  {
+    "Table": "RefAeSpecialProgramType",
+    "Description": "The type, by location or delivery mode, of adult education instruction program in which an adult participates."
+  },
+  {
+    "Table": "RefAeStaffClassification",
+    "Description": "The titles of employment, official status, or rank of adult education staff."
+  },
+  {
+    "Table": "RefAeStaffEmploymentStatus",
+    "Description": "The condition under which a person has agreed to serve as an employee."
+  },
+  {
+    "Table": "RefAllergySeverity",
+    "Description": "The level of severity of a person's reaction to an allergen."
+  },
+  {
+    "Table": "RefAllergyType",
+    "Description": "Type of allergy condition attributed to a person as defined by the SNOWMED Clinical Terms(r) vocabulary."
+  },
+  {
+    "Table": "RefAlternateFundUses",
+    "Description": "CEDS Element has been removed."
+  },
+  {
+    "Table": "RefAlternativeSchoolFocus",
+    "Description": "An indication of the specific group of students whose needs the alternative school is designed to meet."
+  },
+  {
+    "Table": "RefAltRouteToCertificationOrLicensure",
+    "Description": "An indication of whether a person is enrolled in an alternative teacher preparation program as defined by Title II."
+  },
+  {
+    "Table": "RefAmaoAttainmentStatus",
+    "Description": "An indication whether the organization met the Annual Measurable Achievement Objectives (AMAO) for attaining English proficiency for limited English proficient (LEP) students under Title III of ESEA."
+  },
+  {
+    "Table": "RefApipInteractionType",
+    "Description": "The assessment item body interaction type as defined by IMS Global specifications."
+  },
+  {
+    "Table": "RefAssessmentAccommodationCategory",
+    "Description": "A category of accommodations needed for a given assessment."
+  },
+  {
+    "Table": "RefAssessmentAssetIdentifierType",
+    "Description": "The type of identifier that is provided for this asset."
+  },
+  {
+    "Table": "RefAssessmentAssetType",
+    "Description": "Specifies a predominant type of assessment asset represented by the Learning Resource.  Assessment assets represent any content used to compose an assessment item, is referenced by an item but not part of the item content itself, or is content that is included as part of a section within an assessment form. Assets can be static content such as art work or dynamic assets such as calculators."
+  },
+  {
+    "Table": "RefAssessmentELDevelopmentalDomain",
+    "Description": "Developmental domains related to early learning and used for assessing a child's kindergarten readiness."
+  },
+  {
+    "Table": "RefAssessmentFormSectionIdentificationSystem",
+    "Description": "A coding scheme that is used for identification of an Assessment Form Section."
+  },
+  {
+    "Table": "RefAssessmentItemCharacteristicType",
+    "Description": "The type of psychometric measure provided for assessment item."
+  },
+  {
+    "Table": "RefAssessmentItemResponseScoreStatus",
+    "Description": "The status of scoring a person's response to an assessment item."
+  },
+  {
+    "Table": "RefAssessmentItemResponseStatus",
+    "Description": "The status of the response for a given item."
+  },
+  {
+    "Table": "RefAssessmentItemType",
+    "Description": "The specific type of assessment item."
+  },
+  {
+    "Table": "RefAssessmentNeedAlternativeRepresentationType",
+    "Description": "Defines as part of an Assessment Personal Needs Profile the default presentation mode of the associated Alternative Representations accessibility."
+  },
+  {
+    "Table": "RefAssessmentNeedBrailleGradeType",
+    "Description": "Defines as part of an Assessment Personal Needs Profile the grade of Braille to use when using a Braille display."
+  },
+  {
+    "Table": "RefAssessmentNeedBrailleMarkType",
+    "Description": "Defines as part of an Assessment Personal Needs Profile what textual properties to mark when using a Braille display."
+  },
+  {
+    "Table": "RefAssessmentNeedBrailleStatusCellType",
+    "Description": "Defines as part of an Assessment Personal Needs Profile the preferred presence or location of a Braille display status cell."
+  },
+  {
+    "Table": "RefAssessmentNeedHazardType",
+    "Description": "Defines as part of an Assessment Personal Needs Profile a characteristic of a digital resource that may be specified as being dangerous to a user."
+  },
+  {
+    "Table": "RefAssessmentNeedIncreasedWhitespacingType",
+    "Description": "Defines the user preferences for white spacing in lines, words and characters as part of an Assessment Personal Needs Profile."
+  },
+  {
+    "Table": "RefAssessmentNeedLanguageLearnerType",
+    "Description": "Defines as part of an Assessment Personal Needs Profile a preference for the language of the user interface."
+  },
+  {
+    "Table": "RefAssessmentNeedLinkIndicationType",
+    "Description": "Defines as part of an Assessment Personal Needs Profile the characteristics of presentation for a hyperlink when using a screen reader."
+  },
+  {
+    "Table": "RefAssessmentNeedMaskingType",
+    "Description": "Specifies as part of an Assessment Personal Needs Profile the type of masks the user is able to create  to cover portions of the question until needed."
+  },
+  {
+    "Table": "RefAssessmentNeedNumberOfBrailleDots",
+    "Description": "Defines as part of an Assessment Personal Needs Profile the number of dots in a Braille cell."
+  },
+  {
+    "Table": "RefAssessmentNeedSigningType",
+    "Description": "Defines as part of an Assessment Personal Needs Profile the type of signing preferred by the user."
+  },
+  {
+    "Table": "RefAssessmentNeedSpokenSourcePreferenceType",
+    "Description": "Defines as part of an Assessment Personal Needs Profile the preferred spoken audio form."
+  },
+  {
+    "Table": "RefAssessmentNeedSupportTool",
+    "Description": "Defines as part of an Assessment Personal Needs Profile the electronic tool associated with a resource."
+  },
+  {
+    "Table": "RefAssessmentNeedUsageType",
+    "Description": "Defines as part of an Assessment Personal Needs Profile the rating for the collection of Access for All (AfA) needs and preferences."
+  },
+  {
+    "Table": "RefAssessmentNeedUserSpokenPreferenceType",
+    "Description": "Used as part of an Assessment Personal Needs Profile to define the type of material that should be rendered using the read aloud alternative content."
+  },
+  {
+    "Table": "RefAssessmentParticipationIndicator",
+    "Description": "An indication of whether a student participated in an assessment."
+  },
+  {
+    "Table": "RefAssessmentPlatformType",
+    "Description": "The platform with which the assessment was delivered to the student during the assessment session."
+  },
+  {
+    "Table": "RefAssessmentPretestOutcome",
+    "Description": "The results of a pre-test in academic subjects."
+  },
+  {
+    "Table": "RefAssessmentPurpose",
+    "Description": "The reason for which an assessment is designed or delivered."
+  },
+  {
+    "Table": "RefAssessmentReasonNotCompleting",
+    "Description": "The primary reason a participant did not complete an assessment."
+  },
+  {
+    "Table": "RefAssessmentReasonNotTested",
+    "Description": "The primary reason a student is not tested."
+  },
+  {
+    "Table": "RefAssessmentRegistrationCompletionStatus",
+    "Description": "The completion and scoring status for an instance of a person taking an assessment."
+  },
+  {
+    "Table": "RefAssessmentReportingMethod",
+    "Description": "The method used to report the performance and achievement of all students. It may be a qualitative method such as individualized teacher comments or a quantitative method such as a letter or a numerical grade. In some cases, more than one type of reporting method may be used. "
+  },
+  {
+    "Table": "RefAssessmentResultDataType",
+    "Description": " The data type of the assessment result score value."
+  },
+  {
+    "Table": "RefAssessmentResultScoreType",
+    "Description": "Indicates the purpose for which this assessment score instance was recorded."
+  },
+  {
+    "Table": "RefAssessmentSessionSpecialCircumstanceType",
+    "Description": "An unusual event occurred during the administration of the assessment. This could include fire alarm, student became ill, etc."
+  },
+  {
+    "Table": "RefAssessmentSessionStaffRoleType",
+    "Description": "The type of role served related to the administration of an assessment session."
+  },
+  {
+    "Table": "RefAssessmentSessionType",
+    "Description": "The type of session that is scheduled."
+  },
+  {
+    "Table": "RefAssessmentSubtestIdentifierType",
+    "Description": "The type of identifier that is provided for a Subtest."
+  },
+  {
+    "Table": "RefAssessmentType",
+    "Description": "The category of an assessment based on format and content."
+  },
+  {
+    "Table": "RefAssessmentTypeChildrenWithDisabilities",
+    "Description": "The types of assessments administered to children with disabilities."
+  },
+  {
+    "Table": "RefAttendanceEventType",
+    "Description": "The type of attendance event."
+  },
+  {
+    "Table": "RefAttendanceStatus",
+    "Description": "The status of a person's attendance associated with an Attendance Event Type and Attendance Event Date in an organization-person-role context."
+  },
+  {
+    "Table": "RefAuthorizerType",
+    "Description": "Type of person who authorized the decision or document."
+  },
+  {
+    "Table": "RefAypStatus",
+    "Description": "An indication of whether the state, district, or school met the Adequate Yearly Progress (AYP) requirements for the school year, as determined by the state-established criteria."
+  },
+  {
+    "Table": "RefBarrierToEducatingHomeless",
+    "Description": "Barriers to the enrollment and success of homeless children and youths."
+  },
+  {
+    "Table": "RefBillableBasisType",
+    "Description": "The event/action that results in a billable action."
+  },
+  {
+    "Table": "RefBlendedLearningModelType",
+    "Description": "A type of formal education program in which a student learns at least in part through online learning, with some element of student control over time, place, path, and/or pace; at least in part in a supervised brick-and-mortar location away from home; and the modalities along each student’s learning path within a course or subject are connected to provide an integrated learning experience."
+  },
+  {
+    "Table": "RefBloomsTaxonomyDomain",
+    "Description": "Classification of the Competency Item using Bloom's Taxonomy Domains. "
+  },
+  {
+    "Table": "RefBuildingAdministrativeSpaceType",
+    "Description": "The space designed primarily for conducting administrative and business functions."
+  },
+  {
+    "Table": "RefBuildingAirDistributionSystemType",
+    "Description": "The primary means by which air is circulated, freshened, and exhausted."
+  },
+  {
+    "Table": "RefBuildingArtSpecialtySpaceType",
+    "Description": "The space designed to support the teaching and learning of 2 dimensional or 3 dimensional visual arts."
+  },
+  {
+    "Table": "RefBuildingAssemblySpaceType",
+    "Description": "An area designed primarily for theater productions, assemblies, and other large gatherings."
+  },
+  {
+    "Table": "RefBuildingBasicClassroomDesignType",
+    "Description": "A classroom designed for instruction of a particular age group, but not a specific subject."
+  },
+  {
+    "Table": "RefBuildingCareerTechEducationSpaceType",
+    "Description": "The classroom, laboratory, or shop specially located, designed, furnished, and equipped to support instruction of technical and technology related curriculum, usually tied to particular industry, for example, bio-tech, construction, or agriculture."
+  },
+  {
+    "Table": "RefBuildingCharterSchoolRealtyAccessType",
+    "Description": "The type of real estate vehicle through which a public charter school has access and control of its building space."
+  },
+  {
+    "Table": "RefBuildingCirculationSpaceType",
+    "Description": "A space designed to enable people to move within the building."
+  },
+  {
+    "Table": "RefBuildingCleaningStandardType",
+    "Description": "The standard for cleanliness, and benchmarks for how much space can be assigned to one properly supplied custodian to meet these standards."
+  },
+  {
+    "Table": "RefBuildingCommMgmtComponentSystemType",
+    "Description": "The type of system, interface, and management components for carrying voice, video, and data throughout a building."
+  },
+  {
+    "Table": "RefBuildingCommunityUseSpaceType",
+    "Description": "The space designed primarily for community or shared use."
+  },
+  {
+    "Table": "RefBuildingCoolingGenerationSystemType",
+    "Description": "The type of mechanical systems and building designs used for cooling."
+  },
+  {
+    "Table": "RefBuildingDesignType",
+    "Description": "The primary design or purpose of a building, as determined by its physical layout and built-in systems and equipment, regardless of its current use."
+  },
+  {
+    "Table": "RefBuildingElectricalSystemType",
+    "Description": "The components and system required to distribute electricity throughout the building or site."
+  },
+  {
+    "Table": "RefBuildingEnergyConservationMeasureType",
+    "Description": "The type of modification to, or replacement of, a piece of equipment or building shell/system that increases energy efficiency."
+  },
+  {
+    "Table": "RefBuildingEnergySourceType",
+    "Description": "The source of energy that directly powers a school district facility or building system."
+  },
+  {
+    "Table": "RefBuildingEnvOrEnergyPerformanceRatingCat",
+    "Description": "The primary groupings that rating organizations use to evaluate environmental sustainability and energy use."
+  },
+  {
+    "Table": "RefBuildingFireProtectionSystemType",
+    "Description": "The type of system that protects the facility against fire."
+  },
+  {
+    "Table": "RefBuildingFoodServiceSpaceType",
+    "Description": "The space located, designed, furnished and equipped to support meal programs."
+  },
+  {
+    "Table": "RefBuildingFullServiceKitchenType",
+    "Description": "The type of kitchen housed in the facility as defined by whether it prepares food to be served onsite and/or at additional locations."
+  },
+  {
+    "Table": "RefBuildingHeatingGenerationSystemType",
+    "Description": "The method by which the heat is distributed and delivered throughout the room(s) or building."
+  },
+  {
+    "Table": "RefBuildingHistoricStatus",
+    "Description": "An indication of whether or not a building is eligible to be or has been declared a landmark or historic building."
+  },
+  {
+    "Table": "RefBuildingHVACSystemType",
+    "Description": "The building service system that provides for heating, ventilation and air-conditioning."
+  },
+  {
+    "Table": "RefBuildingIndoorAthleticOrPhysEdSpaceType",
+    "Description": "The indoor space designed, located, furnished, and equipped for instruction and support of a physical education curriculum and athletic program."
+  },
+  {
+    "Table": "RefBuildingInstructionalSpaceFactorType",
+    "Description": "A designation as to whether the space is considered an instructional space under state or local guidelines."
+  },
+  {
+    "Table": "RefBuildingJointUseRationaleType",
+    "Description": "The reasons for permitting and participating in joint-use."
+  },
+  {
+    "Table": "RefBuildingJointUserType",
+    "Description": "The types of users sharing school district controlled, owned, or utilized facilities."
+  },
+  {
+    "Table": "RefBuildingJointUseSchedulingType",
+    "Description": "The type of designation of non school district users by the amount of time they have access to public school for joint use."
+  },
+  {
+    "Table": "RefBuildingLibMediaCenterSpecialtySpaceType",
+    "Description": "The primary and auxiliary space designed to provide and support student and staff access to books, periodicals, software, videos, and the Internet."
+  },
+  {
+    "Table": "RefBuildingMechanicalConveyingSystemType",
+    "Description": "Mechanical means for moving people and equipment within buildings."
+  },
+  {
+    "Table": "RefBuildingMechanicalSystemType",
+    "Description": "The major manufactured systems required to operate a building."
+  },
+  {
+    "Table": "RefBuildingOperationsOrMaintSpaceType",
+    "Description": "The area designed primarily for conducting activities concerned with maintaining the grounds, buildings, and equipment."
+  },
+  {
+    "Table": "RefBuildingOutdoorAthleticOrPhysEdSpaceType",
+    "Description": "The outdoor space designed, located, furnished, and equipped for instruction and support of a physical education curriculum and athletic program."
+  },
+  {
+    "Table": "RefBuildingOutdoorOrNonathleticSpaceType",
+    "Description": "The outdoor space located, designed, furnished, and equipped primarily for recreation, play and outdoor environmental education."
+  },
+  {
+    "Table": "RefBuildingPerformingArtsSpecialtySpaceType",
+    "Description": "The space designed, located, furnished, and equipped for instruction and support of music and drama curricula and productions."
+  },
+  {
+    "Table": "RefBuildingPlumbingSystemType",
+    "Description": "The component of an on-site system for supplying, eliminating, and treating water."
+  },
+  {
+    "Table": "RefBuildingPrimaryUseType",
+    "Description": "The primary use type of the building in which a school is located."
+  },
+  {
+    "Table": "RefBuildingSchoolDesignType",
+    "Description": "The physical layout and character of a school facility, as determined by age groups served and educational programs provided."
+  },
+  {
+    "Table": "RefBuildingScienceSpecialtySpaceType",
+    "Description": "The space designed, located, furnished, and equipped for instruction and experimentation in science."
+  },
+  {
+    "Table": "RefBuildingSecuritySystemType",
+    "Description": "The type of system that protects the facility from intrusion."
+  },
+  {
+    "Table": "RefBuildingSiteUseRestrictionsType",
+    "Description": "A characterization of a site that would define restrictions or opportunities."
+  },
+  {
+    "Table": "RefBuildingSpaceDesignType",
+    "Description": "The primary design or purpose of a space, as determined by its physical layout and built-in systems and equipment, regardless of its current use."
+  },
+  {
+    "Table": "RefBuildingSpecEdSpecialtySpaceType",
+    "Description": "The space designed, located, furnished, and equipped to support instruction of children with special physical, emotional, and/or educational needs."
+  },
+  {
+    "Table": "RefBuildingStudentSupportSpaceType",
+    "Description": "The space designed to provide student support services such as administrative, technical (e.g., guidance and health), and logistical support to facilitate and enhance instruction."
+  },
+  {
+    "Table": "RefBuildingSystemType",
+    "Description": "The type of system that is installed in the building or site."
+  },
+  {
+    "Table": "RefBuildingTechnologyWiringSystemType",
+    "Description": "The means through which voice, video, audio, and data information are conveyed."
+  },
+  {
+    "Table": "RefBuildingUseType",
+    "Description": "How a building is principally used, regardless of its original design."
+  },
+  {
+    "Table": "RefBuildingVerticalTransportationSystemType",
+    "Description": "The type of system used to convey persons or freight between floors."
+  },
+  {
+    "Table": "RefCalendarEventType",
+    "Description": "A type of scheduled or unscheduled calendar event."
+  },
+  {
+    "Table": "RefCampusResidencyType",
+    "Description": "A person's residency arrangement as defined in the Free Application for Federal Student Aid (FAFSA)."
+  },
+  {
+    "Table": "RefCampusStatus",
+    "Description": "The generalized use or control of a campus, independent of program type."
+  },
+  {
+    "Table": "RefCampusType",
+    "Description": "The primary purpose for which a campus is designed and/or used."
+  },
+  {
+    "Table": "RefCareerCluster",
+    "Description": "The career cluster that defines the industry or occupational focus which may be associated with a career pathways program, plan of study, or course."
+  },
+  {
+    "Table": "RefCareerEducationPlanType",
+    "Description": "An indicator of whether a student completed an individualized guidance and counseling plan."
+  },
+  {
+    "Table": "RefCarnegieBasicClassification",
+    "Description": "The Basic Classification is an update of the traditional classification framework developed by the Carnegie Commission on Higher Education in 1970 to support its research program, and later published in 1973 for use by other researchers."
+  },
+  {
+    "Table": "RefCharterSchoolApprovalAgencyType",
+    "Description": "The type of agency that approved the establishment or continuation of a charter school."
+  },
+  {
+    "Table": "RefCharterSchoolManagementOrganizationType",
+    "Description": "The type of organization that is a separate legal entity that 1) contracts with one or more charter schools to manage, operate, and oversee the charter schools; or 2) holds a charter, or charters, to operate multiple charter schools."
+  },
+  {
+    "Table": "RefCharterSchoolType",
+    "Description": "The category of charter school."
+  },
+  {
+    "Table": "RefChildDevelopmentalScreeningStatus",
+    "Description": "The result of a brief standardized screening tool aiding in the identification of children at risk of a developmental delay/disorder."
+  },
+  {
+    "Table": "RefChildDevelopmentAssociateType",
+    "Description": "Type of Child Development Associate credential as defined by options."
+  },
+  {
+    "Table": "RefChildOutcomesSummaryRating",
+    "Description": "Codes used to identify a child's level of functioning."
+  },
+  {
+    "Table": "RefCipCode",
+    "Description": "A six-digit code in the form xx.xxxx that identifies instructional program specialties within educational institutions."
+  },
+  {
+    "Table": "RefCipUse",
+    "Description": "An indicator of whether the CIP Code is referencing an enrollment program or an award program."
+  },
+  {
+    "Table": "RefCipVersion",
+    "Description": "The version of CIP being reported."
+  },
+  {
+    "Table": "RefClassroomPositionType",
+    "Description": "The type of position the staff member holds in the specific course section."
+  },
+  {
+    "Table": "RefCohortExclusion",
+    "Description": "Those persons who may be removed (deleted) from a cohort (or subcohort). For the Graduation Rates and Fall Enrollment retention rate reporting, persons may be removed from a cohort if they left the institution for one of the following reasons: death or total and permanent disability; service in the armed forces (including those called to active duty); service with a foreign aid service of the federal government, such as the Peace Corps; or service on official church missions."
+  },
+  {
+    "Table": "RefCommunicationMethod",
+    "Description": "The types of communication methods with parents."
+  },
+  {
+    "Table": "RefCommunityBasedType",
+    "Description": "Non domestic residence in which the early learning setting is located."
+  },
+  {
+    "Table": "RefCompetencyFrameworkItemAssociationType",
+    "Description": "Defines the nature of the association between a Competency Item and an associated data object such as a Learning Resource, an Assessment Item, or even another Learning Standard Competency Framework Item."
+  },
+  {
+    "Table": "RefCompetencyFrameworkItemNodeAccessibilityProfile",
+    "Description": "When the Competency Item is used as a node in a learning map, this element supports alternative pathways based on a learner's accessibility profile. The type selected indicates which accessibility profile the node is designed to address."
+  },
+  {
+    "Table": "RefCompetencyFrameworkItemTestabilityType",
+    "Description": "Indicates if the competency described in the Competency Item Statement can be tested using one or more assessment items."
+  },
+  {
+    "Table": "RefCompetencyFrameworkPublicationStatus",
+    "Description": "The publication status of the competency framework."
+  },
+  {
+    "Table": "RefCompetencySetCompletionCriteria",
+    "Description": "The criteria for the set of competencies that represent completion or partial completion of a unit, course, program, degree, certification, or other achievement/award. Specifies whether completion requires achievement of all items in the set or some number of items."
+  },
+  {
+    "Table": "RefContentStandardType",
+    "Description": "An indication as to whether an assessment conforms to a standard."
+  },
+  {
+    "Table": "RefContinuationOfServices",
+    "Description": "Reason why the student is being served under the continuation of services provision of the MEP."
+  },
+  {
+    "Table": "RefControlOfInstitution",
+    "Description": "A classification of whether a postsecondary institution is operated by publicly elected or appointed officials (public control) or by privately elected or appointed officials and derives its major source of funds from private sources (private control). "
+  },
+  {
+    "Table": "RefCoreKnowledgeArea",
+    "Description": "A description of the core knowledge areas addressed by Early Learning professional development."
+  },
+  {
+    "Table": "RefCorrectionalEducationFacilityType",
+    "Description": "The type of facility in which an inmate receives correctional education services."
+  },
+  {
+    "Table": "RefCorrectiveActionType",
+    "Description": "The types of corrective actions under ESEA as amended."
+  },
+  {
+    "Table": "RefCountry",
+    "Description": "The country in which an address is located."
+  },
+  {
+    "Table": "RefCounty",
+    "Description": "County code as defined for the identification of counties and equivalent areas of the United States, Puerto Rico, and the insular areas as established by the American National Standards Institute (ANSI) Inter-National Committee for Information Technology Standards (INCITS) in specification BSR INCITS 31-200x or more current updates.  See http://www.census.gov/geo/reference/codes/cou.html ."
+  },
+  {
+    "Table": "RefCourseAcademicGradeStatusCode",
+    "Description": "Additional information regarding the context of the given grade."
+  },
+  {
+    "Table": "RefCourseApplicableEducationLevel",
+    "Description": "The education level, grade level or primary instructional level at which a course is intended."
+  },
+  {
+    "Table": "RefCourseCreditBasisType",
+    "Description": "The type of enrollment associated with the credit hours for the course."
+  },
+  {
+    "Table": "RefCourseCreditLevelType",
+    "Description": "The level of credit associated with the credit hours earned for the course."
+  },
+  {
+    "Table": "RefCourseCreditUnit",
+    "Description": "The type of credit (unit, semester, or quarter) associated with the credit hours earned for the course. "
+  },
+  {
+    "Table": "RefCourseGpaApplicability",
+    "Description": "An indicator of whether or not this course being described is included in the computation of the student’s Grade Point Average (GPA)."
+  },
+  {
+    "Table": "RefCourseHonorsType",
+    "Description": "An indication that the course is or can be counted as an honors course."
+  },
+  {
+    "Table": "RefCourseInstructionMethod",
+    "Description": "The primary method of instruction used for the course."
+  },
+  {
+    "Table": "RefCourseInstructionSiteType",
+    "Description": "An indication of the type of location at which the course is taught."
+  },
+  {
+    "Table": "RefCourseInteractionMode",
+    "Description": "The primary type of interaction, synchronous or asynchronous, defined for the course."
+  },
+  {
+    "Table": "RefCourseLevelCharacteristic",
+    "Description": "An indication of the general nature and difficulty of instruction provided throughout a course."
+  },
+  {
+    "Table": "RefCourseLevelType",
+    "Description": "The level of work which is reflected in the credits associated with the academic course being described or the level of the typical individual taking the academic course."
+  },
+  {
+    "Table": "RefCourseRepeatCode",
+    "Description": "Indicates that an academic course has been repeated by a student and how that repeat is to be computed in the student's academic grade average."
+  },
+  {
+    "Table": "RefCourseSectionAssessmentReportingMethod",
+    "Description": "The method that the instructor of the course uses to report the performance and achievement of all students. It may be a qualitative method such as individualized teacher comments or a quantitative method such as a letter or a numerical grade. In some cases, more than one type of reporting method may be used."
+  },
+  {
+    "Table": "RefCourseSectionDeliveryMode",
+    "Description": "The primary setting or medium of delivery for the course."
+  },
+  {
+    "Table": "RefCourseSectionEnrollmentStatusType",
+    "Description": "The status related to a student enrollment in an instance of a course."
+  },
+  {
+    "Table": "RefCourseSectionEntryType",
+    "Description": "The process by which a student enters a school (Course Section) during a given academic session."
+  },
+  {
+    "Table": "RefCourseSectionExitType",
+    "Description": "The circumstances under which the student exited from membership in a course section."
+  },
+  {
+    "Table": "RefCredentialAssessmentMethodType",
+    "Description": "The method used to conduct the assessment being referenced."
+  },
+  {
+    "Table": "RefCredentialIdentifierSystem",
+    "Description": "A coding scheme that is used for identification and record-keeping purposes by a credentialing organizations to refer to an achievement."
+  },
+  {
+    "Table": "RefCredentialIntendedPurposeType",
+    "Description": "The intended type of application of the credential by the holder."
+  },
+  {
+    "Table": "RefCredentialStatusType",
+    "Description": "The status of the credential offered by a credentialing organization."
+  },
+  {
+    "Table": "RefCredentialType",
+    "Description": "An indication of the category of credential a person holds."
+  },
+  {
+    "Table": "RefCredentialVerificationType",
+    "Description": "A resource describing the means by which someone can verify whether a credential has been attained by a person."
+  },
+  {
+    "Table": "RefCreditHoursAppliedOtherProgram",
+    "Description": "Codes identifying the set of credit hours taken in other programs or degrees that were applied to the individual's degree."
+  },
+  {
+    "Table": "RefCreditTypeEarned",
+    "Description": "The type of credits or units of value awarded for the completion of a course."
+  },
+  {
+    "Table": "RefCriticalTeacherShortageCandidate",
+    "Description": "An indication of whether a person is pursuing licensure/certification in a field designated as a shortage area as defined by Title II."
+  },
+  {
+    "Table": "RefCTDLOrganizationType",
+    "Description": "The type of credentialing organization or entity as defined by the Credential Transparency Description Language."
+  },
+  {
+    "Table": "RefCteGraduationRateInclusion",
+    "Description": "An indication of how CTE concentrators are included in the state's computation of its graduation rate."
+  },
+  {
+    "Table": "RefCteNonTraditionalGenderStatus",
+    "Description": "An indication of whether CTE participants were members of an underrepresented gender group (where one gender comprises less than 25 percent of the persons employed in those occupations or field of work)."
+  },
+  {
+    "Table": "RefCurriculumFrameworkType",
+    "Description": "An indication of the standard curriculum used for this course."
+  },
+  {
+    "Table": "RefDegreeOrCertificateType",
+    "Description": "The type of degree or certificate earned by a person."
+  },
+  {
+    "Table": "RefDentalInsuranceCoverageType",
+    "Description": "The source of insurance covering an person's dental care."
+  },
+  {
+    "Table": "RefDentalScreeningStatus",
+    "Description": "The condition of a person's mouth or oral cavity; more specifically the condition of the hard tissues (i.e., teeth and jaws) and the soft tissues (i.e., gums, tongue, lips, palate, mouth floor, and inner cheeks). Good oral health denotes the absence of clinically manifested disease or abnormalities of the oral cavity."
+  },
+  {
+    "Table": "RefDependencyStatus",
+    "Description": "A person's classification as dependent or independent with regards to eligibility for Title IV Federal Student aid."
+  },
+  {
+    "Table": "RefDevelopmentalEducationReferralStatus",
+    "Description": "The status of a student's referral to or placement into  developmental education."
+  },
+  {
+    "Table": "RefDevelopmentalEducationType",
+    "Description": "An indicator of the category of developmental education."
+  },
+  {
+    "Table": "RefDevelopmentalEvaluationFinding",
+    "Description": "Child developmental delay/disability determined by procedure used by appropriate qualified personnel."
+  },
+  {
+    "Table": "RefDirectoryInformationBlockStatus",
+    "Description": "An indication of whether a individual requested a Family Education Rights and Privacy Act (FERPA) block to withhold the release of the person's directory information."
+  },
+  {
+    "Table": "RefDisabilityConditionStatusCode",
+    "Description": "A code indicating the disability condition status."
+  },
+  {
+    "Table": "RefDisabilityConditionType",
+    "Description": "Codes identifying the set of disability conditions."
+  },
+  {
+    "Table": "RefDisabilityDeterminationSourceType",
+    "Description": "Codes identifying the set of disability determination sources."
+  },
+  {
+    "Table": "RefDisabilityType",
+    "Description": "The major or overriding disability condition that best describes a person's impairment."
+  },
+  {
+    "Table": "RefDisciplinaryActionTaken",
+    "Description": "Identifies the consequences of an incident for the student(s) involved in an incident as perpetrator(s)."
+  },
+  {
+    "Table": "RefDisciplineLengthDifferenceReason",
+    "Description": "The reason for the difference, if any, between the official and actual lengths of a student’s disciplinary assignment."
+  },
+  {
+    "Table": "RefDisciplineMethodFirearms",
+    "Description": "The method used to discipline students who are not children with disabilities (IDEA) involved in firearms and other outcomes of firearms incidents."
+  },
+  {
+    "Table": "RefDisciplineMethodOfCwd",
+    "Description": "The type of suspension or expulsion used for the discipline of children with disabilities."
+  },
+  {
+    "Table": "RefDisciplineReason",
+    "Description": "The reason why the student was disciplined."
+  },
+  {
+    "Table": "RefDistanceEducationCourseEnrollment",
+    "Description": "An individual's enrollment in a course or courses in which the instructional content is delivered exclusively via distance education.  Distance education is education that uses one or more technologies to deliver instruction to students who are separated from the instructor and to support regular and substantive interaction between the students and the instructor synchronously or asynchronously.  Technologies used for instruction may include: Internet; one-way and two-way transmissions through open broadcasts, closed circuit, cable, microwave, broadband lines, fiber optics, satellite or wireless communication devices; audio conferencing; and video cassette, DVDs, and CD-ROMs, if the cassette, DVDs, and CD-ROMs are used in a course in conjunction with the technologies listed above."
+  },
+  {
+    "Table": "RefDoctoralExamsRequiredCode",
+    "Description": "A qualifier identifying the types of exams required of doctoral level individuals."
+  },
+  {
+    "Table": "RefDQPCategoriesOfLearning",
+    "Description": "The Lumina Foundation's Degree Qualifications Profile offers reference points for what students should know and be able to do upon completion of associate, bachelor's and master's degrees – in any field of study. The DQP Categories of Learning provide a profile of what degrees mean within which specific proficiencies may be defined."
+  },
+  {
+    "Table": "RefEarlyChildhoodCredential",
+    "Description": "The credential related to early childhood education or development held by a person."
+  },
+  {
+    "Table": "RefEarlyChildhoodProgramEnrollmentType",
+    "Description": "The system outlining activities and procedures based on a set of required services and standards in which the child is enrolled."
+  },
+  {
+    "Table": "RefEarlyChildhoodServices",
+    "Description": "The types of service that adapts the curriculum, materials, or instruction for students identified as needing additional resources."
+  },
+  {
+    "Table": "RefEducationLevel",
+    "Description": "The extent of formal instruction a person has received."
+  },
+  {
+    "Table": "RefEducationLevelType",
+    "Description": "List of identification system types."
+  },
+  {
+    "Table": "RefEducationVerificationMethod",
+    "Description": "The method by which the formal education is verified."
+  },
+  {
+    "Table": "RefELEducationStaffClassification",
+    "Description": "The title/role of employment, official status, or rank of education staff"
+  },
+  {
+    "Table": "RefElementaryMiddleAdditional",
+    "Description": " An indication of whether the school or district met the Elementary/Middle Additional Indicator requirement in accordance with state definition for the purpose of determining Adequate Yearly Progress (AYP)."
+  },
+  {
+    "Table": "RefELEmploymentSeparationReason",
+    "Description": "The primary reason for the termination of the employment relationship."
+  },
+  {
+    "Table": "RefELFacilityLicensingStatus",
+    "Description": "The status of the facility license."
+  },
+  {
+    "Table": "RefELFederalFundingType",
+    "Description": "Federal source, even if administered by state or local, that contributes to the EL program."
+  },
+  {
+    "Table": "RefELGroupSizeStandardMet",
+    "Description": "An indication of whether a program meets NAEYC or NAFCC standards for infant group sizes."
+  },
+  {
+    "Table": "RefELLevelOfSpecialization",
+    "Description": "The extent to which a person concentrates upon a particular subject matter area during his or her period of study at an educational institution."
+  },
+  {
+    "Table": "RefELLocalRevenueSource",
+    "Description": "Funds that originate at the local level, and not from the state or federal level, that contribute to EL program."
+  },
+  {
+    "Table": "RefELOtherFederalFundingSources",
+    "Description": "The other contributing funding sources."
+  },
+  {
+    "Table": "RefELOutcomeMeasurementLevel",
+    "Description": "Use for outcome measures in early learning."
+  },
+  {
+    "Table": "RefELProfessionalDevelopmentTopicArea",
+    "Description": "The topical area of competence needed for Staff professional development."
+  },
+  {
+    "Table": "RefELProgramEligibility",
+    "Description": "Category under which the person is eligible for an early childhood program or service."
+  },
+  {
+    "Table": "RefELProgramEligibilityStatus",
+    "Description": "The status of eligibility for the child."
+  },
+  {
+    "Table": "RefELProgramLicenseStatus",
+    "Description": "The current licensing status for an early learning program."
+  },
+  {
+    "Table": "RefELServiceProfessionalStaffClassification",
+    "Description": "The title/role of employment, official status, or rank of early learning service professionals"
+  },
+  {
+    "Table": "RefELServiceType",
+    "Description": "A type of service provided to a child."
+  },
+  {
+    "Table": "RefELStateRevenueSource",
+    "Description": " Funds that originate at the State, and not from a federal or local source, that contribute to EL program."
+  },
+  {
+    "Table": "RefELTrainerCoreKnowledgeArea",
+    "Description": "A description of the core knowledge expertise of a trainer of a professional development experience."
+  },
+  {
+    "Table": "RefEmailType",
+    "Description": "The type of electronic mail (e-mail) address listed for a person or organization."
+  },
+  {
+    "Table": "RefEmployedAfterExit",
+    "Description": "An individual who is a paid employee or works in his or her own business, profession, or farm, as reported through the State Unemployment Insurance Wage Report, FEDES, or WRIS, after exiting secondary, postsecondary, or adult education or workforce programs."
+  },
+  {
+    "Table": "RefEmployedPriorToEnrollment",
+    "Description": "An individual who is a paid employee or works in his or her own business, profession, or farm, as reported through the State Unemployment Insurance Wage Report, FEDES, or WRIS, before enrolling in secondary, postsecondary, or adult education or workforce programs."
+  },
+  {
+    "Table": "RefEmployedWhileEnrolled",
+    "Description": "An individual who is a paid employee or works in his or her own business, profession, or farm, as reported through the State Unemployment Insurance Wage Report, FEDES, or WRIS, and at the same time is enrolled in secondary, postsecondary, or adult education or workforce programs."
+  },
+  {
+    "Table": "RefEmployeeBenefit",
+    "Description": NaN
+  },
+  {
+    "Table": "RefEmploymentContractType",
+    "Description": "The type of employment contract used by an institution."
+  },
+  {
+    "Table": "RefEmploymentLocation",
+    "Description": "The state or other location in which an individual is found employed."
+  },
+  {
+    "Table": "RefEmploymentSeparationReason",
+    "Description": "The primary reason for the termination of the employment relationship."
+  },
+  {
+    "Table": "RefEmploymentSeparationType",
+    "Description": "A designation of the type of separation occurring between a person and the organization."
+  },
+  {
+    "Table": "RefEmploymentStatus",
+    "Description": "The condition under which a person has agreed to serve as an employee."
+  },
+  {
+    "Table": "RefEmploymentStatusWhileEnrolled",
+    "Description": "An indication of the individual's employment status while enrolled."
+  },
+  {
+    "Table": "RefEndOfTermStatus",
+    "Description": "The nature of the student's progress at the end of a given school term."
+  },
+  {
+    "Table": "RefEnrollmentStatus",
+    "Description": "An indication as to whether a student's name was, is, or will be officially registered on the roll of a school or schools."
+  },
+  {
+    "Table": "RefEntityType",
+    "Description": "CEDS entities. Used when the relationship of data requires the associated entity to be specified."
+  },
+  {
+    "Table": "RefEntryType",
+    "Description": "The process by which a student enters a school during a given academic session."
+  },
+  {
+    "Table": "RefEnvironmentSetting",
+    "Description": "The site or setting in which  early childhood care, education, and/or services are provided."
+  },
+  {
+    "Table": "RefERAdministrativeDataSource",
+    "Description": "Administrative data source of information used to collect employment and earnings-related data."
+  },
+  {
+    "Table": "RefERSRuralUrbanContinuumCode",
+    "Description": "Rural-Urban Continuum Codes form a classification scheme that distinguishes metropolitan (metro) counties by the population size of their metro area, and nonmetropolitan (nonmetro) counties by degree of urbanization and adjacency to a metro area or areas. The metro and nonmetro categories have been subdivided into three metro and six nonmetro groupings, resulting in a nine-part county codification. The codes allow researchers working with county data to break such data into finer residential groups beyond a simple metro-nonmetro dichotomy, particularly for the analysis of trends in nonmetro areas that may be related to degree of rurality and metro proximity."
+  },
+  {
+    "Table": "RefExitOrWithdrawalStatus",
+    "Description": "An indication as to whether an instance of student exit/withdrawal is considered to be of a permanent or temporary nature."
+  },
+  {
+    "Table": "RefExitOrWithdrawalType",
+    "Description": "The circumstances under which the student exited from membership in an educational institution. "
+  },
+  {
+    "Table": "RefFacilitiesMandateAuthorityType",
+    "Description": "The authority that mandates through law, regulation, or standard that pertains to a specific mandate."
+  },
+  {
+    "Table": "RefFacilitiesMgmtEmergencyType",
+    "Description": "The type of abnormal and urgent circumstances that disrupt the normal operation of the building, threaten the health and safety of the occupants, or require an emergency response."
+  },
+  {
+    "Table": "RefFacilitiesPlanType",
+    "Description": "The type of management and accountability plan."
+  },
+  {
+    "Table": "RefFacilityApplicableFederalMandateType",
+    "Description": "The particular federal law, regulation, or standard that pertains to a school facility."
+  },
+  {
+    "Table": "RefFacilityAuditType",
+    "Description": "The type of systematic review or audit of facility quality, management, decision making processes, controls, schedule and cost."
+  },
+  {
+    "Table": "RefFacilityCapitalProgramMgmtType",
+    "Description": "The type of management organization for planning, design, and construction of major capital projects."
+  },
+  {
+    "Table": "RefFacilityComplianceAgencyType",
+    "Description": "The type of agency that has ultimate responsibility for the compliance determination."
+  },
+  {
+    "Table": "RefFacilityComplianceStatus",
+    "Description": "An indication of whether the school, building, site, system, component, equipment, vehicle, or fixture conforms to the requirements or standards specified in federal, state, or local standards or codes or other officially required guidelines or regulations."
+  },
+  {
+    "Table": "RefFacilityConstructionDateType",
+    "Description": "Designation of the nature of the construction completion date."
+  },
+  {
+    "Table": "RefFacilityConstructionMaterialType",
+    "Description": "The primary material used for the construction of a building."
+  },
+  {
+    "Table": "RefFacilityFederalMandateInterestType",
+    "Description": "The area of interest controlled by a federal law, regulation, or standard that pertains to a school facility."
+  },
+  {
+    "Table": "RefFacilityFinancingFeeType",
+    "Description": "The type of fee that one must pay when getting a mortgage."
+  },
+  {
+    "Table": "RefFacilityFurnishingsType",
+    "Description": "Moveable assets that are provided so the building or interior assets can be utilized by occupants for their intended purposes."
+  },
+  {
+    "Table": "RefFacilityHazardousMaterialsOrCondType",
+    "Description": "The type of hazardous materials or conditions tested for at a site or building."
+  },
+  {
+    "Table": "RefFacilityJointDevelopmentType",
+    "Description": "The type of development where two or more entities partner to plan, site, design, and/or build a new school or renovate an existing school to better support the joint use of the building and/or land."
+  },
+  {
+    "Table": "RefFacilityLeaseAmountCategory",
+    "Description": "The category of payment that a school must pay to rent the facility that it is in."
+  },
+  {
+    "Table": "RefFacilityLeaseType",
+    "Description": "The type of agreement that allows the use and possession of a school, building, or other facility from a third party in return for a regularly scheduled installment payment over an agreed-upon period."
+  },
+  {
+    "Table": "RefFacilityMaintStandardType",
+    "Description": "The standard for maintenance of a component, system, or building."
+  },
+  {
+    "Table": "RefFacilityMortgageInterestType",
+    "Description": "The type of interest paid on a mortgage to the lender to compensate the lender for the use of money to purchase a building or facility."
+  },
+  {
+    "Table": "RefFacilityMortgageType",
+    "Description": "The status of a mortgage as it relates to priority of payment."
+  },
+  {
+    "Table": "RefFacilityNaturallyOccurringHazardType",
+    "Description": "Type of natural hazard that can affect the health, safety and operation of school facilities and their occupants."
+  },
+  {
+    "Table": "RefFacilityOperationsMgmtType",
+    "Description": "The type of management arrangements whereby a district oversees and manages its facilities operations."
+  },
+  {
+    "Table": "RefFacilitySiteImprovementLocationType",
+    "Description": "The type of location of the designed and constructed improvements made to a site."
+  },
+  {
+    "Table": "RefFacilitySiteOutdoorAreaType",
+    "Description": "The designated constructed outdoor area on a public school site."
+  },
+  {
+    "Table": "RefFacilityStandardType",
+    "Description": "An indication of the district or state requirements or guidelines for the design and construction of school facilities."
+  },
+  {
+    "Table": "RefFacilityStateOrLocalMandateInterestType",
+    "Description": "The area of interest controlled by a law, rule, regulation, or standard of state and local governments that pertains to public school facilities."
+  },
+  {
+    "Table": "RefFacilitySystemOrComponentCondition",
+    "Description": "The rating of the system or component functions under the demands of its regular operation."
+  },
+  {
+    "Table": "RefFacilityUtilityProviderType",
+    "Description": "An indication of how utilities are supplied to a site or a building by a company or provider."
+  },
+  {
+    "Table": "RefFacilityUtilityType",
+    "Description": "The type of utility used in the operation of a facility."
+  },
+  {
+    "Table": "RefFamilyIncomeSource",
+    "Description": "Sources of total family income."
+  },
+  {
+    "Table": "RefFederalProgramFundingAllocationType",
+    "Description": "The type of federal program funding allocation or distribution made."
+  },
+  {
+    "Table": "RefFinancialAccountBalanceSheetCode",
+    "Description": "Balance sheet accounts and statement of net position accounts are used to track financial transactions for each fund. Such financial statements only report assets, deferred outflows of resources, liabilities, deferred inflows of resources, and equity accounts and are considered \"snapshots\" of how these accounts stand as of a certain point in time."
+  },
+  {
+    "Table": "RefFinancialAccountCategory",
+    "Description": "A label for a grouping of financial accounts, based on type and purpose."
+  },
+  {
+    "Table": "RefFinancialAccountFundClassification",
+    "Description": "A fund is a separate fiscal and accounting entity with a self-balancing set of accounts recording cash and other financial resources, together with all related liabilities and residual equities or balances or changes therein."
+  },
+  {
+    "Table": "RefFinancialAccountProgramCode",
+    "Description": "A program is a plan of activities and procedures designed to accomplish a predetermined objective or set of objectives.  The program classification provides the school district with a framework to classify instructional and other expenditures by program to determine cost."
+  },
+  {
+    "Table": "RefFinancialAccountRevenueCode",
+    "Description": "These codes are for recording revenue and other receivables by source.  Major revenue categories have codes ending in 00 and are further subdivided."
+  },
+  {
+    "Table": "RefFinancialAidApplicationType",
+    "Description": "The type of financial application completed by an individual."
+  },
+  {
+    "Table": "RefFinancialAidAwardStatus",
+    "Description": "An indication of whether the financial aid type being reported is aid that has been awarded, accepted or dispersed."
+  },
+  {
+    "Table": "RefFinancialAidAwardType",
+    "Description": "The classification of financial aid awarded to a person for the academic term/year."
+  },
+  {
+    "Table": "RefFinancialAidVeteransBenefitStatus",
+    "Description": "An indication of whether a person is receiving Veteran's benefits."
+  },
+  {
+    "Table": "RefFinancialAidVeteransBenefitType",
+    "Description": "The type of Veteran's benefits a person is receiving."
+  },
+  {
+    "Table": "RefFinancialExpenditureFunctionCode",
+    "Description": "The function describes the activity for which a service or material object is acquired. The functions of a school district are classified into five broad areas: instruction, support services, operation of noninstructional services, facilities acquisition and construction, and debt service. Functions are further classified into sub functions."
+  },
+  {
+    "Table": "RefFinancialExpenditureLevelOfInstructionCode",
+    "Description": "This classification permits expenditures to be segregated by instructional level."
+  },
+  {
+    "Table": "RefFinancialExpenditureObjectCode",
+    "Description": "This classification is used to describe the service or commodity obtained as the result of a specific expenditure.  Nine major object categories have codes ending in 00 and are further subdivided."
+  },
+  {
+    "Table": "RefFirearmType",
+    "Description": "The type of firearm."
+  },
+  {
+    "Table": "RefFoodServiceEligibility",
+    "Description": "An indication of a student's level of eligibility to participate in the National School Lunch Program for breakfast, lunch, snack, supper, and milk programs."
+  },
+  {
+    "Table": "RefFoodServiceParticipation",
+    "Description": "An indication of a student's participation in free, reduced price, full price breakfast, lunch, snack, supper, and milk programs."
+  },
+  {
+    "Table": "RefFrequencyOfService",
+    "Description": "The frequency at which a service is planned to occur."
+  },
+  {
+    "Table": "RefFrequencyUnit",
+    "Description": "The unit of time by which a cycle is defined."
+  },
+  {
+    "Table": "RefFullTimeStatus",
+    "Description": "An indication of whether an individual is employed for a standard number of hours (as determined by civil or organizational policies) in a week, month, or other period of time."
+  },
+  {
+    "Table": "RefGoalMeasurementType",
+    "Description": "Type of evidence appropriate for assessing achievement of a goal or short-term objective."
+  },
+  {
+    "Table": "RefGoalsForAttendingAdultEducation",
+    "Description": "A person's reasons for attending an adult education class or program."
+  },
+  {
+    "Table": "RefGoalStatusType",
+    "Description": "Status toward achievement of the annual goal or short-term objectives."
+  },
+  {
+    "Table": "RefGpaWeightedIndicator",
+    "Description": "An indication of whether the reported GPA is weighted or unweighted."
+  },
+  {
+    "Table": "RefGradeLevel",
+    "Description": "Grade levels offered by educational institutions."
+  },
+  {
+    "Table": "RefGradeLevelType",
+    "Description": "List of identification system types."
+  },
+  {
+    "Table": "RefGradePointAverageDomain",
+    "Description": "The domain to which the Grade Point Average is referencing."
+  },
+  {
+    "Table": "RefGraduateAssistantIpedsCategory",
+    "Description": "The Integrated Postsecondary Education Data System (IPEDS) occupational categories used to report graduate assistants."
+  },
+  {
+    "Table": "RefGraduateOrDoctoralExamResultsStatus",
+    "Description": "The individual's status in completing exams required for graduate or doctoral degree programs."
+  },
+  {
+    "Table": "RefGunFreeSchoolsActReportingStatus",
+    "Description": "An indication of whether the school or local education agency (LEA) submitted a Gun-Free Schools Act (GFSA) of 1994 report to the state, as defined by Title 18, Section 921."
+  },
+  {
+    "Table": "RefHealthInsuranceCoverage",
+    "Description": "The nature of insurance covering an person's hospitalization and other health or medical care."
+  },
+  {
+    "Table": "RefHearingScreeningStatus",
+    "Description": "Status of an examination used to measure a person's ability to perceive sounds."
+  },
+  {
+    "Table": "RefHigherEducationInstitutionAccreditationStatus",
+    "Description": "An indication of the accreditation status of a higher education institution."
+  },
+  {
+    "Table": "RefHighSchoolDiplomaDistinctionType",
+    "Description": "The distinction of the diploma or credential that is awarded to a student in recognition of their completion of the curricular requirements."
+  },
+  {
+    "Table": "RefHighSchoolDiplomaType",
+    "Description": "The type of diploma/credential that is awarded to a person in recognition of his/her completion of the curricular requirements."
+  },
+  {
+    "Table": "RefHighSchoolGraduationRateIndicator",
+    "Description": "An indication of whether the school or district met the High School Graduation Rate requirement in accordance with state definition for the purposes of determining AYP."
+  },
+  {
+    "Table": "RefHomelessNighttimeResidence",
+    "Description": "The primary nighttime residence of the students at the time the students are identified as homeless."
+  },
+  {
+    "Table": "RefIDEADisabilityType",
+    "Description": "A category of disability that describes a person’s impairment defined by the Individuals with Disabilities Education Act."
+  },
+  {
+    "Table": "RefIDEADisciplineMethodFirearm",
+    "Description": "The methods used to discipline students who are children with disabilities (IDEA) involved in firearms and other outcomes of firearms incidents."
+  },
+  {
+    "Table": "RefIDEAEducationalEnvironmentEC",
+    "Description": "The program in which children ages 3 through 5 attend and in which these children receive special education and related services."
+  },
+  {
+    "Table": "RefIDEAEducationalEnvironmentSchoolAge",
+    "Description": "The setting in which children ages 6 through 21, receive special education and related services."
+  },
+  {
+    "Table": "RefIDEAEligibilityEvaluationCategory",
+    "Description": "Category of evaluation used for IDEA eligibility."
+  },
+  {
+    "Table": "RefIDEAEnvironmentEL",
+    "Description": "The program in which children ages 3 through 5 attend and in which these children receive special education and related services."
+  },
+  {
+    "Table": "RefIDEAIEPStatus",
+    "Description": "The status of an individualized services plan for a specified reporting period or on a specified date."
+  },
+  {
+    "Table": "RefIDEAInterimRemoval",
+    "Description": "The type of interim removal from current educational setting experienced by children with disabilities (IDEA)."
+  },
+  {
+    "Table": "RefIDEAInterimRemovalReason",
+    "Description": "The reasons why children with disabilities were unilaterally removed from their current educational placement to an interim alternative educational setting."
+  },
+  {
+    "Table": "RefIDEAPartCEligibilityCategory",
+    "Description": "The category under which a person under 3 years of age is eligible for early intervention services under IDEA Part C."
+  },
+  {
+    "Table": "RefIEPAuthorizationDocumentType",
+    "Description": "Type of Individualized Education Plan document authorized."
+  },
+  {
+    "Table": "RefIEPEligibilityEvaluationType",
+    "Description": "Purpose within the IEP lifecycle for which the eligibility evaluation is conducted."
+  },
+  {
+    "Table": "RefIEPGoalType",
+    "Description": "Legal category for an IEP annual goal or short-term objectives."
+  },
+  {
+    "Table": "RefImmunizationType",
+    "Description": "An indication of the type of immunization that an individual has satisfactorily received. (Note: The International Classification of Diseases (ICD) is maintained by the World Health Organization. The ICD is revised periodically to incorporate changes in the medical field, the most updated and detailed list of International Statistical Classification of Diseases and Related Health Problems can be found at http://www.who.int/classifications/apps/icd/icd10online)."
+  },
+  {
+    "Table": "RefIncidentBehavior",
+    "Description": "Categories of behavior coded for use in describing an incident."
+  },
+  {
+    "Table": "RefIncidentBehaviorSecondary",
+    "Description": "Supplemental information about an incident when the primary offense is more serious in nature than alcohol or drug, etc. offenses."
+  },
+  {
+    "Table": "RefIncidentInjuryType",
+    "Description": "An indication of the occurrence of physical injury to participants involved in the incident and, if so, the level of injury sustained."
+  },
+  {
+    "Table": "RefIncidentLocation",
+    "Description": "Identifies where the incident occurred and whether or not it occurred on campus."
+  },
+  {
+    "Table": "RefIncidentMultipleOffenseType",
+    "Description": "An indication of whether the offense was primary or secondary in nature when a single incident included more than one type of offense."
+  },
+  {
+    "Table": "RefIncidentPerpetratorInjuryType",
+    "Description": "An indication of the occurrence of physical injury to the perpetrator(s) (participants) involved in the incident and‚ if so‚ the level of injury sustained."
+  },
+  {
+    "Table": "RefIncidentPersonRoleType",
+    "Description": "The role or type of participation of a person in a discipline incident."
+  },
+  {
+    "Table": "RefIncidentPersonType",
+    "Description": "Information on the type of individual who was involved in an incident."
+  },
+  {
+    "Table": "RefIncidentReporterType",
+    "Description": "Information on the type of person who reported the incident. When known and/or if useful, use a more specific option code (e.g., \"Counselor\" rather than \"Professional Staff\")."
+  },
+  {
+    "Table": "RefIncidentTimeDescriptionCode",
+    "Description": "A code for the description of the time of day that an incident took place."
+  },
+  {
+    "Table": "RefIncomeCalculationMethod",
+    "Description": "The calculation method used by a program to determine total family income."
+  },
+  {
+    "Table": "RefIncreasedLearningTimeType",
+    "Description": "The types of increased learning time provided."
+  },
+  {
+    "Table": "RefIndividualizedProgramDateType",
+    "Description": "An indication of the significance of a date to an individualized program."
+  },
+  {
+    "Table": "RefIndividualizedProgramLocation",
+    "Description": "The place in which a child's service plan meeting is held."
+  },
+  {
+    "Table": "RefIndividualizedProgramPlannedServiceType",
+    "Description": "The types of service that adapts the curriculum, materials, or instruction for students identified as needing special education because of a delay or disability."
+  },
+  {
+    "Table": "RefIndividualizedProgramTransitionType",
+    "Description": "The post-school transition plan for the student recorded on their Individualized Education Program."
+  },
+  {
+    "Table": "RefIndividualizedProgramType",
+    "Description": "A designation of the type of program developed for a student."
+  },
+  {
+    "Table": "RefInstitutionTelephoneType",
+    "Description": "The type of communication number listed for an organization."
+  },
+  {
+    "Table": "RefInstructionalActivityHours",
+    "Description": "The unit of measure of student instructional activity."
+  },
+  {
+    "Table": "RefInstructionalStaffContractLength",
+    "Description": "The contracted teaching period for faculty."
+  },
+  {
+    "Table": "RefInstructionalStaffFacultyTenure",
+    "Description": "An indicator of the type of faculty status a person has if, by institutional definition, a staff member has faculty status."
+  },
+  {
+    "Table": "RefInstructionCreditType",
+    "Description": "A designation of the type(s) of instruction being delivered by staff whose primary responsibility is instruction.  Instruction that is for \"credit\" can be applied toward the requirements for a postsecondary degree, diploma, certificate or other formal award."
+  },
+  {
+    "Table": "RefInstructionLocationType",
+    "Description": "The type of location at which instruction or service takes place."
+  },
+  {
+    "Table": "RefIntegratedTechnologyStatus",
+    "Description": "An indication of the extent to which the district has effectively and fully integrated technology, as defined by the state."
+  },
+  {
+    "Table": "RefInternetAccess",
+    "Description": "The type of internet access available."
+  },
+  {
+    "Table": "RefIPEDSFASBFinancialPosition",
+    "Description": "IPEDS financial position classification used by degree-granting private, not-for-profit institutions and public institutions using FASB Reporting Standards for reporting the assets, liabilities, and net assets in a manner consistent with the Statement of Financial Position in the General Purpose Financial Statements (GPFS)."
+  },
+  {
+    "Table": "RefIPEDSFASBFunctionalExpense",
+    "Description": "A functional expense classification is a method of grouping expenses according to the purpose for which the costs are incurred. The classifications tell why an expense was incurred rather than what was purchased."
+  },
+  {
+    "Table": "RefIPEDSFASBPellGrantTransactions",
+    "Description": "Method of reporting Pell Grants in IPEDS by degree-granting private, not-for-profit institutions and public institutions using FASB Reporting Standards."
+  },
+  {
+    "Table": "RefIPEDSFASBRevenue",
+    "Description": "IPEDS revenue classification used by degree-granting private, not-for-profit institutions and public institutions using FASB Reporting Standards for reporting revenues and investment return by source in a manner consistent with the definitions from the National Association of College and University Business Officers (NACUBO) Financial Accounting and Reporting Manual for Higher Education (FARM)."
+  },
+  {
+    "Table": "RefIPEDSFASBRevenueRestriction",
+    "Description": "IPEDS revenue restriction classification used by degree-granting private, not-for-profit institutions and public institutions using FASB Reporting Standards for reporting revenues by restriction."
+  },
+  {
+    "Table": "RefIPEDSFASBScholarshipsandFellowshipsRevenue",
+    "Description": "IPEDS revenue category used by degree-granting private, not-for-profit institutions and public institutions using FASB Reporting Standards for the reporting of resources received for supporting student grant aid."
+  },
+  {
+    "Table": "RefIPEDSGASBFinancialPosition",
+    "Description": "IPEDS financial position classification used by degree-granting public institutions using GASB Reporting Standards for reporting the assets, liabilities, and net position in a manner consistent with the Statement of Net Position in the General Purpose Financial Statements (GPFS)."
+  },
+  {
+    "Table": "RefIPEDSGASBFunctionalExpense",
+    "Description": "A functional expense classification is a method of grouping expenses according to the purpose for which the costs are incurred. The classifications tell why an expense was incurred rather than what was purchased."
+  },
+  {
+    "Table": "RefIPEDSGASBRevenue",
+    "Description": "IPEDS revenue classification used by degree-granting public institutions using GASB Reporting Standards for reporting revenues and other additions by source including all operating revenues, nonoperating revenues, and other additions for the reporting period. This includes unrestricted and restricted revenues and additions, whether expendable or nonexpendable."
+  },
+  {
+    "Table": "RefIPEDSGASBScholarshipsandFellowshipsRevenue",
+    "Description": "IPEDS revenue category used by degree-granting public institutions using GASB Reporting Standards for the reporting of resources received for supporting student scholarships and fellowships."
+  },
+  {
+    "Table": "RefIPEDSIntercollegiateAthleticsExpenses",
+    "Description": "Identifies the functional expense category where the institution allocates its intercollegiate athletics expenses."
+  },
+  {
+    "Table": "RefIPEDSNaturalExpense",
+    "Description": "A natural expense classification is a method of grouping expenses according to the type of costs that are incurred. The classifications tell what was purchased rather than why an expense was incurred."
+  },
+  {
+    "Table": "RefIpedsOccupationalCategory",
+    "Description": "The Integrated Postsecondary Education Data System (IPEDS) occupational categories used to report employees."
+  },
+  {
+    "Table": "RefIPSPProgressReportSchedule",
+    "Description": "Frequency by which parents are notified of the student’s progress on annual goals and if the progress is sufficient to achieve the goals by the end of the individualized program service plan year."
+  },
+  {
+    "Table": "RefIPSPProgressReportType",
+    "Description": "A method by which parents are notified of the student’s progress on annual goals and if the progress is sufficient to achieve the goals by the end of the individualized program service plan."
+  },
+  {
+    "Table": "RefISO6392Language",
+    "Description": "The code for the specific language or dialect that a person uses to communicate."
+  },
+  {
+    "Table": "RefISO6393Language",
+    "Description": "The code for the specific language or dialect that a person uses to communicate."
+  },
+  {
+    "Table": "RefISO6395LanguageFamily",
+    "Description": "A code for a specific language family, which supplements the language groups and families in the ISO 639-2 Language Code."
+  },
+  {
+    "Table": "RefItemResponseTheoryDifficultyCategory",
+    "Description": "A category for the difficulty of the item based on the Item Response Theory value."
+  },
+  {
+    "Table": "RefItemResponseTheoryKappaAlgorithm",
+    "Description": "The algorithm used to derive the Assessment Item Kappa Value"
+  },
+  {
+    "Table": "RefK12EndOfCourseRequirement",
+    "Description": "An indication that this course has an end of course examination required by the SEA or LEA."
+  },
+  {
+    "Table": "RefK12LeaTitleISupportService",
+    "Description": "The type of support services provided to students in Title I programs."
+  },
+  {
+    "Table": "RefK12ResponsibilityType",
+    "Description": "The type of services/instruction the organization is responsible for the student."
+  },
+  {
+    "Table": "RefK12StaffClassification",
+    "Description": "The titles of employment, official status, or rank of education staff."
+  },
+  {
+    "Table": "RefLanguage",
+    "Description": "The specific language or dialect that a person uses to communicate."
+  },
+  {
+    "Table": "RefLanguageUseType",
+    "Description": "An indication of the function and context in which a person uses a language to communicate."
+  },
+  {
+    "Table": "RefLeaFundsTransferType",
+    "Description": "An indication of the type of transfer for an LEAs that transferred funds from an eligible program to another eligible program."
+  },
+  {
+    "Table": "RefLeaImprovementStatus",
+    "Description": "An indication of the improvement stage for AYP of the local education agency (LEA)."
+  },
+  {
+    "Table": "RefLearnerActionType",
+    "Description": "The type of action taken by the learner."
+  },
+  {
+    "Table": "RefLearnerActivityAddToGradeBookFlag",
+    "Description": "Identifies the assignment as one that is graded."
+  },
+  {
+    "Table": "RefLearnerActivityMaximumTimeAllowedUnits",
+    "Description": "The unit of time of the Maximum Time Allowed value."
+  },
+  {
+    "Table": "RefLearnerActivityType",
+    "Description": "The type of work assigned to the learner."
+  },
+  {
+    "Table": "RefLearningResourceAccessAPIType",
+    "Description": "Indicates that the learning resource is compatible with the referenced accessibility application programming interface (API)."
+  },
+  {
+    "Table": "RefLearningResourceAccessHazardType",
+    "Description": "A characteristic of the described learning resource that is physiologically dangerous to some users."
+  },
+  {
+    "Table": "RefLearningResourceAccessModeType",
+    "Description": "An access mode through which the intellectual content of a described learning resource or adaptation is communicated; if adaptations for the resource are known, the access modes of those adaptations are not included."
+  },
+  {
+    "Table": "RefLearningResourceAccessRightsUrl",
+    "Description": "A Uniform Resource Locator (URL) that identifies the conditions that govern the user’s ability to access a learning resource."
+  },
+  {
+    "Table": "RefLearningResourceAuthorType",
+    "Description": "The type of entity, organization or person, that authored the learning resource."
+  },
+  {
+    "Table": "RefLearningResourceBookFormatType",
+    "Description": "Specifies the format for a learning resource that is a book.  Other options may be considered for inclusion in the option set."
+  },
+  {
+    "Table": "RefLearningResourceCompetencyAlignmentType",
+    "Description": "The alignment relationship between the resource and the competency."
+  },
+  {
+    "Table": "RefLearningResourceControlFlexibilityType",
+    "Description": "Identifies a single input method that is sufficient to control the described learning resource."
+  },
+  {
+    "Table": "RefLearningResourceDigitalMediaSubType",
+    "Description": "The media or file subtype of the digital resource being based on the Media Types and Subtypes, formerly known as MIME types, defined by the Internet Assigned Numbers Authority (IANA)."
+  },
+  {
+    "Table": "RefLearningResourceDigitalMediaType",
+    "Description": "The media or file type of the digital resource being based on the media types defined by the Internet Assigned Numbers Authority (AINA) at http://www.iana.org/assignments/media-types."
+  },
+  {
+    "Table": "RefLearningResourceEducationalUse",
+    "Description": "The purpose of the work in the context of education."
+  },
+  {
+    "Table": "RefLearningResourceIntendedEndUserRole",
+    "Description": "The individual or group for which the resource was produced."
+  },
+  {
+    "Table": "RefLearningResourceInteractionMode",
+    "Description": "The primary type of interaction, synchronous or asynchronous, defined for the learning resource."
+  },
+  {
+    "Table": "RefLearningResourceInteractivityType",
+    "Description": "The predominate mode of learning supported by the learning resource. Acceptable values are active, expositive, or mixed."
+  },
+  {
+    "Table": "RefLearningResourceMediaFeatureType",
+    "Description": "Accessible content features included with the learning resource."
+  },
+  {
+    "Table": "RefLearningResourcePhysicalMediaType",
+    "Description": "A type of physical media on which the Learning Resource is delivered or available."
+  },
+  {
+    "Table": "RefLearningResourceType",
+    "Description": "The predominate type or kind characterizing the learning resource."
+  },
+  {
+    "Table": "RefLeaType",
+    "Description": "The classification of education agencies within the geographic boundaries of a state according to the level of administrative and operational control."
+  },
+  {
+    "Table": "RefLeaveEventType",
+    "Description": "The type of the leave event."
+  },
+  {
+    "Table": "RefLevelOfInstitution",
+    "Description": "A classification of whether a postsecondary institution's highest level of offering is a program of 4-years or higher (4 year), 2-but-less-than 4-years (2 year), or less than 2-years."
+  },
+  {
+    "Table": "RefLicenseExempt",
+    "Description": "The program or center is legally exempt from licensing."
+  },
+  {
+    "Table": "RefLiteracyAssessment",
+    "Description": "The type of literacy test administered."
+  },
+  {
+    "Table": "RefMagnetSpecialProgram",
+    "Description": "A school that has been designed: 1) to attract students of different racial/ethnic backgrounds for the purpose of reducing, preventing, or eliminating racial isolation; and/or 2)to provide an academic or social focus on a particular theme (e.g., science/math, performing arts, gifted/talented, career academy or foreign language)."
+  },
+  {
+    "Table": "RefMedicalAlertIndicator",
+    "Description": "Alert indicator for a medical/health condition."
+  },
+  {
+    "Table": "RefMepEnrollmentType",
+    "Description": "The type of school/migrant education project in which instruction and/or support services are provided."
+  },
+  {
+    "Table": "RefMepProjectBased",
+    "Description": "Indicates the type of MEP project based on the location where the MEP services are held."
+  },
+  {
+    "Table": "RefMepProjectType",
+    "Description": "Type of project funded in whole or in part by MEP funds."
+  },
+  {
+    "Table": "RefMepServiceType",
+    "Description": "The type of services received by participating migrant students in the migrant education program (MEP)."
+  },
+  {
+    "Table": "RefMepSessionType",
+    "Description": "The time of year that a Migrant Education Program operates."
+  },
+  {
+    "Table": "RefMepStaffCategory",
+    "Description": "Titles of employment, official status, or rank of staff working in the Migrant Education Program (MEP)."
+  },
+  {
+    "Table": "RefMethodOfServiceDelivery",
+    "Description": "The method by which the services will be provided."
+  },
+  {
+    "Table": "RefMilitaryActiveStudentIndicator",
+    "Description": "An indication that the student is currently serving on Active Duty, in the National Guard, or in the Reserve components of the United States military services"
+  },
+  {
+    "Table": "RefMilitaryBranch",
+    "Description": "A branch of the U.S. Military applicable for specifying more details when using Military Connected Student Indicator, Military Active Student Indicator,  Military Veteran Student Indicator, and Military Enlistment After Exit elements."
+  },
+  {
+    "Table": "RefMilitaryConnectedStudentIndicator",
+    "Description": "An indication that the student’s parent or guardian is on Active Duty, in the National Guard, or in the Reserve components of the United States military services"
+  },
+  {
+    "Table": "RefMilitaryVeteranStudentIndicator",
+    "Description": "An indication that the student is a veteran who served on Active Duty, in the National Guard, or in the Reserve components of the United States military services"
+  },
+  {
+    "Table": "RefMultipleIntelligenceType",
+    "Description": "Classification of the Competency Item using intelligences defined for Howard Earl Gardner's Theory of Multiple Intelligences."
+  },
+  {
+    "Table": "RefNaepAspectsOfReading",
+    "Description": "Aspects of reading defined by the National Assessment of Educational Progress (NAEP 2005b Framework)."
+  },
+  {
+    "Table": "RefNaepMathComplexityLevel",
+    "Description": "Complexity levels defined by the National Assessment of Educational Progress (NAEP 2005a Framework)."
+  },
+  {
+    "Table": "RefNationalSchoolLunchProgramStatus",
+    "Description": "The classification of participation by a school in the National School Lunch Program."
+  },
+  {
+    "Table": "RefNCESCollegeCourseMapCode",
+    "Description": "A taxonomy system for coding postsecondary courses in NCES research studies."
+  },
+  {
+    "Table": "RefNeedDeterminationMethod",
+    "Description": "The methodology used to determine an individual's financial need."
+  },
+  {
+    "Table": "RefNeglectedProgramType",
+    "Description": "The type of program under ESEA Title I, Part D, Subpart 1 (state programs) or Subpart 2 (LEA)."
+  },
+  {
+    "Table": "RefNonPromotionReason",
+    "Description": "The primary reason as to why a staff member determined that a student should not be promoted (or be demoted)."
+  },
+  {
+    "Table": "RefNonTraditionalGenderStatus",
+    "Description": "An indication of whether CTE participants were members of an underrepresented gender group (where one gender comprises less than 25 percent of the persons employed in those occupations or field of work)."
+  },
+  {
+    "Table": "RefONETSOCOccupationType",
+    "Description": "The O*NET-SOC taxonomy defines the set of occupations across the world of work based on the Standard Occupational Classification."
+  },
+  {
+    "Table": "RefOperationalStatus",
+    "Description": "Organization operating status values."
+  },
+  {
+    "Table": "RefOperationalStatusType",
+    "Description": "List of operational status types."
+  },
+  {
+    "Table": "RefOrganizationElementType",
+    "Description": "List of identification system types."
+  },
+  {
+    "Table": "RefOrganizationIdentificationSystem",
+    "Description": "A coding scheme that is used for identification and record-keeping purposes by an organization."
+  },
+  {
+    "Table": "RefOrganizationIdentifierType",
+    "Description": "List of identification system types."
+  },
+  {
+    "Table": "RefOrganizationIndicator",
+    "Description": "The types of indicators for an organization."
+  },
+  {
+    "Table": "RefOrganizationLocationType",
+    "Description": "The type of address listed for an organization."
+  },
+  {
+    "Table": "RefOrganizationMonitoringNotifications",
+    "Description": "Whether the organization received notification about monitoring"
+  },
+  {
+    "Table": "RefOrganizationRelationship",
+    "Description": "The nature of one organization’s relationship to another."
+  },
+  {
+    "Table": "RefOrganizationType",
+    "Description": "The type of educational organizations or entities."
+  },
+  {
+    "Table": "RefOtherNameType",
+    "Description": "The types of previous, alternate or other names for a person."
+  },
+  {
+    "Table": "RefOutcomeTimePoint",
+    "Description": "The point in time for which the result is used for an outcome measure."
+  },
+  {
+    "Table": "RefParaprofessionalQualification",
+    "Description": "An indication of whether paraprofessionals are classified as qualified for their assignment according to state definition."
+  },
+  {
+    "Table": "RefParticipationStatusAyp",
+    "Description": "An indication of whether the school or district met the 95 percent participation requirement in the subject assessment in accordance with state definition for the purposes of determining AYP."
+  },
+  {
+    "Table": "RefParticipationType",
+    "Description": "Status types for a person's participation in the program.  Either, a record represents Yes (True) and it's absence No (False), or ParticipationStatus contains a status value."
+  },
+  {
+    "Table": "RefPDActivityApprovedPurpose",
+    "Description": "The purposes for which an activity is approved."
+  },
+  {
+    "Table": "RefPDActivityCreditType",
+    "Description": "The type of credit awarded."
+  },
+  {
+    "Table": "RefPDActivityEducationLevelsAddressed",
+    "Description": "An age group or education level to which the professional development activity's content pertains."
+  },
+  {
+    "Table": "RefPDActivityLevel",
+    "Description": "An indicator of the level of a professional development activity on the beginner to advanced continuum."
+  },
+  {
+    "Table": "RefPDActivityTargetAudience",
+    "Description": "A categorization of the audience for which the professional development activity is intended."
+  },
+  {
+    "Table": "RefPDActivityType",
+    "Description": "The indication of the type of professional development activity."
+  },
+  {
+    "Table": "RefPDAudienceType",
+    "Description": "The type of audience for the professional development activity."
+  },
+  {
+    "Table": "RefPDDeliveryMethod",
+    "Description": "The method by which a session is delivered"
+  },
+  {
+    "Table": "RefPDInstructionalDeliveryMode",
+    "Description": "The primary setting or medium of professional development delivery."
+  },
+  {
+    "Table": "RefPDSessionStatus",
+    "Description": "The current status of a professional development session"
+  },
+  {
+    "Table": "RefPersonalInformationVerification",
+    "Description": "The evidence by which a persons name, address, date of birth, etc. is confirmed."
+  },
+  {
+    "Table": "RefPersonIdentificationSystem",
+    "Description": "The types of person identifiers."
+  },
+  {
+    "Table": "RefPersonIdentifierType",
+    "Description": "List of identification system types."
+  },
+  {
+    "Table": "RefPersonLocationType",
+    "Description": "The type of address for a person."
+  },
+  {
+    "Table": "RefPersonRelationship",
+    "Description": "The nature of the person's relationship to a learner.  The learner may be an Early Learning Child, K12 Student, Postsecondary Student, or an adult learner in a workforce education program."
+  },
+  {
+    "Table": "RefPersonStatusType",
+    "Description": "Status types for a person where the possible condition is either Yes (True) or No (False)."
+  },
+  {
+    "Table": "RefPersonTelephoneNumberType",
+    "Description": "The type of communication number listed for a person."
+  },
+  {
+    "Table": "RefPESCAwardLevelType",
+    "Description": "An indicator of the category of award conferred by a college, university, or other postsecondary education institution as official recognition for the successful completion of a program of study."
+  },
+  {
+    "Table": "RefPopulationServed",
+    "Description": "Program provides services to meet the needs of children in special circumstances."
+  },
+  {
+    "Table": "RefPreAndPostTestIndicator",
+    "Description": "An indication of whether students took both a pre-test and a post-test to measure academic improvement."
+  },
+  {
+    "Table": "RefPredominantCalendarSystem",
+    "Description": "The method by which an institution structures most of its courses for the academic year."
+  },
+  {
+    "Table": "RefPreKEligibleAgesNonIDEA",
+    "Description": "The ages of children not served under IDEA to whom the LEA's pre-kindergarten services are available.  "
+  },
+  {
+    "Table": "RefPrekindergartenEligibility",
+    "Description": "The groups of students for whom pre-kindergarten programs are available."
+  },
+  {
+    "Table": "RefPresentAttendanceCategory",
+    "Description": "The category that describes how the student spends his or her time when attending an instructional program approved by the state and/or school."
+  },
+  {
+    "Table": "RefProfessionalDevelopmentFinancialSupport",
+    "Description": "The type of financial assistance received in support of non-credit professional development activities."
+  },
+  {
+    "Table": "RefProfessionalEducationJobClassification",
+    "Description": "A general job classification that describes staff that performs duties requiring a high degree of knowledge and skills generally acquired through at least a baccalaureate degree (or its equivalent obtained through special study and/or experience) including skills in the field of education, educational psychology, educational social work, or an education therapy field."
+  },
+  {
+    "Table": "RefProfessionalTechnicalCredentialType",
+    "Description": "An indicator of the category of credential conferred by a state occupational licensing entity or industry organization for competency in a specific area measured by a set of pre-established standards."
+  },
+  {
+    "Table": "RefProficiencyStatus",
+    "Description": "An indication of whether a student's scores were proficient."
+  },
+  {
+    "Table": "RefProficiencyTargetAyp",
+    "Description": "An indication of whether the school or district met the proficiency target in accordance with state definition for the purposes of determining AYP."
+  },
+  {
+    "Table": "RefProfitStatus",
+    "Description": "An indication of the for-profit status of a facility."
+  },
+  {
+    "Table": "RefProgramDayLength",
+    "Description": "The portion of a day that a program is provided to the students it serves."
+  },
+  {
+    "Table": "RefProgramExitReason",
+    "Description": "The documented or assumed reason a student is no longer being served by a special program."
+  },
+  {
+    "Table": "RefProgramGiftedEligibility",
+    "Description": "State/local code used to determine a student's eligibility for Gifted/Talented program."
+  },
+  {
+    "Table": "RefProgramLengthHoursType",
+    "Description": "The type of hours (credit or contact) by which the normal length of a program of study is measured."
+  },
+  {
+    "Table": "RefProgramSponsorType",
+    "Description": "A type of organization providing funds for a particular educational or service program or activity or for an individual's participation in the program or activity."
+  },
+  {
+    "Table": "RefProgramType",
+    "Description": "The system outlining instructional or non-instructional activities and procedures designed to accomplish a predetermined educational objective or set of objectives or to provide support services to a person and/or the community."
+  },
+  {
+    "Table": "RefProgressLevel",
+    "Description": "The amount of progress shown in academic subjects."
+  },
+  {
+    "Table": "RefPromotionReason",
+    "Description": "The nature of the student's promotion or progress at the end of a given school term."
+  },
+  {
+    "Table": "RefProofOfResidencyType",
+    "Description": "An accepted form of proof of residency in the district/county/other locality."
+  },
+  {
+    "Table": "RefPsEnrollmentAction",
+    "Description": "The action taken with respect to postsecondary enrollment by the student who graduated from the school, LEA or state in the past two years."
+  },
+  {
+    "Table": "RefPsEnrollmentAwardType",
+    "Description": "An indicator of the award level in which the person is currently enrolled."
+  },
+  {
+    "Table": "RefPsEnrollmentStatus",
+    "Description": "An indication of the student's enrollment status for a particular term as defined by the institution"
+  },
+  {
+    "Table": "RefPsEnrollmentType",
+    "Description": "An indicator of the enrollment type associated with the enrollment award level of a person at the beginning of a term."
+  },
+  {
+    "Table": "RefPSExitOrWithdrawalType",
+    "Description": " The circumstances under which the student exited from enrollment in a postsecondary institution."
+  },
+  {
+    "Table": "RefPsLepType",
+    "Description": "The term \"individual with limited English proficiency\" means a secondary school student, an adult, or an out-of-school youth, who has limited ability in speaking, reading, writing, or understanding the English language AND whose native language is a language other than English; OR who lives in a family or community environment in which a language other than English is the dominant language. "
+  },
+  {
+    "Table": "RefPSProgramLevel",
+    "Description": "The level describing the concentration of study for a postsecondary program."
+  },
+  {
+    "Table": "RefPsStudentLevel",
+    "Description": "Classification of a person enrolling in credit-granting courses at a postsecondary institution since completing high school (or its equivalent) as either an undergraduate or graduate student."
+  },
+  {
+    "Table": "RefPublicSchoolChoiceStatus",
+    "Description": "An indication of whether the LEA was able to implement the provisions for public school choice under Title I, Part A, Section 1116 of ESEA as amended."
+  },
+  {
+    "Table": "RefPublicSchoolResidence",
+    "Description": "An indication of the location of a persons legal residence relative to (within or outside) the boundaries of the public school attended and its administrative unit."
+  },
+  {
+    "Table": "RefPurposeOfMonitoringVisit",
+    "Description": "The purpose for the monitoring visit."
+  },
+  {
+    "Table": "RefQrisParticipation",
+    "Description": "Program site participates in a Quality Rating and Improvement System (QRIS)."
+  },
+  {
+    "Table": "RefRace",
+    "Description": "The name used to describe a group of persons related by common descent or heredity."
+  },
+  {
+    "Table": "RefReapAlternativeFundingStatus",
+    "Description": "An indication that the local education agency (LEA) notified the state of the LEA's intention to use REAP-Flex Alternative Uses of Funding Authority during the school year as specified in the Title VI, Section 6211 of ESEA as amended."
+  },
+  {
+    "Table": "RefReasonDelayTransitionConf",
+    "Description": "The reasons for the delay of a transition conference."
+  },
+  {
+    "Table": "RefReconstitutedStatus",
+    "Description": "An indication that the school was restructured, transformed or otherwise changed as a consequence of the state’s accountability system under ESEA or as a result of School Improvement Grants (SIG)."
+  },
+  {
+    "Table": "RefReferralOutcome",
+    "Description": "The outcome of the referral."
+  },
+  {
+    "Table": "RefReimbursementType",
+    "Description": "A billable basis which defines payment. This is how state agencies/programs move funding to the local provider/agency."
+  },
+  {
+    "Table": "RefRestructuringAction",
+    "Description": "The types of actions being implemented in Title I schools as a result of the school being in an improvement status of restructuring – year 2 (implementation year)."
+  },
+  {
+    "Table": "RefRlisProgramUse",
+    "Description": "The type of use of the Rural Low-Income Schools Program (RLIS) (Title VI, Part B, Subpart 2) Grant Funds."
+  },
+  {
+    "Table": "RefRoleStatus",
+    "Description": "The types of status values for a person's role with an organization."
+  },
+  {
+    "Table": "RefRoleStatusType",
+    "Description": "List of role status types."
+  },
+  {
+    "Table": "RefSCEDCourseLevel",
+    "Description": " The course's level of rigor."
+  },
+  {
+    "Table": "RefSCEDCourseSubjectArea",
+    "Description": "The intended major subject area of the education course."
+  },
+  {
+    "Table": "RefScheduledWellChildScreening",
+    "Description": "The individual well child visit scheduled according to the AAP recommended periodicity schedule."
+  },
+  {
+    "Table": "RefSchoolFoodServiceProgram",
+    "Description": "An indication of a student's participation in free, reduced price, full price breakfast, lunch, snack, supper, and milk programs."
+  },
+  {
+    "Table": "RefSchoolImprovementFunds",
+    "Description": "An indication of whether the school received funds under Section 1003 of ESEA, as amended."
+  },
+  {
+    "Table": "RefSchoolImprovementStatus",
+    "Description": "An indication of the improvement stage of the school."
+  },
+  {
+    "Table": "RefSchoolLevel",
+    "Description": "An indication of the level of the education institution."
+  },
+  {
+    "Table": "RefSchoolType",
+    "Description": "The type of education institution as classified by its primary focus. "
+  },
+  {
+    "Table": "RefScoreMetricType",
+    "Description": "The specific method used to report the performance and achievement of the assessment. This is the metric that is being used to derive the scores."
+  },
+  {
+    "Table": "RefServiceFrequency",
+    "Description": "The frequency that a service is planned to be provided."
+  },
+  {
+    "Table": "RefServiceOption",
+    "Description": "Nature of early childhood program, class or group in which a person is enrolled."
+  },
+  {
+    "Table": "RefServices",
+    "Description": "The types of service that adapts the curriculum, materials, or instruction for students identified as needing additional resources."
+  },
+  {
+    "Table": "RefSessionType",
+    "Description": "A prescribed span of time when an education institution is open, instruction is provided, and students are under the direction and guidance of teachers and/or education institution administration. A session may be interrupted by one or more vacations."
+  },
+  {
+    "Table": "RefSex",
+    "Description": "The concept describing the biological traits that distinguish the males and females of a species."
+  },
+  {
+    "Table": "RefSigInterventionType",
+    "Description": "The type of intervention used by the school under the School Improvement Grant (SIG)."
+  },
+  {
+    "Table": "RefSingleSexClassStatus",
+    "Description": "Section in a co-educational school where only male or only female students are permitted to take the course."
+  },
+  {
+    "Table": "RefSpaceUseType",
+    "Description": "The primary use of a space, as determined by its physical layout and built-in systems and equipment, regardless of its original design."
+  },
+  {
+    "Table": "RefSpecialEducationAgeGroupTaught",
+    "Description": "The age range of special education students taught."
+  },
+  {
+    "Table": "RefSpecialEducationExitReason",
+    "Description": "The reason children who were in special education at the start of the reporting period were not in special education at the end of the reporting period."
+  },
+  {
+    "Table": "RefSpecialEducationStaffCategory",
+    "Description": "Titles of personnel employed and contracted to provide special education and related services for children with disabilities."
+  },
+  {
+    "Table": "RefStaffPerformanceLevel",
+    "Description": "The levels used in district evaluation systems for assigning teacher or principal performance ratings."
+  },
+  {
+    "Table": "RefStandardizedAdmissionTest",
+    "Description": "The type of test prepared and administered by an agency that is independent of any postsecondary education institution and is typically used for admissions purposes. Tests provide information about prospective students and their academic qualifications relative to a national sample."
+  },
+  {
+    "Table": "RefState",
+    "Description": "A state or outlying region where an address is located."
+  },
+  {
+    "Table": "RefStateANSICode",
+    "Description": "The American National Standards Institute (ANSI) two-digit code for the state."
+  },
+  {
+    "Table": "RefStatePovertyDesignation",
+    "Description": "The designation of a school’s poverty quartile for purposes of determining classes taught by highly qualified teachers in high and low poverty schools, according to state’s indicator of poverty."
+  },
+  {
+    "Table": "RefStudentEnrollmentAccessType",
+    "Description": "The designation of how students secure access to age appropriate public schools, or publicly funded charter or private schools."
+  },
+  {
+    "Table": "RefStudentSupportServiceType",
+    "Description": "Type of related or ancillary services provided to a person or a group of persons within the formal educational system or offered by an outside agency which provides non-instructional services to support the general welfare of students. This includes physical and emotional health, the ability to select an appropriate course of study, admission to appropriate educational programs, and the ability to adjust to and remain in school through the completion of programs. In serving a student with an identified disability, related services include developmental, corrective, or supportive services required to ensure that the person benefits from special education."
+  },
+  {
+    "Table": "RefSupervisedClinicalExperience",
+    "Description": "An indication of whether a person is enrolled in a supervised clinical experience (including student teaching) as part of a teacher preparation program."
+  },
+  {
+    "Table": "RefTeacherEducationCredentialExam",
+    "Description": "The type of examination used to assess teacher candidate's knowledge and skills."
+  },
+  {
+    "Table": "RefTeacherEducationExamScoreType",
+    "Description": "An indication of the type of credential exam associated with a given exam score."
+  },
+  {
+    "Table": "RefTeacherEducationTestCompany",
+    "Description": "The name of the company that provides the examination used in the teacher education program."
+  },
+  {
+    "Table": "RefTeacherPrepCompleterStatus",
+    "Description": "An indication of whether a person completed a state-approved teacher preparation program.  The fact that a person has or has not been recommended to the state for initial certification or licensure may not be used as a criterion for determining who is a program completer."
+  },
+  {
+    "Table": "RefTeacherPrepEnrollmentStatus",
+    "Description": "An indication of whether a person is pursuing certification as a teacher."
+  },
+  {
+    "Table": "RefTeachingAssignmentRole",
+    "Description": "The role that the Staff Member has been assigned for a Class Section.  (A teacher may have the lead responsibility for one section and serve a supporting role for another section of the same course.)"
+  },
+  {
+    "Table": "RefTeachingCredentialBasis",
+    "Description": "An indication of the pre-determined criteria for granting the teaching credential that a person holds."
+  },
+  {
+    "Table": "RefTeachingCredentialType",
+    "Description": "An indication of the category of a legal document giving authorization to perform teaching assignment services."
+  },
+  {
+    "Table": "RefTechnicalAssistanceDeliveryType",
+    "Description": "The method of delivery of technical assistance received/provided"
+  },
+  {
+    "Table": "RefTechnicalAssistanceType",
+    "Description": "The type of technical assistance provided."
+  },
+  {
+    "Table": "RefTechnologyLiteracyStatus",
+    "Description": "An indication of the technology literacy of 8th graders."
+  },
+  {
+    "Table": "RefTelephoneNumberType",
+    "Description": "The type of communication number listed for a person."
+  },
+  {
+    "Table": "RefTenureSystem",
+    "Description": "An indicator of whether an institution has personnel positions that lead to consideration for tenure."
+  },
+  {
+    "Table": "RefTextComplexitySystem",
+    "Description": "The scaling system used to specify the text complexity of an assessment item."
+  },
+  {
+    "Table": "RefTimeForCompletionUnits",
+    "Description": "The unit of measurement for length of time for completion."
+  },
+  {
+    "Table": "RefTitleIIIAccountability",
+    "Description": "An indication of the progress made by a student toward English proficiency."
+  },
+  {
+    "Table": "RefTitleIIILanguageInstructionProgramType",
+    "Description": "The type of Title III language instructional programs."
+  },
+  {
+    "Table": "RefTitleIIIProfessionalDevelopmentType",
+    "Description": "The type of Title III professional development utilized."
+  },
+  {
+    "Table": "RefTitleIIndicator",
+    "Description": "An indication that the student is participating in and served by programs under Title I, Part A of ESEA as amended."
+  },
+  {
+    "Table": "RefTitleIInstructionalServices",
+    "Description": "The type of instructional services provided to students in ESEA Title I programs."
+  },
+  {
+    "Table": "RefTitleIProgramStaffCategory",
+    "Description": "Titles of employment, official status, or rank for staff working in a Title I program."
+  },
+  {
+    "Table": "RefTitleIProgramType",
+    "Description": "The type of Title I program offered in the school or district."
+  },
+  {
+    "Table": "RefTitleISchoolStatus",
+    "Description": "An indication that a school is designated under state and federal regulations as being eligible for participation in programs authorized by Title I of ESEA as amended and whether it has a Title I program."
+  },
+  {
+    "Table": "RefTransferOutIndicator",
+    "Description": "An indicator of whether the student has transferred to another institution."
+  },
+  {
+    "Table": "RefTransferReady",
+    "Description": "A person who has successfully completed a transfer-preparatory program as defined by the state or by the institution if no official state definition exists."
+  },
+  {
+    "Table": "RefTribalAffiliation",
+    "Description": "The Native American tribal entity recognized and eligible to receive services from the United States Bureau of Indian Affairs to which a person is affiliated."
+  },
+  {
+    "Table": "RefTrimesterWhenPrenatalCareBegan",
+    "Description": "The trimester of pregnancy in which a child's mother began receiving prenatal health care."
+  },
+  {
+    "Table": "RefTuitionResidencyType",
+    "Description": "A person's residency status for tuition purposes."
+  },
+  {
+    "Table": "RefTuitionUnit",
+    "Description": "The component for which tuition is being charged.  It might be a time period (term, quarter, year, etc.) or it might be an entity of education (course, credit hour, etc.)."
+  },
+  {
+    "Table": "RefUSCitizenshipStatus",
+    "Description": "An indicator of whether or not the person is a US citizen."
+  },
+  {
+    "Table": "RefVirtualSchoolStatus",
+    "Description": "An indication of the extent to which a public school offers instruction in which students and teachers are separated by time and/or location, and interaction occurs via computers and/or telecommunications technologies."
+  },
+  {
+    "Table": "RefVisaType",
+    "Description": "An indicator of a non-US citizen's Visa type."
+  },
+  {
+    "Table": "RefVisionScreeningStatus",
+    "Description": "Status of an examination used to measure a person's ability to see."
+  },
+  {
+    "Table": "RefWageCollectionMethod",
+    "Description": "Method used for the collection of wage data for an employment record."
+  },
+  {
+    "Table": "RefWageVerification",
+    "Description": "An indication of whether the wage information has been verified."
+  },
+  {
+    "Table": "RefWeaponType",
+    "Description": "Identifies the type of weapon used during an incident."
+  },
+  {
+    "Table": "RefWfProgramParticipation",
+    "Description": "The type of workforce and employment development program that an individual is participating in."
+  },
+  {
+    "Table": "RefWorkbasedLearningOpportunityType",
+    "Description": "The type of work-based learning opportunity a student participated in."
+  },
+  {
+    "Table": "RequiredImmunization",
+    "Description": "Immunizations required by an organization or governing body."
+  },
+  {
+    "Table": "Role",
+    "Description": "The list of roles for a person."
+  },
+  {
+    "Table": "RoleAttendance",
+    "Description": "Aggregated attendance counts."
+  },
+  {
+    "Table": "RoleAttendanceEvent",
+    "Description": "The attributes of a person's attendance during a given day."
+  },
+  {
+    "Table": "RoleStatus",
+    "Description": "Identifies changes to the status of a role."
+  },
+  {
+    "Table": "Rubric",
+    "Description": "A rubric that may be utilized for scoring an assessment."
+  },
+  {
+    "Table": "RubricCriterion",
+    "Description": NaN
+  },
+  {
+    "Table": "RubricCriterionLevel",
+    "Description": NaN
+  },
+  {
+    "Table": "ServiceFrequency",
+    "Description": NaN
+  },
+  {
+    "Table": "ServicePlan",
+    "Description": NaN
+  },
+  {
+    "Table": "ServiceProvided",
+    "Description": NaN
+  },
+  {
+    "Table": "ServiceProvider",
+    "Description": NaN
+  },
+  {
+    "Table": "ServicesReceived",
+    "Description": "A service provided to a person in any of the P-20, adult education and workforce domains."
+  },
+  {
+    "Table": "ServiceStaff",
+    "Description": NaN
+  },
+  {
+    "Table": "StaffCredential",
+    "Description": "A credential held by a staff member."
+  },
+  {
+    "Table": "StaffEmployment",
+    "Description": "Information on employment of a person by an organization."
+  },
+  {
+    "Table": "StaffEvaluation",
+    "Description": "Evaluation of a staff member's performance."
+  },
+  {
+    "Table": "StaffExperience",
+    "Description": "Number of years of experience for a staff member."
+  },
+  {
+    "Table": "StaffProfessionalDevelopmentActivity",
+    "Description": "Information about a person's participation in a professional development activity and outcomes from that participation that may be related to a Professional Development Requirement.  The StaffProfessionalDevelopmentActivity may also be more granularly defined as a person's participation in a specific Professional Development Session, indicated by reference."
+  },
+  {
+    "Table": "StaffTechnicalAssistance",
+    "Description": NaN
+  },
+  {
+    "Table": "TeacherEducationCredentialExam",
+    "Description": "The exam and score of a person on a teaching credential exam."
+  },
+  {
+    "Table": "TeacherStudentDataLinkExclusion",
+    "Description": "Indicates that the student is excluded from calculation of value-added or growth attribution calculations used for teacher evaluation."
+  },
+  {
+    "Table": "WorkforceEmploymentQuarterlyData",
+    "Description": "Employment attributes reported for workforce quarterly data."
+  },
+  {
+    "Table": "WorkforceProgramParticipation",
+    "Description": "Information on a person's participation in a workforce program."
+  }
+]

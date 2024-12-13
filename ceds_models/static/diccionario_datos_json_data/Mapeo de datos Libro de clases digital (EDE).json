@@ -1,0 +1,522 @@
+[
+  {
+    "Origen": "Circular",
+    "Campo": "Número correlativo de matrícula",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; PersonIdentifier; Identifier == [Número correlativo de matrícula] AND _Personas; PersonIdentifier; RefPersonIdentificationSystemId == 55",
+    "SQL": "select a.personId,b.Identifier NumeroMatricula  from Person a \ninner join PersonIdentifier b on a.personId=b.personId and b.RefPersonIdentificationSystemId=55\n\n#listado de estudiantes por colegio\n\nselect * from PersonIdentifier where refpersonidentificationsystemid=55",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "RUN",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; PersonIdentifier; Identifier == [RUN] AND _Personas; PersonIdentifier; RefPersonIdentificationSystemId == 51",
+    "SQL": "select a.personId,b.Identifier   from Person a \ninner join PersonIdentifier b on a.personId=b.personId and b.RefPersonIdentificationSystemId=51",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "IPE",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; PersonIdentifier; Identifier == [IPE] AND _Personas; PersonIdentifier; RefPersonIdentificationSystemId == 52",
+    "SQL": "select a.personId,b.Identifier from Person a inner join PersonIdentifier b on a.personId=b.personId and b.RefPersonIdentificationSystemId=52",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Primer Nombre estudiante",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; Person; FirstName == [Primer Nombre estudiante]",
+    "SQL": "SELECT FirstName FROM Person join OrganizationPersonRole using(PersonId) where OrganizationPersonRole.RoleId = 6",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Segundo Nombre estudiante",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; Person; MiddleName == [Segundo Nombre estudiante]",
+    "SQL": "SELECT MiddleName FROM Person join OrganizationPersonRole using(PersonId) where OrganizationPersonRole.RoleId = 6",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Apellido Paterno estudiante",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; Person; LastName == [Apellido Paterno estudiante]",
+    "SQL": "SELECT LastName FROM Person join OrganizationPersonRole using(PersonId) where OrganizationPersonRole.RoleId = 6",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Apellido Materno estudiante",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; Person; SecondLastName == [Apellido Materno estudiante]",
+    "SQL": NaN,
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Sexo",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; Person; RefSexId == 1 (M) OR _Personas; Person; RefSexId == 2 (F), según corresponda",
+    "SQL": "SELECT RefSex.Description FROM Person join RefSex using(RefSexId)",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Fecha Nacimiento",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; Person; Birthdate == [Fecha Nacimiento]",
+    "SQL": "SELECT Birthdate FROM Person",
+    "Notas": "Formato permitdo: yyyy-mm-dd"
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Nivel",
+    "Obligatorio": "Si",
+    "JSON": "_Organizaciones; Organization; Name == [nivelList]\n\nnivelList\n01:Educación Parvularia\n02:Enseñanza Básica Niños\n03:Educación Básica Adultos\n04:Educación Especial\n05:Enseñanza Media Humanístico Científica Jóvenes\n06:Educación Media Humanístico Científica Adultos\n07:Enseñanza Media Técnico Profesional y Artística, Jóvenes\n08:Educación Media Técnico Profesional y Artística, Adultos\n\nAND \n_Organizaciones; Organization; RefOrganizationTypeId == 40",
+    "SQL": "Como en _Personas; Person; personId se encuentra el identificador del estudiante, asumiré que personId es un dato conocido. Por lo tanto para obtener el nivel del curso de un estudiante desde Organization.Name se debe aplicar el siguiente filtro:\n\nOrganizationPersonRole;personId == [Person.personId] AND OrganizationPersonRole;RoleID == 6 (Estudiante) AND OrganizationPersonRole;OrganizationId == Organization.OrganizationId AND Organization.RefOrganizationTypeId == 40 \n\n#listado de niveles por establecimiento#\n select distinct name NIvel from organization\nwhere reforganizationtypeid=40\n\n#grado por nivel por establecimiento#\n select distinct name Grado from organization\nwhere reforganizationtypeid=46\n\n#cursos por nivel y grado, por establecimiento#\nSELECT DISTINCT\n                 codEnse.Name as codigoEnseñanza\n                , grado.Name as grado\n                , curso.Name as letraCurso\n        FROM Organization as curso\n        INNER JOIN OrganizationRelationship as rsCurso on curso.OrganizationId=rsCurso.OrganizationId\n        \n        INNER JOIN Organization as grado \n                ON grado.OrganizationId=rsCurso.Parent_OrganizationId AND grado.RefOrganizationTypeId = 46\n        INNER JOIN OrganizationRelationship as rsGrado on grado.OrganizationId=rsGrado.OrganizationId\n        \n        INNER JOIN Organization as codEnse \n                ON codEnse.OrganizationId=rsGrado.Parent_OrganizationId AND codEnse.RefOrganizationTypeId = 45\n        INNER JOIN OrganizationRelationship as rsCodEnse on codEnse.OrganizationId=rsCodEnse.OrganizationId\n\n        INNER JOIN Organization as tipoCurso \n                ON tipoCurso.OrganizationId=rsCodEnse.Parent_OrganizationId AND tipoCurso.RefOrganizationTypeId = 44\n        INNER JOIN OrganizationRelationship as rsTipoCurso on tipoCurso.OrganizationId=rsTipoCurso.OrganizationId\n        \n        INNER JOIN Organization as especialidad \n                ON especialidad.OrganizationId=rsTipoCurso.Parent_OrganizationId AND especialidad.RefOrganizationTypeId = 43\n        INNER JOIN OrganizationRelationship as rsEspecialidad on especialidad.OrganizationId=rsEspecialidad.OrganizationId\n\n        INNER JOIN Organization as sector \n                ON sector.OrganizationId=rsEspecialidad.Parent_OrganizationId AND sector.RefOrganizationTypeId = 42\n        INNER JOIN OrganizationRelationship as rsSector on sector.OrganizationId=rsSector.OrganizationId\n        \n        INNER JOIN Organization as rama \n                ON rama.OrganizationId=rsSector.Parent_OrganizationId AND rama.RefOrganizationTypeId = 41\n        INNER JOIN OrganizationRelationship as rsRama on rama.OrganizationId=rsRama.OrganizationId\n        \n        INNER JOIN Organization as nivel \n                ON nivel.OrganizationId=rsRama.Parent_OrganizationId AND nivel.RefOrganizationTypeId = 40\n        INNER JOIN OrganizationRelationship as rsNivel on nivel.OrganizationId=rsNivel.OrganizationId",
+    "Notas": "El siguiente link contiene un ejemplo de la estructura jerarquica que se encuentra cargada en la BD.\n\nhttps://docs.google.com/spreadsheets/d/1ZNqqzeMBbniWJ57Ye6RhELlPKperzRNV9AVbaQD3ahY/edit#gid=491532186 \n\nPor lo tanto, se recomienda mirar el ejemplo para comprender de mejor forma cómo almacenar correctamente las organizaciones, respetando su estructura jerarquica."
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Curso",
+    "Obligatorio": "Si",
+    "JSON": "_Organizaciones; Organization; Name == [letraCurso]\n\nletraCurso: Correspone a la letra asignada al curso. \nEjemplo: A, B, C, D... etc.\n\nAND \n_Organizaciones; Organization; RefOrganizationTypeId == 21",
+    "SQL": "Como en _Personas; Person; personId se encuentra el identificador del estudiante, asumiré que personId es un dato conocido. Por lo tanto para obtener el nivel del curso de un estudiante desde Organization.Name se debe aplicar el siguiente filtro:\n\nOrganizationPersonRole;personId == [Person.personId] AND OrganizationPersonRole;RoleID == 6 (Estudiante) AND OrganizationPersonRole;OrganizationId == Organization.OrganizationId AND Organization.RefOrganizationTypeId == 21\n\n#cursos por nivel y grado, por establecimiento#\nSELECT DISTINCT\n                 codEnse.Name as codigoEnseñanza\n                , grado.Name as grado\n                , curso.Name as letraCurso\n        FROM Organization as curso\n        INNER JOIN OrganizationRelationship as rsCurso on curso.OrganizationId=rsCurso.OrganizationId\n        \n        INNER JOIN Organization as grado \n                ON grado.OrganizationId=rsCurso.Parent_OrganizationId AND grado.RefOrganizationTypeId = 46\n        INNER JOIN OrganizationRelationship as rsGrado on grado.OrganizationId=rsGrado.OrganizationId\n        \n        INNER JOIN Organization as codEnse \n                ON codEnse.OrganizationId=rsGrado.Parent_OrganizationId AND codEnse.RefOrganizationTypeId = 45\n        INNER JOIN OrganizationRelationship as rsCodEnse on codEnse.OrganizationId=rsCodEnse.OrganizationId\n\n        INNER JOIN Organization as tipoCurso \n                ON tipoCurso.OrganizationId=rsCodEnse.Parent_OrganizationId AND tipoCurso.RefOrganizationTypeId = 44\n        INNER JOIN OrganizationRelationship as rsTipoCurso on tipoCurso.OrganizationId=rsTipoCurso.OrganizationId\n        \n        INNER JOIN Organization as especialidad \n                ON especialidad.OrganizationId=rsTipoCurso.Parent_OrganizationId AND especialidad.RefOrganizationTypeId = 43\n        INNER JOIN OrganizationRelationship as rsEspecialidad on especialidad.OrganizationId=rsEspecialidad.OrganizationId\n\n        INNER JOIN Organization as sector \n\n\n\n                ON sector.OrganizationId=rsEspecialidad.Parent_OrganizationId AND sector.RefOrganizationTypeId = 42\n        INNER JOIN OrganizationRelationship as rsSector on sector.OrganizationId=rsSector.OrganizationId\n        \n        INNER JOIN Organization as rama \n                ON rama.OrganizationId=rsSector.Parent_OrganizationId AND rama.RefOrganizationTypeId = 41\n        INNER JOIN OrganizationRelationship as rsRama on rama.OrganizationId=rsRama.OrganizationId\n        \n        INNER JOIN Organization as nivel \n                ON nivel.OrganizationId=rsRama.Parent_OrganizationId AND nivel.RefOrganizationTypeId = 40\n        INNER JOIN OrganizationRelationship as rsNivel on nivel.OrganizationId=rsNivel.OrganizationId\n\n#listado de datos del curso\n\nSELECT DISTINCT\n                ee.RBD\n                , modalidad.Name as modalidad\n                , jornada.Name as jornada\n                , nivel.Name as nivel\n                , rama.Name as rama\n                , sector.Name as sector\n                , especialidad.Name as especialidad        \n                , tipoCurso.Name as tipoCurso                \n                , codEnse.Name as codigoEnseñanza\n                , grado.Name as grado\n                , curso.Name as letraCurso\n                , curso.OrganizationId as OrganizationIdDelCurso\n\n        FROM Organization as curso\n        INNER JOIN OrganizationRelationship as rsCurso on curso.OrganizationId=rsCurso.OrganizationId\n        \n        INNER JOIN Organization as grado \n                ON grado.OrganizationId=rsCurso.Parent_OrganizationId AND grado.RefOrganizationTypeId = 46\n        INNER JOIN OrganizationRelationship as rsGrado on grado.OrganizationId=rsGrado.OrganizationId\n        \n        INNER JOIN Organization as codEnse \n                ON codEnse.OrganizationId=rsGrado.Parent_OrganizationId AND codEnse.RefOrganizationTypeId = 45\n        INNER JOIN OrganizationRelationship as rsCodEnse on codEnse.OrganizationId=rsCodEnse.OrganizationId\n\n        INNER JOIN Organization as tipoCurso \n                ON tipoCurso.OrganizationId=rsCodEnse.Parent_OrganizationId AND tipoCurso.RefOrganizationTypeId = 44\n        INNER JOIN OrganizationRelationship as rsTipoCurso on tipoCurso.OrganizationId=rsTipoCurso.OrganizationId\n        \n        INNER JOIN Organization as especialidad \n                ON especialidad.OrganizationId=rsTipoCurso.Parent_OrganizationId AND especialidad.RefOrganizationTypeId = 43\n        INNER JOIN OrganizationRelationship as rsEspecialidad on especialidad.OrganizationId=rsEspecialidad.OrganizationId\n\n        INNER JOIN Organization as sector \n                ON sector.OrganizationId=rsEspecialidad.Parent_OrganizationId AND sector.RefOrganizationTypeId = 42\n        INNER JOIN OrganizationRelationship as rsSector on sector.OrganizationId=rsSector.OrganizationId\n        \n        INNER JOIN Organization as rama \n                ON rama.OrganizationId=rsSector.Parent_OrganizationId AND rama.RefOrganizationTypeId = 41\n        INNER JOIN OrganizationRelationship as rsRama on rama.OrganizationId=rsRama.OrganizationId\n        \n        INNER JOIN Organization as nivel \n                ON nivel.OrganizationId=rsRama.Parent_OrganizationId AND nivel.RefOrganizationTypeId = 40\n        INNER JOIN OrganizationRelationship as rsNivel on nivel.OrganizationId=rsNivel.OrganizationId\n        \n        INNER JOIN Organization as jornada \n                ON jornada.OrganizationId=rsNivel.Parent_OrganizationId AND jornada.RefOrganizationTypeId = 39\n        INNER JOIN OrganizationRelationship as rsJornada on jornada.OrganizationId=rsJornada.OrganizationId\n        \n        INNER JOIN Organization as modalidad \n                ON modalidad.OrganizationId=rsJornada.Parent_OrganizationId AND modalidad.RefOrganizationTypeId = 38\n        INNER JOIN OrganizationRelationship as rsModalidad on modalidad.OrganizationId=rsModalidad.OrganizationId\n        \n        INNER JOIN (\n                SELECT \n                i.Identifier as RBD\n                ,Organization.Name as 'nombreEstablecimiento'\n                ,i.OrganizationId as OrganizationId\n                FROM OrganizationIdentifier i\n                INNER JOIN Organization USING(OrganizationId)\n                INNER JOIN RefOrganizationIdentificationSystem rbd\n                        ON i.RefOrganizationIdentificationSystemId = rbd.RefOrganizationIdentificationSystemId\n                        AND i.RefOrganizationIdentificationSystemId = (\n                                        SELECT RefOrganizationIdentificationSystemId\n                                        FROM RefOrganizationIdentificationSystem\n                                        WHERE Code = 'RBD' )\n                INNER JOIN RefOrganizationIdentifierType Mineduc\n                        ON i.RefOrganizationIdentifierTypeId = Mineduc.RefOrganizationIdentifierTypeId\n                        AND i.RefOrganizationIdentifierTypeId = (\n                                        SELECT RefOrganizationIdentifierTypeId\n                                        FROM RefOrganizationIdentifierType\n                                        WHERE Code = 'Mineduc' )) as ee on ee.OrganizationId=rsModalidad.Parent_OrganizationId\n        \n        WHERE curso.RefOrganizationTypeId = 21",
+    "Notas": "La vista jerarquiasList contiene todas las organizaciones ordenadas según si jerarquía.\n\nPor ejemplo: Al unir jerarquiasList.grado + jerarquiasList.letraCurso, se debería obtener 110.02:2º Básico B"
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Local Escolar",
+    "Obligatorio": "Si",
+    "JSON": "LocationAddress",
+    "SQL": "select distinct StreetNumberAndName,city Ciudad,CountyName Comuna from LocationAddress\n",
+    "Notas": "Se linkea a través del OrganizationPersonRole. Los organization se crean siguiendo esta estructura https://docs.google.com/spreadsheets/d/1ZNqqzeMBbniWJ57Ye6RhELlPKperzRNV9AVbaQD3ahY/edit#gid=2027552746 "
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Fecha de Matrícula",
+    "Obligatorio": "Si",
+    "JSON": "PersonStatus.StatusStartDate",
+    "SQL": "select b.personid,a.StatusStartDate from PersonStatus a\ninner join person b on a.personId=b.PersonId",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Fecha Retiro estudiante",
+    "Obligatorio": "Si",
+    "JSON": "PersonStatus.StatusEndDate",
+    "SQL": "select b.personid,a.StatusEndDate from PersonStatus a\ninner join person b on a.personId=b.PersonId",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Motivo Retiro estudiante",
+    "Obligatorio": "Si",
+    "JSON": "PersonStatus.RefPersonStatusTypeId == 30 + PersonStatus.Description",
+    "SQL": "select persona.personId,\nnumeroMatricula.Identifier NumMatricula,\nfechaMatricula.StatusStartDate FechaMatricula ,\npersona.FirstName PrimerNombre,\npersona.MiddleName SegundoNombre,\npersona.LastName ApellidoPaterno,\npersona.SecondLastName ApellidoMaterno,\nfechaMatricula.recordEndDateTime FechaRetiro,\nfechaMatricula.Description MotivoRetiro \nfrom Person persona \ninner join PersonIdentifier numeroMatricula on persona.personId=numeroMatricula.personId and numeroMatricula.RefPersonIdentificationSystemId=55\ninner join personstatus fechaMatricula on persona.personid=fechamatricula.personid",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Domicilio estudiante",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; PersonAddress",
+    "SQL": "select a.personId,b.StreetNumberAndName from person a\ninner join PersonAddress b on a.personId=b.personId",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Observaciones",
+    "Obligatorio": "Si",
+    "JSON": "PersonStatus.Description",
+    "SQL": NaN,
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Domicilio Padre",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; PersonAddress + personRelationShip.refPersonRelationShipId == 8(Father)",
+    "SQL": "\nselect relacion.firstname,\nrelacion.MiddleName,\nrelacion.LastName,\nrelacion.SecondLastName,\ndireccion.StreetNumberAndName,\ncomuna.Description,\ntelefono.TelephoneNumber,\nemail.emailAddress,\nNivelEducacionalMAE.Description EducacionNivel\nfrom person a\ninner join PersonRelationship b on a.personid=b.personid and b.refpersonrelationshipid=8\ninner join refpersonrelationship c on b.refpersonrelationshipid=c.refpersonrelationshipid\ninner join person relacion on b.relatedpersonid=relacion.personid\nleft join PersonAddress direccion on relacion.personid=direccion.personId\nleft join refcounty comuna on direccion.RefCountyId=comuna.RefCountyId\nleft join PersonTelephone telefono on relacion.personid=telefono.personid\nleft join PersonEmailAddress email on relacion.personid=email.personid\nleft join PersonDegreeOrCertificate NivelEducacional on relacion.personid=Niveleducacional.personid\nleft join RefDegreeOrCertificateType NivelEducacionalMAE on Niveleducacional.RefDegreeOrCertificateTypeid=NivelEducacionalMAE.RefDegreeOrCertificateTypeid",
+    "Notas": "a) Por un lado, todos los estudiantes tienen número de matrícula y desde ahí se puede obtener su personID:\n_Personas; PersonIdentifier; Identifier + _Personas; PersonIdentifier; RefPersonIdentificationSystemId==55(School)\n\nb) Además la tabla PersonRelationship.RefPersonRelationshipId (tipo de relación) contiene el tipo de relación que tienen otras personas con el estudiante.\n\ncon ambos criterios se puede obtener diferenciar los datos de las demás tablas de personas. \n\nOtra forma sería a través de la tabla organizationPersonRole la cual contiene el role que cada persona cumple dentro de los diferentes tipos de organización que estan cargados en la BD. Esta sería otra forma de obtener la lista de estudiantes, docentes, etc."
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Teléfono Padre",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; PersonTelephone",
+    "SQL": "E19",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Email Padre",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; PersonEmailAddress; EmailAddress",
+    "SQL": "E19",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Domicilio Madre",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; PersonAddress",
+    "SQL": "\nselect relacion.firstname,\nrelacion.MiddleName,\nrelacion.LastName,\nrelacion.SecondLastName,\ndireccion.StreetNumberAndName,\ncomuna.Description,\ntelefono.TelephoneNumber,\nemail.emailAddress,\nNivelEducacionalMAE.Description EducacionNivel\nfrom person a\ninner join PersonRelationship b on a.personid=b.personid and b.refpersonrelationshipid=19\ninner join refpersonrelationship c on b.refpersonrelationshipid=c.refpersonrelationshipid\ninner join person relacion on b.relatedpersonid=relacion.personid\nleft join PersonAddress direccion on relacion.personid=direccion.personId\nleft join refcounty comuna on direccion.RefCountyId=comuna.RefCountyId\nleft join PersonTelephone telefono on relacion.personid=telefono.personid\nleft join PersonEmailAddress email on relacion.personid=email.personid\nleft join PersonDegreeOrCertificate NivelEducacional on relacion.personid=Niveleducacional.personid\nleft join RefDegreeOrCertificateType NivelEducacionalMAE on Niveleducacional.RefDegreeOrCertificateTypeid=NivelEducacionalMAE.RefDegreeOrCertificateTypeid",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Teléfono Madre",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; PersonTelephone",
+    "SQL": "E22",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Email Madre",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; PersonEmailAddress; EmailAddress",
+    "SQL": "E22",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Libro Físico",
+    "Campo": "Presedencia",
+    "Obligatorio": "Si",
+    "JSON": "PersonStatus.RefPersonStatusTypeId == 27(estudiante nuevo con matrícula definitiva), 28(estudiante promovido)",
+    "SQL": NaN,
+    "Notas": NaN
+  },
+  {
+    "Origen": "Libro Físico",
+    "Campo": "Nivel educacional de padre",
+    "Obligatorio": "Si",
+    "JSON": "PersonDegreeOrCertificate",
+    "SQL": "E19",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Libro Físico",
+    "Campo": "Nivel educacional de madre",
+    "Obligatorio": "Si",
+    "JSON": "PersonDegreeOrCertificate",
+    "SQL": "E22",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Libro Físico",
+    "Campo": "Persona con quien vive (vínculo)",
+    "Obligatorio": "Si",
+    "JSON": "PersonRelationship.RefPersonRelationshipId (tipo de relación)",
+    "SQL": "select a.PersonId,c.Description from person a\ninner join PersonRelationship b on a.personId=b.personId\ninner join RefPersonRelationship c on b.RefPersonRelationshipId=c.RefPersonRelationshipId",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Tipo Estudiante",
+    "Obligatorio": "Si",
+    "JSON": "PersonStatus.RefPersonStatusTypeId == 24  y 31 (Excedente), 25(Intercambio), 26(En práctica), 5(Migrant)",
+    "SQL": NaN,
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Doc Identidad país origen (Pasaporte, Cédula, Otro)",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; PersonIdentifier; Identifier + _Personas; PersonIdentifier; RefPersonIdentificationSystemId==53",
+    "SQL": NaN,
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Tipo Matrícula (Provisoria-Definitiva)",
+    "Obligatorio": "Si",
+    "JSON": "PersonStatus.RefPersonStatusTypeId == 27(estudiante nuevo con matrícula definitiva), 29(estudiante nuevo con matricula provisoria)",
+    "SQL": NaN,
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Número y fecha de la resolución respectiva",
+    "Obligatorio": "Si",
+    "JSON": "PersonStatus.RefPersonStatusTypeId == (24 OR 31 OR 25) + PersonStatus.fileScanBase64 + PersonStatus.docNumber + PersonStatus.StatusStartDate",
+    "SQL": NaN,
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "RBD",
+    "Obligatorio": "Si",
+    "JSON": "_Organizaciones; organization; shortName == [RBD] AND _Organizaciones; organization; refOrganizationTypeId == 10 (k12School)",
+    "SQL": "select SUBSTR(ShortName, 4, 8) RBD from organization\n where reforganizationtypeid=10  /* el formato ej es RBD09599*/",
+    "Notas": "el formato del RBD debe cumplir con la siguiente expresión regular: ^RBD\\d{5}$"
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Nombre establecimiento",
+    "Obligatorio": "Si",
+    "JSON": "_Organizaciones; organization; name == [Nombre del establecimiento] AND _Organizaciones; organization; refOrganizationTypeId == 10 (k12School)",
+    "SQL": " select name NombreEstablecimiento from organization\nwhere reforganizationtypeid=10",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Modalidad",
+    "Obligatorio": "Si",
+    "JSON": "Este filtro entrega el curso en el cuál está inscrito el estudiante. OrganizationPersonRole;RoleID == 6 (Estudiante) AND OrganizationPersonRole;OrganizationId == Organization.OrganizationId AND Organization.RefOrganizationTypeId == 21 (Course) Luego de obtednido el organizationID del curso, se puede recorrer la estructura jerarquica de la tabla OrganizationRelationShip para obtener la siguiente información relacionada con el curso. 38 (Modalidad de Enseñanza) 39 (Jornada Escolar) 40 (Nivel Educacional) 41 (Rama de especialidad) 42 (Sector Económico) 43 (Especialidad) 44 (Tipo de curso (Simple/Combinado)) 45 (Código de enseñanza) 46 (Grado de enseñanza) 21 (Course)",
+    "SQL": " select name Modalidad /*deben ser solo 3 regular, especial, adulto*/ from organization\nwhere reforganizationtypeid=38",
+    "Notas": "\"El siguiente link contiene un ejemplo de la estructura jerarquica que se encuentra cargada en la BD.\n\nhttps://docs.google.com/spreadsheets/d/1ZNqqzeMBbniWJ57Ye6RhELlPKperzRNV9AVbaQD3ahY/edit#gid=491532186 \n\nPor lo tanto, para obtener el nivel, el curso, el código de enseñanza, etc. se deben uilizar las tablas Organization y OrganizationRelationShip.\"\n"
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Año Escolar",
+    "Obligatorio": "Si",
+    "JSON": "_calendarios; OrganizationCalendar; CalendarYear == [Año Escolar]",
+    "SQL": "select CalendarYear from organizationcalendar limit 1 /*solo un año por archivo*/",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Primer Nombre Profesor Jefe",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; Person; FirstName",
+    "SQL": "select DISTINCT\n                 curso.OrganizationId as OrganizationIdDelCurso\n                , profesorJefe.apellidoPaternoDocenteLiderCurso\n                , profesorJefe.apellidoMaternoDocenteLiderCurso\n                , profesorJefe.primerNombreDocenteLiderCurso\n                , profesorJefe.otrosNombresDocenteLiderCurso\n                , profesorJefe.runDocenteLiderCurso\n\n        FROM Organization as curso\n        INNER JOIN OrganizationRelationship as rsCurso on curso.OrganizationId=rsCurso.OrganizationId\n        OUTER LEFT JOIN (\n                SELECT \n                        OrganizationPersonRoleId\n                        , OrganizationId\n                        , PersonId\n                        , LastName as 'apellidoPaternoDocenteLiderCurso'\n                        , SecondLastName as 'apellidoMaternoDocenteLiderCurso'\n                        , FirstName as 'primerNombreDocenteLiderCurso'\n                        , MiddleName as 'otrosNombresDocenteLiderCurso'\n                        , runDocenteLiderCurso\n                FROM K12StaffAssignment\n                INNER JOIN OrganizationPersonRole USING(OrganizationPersonRoleId)\n                INNER JOIN (\n                                        SELECT DISTINCT \n                                                Person.PersonId\n                                                ,Person.LastName\n                                                ,Person.SecondLastName\n                                                ,Person.FirstName\n                                                ,Person.MiddleName\n                                                ,rut.Identifier as RunDocenteLiderCurso \n                                        FROM Person \n                                        INNER JOIN PersonIdentifier rut ON rut.PersonId = Person.PersonId AND rut.RefPersonIdentificationSystemId = 51 \n                                ) USING(PersonId)\n                                WHERE RefTeachingAssignmentRoleId = 1\n                        ) profesorJefe ON OrganizationIdDelCurso = profesorJefe.OrganizationId\n        \n                WHERE curso.RefOrganizationTypeId = 21",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Segundo Nombre Profesor Jefe",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; Person; MiddleName",
+    "SQL": "E37",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Apellido Paterno Profesor Jefe",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; Person; LastName",
+    "SQL": "E37",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Apellido Materno Profesor Jefe",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; Person; SecondLastName",
+    "SQL": "E37",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Domicilio estudiante (Comuna)",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; PersonAddress",
+    "SQL": NaN,
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Primer Nombre Apoderado o Tutor",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; Person; FirstName",
+    "SQL": "select relacion.firstname,\nrelacion.MiddleName,\nrelacion.LastName,\nrelacion.SecondLastName,\ndireccion.StreetNumberAndName,\ncomuna.Description,\ntelefono.TelephoneNumber,\nemail.emailAddress,\nNivelEducacionalMAE.Description EducacionNivel\nfrom person a\ninner join PersonRelationship b on a.personid=b.personid and b.refpersonrelationshipid=31\ninner join refpersonrelationship c on b.refpersonrelationshipid=c.refpersonrelationshipid\ninner join person relacion on b.relatedpersonid=relacion.personid\nleft join PersonAddress direccion on relacion.personid=direccion.personId\nleft join refcounty comuna on direccion.RefCountyId=comuna.RefCountyId\nleft join PersonTelephone telefono on relacion.personid=telefono.personid\nleft join PersonEmailAddress email on relacion.personid=email.personid\nleft join PersonDegreeOrCertificate NivelEducacional on relacion.personid=Niveleducacional.personid\nleft join RefDegreeOrCertificateType NivelEducacionalMAE on Niveleducacional.RefDegreeOrCertificateTypeid=NivelEducacionalMAE.RefDegreeOrCertificateTypeid\n",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Segundo Nombre Apoderado o Tutor",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; Person; MiddleName",
+    "SQL": "E42",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Apellido Paterno Apoderado o Tutor",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; Person; LastName",
+    "SQL": "E42",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Apellido Materno Apoderado o Tutor",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; Person; SecondLastName",
+    "SQL": "E42",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Teléfono Apoderado o Tutor",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; PersonTelephone",
+    "SQL": "E42",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Email Apoderado o Tutor",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; PersonEmailAddress; EmailAddress",
+    "SQL": "E42",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Datos Biológicos y de Salud - estudiante",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; PersonHealth; description",
+    "SQL": "select * from Person persona\nleft join PersonHealth salud on persona.personid=salud.personid\nleft join PersonAllergy alergia on persona.personid=alergia.personid",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "N° Resolución y Fecha estudiante Excedente",
+    "Obligatorio": "Si",
+    "JSON": NaN,
+    "SQL": NaN,
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Intercambio - estudiante",
+    "Obligatorio": "Si",
+    "JSON": NaN,
+    "SQL": "--excedente sin pago subvencion\nselect b.personid,c.Description,b.docnumber numeroResolucion,b.filescanbase64 archivo,b.StatusStartDate fechadocumento  from PersonStatus a\ninner join person b on a.personId=b.PersonId and a.RefPersonStatusTypeId in (24)\ninner join RefPersonStatusType c on a.RefPersonStatusTypeid=c.RefPersonStatusTypeId\nwhere a.recordenddatetime is null\n\n\n--excedente con pago subvencion\nselect b.personid,c.Description,b.docnumber numeroResolucion,b.filescanbase64 archivo,b.StatusStartDate fechadocumento  from PersonStatus a\ninner join person b on a.personId=b.PersonId and a.RefPersonStatusTypeId in (31)\ninner join RefPersonStatusType c on a.RefPersonStatusTypeid=c.RefPersonStatusTypeId\nwhere a.recordenddatetime is null\n\n\n\n#Intercambio\nselect b.personid,c.Description,b.docnumber numeroResolucion,b.filescanbase64 archivo,b.StatusStartDate fechadocumento  \nfrom PersonStatus a\ninner join person b on a.personId=b.PersonId and a.RefPersonStatusTypeId in (25)\ninner join RefPersonStatusType c on a.RefPersonStatusTypeid=c.RefPersonStatusTypeId\nwhere a.recordenddatetime is null",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Otro Dato Interés - estudiante",
+    "Obligatorio": "Si",
+    "JSON": NaN,
+    "SQL": "select b.personid,c.Description  from PersonStatus a\ninner join person b on a.personId=b.PersonId and a.RefPersonStatusTypeId in (26,5)\ninner join RefPersonStatusType c on a.RefPersonStatusTypeid=c.RefPersonStatusTypeId",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Modalidad DUAL",
+    "Obligatorio": "Si",
+    "JSON": NaN,
+    "SQL": NaN,
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "--Nombre Empresa",
+    "Obligatorio": "Si",
+    "JSON": "Organization.Name AND Organization.RefOrganizationTypeId == 26 (ServiceProvider)",
+    "SQL": "select empresa.name NombreEmpresa,\nfonoempresa.TelephoneNumber telefonoempresa,\nemailempresa.ElectronicMailAddress correoempresa,\ndireccionempresa.StreetNumberAndName dirempresa\n from organization empresa\nleft join OrganizationTelephone fonoempresa on empresa.organizationid=fonoempresa.organizationid\nleft join OrganizationEmail emailempresa on empresa.organizationid=emailempresa.organizationid\nleft join OrganizationLocation orgloca on empresa.organizationid=orgloca.OrganizationId\nleft join LocationAddress direccionempresa on orgloca.locationid=direccionempresa.locationid\nwhere empresa.reforganizationtypeid=26",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "--Dirección Empresa",
+    "Obligatorio": "Si",
+    "JSON": "LocationAddress.StreetNumberAndName",
+    "SQL": "E53",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "--Teléfono Empresa",
+    "Obligatorio": "Si",
+    "JSON": "OrganizationTelephone.TelephoneNumber",
+    "SQL": "E53",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "--Comuna Empresa",
+    "Obligatorio": "Si",
+    "JSON": "LocationAddress.RefCountyId",
+    "SQL": "E53",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "E Mail Empresa - Modalidad Dual",
+    "Obligatorio": "Si",
+    "JSON": NaN,
+    "SQL": "E53",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "--Primer nombre Tutor",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; Person; FirstName AND OrganizationPersonRole.RoleId == 17 Tutor(a) práctica profesional",
+    "SQL": "select * from organization a\ninner join OrganizationPersonRole rolesupervisor on a.organizationid=rolesupervisor.organizationid and rolesupervisor.roleid=17\nleft join RefOrganizationType ramopractica on a.reforganizationtypeid=ramopractica.reforganizationtypeid and ramopractica.RefOrganizationTypeId=47\nleft join person profesorsupervisor on rolesupervisor.personid=profesorsupervisor.personid\nleft join PersonTelephone telefonosupervisor on profesorsupervisor.personid=telefonosupervisor.personId\nleft join PersonEmailAddress emailsupervisor on profesorsupervisor.personid=emailsupervisor.personid\n",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "--Segundo nombre Tutor",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; Person; MiddleName AND OrganizationPersonRole.RoleId == 17 Tutor(a) práctica profesional",
+    "SQL": "select relacion.firstname,\nrelacion.MiddleName,\nrelacion.LastName,\nrelacion.SecondLastName,\ndireccion.StreetNumberAndName,\ncomuna.Description,\ntelefono.TelephoneNumber,\nemail.emailAddress,\nNivelEducacionalMAE.Description EducacionNivel\nfrom person a\ninner join PersonRelationship b on a.personid=b.personid and b.refpersonrelationshipid=31\ninner join refpersonrelationship c on b.refpersonrelationshipid=c.refpersonrelationshipid\ninner join person relacion on b.relatedpersonid=relacion.personid\nleft join PersonAddress direccion on relacion.personid=direccion.personId\nleft join refcounty comuna on direccion.RefCountyId=comuna.RefCountyId\nleft join PersonTelephone telefono on relacion.personid=telefono.personid\nleft join PersonEmailAddress email on relacion.personid=email.personid\nleft join PersonDegreeOrCertificate NivelEducacional on relacion.personid=Niveleducacional.personid\nleft join RefDegreeOrCertificateType NivelEducacionalMAE on Niveleducacional.RefDegreeOrCertificateTypeid=NivelEducacionalMAE.RefDegreeOrCertificateTypeid",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "--Apellido Paterno Tutor",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; Person; LastName AND OrganizationPersonRole.RoleId == 17 Tutor(a) práctica profesional",
+    "SQL": "E59",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "--Apellido Materno Tutor",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; Person; SecondLastName AND OrganizationPersonRole.RoleId == 17 Tutor(a) práctica profesional",
+    "SQL": "E59",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "--Teléfono Tutor",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; PersonTelephone; TelephoneNumber AND OrganizationPersonRole.RoleId == 17 Tutor(a) práctica profesional",
+    "SQL": "E59",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "--Correo Tutor",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; PersonEmailAddress; EmailAddress AND OrganizationPersonRole.RoleId == 17 Tutor(a) práctica profesional",
+    "SQL": "E59",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Rut - DV Tutor- Modalidad Dual",
+    "Obligatorio": "Si",
+    "JSON": NaN,
+    "SQL": NaN,
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "Nacionalidad",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; PersonBirthplace ; refcountryid",
+    "SQL": "select a.personid,c.Description Nacionalidad from Person a\nleft join PersonBirthplace b on a.personid=b.personid\nleft join RefCountry c on b.refcountryid=c.refcountryid",
+    "Notas": NaN
+  },
+  {
+    "Origen": "Circular",
+    "Campo": "ETNIA",
+    "Obligatorio": "Si",
+    "JSON": "_Personas; RefTribalAffiliation ; RefTribalAffiliationid",
+    "SQL": "select a.personid,b.Description ETNIA from person a\n left join RefTribalAffiliation b on a.RefTribalAffiliationid=b.RefTribalAffiliationid",
+    "Notas": NaN
+  }
+]
