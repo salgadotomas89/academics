@@ -1,0 +1,89 @@
+/* Sidebar */
+.sidebar {
+    width: var(--sidebar-width);
+    background: #2c3e50;
+    color: white;
+    transition: all 0.3s;
+    position: fixed;
+    height: 100vh;
+    z-index: 1000;
+}
+
+.sidebar.collapsed {
+    width: var(--sidebar-width-collapsed);
+}
+
+.sidebar-header {
+    padding: 20px;
+    background: #243342;
+    height: var(--topbar-height);
+}
+
+.sidebar-menu {
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-menu li {
+    padding: 10px 20px;
+    border-bottom: 1px solid #34495e;
+}
+
+.sidebar-menu li a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.menu-text {
+    margin-left: 10px;
+}
+
+.collapsed .menu-text {
+    display: none;
+}
+
+/* Estilos para el contador de estudiantes en el sidebar */
+.sidebar-stats {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #34495e;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.mini-counter {
+    color: white;
+}
+
+.counter-icon-small {
+    background: linear-gradient(45deg, #2980b9, #3498db);
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
+}
+
+.counter-number-small {
+    font-size: 1.2rem;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+}
+
+.counter-label-small {
+    font-size: 0.7rem;
+    color: #bdc3c7;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.sidebar.collapsed .counter-info {
+    display: none;
+}
+
+.sidebar.collapsed .counter-icon-small {
+    margin: 0 auto;
+} 

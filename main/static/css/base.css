@@ -1,0 +1,58 @@
+:root {
+    --sidebar-width: 250px;
+    --sidebar-width-collapsed: 70px;
+    --topbar-height: 60px;
+}
+
+.wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Contenido principal */
+.main-content {
+    margin-left: var(--sidebar-width);
+    flex: 1;
+    transition: all 0.3s;
+}
+
+.main-content.expanded {
+    margin-left: var(--sidebar-width-collapsed);
+}
+
+/* Barra superior */
+.topbar {
+    height: var(--topbar-height);
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    position: sticky;
+    top: 0;
+    z-index: 900;
+}
+
+/* Área de contenido */
+.content-area {
+    padding: 20px;
+}
+
+/* Tarjetas de configuración */
+.config-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+/* Submenu */
+.submenu {
+    padding-left: 20px;
+    display: none;
+}
+
+.submenu.show {
+    display: block;
+} 

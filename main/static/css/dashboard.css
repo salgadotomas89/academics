@@ -1,0 +1,78 @@
+/* Estilos para las tarjetas de estadísticas */
+.dashboard-stats {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.stats-card {
+    transition: all 0.3s ease;
+}
+
+.stats-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
+}
+
+.stats-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Timeline */
+.timeline-container {
+    padding: 1rem;
+}
+
+.timeline-bar {
+    height: 25px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.timeline-period {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.timeline-period .progress {
+    background: transparent;
+}
+
+.timeline-period .progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.timeline-marker {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+
+.timeline-marker:hover::after {
+    content: attr(data-description);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    z-index: 1000;
+} 

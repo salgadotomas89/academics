@@ -1,0 +1,109 @@
+ <!-- Contenido de Alumnos -->
+ <div id="alumnosContent" class="content-section" style="display: none;">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Listado </h2>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nuevoAlumnoModal" 
+                    data-bs-toggle="tooltip" data-bs-placement="left" title="Agregar nuevo alumno">
+                    <i class="fas fa-plus me-2"></i>Nuevo Alumno
+                </button>
+            </div>
+            
+            <!-- Panel de Filtros -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <label class="form-label">Buscar por nombre</label>
+                            <input type="text" class="form-control" id="searchNombre" placeholder="Nombre o apellido..." 
+                                data-bs-toggle="tooltip" data-bs-placement="top" 
+                                title="Buscar por nombre o apellido del alumno">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Grado</label>
+                            <select class="form-select" id="filterGrado" 
+                                data-bs-toggle="tooltip" data-bs-placement="top" 
+                                title="Filtrar alumnos por grado">
+                                <option value="">Todos los grados</option>
+                                <option value="1">Primer Grado</option>
+                                <option value="2">Segundo Grado</option>
+                                <option value="3">Tercer Grado</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Sección</label>
+                            <select class="form-select" id="filterSeccion">
+                                <option value="">Todas las secciones</option>
+                                <option value="A">Sección A</option>
+                                <option value="B">Sección B</option>
+                                <option value="C">Sección C</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Estado</label>
+                            <select class="form-select" id="filterEstado">
+                                <option value="">Todos</option>
+                                <option value="activo">Activo</option>
+                                <option value="inactivo">Inactivo</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-primary" onclick="aplicarFiltros()" 
+                                    data-bs-toggle="tooltip" data-bs-placement="top" 
+                                    title="Buscar alumnos con los filtros seleccionados">
+                                    <i class="fas fa-search me-2"></i>Aplicar Filtros
+                                </button>
+                                <button class="btn btn-secondary" onclick="limpiarFiltros()"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" 
+                                    title="Restablecer todos los filtros">
+                                    <i class="fas fa-undo me-2"></i>Limpiar Filtros
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabla de Alumnos -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Email</th>
+                                    <th>Grado</th>
+                                    <th>Sección</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="alumnosTableBody">
+                                <!-- Los alumnos se cargarán aquí dinámicamente -->
+                            </tbody>
+                        </table>
+                        <!-- Paginación -->
+                        <nav aria-label="Page navigation" class="mt-4">
+                            <ul class="pagination justify-content-center" id="paginacion">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">Anterior</a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Siguiente</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

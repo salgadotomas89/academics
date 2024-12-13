@@ -1,0 +1,109 @@
+  <!-- Agregar el modal después del div.wrapper -->
+  <div class="modal fade" id="nuevoAlumnoModal" tabindex="-1" aria-labelledby="nuevoAlumnoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nuevoAlumnoModalLabel">Agregar Nuevo Alumno</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="nuevoAlumnoForm">
+                    <!-- Información Personal Básica -->
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Nombre*</label>
+                            <input type="text" class="form-control" name="first_name" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Segundo Nombre</label>
+                            <input type="text" class="form-control" name="middle_name">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Apellidos*</label>
+                            <input type="text" class="form-control" name="last_name" required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Fecha de Nacimiento*</label>
+                            <input type="date" class="form-control" name="birthdate" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Sexo*</label>
+                            <select class="form-select" name="ref_sex_id" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="1">Masculino</option>
+                                <option value="2">Femenino</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Etnia Hispana/Latina</label>
+                            <select class="form-select" name="hispanic_latino_ethnicity">
+                                <option value="true">Sí</option>
+                                <option value="false">No</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Información de Matrícula -->
+                    <h6 class="mt-4 mb-3">Información de Matrícula</h6>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Grado de Ingreso*</label>
+                            <select class="form-select" name="ref_entry_grade_level_id" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="1">1° Grado</option>
+                                <option value="2">2° Grado</option>
+                                <option value="3">3° Grado</option>
+                                <!-- Agregar más grados según necesidad -->
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Estado de Matrícula*</label>
+                            <select class="form-select" name="ref_enrollment_status_id" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="1">Activo</option>
+                                <option value="2">Inactivo</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Fecha de Ingreso*</label>
+                            <input type="date" class="form-control" name="first_entry_date_into_us_school" required>
+                        </div>
+                    </div>
+
+                    <!-- Información de Contacto -->
+                    <h6 class="mt-4 mb-3">Información de Contacto</h6>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Teléfono</label>
+                            <input type="tel" class="form-control" name="telephone_number">
+                        </div>
+                    </div>
+
+                    <!-- Dirección -->
+                    <h6 class="mt-4 mb-3">Dirección</h6>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Calle y Número*</label>
+                            <input type="text" class="form-control" name="street_number_and_name" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Ciudad*</label>
+                            <input type="text" class="form-control" name="city" required>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="guardarNuevoAlumno()">Guardar Alumno</button>
+            </div>
+        </div>
+    </div>
+</div>
