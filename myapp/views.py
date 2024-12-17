@@ -36,7 +36,13 @@ import logging
 from django.views.decorators.csrf import csrf_protect
 from django.http import JsonResponse
 from django.db import transaction
-from ceds_models.models import Organization, OrganizationIdentifier
+from ceds_models.models import Organization, OrganizationIdentifier, OrganizationPersonRole, Person
+from django.contrib.auth.models import User
+from ceds_models.models import Person
+from ceds_models.models import OrganizationPersonRole
+from django.db.models import Subquery, OuterRef, Value, CharField
+from django.db.models.functions import Concat
+from django.db import models
 
 logger = logging.getLogger(__name__)
 
@@ -63,7 +69,11 @@ def mensajes(request):
     return render(request, 'mensajes.html')
 
 def home(request):
-    return render(request, 'home.html')
+    context = {}
+    if request.user.is_authenticated:
+        # Si el usuario está autenticado, agregamos su nombre al contexto
+        context['user_name'] = f"{request.user.first_name} {request.user.last_name}"
+    return render(request, 'home.html', context)
 
 def juego(request):
     message = Mail(
@@ -209,7 +219,28 @@ def demo1(request):
     return render(request, 'demo1.html')
 
 def colegios(request):
-    # Obtener lista de colegios para mostrar en la tabla
+    # Verificar todos los roles existentes
+    print("Todos los roles:")
+    all_roles = OrganizationPersonRole.objects.all().values(
+        'organization_id', 
+        'person_id', 
+        'role_id',
+        'person__first_name',
+        'person__last_name'
+    )
+    print(all_roles)
+
+    # Verificar específicamente los roles con role_id=1
+    print("\nRoles de administrador (role_id=1):")
+    admin_roles = OrganizationPersonRole.objects.filter(role_id=1).values(
+        'organization_id', 
+        'person_id', 
+        'role_id',
+        'person__first_name',
+        'person__last_name'
+    )
+    print(admin_roles)
+
     colegios = Organization.objects.filter(
         ref_organization_type_id=28
     ).annotate(
@@ -218,10 +249,40 @@ def colegios(request):
                 organization=OuterRef('pk'),
                 ref_organization_identification_system_id=1
             ).values('identifier')[:1]
+        ),
+        admin_name=Subquery(
+            OrganizationPersonRole.objects.filter(
+                organization=OuterRef('pk'),
+                role_id=1
+            ).annotate(
+                full_name=Concat(
+                    'person__first_name', 
+                    Value(' '), 
+                    'person__last_name',
+                    output_field=models.CharField()
+                )
+            ).values('full_name')[:1]
+        ),
+        admin_email=Subquery(
+            OrganizationPersonRole.objects.filter(
+                organization=OuterRef('pk'),
+                role_id=1
+            ).values('person__user__email')[:1]
         )
-    ).values('rbd', 'name')
+    )
 
-    return render(request, 'colegios.html', {'colegios': colegios})
+    # Obtener el total antes de convertir a lista
+    total_colegios = colegios.count()
+    colegios_list = list(colegios.values('pk', 'rbd', 'name', 'admin_name', 'admin_email'))
+
+    # Obtener todas las personas para el selector de nuevo administrador
+    personas = Person.objects.all().values('person_id', 'first_name', 'last_name')
+    
+    return render(request, 'colegios.html', {
+        'colegios': colegios_list,
+        'total_colegios': total_colegios,
+        'personas': personas
+    })
 
 @csrf_protect
 def crear_colegio(request):
@@ -257,3 +318,117 @@ def crear_colegio(request):
         'status': 'error',
         'message': 'Método no permitido'
     }, status=405)
+
+def crear_persona(request):
+    if request.method == 'POST':
+        try:
+            print("\nDatos recibidos:")
+            print("organization_id:", request.POST.get('organization_id'))
+            print("email:", request.POST.get('email'))
+            print("first_name:", request.POST.get('first_name'))
+            print("last_name:", request.POST.get('last_name'))
+
+            # Verificar si ya existe un usuario con ese email
+            if User.objects.filter(email=request.POST['email']).exists():
+                return JsonResponse({
+                    'status': 'error',
+                    'message': 'Ya existe un usuario con ese correo electrónico'
+                })
+
+            with transaction.atomic():
+                # Crear el usuario de Django
+                user = User.objects.create_user(
+                    username=request.POST['email'],
+                    email=request.POST['email'],
+                    password=request.POST['password'],
+                    first_name=request.POST['first_name'],
+                    last_name=request.POST['last_name']
+                )
+                print("Usuario creado:", user.id)
+                
+                # Crear la persona
+                person = Person.objects.create(
+                    user=user,
+                    first_name=request.POST['first_name'],
+                    last_name=request.POST['last_name'],
+                    birthdate='2000-01-01',
+                    ref_sex_id=1,
+                    hispanic_latino_ethnicity=False,
+                    ref_us_citizenship_status_id=1,
+                    ref_state_of_residence_id=1,
+                    ref_proof_of_residency_type_id=1,
+                    ref_highest_education_level_completed_id=1,
+                    ref_personal_information_verification_id=1
+                )
+                print("Persona creada:", person.person_id)
+
+                # Crear la relación con la organización
+                organization = Organization.objects.get(pk=request.POST['organization_id'])
+                print("Organización encontrada:", organization.pk)
+                
+                role = OrganizationPersonRole.objects.create(
+                    organization=organization,
+                    person=person,
+                    role_id=1,  # ID para rol de administrador
+                    entry_date=timezone.now()
+                )
+                print("\nRol creado:")
+                print(f"- organization_id: {role.organization_id}")
+                print(f"- person_id: {role.person_id}")
+                print(f"- role_id: {role.role_id}")
+                print(f"- entry_date: {role.entry_date}")
+                
+                return JsonResponse({
+                    'status': 'success',
+                    'message': 'Persona creada exitosamente'
+                })
+                
+        except Exception as e:
+            print("Error al crear persona:", str(e))
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            })
+    
+    return JsonResponse({
+        'status': 'error',
+        'message': 'Método no permitido'
+    })
+
+@csrf_protect
+def cambiar_administrador(request):
+    if request.method == 'POST':
+        try:
+            with transaction.atomic():
+                organization_id = request.POST['organization_id']
+                new_admin_id = request.POST['new_admin_id']
+                
+                # Remover el rol de administrador actual
+                OrganizationPersonRole.objects.filter(
+                    organization_id=organization_id,
+                    role_id=1
+                ).delete()
+                
+                # Crear nuevo rol de administrador
+                OrganizationPersonRole.objects.create(
+                    organization_id=organization_id,
+                    person_id=new_admin_id,
+                    role_id=1,
+                    entry_date=timezone.now()
+                )
+                
+                return JsonResponse({
+                    'status': 'success',
+                    'message': 'Administrador cambiado exitosamente'
+                })
+                
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            })
+    
+    return JsonResponse({
+        'status': 'error',
+        'message': 'Método no permitido'
+    })

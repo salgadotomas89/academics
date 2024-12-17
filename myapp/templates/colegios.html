@@ -20,6 +20,8 @@
                                 <tr>
                                     <th>RBD</th>
                                     <th>Nombre</th>
+                                    <th>Administrador</th>
+                                    <th>Correo</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -28,15 +30,31 @@
                                 <tr>
                                     <td>{{ colegio.rbd }}</td>
                                     <td>{{ colegio.name }}</td>
+                                    <td>{{ colegio.admin_name|default:"Sin administrador" }}</td>
+                                    <td>{{ colegio.admin_email|default:"-" }}</td>
                                     <td>
                                         <button class="btn btn-sm btn-outline-primary">
                                             <i class="bi bi-pencil"></i>
                                         </button>
+                                        <button class="btn btn-sm btn-outline-success" 
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#nuevaPersonaModal"
+                                                data-organization-id="{{ colegio.pk }}">
+                                            <i class="bi bi-person-plus"></i>
+                                        </button>
+                                        {% if colegio.admin_name %}
+                                        <button class="btn btn-sm btn-outline-warning" 
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#cambiarAdminModal"
+                                                data-organization-id="{{ colegio.pk }}">
+                                            <i class="bi bi-person-gear"></i>
+                                        </button>
+                                        {% endif %}
                                     </td>
                                 </tr>
                                 {% empty %}
                                 <tr>
-                                    <td colspan="3" class="text-center">No hay colegios registrados</td>
+                                    <td colspan="5" class="text-center">No hay colegios registrados</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -55,7 +73,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between mb-3">
                         <span>Total Colegios:</span>
-                        <span class="fw-bold">{{ colegios.count }}</span>
+                        <span class="fw-bold">{{ total_colegios }}</span>
                     </div>
                 </div>
             </div>
@@ -92,9 +110,88 @@
     </div>
 </div>
 
+<!-- Modal Nueva Persona -->
+<div class="modal fade" id="nuevaPersonaModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Registrar Nueva Persona</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="nuevaPersonaForm">
+                    {% csrf_token %}
+                    <input type="hidden" name="organization_id" id="organization_id">
+                    <div class="mb-3">
+                        <label class="form-label">Nombre*</label>
+                        <input type="text" class="form-control" name="first_name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Apellido Paterno*</label>
+                        <input type="text" class="form-control" name="last_name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Correo Electrónico*</label>
+                        <input type="email" class="form-control" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Contraseña*</label>
+                        <input type="password" class="form-control" name="password" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="guardarPersonaBtn">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Cambiar Administrador -->
+<div class="modal fade" id="cambiarAdminModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cambiar Administrador</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="cambiarAdminForm">
+                    {% csrf_token %}
+                    <input type="hidden" name="organization_id" id="change_organization_id">
+                    <div class="mb-3">
+                        <label class="form-label">Seleccionar Nuevo Administrador</label>
+                        <select class="form-select" name="new_admin_id" required>
+                            <option value="">Seleccione una persona</option>
+                            {% for persona in personas %}
+                            <option value="{{ persona.person_id }}">
+                                {{ persona.first_name }} {{ persona.last_name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="cambiarAdminBtn">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Script para manejar el formulario -->
 <script>
-
+document.addEventListener('DOMContentLoaded', function() {
+    // Capturar el ID de la organización cuando se abre el modal
+    var nuevaPersonaModal = document.getElementById('nuevaPersonaModal')
+    nuevaPersonaModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget
+        var organizationId = button.getAttribute('data-organization-id')
+        document.getElementById('organization_id').value = organizationId
+    })
+});
 
 document.getElementById('guardarColegioBtn').addEventListener('click', function() {
     const form = document.getElementById('nuevoColegioForm');
@@ -125,6 +222,91 @@ document.getElementById('guardarColegioBtn').addEventListener('click', function(
     })
     .catch(error => {
         alert('Error al registrar colegio: ' + error);
+    });
+});
+
+document.getElementById('guardarPersonaBtn').addEventListener('click', function() {
+    const form = document.getElementById('nuevaPersonaForm');
+    const formData = new FormData(form);
+
+    // Debug: Imprimir todos los datos del formulario
+    console.log("Datos del formulario:");
+    for (let pair of formData.entries()) {
+        console.log(pair[0] + ': ' + pair[1]);
+    }
+
+    // Validar campos requeridos
+    if (!formData.get('first_name') || !formData.get('last_name') || 
+        !formData.get('email') || !formData.get('password') ||
+        !formData.get('organization_id')) {
+        alert('Por favor complete todos los campos requeridos');
+        return;
+    }
+
+    fetch('/personas/crear/', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert('Persona registrada exitosamente');
+            $('#nuevaPersonaModal').modal('hide');
+            form.reset();
+            location.reload();  // Recargar la página para ver los cambios
+        } else {
+            alert('Error: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error al registrar persona: ' + error);
+    });
+});
+
+// Capturar el ID de la organización para el modal de cambio de administrador
+document.addEventListener('DOMContentLoaded', function() {
+    var cambiarAdminModal = document.getElementById('cambiarAdminModal')
+    cambiarAdminModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget
+        var organizationId = button.getAttribute('data-organization-id')
+        document.getElementById('change_organization_id').value = organizationId
+    })
+});
+
+// Manejar el cambio de administrador
+document.getElementById('cambiarAdminBtn').addEventListener('click', function() {
+    const form = document.getElementById('cambiarAdminForm');
+    const formData = new FormData(form);
+
+    if (!formData.get('new_admin_id')) {
+        alert('Por favor seleccione un nuevo administrador');
+        return;
+    }
+
+    fetch('/colegios/cambiar-admin/', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert('Administrador cambiado exitosamente');
+            $('#cambiarAdminModal').modal('hide');
+            location.reload();
+        } else {
+            alert('Error: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error al cambiar administrador: ' + error);
     });
 });
 </script>

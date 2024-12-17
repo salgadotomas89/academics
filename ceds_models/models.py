@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Person(models.Model):
     """
@@ -6,6 +7,7 @@ class Person(models.Model):
     Almacena información básica como nombre, fecha de nacimiento, etnicidad, etc.
     """
     person_id = models.AutoField(primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     first_name = models.CharField(max_length=35)
     middle_name = models.CharField(max_length=35, null=True, blank=True)
     last_name = models.CharField(max_length=35)
