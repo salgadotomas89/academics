@@ -1,0 +1,36 @@
+<!-- Contenido de Cursos -->
+<div id="cursosContent" class="content-section" style="display: none;">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Gestión de Cursos</h2>
+                <button id="nuevoCursoBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nuevoCursoModal">
+                    <i class="fas fa-plus me-2"></i>Nuevo Curso
+                </button>
+            </div>
+
+            <!-- Pestañas de navegación -->
+            <ul class="nav nav-tabs mb-4" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="cursos-lista-tab" data-bs-toggle="tab" href="#cursos-lista" role="tab">
+                        <i class="fas fa-list me-2"></i>Lista de Cursos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="horarios-tab" data-bs-toggle="tab" href="#horarios" role="tab">
+                        <i class="fas fa-clock me-2"></i>Horarios
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Contenido de las pestañas -->
+            <div class="tab-content">
+                {% include 'cursos/tabs/lista_cursos.html' %}
+                {% include 'cursos/tabs/horarios.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'cursos/modals/nuevo_curso.html' %}
+{% include 'cursos/modals/asignar_clase.html' %} 

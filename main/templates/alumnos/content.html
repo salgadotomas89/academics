@@ -1,11 +1,14 @@
- <!-- Contenido de Alumnos -->
- <div id="alumnosContent" class="content-section" style="display: none;">
+<!-- Contenido de Alumnos -->
+<div id="alumnosContent" class="content-section" style="display: none;">
+    <!-- Incluir el modal de registro rápido -->
+    {% include 'alumnos/modals/registro_rapido_alumno.html' %}
+    
     <div class="row">
         <div class="col-12">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2>Listado </h2>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nuevoAlumnoModal" 
-                    data-bs-toggle="tooltip" data-bs-placement="left" title="Agregar nuevo alumno">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registroRapidoModal" 
+                    data-bs-toggle="tooltip" data-bs-placement="left" title="Registro rápido de alumno">
                     <i class="fas fa-plus me-2"></i>Nuevo Alumno
                 </button>
             </div>

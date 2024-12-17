@@ -54,7 +54,7 @@
                 <li>
                     <a href="#" class="menu-item" id="cursosLink">
                         <i class="fas fa-chalkboard"></i>
-                        <span class="menu-text">Cursos</span>
+                        <span class="menu-text">Cursos 2</span>
                     </a>
                 </li>
 
@@ -131,230 +131,9 @@
 
                 <!--cargamos el contenido de alumnos-->
                 {% include 'alumnos/content.html' %}
-                
-                
-                
-                <!-- Contenido de Cursos -->
-                <div id="cursosContent" class="content-section" style="display: none;">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="d-flex justify-content-between align-items-center mb-4">
-                                <h2>Gestión de Cursos</h2>
-                                <button id="nuevoCursoBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nuevoCursoModal">
-                                    <i class="fas fa-plus me-2"></i>Nuevo Curso
-                                </button>
-                            </div>
 
-                            <!-- Pestañas de navegación -->
-                            <ul class="nav nav-tabs mb-4" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="cursos-lista-tab" data-bs-toggle="tab" href="#cursos-lista" role="tab">
-                                        <i class="fas fa-list me-2"></i>Lista de Cursos
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="horarios-tab" data-bs-toggle="tab" href="#horarios" role="tab">
-                                        <i class="fas fa-clock me-2"></i>Horarios
-                                    </a>
-                                </li>
-                            </ul>
-
-                            <!-- Contenido de las pestañas -->
-                            <div class="tab-content">
-                                <!-- Pestaña de Lista de Cursos -->
-                                <div class="tab-pane fade show active" id="cursos-lista" role="tabpanel">
-                                    <!-- Panel de Filtros -->
-                                    <div class="card mb-4">
-                                        <div class="card-body">
-                                            <div class="row g-3">
-                                                <div class="col-md-4">
-                                                    <label class="form-label">Buscar por nombre</label>
-                                                    <input type="text" class="form-control" id="searchCurso" placeholder="Nombre del curso...">
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label class="form-label">Nivel</label>
-                                                    <select class="form-select" id="filterNivel">
-                                                        <option value="">Todos los niveles</option>
-                                                        <option value="1">1° Básico</option>
-                                                        <option value="2">2° Básico</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label class="form-label">Profesor Jefe</label>
-                                                    <select class="form-select" id="filterProfesor">
-                                                        <option value="">Todos los profesores</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Contenedor de Cursos -->
-                                    <div class="row" id="cursosContainer">
-                                        <!-- Tarjeta de curso -->
-                                        <div class="col-md-4 mb-4">
-                                            <div class="card h-100">
-                                                <div class="card-header bg-primary bg-opacity-10">
-                                                    <h5 class="card-title mb-0">1° Básico A</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="mb-3">
-                                                        <small class="text-muted">Profesor Jefe</small>
-                                                        <p class="mb-0">Juan Pérez</p>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <small class="text-muted">Cantidad de Alumnos</small>
-                                                        <p class="mb-0">35 estudiantes</p>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <small class="text-muted">Sala</small>
-                                                        <p class="mb-0">101</p>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between align-items-center mt-3">
-                                                        <span class="badge bg-success">Activo</span>
-                                                        <div class="btn-group">
-                                                            <button class="btn btn-sm btn-outline-primary" onclick="editarCurso(1)">
-                                                                <i class="fas fa-edit"></i>
-                                                            </button>
-                                                            <button class="btn btn-sm btn-outline-danger" onclick="eliminarCurso(1)">
-                                                                <i class="fas fa-trash"></i>
-                                                            </button>
-                                                            <button class="btn btn-sm btn-outline-info" onclick="verHorario(1)">
-                                                                <i class="fas fa-clock"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Otra tarjeta de curso -->
-                                        <div class="col-md-4 mb-4">
-                                            <div class="card h-100">
-                                                <div class="card-header bg-primary bg-opacity-10">
-                                                    <h5 class="card-title mb-0">1° Básico B</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="mb-3">
-                                                        <small class="text-muted">Profesor Jefe</small>
-                                                        <p class="mb-0">María González</p>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <small class="text-muted">Cantidad de Alumnos</small>
-                                                        <p class="mb-0">32 estudiantes</p>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <small class="text-muted">Sala</small>
-                                                        <p class="mb-0">102</p>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between align-items-center mt-3">
-                                                        <span class="badge bg-success">Activo</span>
-                                                        <div class="btn-group">
-                                                            <button class="btn btn-sm btn-outline-primary" onclick="editarCurso(2)">
-                                                                <i class="fas fa-edit"></i>
-                                                            </button>
-                                                            <button class="btn btn-sm btn-outline-danger" onclick="eliminarCurso(2)">
-                                                                <i class="fas fa-trash"></i>
-                                                            </button>
-                                                            <button class="btn btn-sm btn-outline-info" onclick="verHorario(2)">
-                                                                <i class="fas fa-clock"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Otra tarjeta de curso -->
-                                        <div class="col-md-4 mb-4">
-                                            <div class="card h-100">
-                                                <div class="card-header bg-primary bg-opacity-10">
-                                                    <h5 class="card-title mb-0">2° Básico A</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="mb-3">
-                                                        <small class="text-muted">Profesor Jefe</small>
-                                                        <p class="mb-0">Carlos Rodríguez</p>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <small class="text-muted">Cantidad de Alumnos</small>
-                                                        <p class="mb-0">33 estudiantes</p>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <small class="text-muted">Sala</small>
-                                                        <p class="mb-0">201</p>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between align-items-center mt-3">
-                                                        <span class="badge bg-success">Activo</span>
-                                                        <div class="btn-group">
-                                                            <button class="btn btn-sm btn-outline-primary" onclick="editarCurso(3)">
-                                                                <i class="fas fa-edit"></i>
-                                                            </button>
-                                                            <button class="btn btn-sm btn-outline-danger" onclick="eliminarCurso(3)">
-                                                                <i class="fas fa-trash"></i>
-                                                            </button>
-                                                            <button class="btn btn-sm btn-outline-info" onclick="verHorario(3)">
-                                                                <i class="fas fa-clock"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Pestaña de Horarios -->
-                                <div class="tab-pane fade" id="horarios" role="tabpanel">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <!-- Selector de Curso -->
-                                            <div class="row mb-4">
-                                                <div class="col-md-4">
-                                                    <label class="form-label">Seleccionar Curso</label>
-                                                    <select class="form-select" id="horarioCursoSelect">
-                                                        <option value="">Seleccione un curso...</option>
-                                                        <option value="1">1° Básico A</option>
-                                                        <option value="2">1° Básico B</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <!-- Horario Semanal -->
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered text-center">
-                                                    <thead>
-                                                        <tr class="bg-light">
-                                                            <th style="width: 100px;">Hora</th>
-                                                            <th>Lunes</th>
-                                                            <th>Martes</th>
-                                                            <th>Miércoles</th>
-                                                            <th>Jueves</th>
-                                                            <th>Viernes</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="horarioTableBody">
-                                                        <!-- Las horas se generarán dinámicamente -->
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
-                                            <!-- Botones de Acción -->
-                                            <div class="d-flex justify-content-end gap-2 mt-3">
-                                                <button class="btn btn-secondary" onclick="limpiarHorario()">
-                                                    <i class="fas fa-undo me-2"></i>Limpiar Horario
-                                                </button>
-                                                <button class="btn btn-primary" onclick="guardarHorario()">
-                                                    <i class="fas fa-save me-2"></i>Guardar Horario
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!--cargamos el contenido de cursos-->
+                {% include 'cursos/content.html' %}
 
                 <!-- Contenido de Usuarios -->
                 <div id="usuariosContent" class="content-section" style="display: none;">
@@ -802,7 +581,7 @@
                                             <div class="card h-100">
                                                 <div class="card-header bg-success bg-opacity-10">
                                                     <h5 class="card-title mb-0">
-                                                        <i class="fas fa-clock me-2"></i>Per��odos Académicos
+                                                        <i class="fas fa-clock me-2"></i>Períodos Académicos
                                                     </h5>
                                                 </div>
                                                 <div class="card-body">

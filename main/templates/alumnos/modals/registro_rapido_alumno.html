@@ -1,0 +1,251 @@
+<!-- Modal de Registro Rápido de Alumno -->
+<div class="modal fade" id="registroRapidoModal" tabindex="-1" aria-labelledby="registroRapidoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registroRapidoModalLabel">Registro Rápido de Alumno</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="registroRapidoForm" class="needs-validation" novalidate>
+                    <!-- Pestañas de navegación -->
+                    <ul class="nav nav-tabs mb-3" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="alumno-tab" data-bs-toggle="tab" href="#alumno-data">Alumno</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="apoderado-tab" data-bs-toggle="tab" href="#apoderado-data">Apoderado</a>
+                        </li>
+                    </ul>
+
+                    <!-- Contenido de las pestañas -->
+                    <div class="tab-content">
+                        <!-- Pestaña de Alumno -->
+                        <div class="tab-pane fade show active" id="alumno-data">
+                            <!-- Nacionalidad y Tipo de Documento -->
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Nacionalidad*</label>
+                                    <select class="form-select" 
+                                            name="ref_country_id" 
+                                            id="nacionalidadSelect"
+                                            required
+                                            data-bs-toggle="tooltip"
+                                            title="Seleccione la nacionalidad para habilitar el tipo de identificación correspondiente">
+                                        <option value="">Seleccionar...</option>
+                                        <option value="1" selected>Chilena</option>
+                                        <option value="2">Venezolana</option>
+                                        <option value="3">Haitiana</option>
+                                        <option value="4">Colombiana</option>
+                                        <option value="5">Argentina</option>
+                                        <option value="6">Brasileña</option>
+                                        <option value="7">Otra</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6" id="tipoDocumentoContainer" style="display: none;">
+                                    <label class="form-label">Tipo de Documento*</label>
+                                    <select class="form-select" 
+                                            name="tipo_documento" 
+                                            id="tipoDocumentoSelect"
+                                            required>
+                                        <option value="">Seleccionar...</option>
+                                        <option value="run">RUN Chileno</option>
+                                        <option value="ipe">IPE (Sin RUN)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Mover el alert fuera del row anterior y darle sus propios márgenes -->
+                            <div class="alert alert-info mb-3" id="ipeInfo" style="display: none;">
+                                <i class="fas fa-info-circle me-2"></i>
+                                <strong>IPE (Identificador Provisorio Escolar):</strong> Es un número único que entrega el Ministerio de Educación a los estudiantes extranjeros que no cuentan con RUN y que les permite ser matriculados en el sistema escolar mientras regularizan su situación migratoria.
+                            </div>
+
+                            <!-- Contenedor para RUN/IPE -->
+                            <div class="mb-3">
+                                <!-- RUN -->
+                                <div id="runContainer" style="display: none;">
+                                    <label class="form-label">RUN*</label>
+                                    <input type="text" 
+                                           class="form-control" 
+                                           name="run" 
+                                           id="runInput"
+                                           maxlength="12"
+                                           placeholder="Ej: 12.345.678-9"
+                                           oninput="validarRUN(this.value)">
+                                    <div class="invalid-feedback">RUN inválido</div>
+                                </div>
+                                
+                                <!-- IPE -->
+                                <div id="ipeContainer" style="display: none;">
+                                    <label class="form-label">IPE*</label>
+                                    <input type="text" 
+                                           class="form-control" 
+                                           name="ipe"
+                                           id="ipeInput"
+                                           pattern="^[0-9]{12}$"
+                                           maxlength="12"
+                                           placeholder="Ingrese 12 dígitos">
+                                    <div class="invalid-feedback">
+                                        El IPE debe contener exactamente 12 dígitos numéricos
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Nombres y Apellidos -->
+                            <div class="mb-3">
+                                <label class="form-label">Primer Nombre*</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       name="first_name" 
+                                       required
+                                       maxlength="35"
+                                       pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Apellido Paterno*</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       name="last_name" 
+                                       required
+                                       maxlength="35"
+                                       pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Apellido Materno*</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       name="second_last_name" 
+                                       required
+                                       maxlength="35"
+                                       pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+">
+                            </div>
+
+                            <!-- Fecha Nacimiento -->
+                            <div class="mb-3">
+                                <label class="form-label">Fecha Nacimiento*</label>
+                                <input type="date" 
+                                       class="form-control" 
+                                       name="birthdate" 
+                                       required
+                                       max="<?php echo date('Y-m-d'); ?>"
+                                       min="1900-01-01">
+                            </div>
+
+                            <!-- Curso -->
+                            <div class="mb-3">
+                                <label class="form-label">Curso*</label>
+                                <select class="form-select" name="course_id" required>
+                                    <option value="">Seleccionar...</option>
+                                    <!-- Se llenará dinámicamente -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Pestaña de Apoderado -->
+                        <div class="tab-pane fade" id="apoderado-data">
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle me-2"></i>
+                                Los datos del apoderado son opcionales y pueden completarse más tarde
+                            </div>
+
+                            <!-- RUN Apoderado -->
+                            <div class="mb-3">
+                                <label class="form-label">RUN Apoderado</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       name="apoderado_run" 
+                                       maxlength="12"
+                                       placeholder="Ej: 12.345.678-9"
+                                       oninput="validarRUN(this.value)">
+                                <div class="invalid-feedback">RUN inválido</div>
+                            </div>
+
+                            <!-- Nombres y Apellidos Apoderado -->
+                            <div class="mb-3">
+                                <label class="form-label">Primer Nombre</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       name="apoderado_first_name" 
+                                       maxlength="35"
+                                       pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Apellido Paterno</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       name="apoderado_last_name" 
+                                       maxlength="35"
+                                       pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Apellido Materno</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       name="apoderado_second_last_name" 
+                                       maxlength="35"
+                                       pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+">
+                            </div>
+
+                            <!-- Parentesco -->
+                            <div class="mb-3">
+                                <label class="form-label">Parentesco</label>
+                                <select class="form-select" name="apoderado_relationship">
+                                    <option value="">Seleccionar...</option>
+                                    <option value="8">Padre</option>
+                                    <option value="19">Madre</option>
+                                    <option value="31">Tutor Legal</option>
+                                    <option value="23">Abuelo/a</option>
+                                    <option value="24">Tío/a</option>
+                                    <option value="25">Hermano/a</option>
+                                </select>
+                            </div>
+
+                            <!-- Contacto -->
+                            <div class="mb-3">
+                                <label class="form-label">Teléfono</label>
+                                <input type="tel" 
+                                       class="form-control" 
+                                       name="apoderado_phone"
+                                       pattern="^\+?[0-9]{8,15}$"
+                                       placeholder="+569XXXXXXXX">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" 
+                                       class="form-control" 
+                                       name="apoderado_email"
+                                       placeholder="ejemplo@correo.com">
+                            </div>
+
+                            <!-- Checkbox Apoderado Principal -->
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" 
+                                           type="checkbox" 
+                                           name="apoderado_primary" 
+                                           value="1"
+                                           id="apoderadoPrimaryCheck">
+                                    <label class="form-check-label" for="apoderadoPrimaryCheck">
+                                        Apoderado Principal
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="guardarRegistroRapido()">
+                    <i class="fas fa-save me-2"></i>Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+</div> 

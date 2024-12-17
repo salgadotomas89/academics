@@ -21,6 +21,9 @@
                         <li class="nav-item">
                             <a class="nav-link" id="apoderados-tab" data-bs-toggle="tab" href="#apoderados">Apoderados</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="salud-tab" data-bs-toggle="tab" href="#salud">Salud</a>
+                        </li>
                     </ul>
 
                     <!-- Contenido de las pestañas -->
@@ -31,12 +34,16 @@
                             <div class="row mb-3">
                                 <div class="col-md-4">
                                     <label class="form-label">Nacionalidad*</label>
-                                    <select class="form-select" name="ref_country_id" required>
+                                    <select class="form-select" 
+                                            name="ref_country_id" 
+                                            required
+                                            data-bs-toggle="tooltip"
+                                            data-bs-custom-class="custom-tooltip"
+                                            title="Seleccione la nacionalidad para habilitar el tipo de identificación correspondiente">
                                         <option value="">Seleccionar...</option>
                                         <option value="1">Chilena</option>
                                         <option value="2">Extranjera</option>
                                     </select>
-                                    <div class="form-text">Seleccione la nacionalidad para habilitar el tipo de identificación correspondiente</div>
                                 </div>
                                 <div class="col-md-4" id="tipoDocumentoContainer" style="display: none;">
                                     <label class="form-label">Tipo de Documento*</label>
@@ -58,12 +65,12 @@
                                            name="run" 
                                            id="runInput"
                                            data-bs-toggle="tooltip"
-                                           title="Rol Único Nacional - Formato: 12.345.678-9"
+                                           data-bs-custom-class="custom-tooltip"
+                                           title="Formato requerido: 12.345.678-9. Ingrese el RUN sin puntos ni guión"
                                            oninput="validarRUN(this.value)"
                                            maxlength="12"
                                            placeholder="Ej: 12.345.678-9">
                                     <div class="invalid-feedback">RUN inválido</div>
-                                    <div class="form-text">Formato: 12.345.678-9</div>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">IPE</label>
@@ -79,11 +86,6 @@
                                     <div class="invalid-feedback">
                                         El IPE debe contener exactamente 12 dígitos numéricos
                                     </div>
-                                    <div class="form-text">Identificador Provisorio Escolar (estudiantes extranjeros)</div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-label">N° Matrícula*</label>
-                                    <input type="text" class="form-control" name="matricula" required>
                                 </div>
                             </div>
 
@@ -91,26 +93,82 @@
                             <div class="row mb-3">
                                 <div class="col-md-3">
                                     <label class="form-label">Primer Nombre*</label>
-                                    <input type="text" class="form-control" name="first_name" required>
+                                    <input type="text" 
+                                           class="form-control" 
+                                           name="first_name" 
+                                           required
+                                           maxlength="35"
+                                           pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+"
+                                           data-bs-toggle="tooltip"
+                                           title="Ingrese solo letras, máximo 35 caracteres"
+                                           >
+                                    <div class="invalid-feedback">
+                                        El primer nombre es requerido y debe contener solo letras
+                                    </div>
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">Segundo Nombre</label>
-                                    <input type="text" class="form-control" name="middle_name">
+                                    <input type="text" 
+                                           class="form-control" 
+                                           name="middle_name"
+                                           maxlength="35"
+                                           pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]*"
+                                           data-bs-toggle="tooltip"
+                                           title="Ingrese solo letras, máximo 35 caracteres"
+                                           >
+                                    <div class="invalid-feedback">
+                                        El segundo nombre debe contener solo letras
+                                    </div>
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">Apellido Paterno*</label>
-                                    <input type="text" class="form-control" name="last_name" required>
+                                    <input type="text" 
+                                           class="form-control" 
+                                           name="last_name" 
+                                           required
+                                           maxlength="35"
+                                           pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+"
+                                           data-bs-toggle="tooltip"
+                                           title="Ingrese solo letras, máximo 35 caracteres"
+                                           >
+                                    <div class="invalid-feedback">
+                                        El apellido paterno es requerido y debe contener solo letras
+                                    </div>
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">Apellido Materno*</label>
-                                    <input type="text" class="form-control" name="second_last_name" required>
+                                    <input type="text" 
+                                           class="form-control" 
+                                           name="second_last_name" 
+                                           required
+                                           maxlength="35"
+                                           pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+"
+                                           data-bs-toggle="tooltip"
+                                           title="Ingrese solo letras, máximo 35 caracteres"
+                                           >
+                                    <div class="invalid-feedback">
+                                        El apellido materno es requerido y debe contener solo letras
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-4">
                                     <label class="form-label">Fecha Nacimiento*</label>
-                                    <input type="date" class="form-control" name="birthdate" required>
+                                    <div class="input-group">
+                                        <input type="date" 
+                                               class="form-control" 
+                                               name="birthdate" 
+                                               required
+                                               max="<?php echo date('Y-m-d'); ?>"
+                                               min="1900-01-01"
+                                               data-bs-toggle="tooltip"
+                                               title="Formato: yyyy-mm-dd">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </span>
+                                    </div>
+                                    <div class="form-text">Seleccione o ingrese la fecha de nacimiento</div>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">Sexo*</label>
@@ -122,9 +180,20 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">Etnia</label>
-                                    <select class="form-select" name="ref_tribal_affiliation_id">
-                                        <option value="">Seleccionar...</option>
-                                        <!-- Se llenará dinámicamente -->
+                                    <select class="form-select" 
+                                            name="ref_tribal_affiliation_id"
+                                            data-bs-toggle="tooltip"
+                                            title="Seleccione la etnia del estudiante si corresponde">
+                                        <option value="">No aplica</option>
+                                        <option value="1">Mapuche</option>
+                                        <option value="2">Aymara</option>
+                                        <option value="3">Rapa Nui</option>
+                                        <option value="4">Lican Antai</option>
+                                        <option value="5">Quechua</option>
+                                        <option value="6">Colla</option>
+                                        <option value="7">Diaguita</option>
+                                        <option value="8">Kawésqar</option>
+                                        <option value="9">Yagán</option>
                                     </select>
                                 </div>
                             </div>
@@ -173,6 +242,25 @@
                         <div class="tab-pane fade" id="academico">
                             <div class="row mb-3">
                                 <div class="col-md-4">
+                                    <label class="form-label">N° Matrícula*</label>
+                                    <input type="text" class="form-control" name="matricula" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Fecha Matrícula*</label>
+                                    <div class="input-group">
+                                        <input type="date" 
+                                               class="form-control" 
+                                               name="enrollment_date" 
+                                               required
+                                               data-bs-toggle="tooltip"
+                                               title="Fecha en que se realiza la matrícula"
+                                               max="<?php echo date('Y-m-d'); ?>">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
                                     <label class="form-label">Tipo Estudiante*</label>
                                     <select class="form-select" name="student_type" required>
                                         <option value="">Seleccionar...</option>
@@ -182,14 +270,9 @@
                                         <option value="migrant">Migrante</option>
                                     </select>
                                 </div>
-                                <div class="col-md-4">
-                                    <label class="form-label">Tipo Matrícula*</label>
-                                    <select class="form-select" name="enrollment_type" required>
-                                        <option value="">Seleccionar...</option>
-                                        <option value="provisional">Provisoria</option>
-                                        <option value="definitive">Definitiva</option>
-                                    </select>
-                                </div>
+                            </div>
+
+                            <div class="row mb-3">
                                 <div class="col-md-4">
                                     <label class="form-label">Curso*</label>
                                     <select class="form-select" name="course_id" required>
@@ -210,7 +293,347 @@
                                 </div>
                             </div>
                             <div id="apoderadosContainer">
-                                <!-- Aquí se agregarán dinámicamente los formularios de apoderados -->
+                                <!-- Template para el formulario de apoderado -->
+                                <div class="apoderado-form border rounded p-3 mb-3">
+                                    <div class="row mb-3">
+                                        <div class="col-md-3">
+                                            <label class="form-label">Primer Nombre*</label>
+                                            <input type="text" 
+                                                   class="form-control" 
+                                                   name="apoderado_first_name[]" 
+                                                   required
+                                                   maxlength="35"
+                                                   pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+"
+                                                   data-bs-toggle="tooltip"
+                                                   title="Ingrese solo letras, máximo 35 caracteres">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Segundo Nombre</label>
+                                            <input type="text" 
+                                                   class="form-control" 
+                                                   name="apoderado_middle_name[]"
+                                                   maxlength="35"
+                                                   pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]*">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Apellido Paterno*</label>
+                                            <input type="text" 
+                                                   class="form-control" 
+                                                   name="apoderado_last_name[]" 
+                                                   required
+                                                   maxlength="35"
+                                                   pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Apellido Materno*</label>
+                                            <input type="text" 
+                                                   class="form-control" 
+                                                   name="apoderado_second_last_name[]" 
+                                                   required
+                                                   maxlength="35"
+                                                   pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label">RUN*</label>
+                                            <input type="text" 
+                                                   class="form-control run-input" 
+                                                   name="apoderado_run[]" 
+                                                   required
+                                                   maxlength="12"
+                                                   placeholder="Ej: 12.345.678-9"
+                                                   oninput="validarRUN(this.value)">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Parentesco*</label>
+                                            <select class="form-select" name="apoderado_relationship[]" required>
+                                                <option value="">Seleccionar...</option>
+                                                <option value="8">Padre</option>
+                                                <option value="19">Madre</option>
+                                                <option value="31">Tutor Legal</option>
+                                                <option value="23">Abuelo/a</option>
+                                                <option value="24">Tío/a</option>
+                                                <option value="25">Hermano/a</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Nivel Educacional</label>
+                                            <select class="form-select" name="apoderado_education_level[]">
+                                                <option value="">Seleccionar...</option>
+                                                <option value="1">Básica Incompleta</option>
+                                                <option value="2">Básica Completa</option>
+                                                <option value="3">Media Incompleta</option>
+                                                <option value="4">Media Completa</option>
+                                                <option value="5">Superior Técnica Incompleta</option>
+                                                <option value="6">Superior Técnica Completa</option>
+                                                <option value="7">Universitaria Incompleta</option>
+                                                <option value="8">Universitaria Completa</option>
+                                                <option value="9">Postgrado</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Dirección*</label>
+                                            <input type="text" 
+                                                   class="form-control" 
+                                                   name="apoderado_address[]" 
+                                                   required>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Comuna*</label>
+                                            <select class="form-select apoderado-comuna" name="apoderado_county[]" required>
+                                                <option value="">Seleccionar...</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Ciudad*</label>
+                                            <input type="text" 
+                                                   class="form-control" 
+                                                   name="apoderado_city[]" 
+                                                   required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Email*</label>
+                                            <input type="email" 
+                                                   class="form-control" 
+                                                   name="apoderado_email[]"
+                                                   required
+                                                   placeholder="ejemplo@correo.com">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Teléfono*</label>
+                                            <input type="tel" 
+                                                   class="form-control" 
+                                                   name="apoderado_phone[]"
+                                                   required
+                                                   pattern="^\+?[0-9]{8,15}$"
+                                                   placeholder="+569XXXXXXXX">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <div class="form-check">
+                                                <input class="form-check-input" 
+                                                       type="checkbox" 
+                                                       name="apoderado_primary[]" 
+                                                       value="1">
+                                                <label class="form-check-label">
+                                                    Apoderado Principal
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <div class="form-check">
+                                                <input class="form-check-input" 
+                                                       type="checkbox" 
+                                                       name="apoderado_authorized_pickup[]" 
+                                                       value="1">
+                                                <label class="form-check-label">
+                                                    Autorizado para retirar al estudiante
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Ocupación</label>
+                                            <input type="text" 
+                                                   class="form-control" 
+                                                   name="apoderado_occupation[]"
+                                                   maxlength="100">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Lugar de Trabajo</label>
+                                            <input type="text" 
+                                                   class="form-control" 
+                                                   name="apoderado_workplace[]"
+                                                   maxlength="100">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <label class="form-label">Observaciones</label>
+                                            <textarea class="form-control" 
+                                                      name="apoderado_observations[]" 
+                                                      rows="2"
+                                                      maxlength="500"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-end">
+                                        <button type="button" class="btn btn-danger btn-sm eliminar-apoderado">
+                                            <i class="fas fa-trash me-2"></i>Eliminar Apoderado
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Salud -->
+                        <div class="tab-pane fade" id="salud">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Grupo Sanguíneo</label>
+                                    <select class="form-select" 
+                                            name="blood_type"
+                                            data-bs-toggle="tooltip"
+                                            data-bs-custom-class="custom-tooltip"
+                                            title="Esta información es importante para emergencias médicas. Seleccione el grupo sanguíneo del estudiante">
+                                        <option value="">Seleccionar...</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Peso (kg)</label>
+                                    <input type="number" 
+                                           class="form-control" 
+                                           name="weight"
+                                           step="0.1"
+                                           min="0"
+                                           max="200"
+                                           data-bs-toggle="tooltip"
+                                           title="Ingrese el peso en kilogramos"
+                                           pattern="^\d*\.?\d*$"
+                                           placeholder="Ej: 45.5">
+                                    <div class="invalid-feedback">
+                                        El peso debe ser un número entre 0 y 200 kg
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Altura (cm)</label>
+                                    <input type="number" 
+                                           class="form-control" 
+                                           name="height"
+                                           step="1"
+                                           min="0"
+                                           max="250"
+                                           data-bs-toggle="tooltip"
+                                           title="Ingrese la altura en centímetros"
+                                           pattern="^\d+$"
+                                           placeholder="Ej: 165">
+                                    <div class="invalid-feedback">
+                                        La altura debe ser un número entre 0 y 250 cm
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Alergias</label>
+                                    <input type="text" 
+                                           class="form-control" 
+                                           name="allergies"
+                                           maxlength="200"
+                                           data-bs-toggle="tooltip"
+                                           title="Describa las alergias conocidas del estudiante"
+                                           placeholder="Describa las alergias si existen">
+                                    <div class="form-text">Separe múltiples alergias con comas</div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <label class="form-label">Condiciones Médicas Relevantes</label>
+                                    <textarea class="form-control" 
+                                              name="medical_conditions" 
+                                              rows="3"
+                                              maxlength="500"
+                                              data-bs-toggle="tooltip"
+                                              title="Describa cualquier condición médica que requiera atención especial"
+                                              placeholder="Describa cualquier condición médica relevante"></textarea>
+                                    <div class="form-text">
+                                        Incluya condiciones crónicas, alergias severas o cualquier condición que requiera atención especial
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <label class="form-label">Medicamentos</label>
+                                    <textarea class="form-control" 
+                                              name="medications" 
+                                              rows="2"
+                                              maxlength="300"
+                                              data-bs-toggle="tooltip"
+                                              title="Liste los medicamentos que el estudiante toma regularmente"
+                                              placeholder="Liste los medicamentos que toma regularmente"></textarea>
+                                    <div class="form-text">
+                                        Incluya nombre del medicamento, dosis y frecuencia
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <label class="form-label">Contacto de Emergencia Médica</label>
+                                    <div class="input-group">
+                                        <input type="text" 
+                                               class="form-control" 
+                                               name="emergency_contact_name"
+                                               maxlength="70"
+                                               pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+"
+                                               data-bs-toggle="tooltip"
+                                               title="Nombre completo del contacto de emergencia"
+                                               placeholder="Nombre del contacto">
+                                        <input type="tel" 
+                                               class="form-control" 
+                                               name="emergency_contact_phone"
+                                               pattern="^\+?[0-9]{8,15}$"
+                                               data-bs-toggle="tooltip"
+                                               title="Número de teléfono del contacto de emergencia"
+                                               placeholder="Teléfono de emergencia">
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Ingrese un nombre válido y un número de teléfono válido
+                                    </div>
+                                    <div class="form-text">
+                                        Este contacto será utilizado en caso de emergencias médicas
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" 
+                                               type="checkbox" 
+                                               name="health_insurance" 
+                                               id="healthInsurance"
+                                               data-bs-toggle="tooltip"
+                                               title="Indique si el estudiante cuenta con seguro de salud">
+                                        <label class="form-check-label" for="healthInsurance">
+                                            Tiene seguro de salud
+                                        </label>
+                                    </div>
+                                    <div id="healthInsuranceDetails" style="display: none;">
+                                        <input type="text" 
+                                               class="form-control mt-2" 
+                                               name="health_insurance_details"
+                                               placeholder="Detalles del seguro de salud"
+                                               data-bs-toggle="tooltip"
+                                               title="Ingrese los detalles del seguro de salud">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -231,5 +654,10 @@
 document.getElementById('nuevoAlumnoModal').addEventListener('shown.bs.modal', function () {
     console.log('Modal abierto');
     initIPEValidations();
+});
+
+document.getElementById('healthInsurance').addEventListener('change', function() {
+    const detailsDiv = document.getElementById('healthInsuranceDetails');
+    detailsDiv.style.display = this.checked ? 'block' : 'none';
 });
 </script>

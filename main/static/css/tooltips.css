@@ -1,0 +1,9 @@
+.custom-tooltip {
+    --bs-tooltip-bg: #000;
+    --bs-tooltip-color: #fff;
+    --bs-tooltip-opacity: 1;
+    --bs-tooltip-padding-x: 1rem;
+    --bs-tooltip-padding-y: 0.5rem;
+    --bs-tooltip-font-size: 0.875rem;
+    --bs-tooltip-max-width: 300px;
+} 
