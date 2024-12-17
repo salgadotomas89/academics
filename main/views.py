@@ -82,3 +82,79 @@ def registro_rapido_alumno(request):
             'success': False,
             'message': f'Error al registrar alumno: {str(e)}'
         })
+    
+
+
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from ceds_models.models import Person, PersonIdentifier, PersonEmailAddress, PersonTelephone, PersonAddress, OrganizationPersonRole
+from django.contrib.auth.hashers import make_password
+
+@csrf_protect
+@require_http_methods(["POST"])
+def nuevo_usuario(request):
+    print('hello llegue')
+    try:
+        with transaction.atomic():
+            # Crear Person (usuario base)
+            person = Person.objects.create(
+                first_name=request.POST['first_name'],
+                last_name=request.POST['last_name'],
+                is_active=request.POST['status'] == 'activo',
+                password=make_password(request.POST['password'])
+            )
+
+            # Crear PersonIdentifier (RUN)
+            PersonIdentifier.objects.create(
+                person=person,
+                identifier=request.POST['run'],
+                ref_person_identification_system_id=51
+            )
+
+            # Crear PersonEmailAddress
+            PersonEmailAddress.objects.create(
+                person=person,
+                email_address=request.POST['email'],
+                ref_email_type_id=1
+            )
+
+            if request.POST.get('telefono'):
+                PersonTelephone.objects.create(
+                    person=person,
+                    telephone_number=request.POST['telefono'],
+                    primary_telephone_number_indicator=True,
+                    ref_person_telephone_number_type_id=1
+                )
+
+            if request.POST.get('direccion'):
+                PersonAddress.objects.create(
+                    person=person,
+                    street_number_and_name=request.POST['direccion'],
+                    ref_state_id=1,
+                    ref_country_id=1,
+                    postal_code='00000'
+                )
+
+            # Asignar rol
+            role_mapping = {
+                'admin': 2,
+                'profesor': 1,
+                'secretaria': 2
+            }
+
+            OrganizationPersonRole.objects.create(
+                organization_id=request.user.organizationpersonrole_set.first().organization_id,
+                person=person,
+                role_id=role_mapping[request.POST['role']]
+            )
+
+            return JsonResponse({
+                'status': 'success',
+                'message': 'Usuario creado exitosamente'
+            })
+
+    except Exception as e:
+        return JsonResponse({
+            'status': 'error',
+            'message': str(e)
+        }, status=400)

@@ -202,3 +202,5 @@ def artefactos(request):
 def demo1(request):
     return render(request, 'demo1.html')
 
+def colegios(request):
+    return render(request, 'colegios.html')

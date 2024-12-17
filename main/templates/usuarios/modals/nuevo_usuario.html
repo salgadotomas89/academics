@@ -1,3 +1,4 @@
+{% load static %}
 <!-- Modal Nuevo Usuario -->
 <div class="modal fade" id="nuevoUsuarioModal" tabindex="-1" aria-labelledby="nuevoUsuarioModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -8,6 +9,7 @@
             </div>
             <div class="modal-body">
                 <form id="nuevoUsuarioForm">
+                    {% csrf_token %}
                     <!-- Datos básicos -->
                     <div class="row mb-3">
                         <div class="col-md-6">
@@ -110,3 +112,5 @@
         </div>
     </div>
 </div> 
+
+<script src="{% static 'js/usuarios/nuevo_usuario.js' %}"></script>
