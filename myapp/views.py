@@ -6,7 +6,9 @@ from django.http import BadHeaderError, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
+from ceds_models import models
 from twilio.rest import Client
+from django.db.models import Subquery, OuterRef
 
 from django.conf import settings
 from django.contrib import messages
@@ -31,6 +33,10 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 import logging
 
+from django.views.decorators.csrf import csrf_protect
+from django.http import JsonResponse
+from django.db import transaction
+from ceds_models.models import Organization, OrganizationIdentifier
 
 logger = logging.getLogger(__name__)
 
@@ -203,4 +209,51 @@ def demo1(request):
     return render(request, 'demo1.html')
 
 def colegios(request):
-    return render(request, 'colegios.html')
+    # Obtener lista de colegios para mostrar en la tabla
+    colegios = Organization.objects.filter(
+        ref_organization_type_id=28
+    ).annotate(
+        rbd=Subquery(
+            OrganizationIdentifier.objects.filter(
+                organization=OuterRef('pk'),
+                ref_organization_identification_system_id=1
+            ).values('identifier')[:1]
+        )
+    ).values('rbd', 'name')
+
+    return render(request, 'colegios.html', {'colegios': colegios})
+
+@csrf_protect
+def crear_colegio(request):
+    if request.method == 'POST':
+        try:
+            with transaction.atomic():
+                # Crear Organization
+                organization = Organization.objects.create(
+                    name=request.POST['nombre'],
+                    ref_organization_type_id=28  # ID para School según CEDS
+                )
+
+                # Crear OrganizationIdentifier para el RBD
+                OrganizationIdentifier.objects.create(
+                    organization=organization,
+                    identifier=request.POST['rbd'],
+                    ref_organization_identification_system_id=1,  # ID para RBD
+                    ref_organization_identifier_type_id=1  # Agregar este campo con un valor apropiado
+                )
+
+                return JsonResponse({
+                    'status': 'success',
+                    'message': 'Colegio registrado exitosamente'
+                })
+
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            }, status=400)
+
+    return JsonResponse({
+        'status': 'error',
+        'message': 'Método no permitido'
+    }, status=405)

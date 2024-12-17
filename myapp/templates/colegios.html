@@ -27,7 +27,7 @@
                                 {% for colegio in colegios %}
                                 <tr>
                                     <td>{{ colegio.rbd }}</td>
-                                    <td>{{ colegio.nombre }}</td>
+                                    <td>{{ colegio.name }}</td>
                                     <td>
                                         <button class="btn btn-sm btn-outline-primary">
                                             <i class="bi bi-pencil"></i>
@@ -94,11 +94,19 @@
 
 <!-- Script para manejar el formulario -->
 <script>
+
+
 document.getElementById('guardarColegioBtn').addEventListener('click', function() {
     const form = document.getElementById('nuevoColegioForm');
     const formData = new FormData(form);
 
-    fetch('/api/colegios/crear/', {
+    // Validar campos
+    if (!formData.get('rbd') || !formData.get('nombre')) {
+        alert('Por favor complete todos los campos requeridos');
+        return;
+    }
+
+    fetch('/colegios/crear/', {
         method: 'POST',
         body: formData,
         headers: {
@@ -109,7 +117,8 @@ document.getElementById('guardarColegioBtn').addEventListener('click', function(
     .then(data => {
         if (data.status === 'success') {
             alert('Colegio registrado exitosamente');
-            location.reload();
+            $('#nuevoColegioModal').modal('hide');
+            location.reload();  // Recargar para ver el nuevo colegio
         } else {
             alert('Error: ' + data.message);
         }
