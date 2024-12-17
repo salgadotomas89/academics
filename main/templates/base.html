@@ -138,119 +138,10 @@
                 <!--cargamos el contenido de colegio-->
                 {% include 'colegio/content.html' %}
 
-                <!-- Contenido de Usuarios -->
-                <div id="usuariosContent" class="content-section" style="display: none;">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="d-flex justify-content-between align-items-center mb-4">
-                                <h2>Gestión de Usuarios</h2>
-                                <button class="btn btn-primary" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#nuevoUsuarioModal" 
-                                    data-bs-toggle="tooltip" 
-                                    data-bs-placement="left" 
-                                    title="Agregar un nuevo usuario al sistema">
-                                    <i class="fas fa-plus me-2"></i>Nuevo Usuario
-                                </button>
-                            </div>
-                            
-                            <!-- Panel de Filtros -->
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    <div class="row g-3">
-                                        <div class="col-md-3">
-                                            <label class="form-label">Buscar por nombre</label>
-                                            <input type="text" class="form-control" id="searchUsuario" 
-                                                placeholder="Nombre o apellido..." 
-                                                data-bs-toggle="tooltip" 
-                                                data-bs-placement="top" 
-                                                title="Buscar usuario por nombre o apellido">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label class="form-label">Rol</label>
-                                            <select class="form-select" id="filterRol"
-                                                data-bs-toggle="tooltip" 
-                                                data-bs-placement="top" 
-                                                title="Filtrar usuarios por rol">
-                                                <option value="">Todos los roles</option>
-                                                <option value="admin">Administrador</option>
-                                                <option value="profesor">Profesor</option>
-                                                <option value="secretaria">Secretaria</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label class="form-label">Estado</label>
-                                            <select class="form-select" id="filterEstadoUsuario"
-                                                data-bs-toggle="tooltip" 
-                                                data-bs-placement="top" 
-                                                title="Filtrar usuarios por estado">
-                                                <option value="">Todos</option>
-                                                <option value="activo">Activo</option>
-                                                <option value="inactivo">Inactivo</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="d-flex gap-2">
-                                                <button class="btn btn-primary" onclick="aplicarFiltrosUsuarios()"
-                                                    data-bs-toggle="tooltip" 
-                                                    data-bs-placement="top" 
-                                                    title="Aplicar filtros seleccionados">
-                                                    <i class="fas fa-search me-2"></i>Aplicar Filtros
-                                                </button>
-                                                <button class="btn btn-secondary" onclick="limpiarFiltrosUsuarios()"
-                                                    data-bs-toggle="tooltip" 
-                                                    data-bs-placement="top" 
-                                                    title="Limpiar todos los filtros">
-                                                    <i class="fas fa-undo me-2"></i>Limpiar Filtros
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                <!--cargamos el contenido de usuarios-->
+                {% include 'usuarios/content.html' %}
 
-                            <!-- Tabla de Usuarios -->
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Nombre</th>
-                                                    <th>Apellido</th>
-                                                    <th>Email</th>
-                                                    <th>Rol</th>
-                                                    <th>Estado</th>
-                                                    <th>Acciones</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="usuariosTableBody">
-                                                <!-- Los usuarios se cargarán aquí dinámicamente -->
-                                            </tbody>
-                                        </table>
-                                        <!-- Paginación -->
-                                        <nav aria-label="Page navigation" class="mt-4">
-                                            <ul class="pagination justify-content-center" id="paginacionUsuarios">
-                                                <li class="page-item disabled">
-                                                    <a class="page-link" href="#" tabindex="-1">Anterior</a>
-                                                </li>
-                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#">Siguiente</a>
-                                                </li>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Agregar la nueva sección de contenido después de los otros content-section -->
+                <!-- Agregar la nueva secci��n de contenido después de los otros content-section -->
                 <div id="libroClasesContent" class="content-section" style="display: none;">
                     <div class="row">
                         <div class="col-12">
@@ -452,7 +343,9 @@
     <!--cargamos el modal para nuevo alumno-->
     {% include 'alumnos/modals/nuevo_alumno.html' %}
 
-   
+    <!--cargamos el modal para nuevo usuario-->
+    {% include 'usuarios/modals/nuevo_usuario.html' %}
+
     <!-- Modal Nuevo Curso -->
     <div class="modal fade" id="nuevoCursoModal" tabindex="-1">
         <div class="modal-dialog modal-lg">
@@ -463,71 +356,6 @@
                 </div>
                 <div class="modal-body">
                     <!-- ... contenido del modal ... -->
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Nuevo Usuario -->
-    <div class="modal fade" id="nuevoUsuarioModal" tabindex="-1" aria-labelledby="nuevoUsuarioModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="nuevoUsuarioModalLabel">Agregar Nuevo Usuario</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="nuevoUsuarioForm">
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label class="form-label">Nombre*</label>
-                                <input type="text" class="form-control" name="first_name" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Apellidos*</label>
-                                <input type="text" class="form-control" name="last_name" required>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label class="form-label">Email*</label>
-                                <input type="email" class="form-control" 
-                                    name="email" required
-                                    data-bs-toggle="tooltip" 
-                                    data-bs-placement="top" 
-                                    title="Ingrese un email válido">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Rol*</label>
-                                <select class="form-select" 
-                                    name="role" required
-                                    data-bs-toggle="tooltip" 
-                                    data-bs-placement="top" 
-                                    title="Seleccione el nivel de acceso del usuario">
-                                    <option value="">Seleccionar...</option>
-                                    <option value="admin">Administrador</option>
-                                    <option value="profesor">Profesor</option>
-                                    <option value="secretaria">Secretaria</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label class="form-label">Contraseña*</label>
-                                <input type="password" class="form-control" name="password" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Confirmar Contraseña*</label>
-                                <input type="password" class="form-control" name="confirm_password" required>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" onclick="guardarNuevoUsuario()">Guardar Usuario</button>
                 </div>
             </div>
         </div>
@@ -627,5 +455,6 @@
     </div>
 
     {% include 'partials/scripts.html' %}
+    <script src="{% static 'js/usuarios/usuarios.js' %}"></script>
 </body>
 </html>
