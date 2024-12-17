@@ -1,6 +1,6 @@
 <!-- Modal Nuevo Curso -->
 <div class="modal fade" id="nuevoCursoModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Crear Nuevo Curso</h5>
@@ -11,58 +11,24 @@
                     <!-- Información Básica -->
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <label class="form-label">Nivel de Enseñanza*</label>
-                            <select class="form-select" name="nivel_ensenanza" required>
-                                <option value="">Seleccionar nivel...</option>
-                                <option value="01">Educación Parvularia</option>
-                                <option value="02">Enseñanza Básica Niños</option>
-                                <option value="03">Educación Básica Adultos</option>
-                                <option value="04">Educación Especial</option>
-                                <option value="05">Enseñanza Media HC Jóvenes</option>
-                                <option value="06">Educación Media HC Adultos</option>
-                                <option value="07">Enseñanza Media TP Jóvenes</option>
-                                <option value="08">Educación Media TP Adultos</option>
+                            <label class="form-label">Nivel*</label>
+                            <select class="form-select" name="nivel" required>
+                                <option value="">Seleccionar...</option>
+                                <!-- Se llenará dinámicamente desde la config del colegio -->
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <label class="form-label">Grado/Nivel*</label>
+                            <label class="form-label">Grado*</label>
                             <select class="form-select" name="grado" required>
-                                <option value="">Seleccionar grado...</option>
-                                <!-- Se llenará dinámicamente según nivel_ensenanza -->
+                                <option value="">Seleccionar...</option>
+                                <!-- Se llenará dinámicamente según el nivel -->
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <label class="form-label">Letra/Identificador*</label>
+                            <label class="form-label">Letra*</label>
                             <input type="text" class="form-control" name="letra" required maxlength="1" 
                                    placeholder="Ej: A, B, C..."
                                    pattern="[A-Za-z]">
-                        </div>
-                    </div>
-
-                    <!-- Información Académica -->
-                    <div class="row mb-3">
-                        <div class="col-md-4">
-                            <label class="form-label">Año Académico*</label>
-                            <select class="form-select" name="ano_academico" required>
-                                <option value="">Seleccionar año...</option>
-                                <!-- Se llenará dinámicamente -->
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Régimen*</label>
-                            <select class="form-select" name="regimen" required>
-                                <option value="">Seleccionar régimen...</option>
-                                <option value="SEMESTRAL">Semestral</option>
-                                <option value="TRIMESTRAL">Trimestral</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Tipo de Curso*</label>
-                            <select class="form-select" name="tipo_curso" required>
-                                <option value="">Seleccionar tipo...</option>
-                                <option value="SIMPLE">Simple</option>
-                                <option value="COMBINADO">Combinado</option>
-                            </select>
                         </div>
                     </div>
 
@@ -72,67 +38,24 @@
                             <label class="form-label">Profesor Jefe*</label>
                             <select class="form-select" name="profesor_jefe" required>
                                 <option value="">Seleccionar profesor...</option>
+                                <!-- Se llenará dinámicamente -->
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Sala*</label>
                             <select class="form-select" name="sala" required>
                                 <option value="">Seleccionar sala...</option>
+                                <!-- Se llenará dinámicamente desde la config del colegio -->
                             </select>
                         </div>
                     </div>
 
-                    <!-- Configuración Operativa -->
-                    <div class="row mb-3">
-                        <div class="col-md-4">
-                            <label class="form-label">Capacidad Máxima*</label>
-                            <input type="number" class="form-control" name="capacidad_maxima" 
-                                   required min="1" max="45">
-                            <small class="text-muted">Máximo permitido: 45 estudiantes</small>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Jornada*</label>
-                            <select class="form-select" name="jornada" required>
-                                <option value="">Seleccionar jornada...</option>
-                                <option value="MANANA">Mañana</option>
-                                <option value="TARDE">Tarde</option>
-                                <option value="COMPLETA">Jornada Completa</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Estado*</label>
-                            <select class="form-select" name="estado" required>
-                                <option value="ACTIVO">Activo</option>
-                                <option value="INACTIVO">Inactivo</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Campos adicionales para TP -->
-                    <div id="camposTP" style="display: none;">
-                        <div class="row mb-3">
-                            <div class="col-md-4">
-                                <label class="form-label">Rama*</label>
-                                <select class="form-select" name="rama">
-                                    <option value="">Seleccionar rama...</option>
-                                    <!-- Se llenará dinámicamente -->
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label">Sector Económico*</label>
-                                <select class="form-select" name="sector_economico">
-                                    <option value="">Seleccionar sector...</option>
-                                    <!-- Se llenará dinámicamente -->
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label">Especialidad*</label>
-                                <select class="form-select" name="especialidad">
-                                    <option value="">Seleccionar especialidad...</option>
-                                    <!-- Se llenará dinámicamente -->
-                                </select>
-                            </div>
-                        </div>
+                    <!-- Capacidad -->
+                    <div class="mb-3">
+                        <label class="form-label">Capacidad Máxima*</label>
+                        <input type="number" class="form-control" name="capacidad_maxima" 
+                               required min="1" max="45">
+                        <small class="text-muted">Máximo permitido: 45 estudiantes</small>
                     </div>
 
                     <div class="mb-3">

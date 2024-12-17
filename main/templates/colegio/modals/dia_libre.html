@@ -1,0 +1,38 @@
+<!-- Modal para agregar día libre -->
+<div class="modal fade" id="diaLibreModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Agregar Día Libre</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="diaLibreForm">
+                    <div class="mb-3">
+                        <label class="form-label">Fecha</label>
+                        <input type="date" class="form-control" id="fechaDiaLibre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Descripción</label>
+                        <input type="text" class="form-control" id="descripcionDiaLibre" 
+                            placeholder="Ej: Feriado Nacional" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Tipo</label>
+                        <select class="form-select" id="tipoDiaLibre" required>
+                            <option value="">Seleccionar tipo...</option>
+                            <option value="feriado">Feriado Nacional</option>
+                            <option value="suspension">Suspensión de Clases</option>
+                            <option value="interferiado">Interferiado</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="guardarDiaLibre()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div> 

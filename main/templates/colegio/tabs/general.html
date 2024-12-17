@@ -1,0 +1,386 @@
+<!-- Pestaña de Configuración General -->
+<div class="tab-pane fade show active" id="general" role="tabpanel">
+    <div class="row">
+        <!-- Tarjeta de Información Básica -->
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-primary bg-opacity-10">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-school me-2"></i>Información del Establecimiento
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form id="infoColegioForm">
+                        <!-- Identificación -->
+                        <div class="mb-3">
+                            <label class="form-label">RBD*</label>
+                            <input type="text" class="form-control" name="rbd" required 
+                                   pattern="[0-9]{5}" title="El RBD debe tener 5 dígitos">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nombre del Establecimiento*</label>
+                            <input type="text" class="form-control" name="nombre_colegio" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nombre Corto/Sigla</label>
+                            <input type="text" class="form-control" name="nombre_corto" maxlength="20">
+                        </div>
+
+                        <!-- Tipo y Dependencia -->
+                        <div class="mb-3">
+                            <label class="form-label">Tipo de Establecimiento*</label>
+                            <select class="form-select" name="tipo_establecimiento" required>
+                                <option value="">Seleccionar tipo...</option>
+                                <option value="1">Municipal</option>
+                                <option value="2">Particular Subvencionado</option>
+                                <option value="3">Particular Pagado</option>
+                                <option value="4">Corporación de Administración Delegada</option>
+                                <option value="5">Servicio Local de Educación</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Modalidad de Enseñanza*</label>
+                            <select class="form-select" name="modalidad" required multiple>
+                                <option value="01">Educación Parvularia</option>
+                                <option value="02">Enseñanza Básica Niños</option>
+                                <option value="03">Educación Básica Adultos</option>
+                                <option value="04">Educación Especial</option>
+                                <option value="05">Enseñanza Media HC Jóvenes</option>
+                                <option value="06">Educación Media HC Adultos</option>
+                                <option value="07">Enseñanza Media TP Jóvenes</option>
+                                <option value="08">Educación Media TP Adultos</option>
+                            </select>
+                        </div>
+
+                        <!-- Autoridades -->
+                        <div class="mb-3">
+                            <label class="form-label">Director(a)*</label>
+                            <select class="form-select" name="director" required>
+                                <option value="">Seleccionar director...</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Sostenedor*</label>
+                            <select class="form-select" name="sostenedor" required>
+                                <option value="">Seleccionar sostenedor...</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Guardar Información
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta de Ubicación y Contacto -->
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-info bg-opacity-10">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-map-marker-alt me-2"></i>Ubicación y Contacto
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form id="ubicacionContactoForm">
+                        <!-- Ubicación -->
+                        <div class="mb-3">
+                            <label class="form-label">Región*</label>
+                            <select class="form-select" name="region" required>
+                                <option value="">Seleccionar región...</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Comuna*</label>
+                            <select class="form-select" name="comuna" required>
+                                <option value="">Seleccionar comuna...</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Dirección*</label>
+                            <input type="text" class="form-control" name="direccion" required>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Latitud</label>
+                                <input type="text" class="form-control" name="latitud" 
+                                       pattern="-?\d{1,2}\.\d{1,6}">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Longitud</label>
+                                <input type="text" class="form-control" name="longitud" 
+                                       pattern="-?\d{1,3}\.\d{1,6}">
+                            </div>
+                        </div>
+
+                        <!-- Contacto -->
+                        <div class="mb-3">
+                            <label class="form-label">Teléfono Principal*</label>
+                            <input type="tel" class="form-control" name="telefono" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email Institucional*</label>
+                            <input type="email" class="form-control" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Sitio Web</label>
+                            <input type="url" class="form-control" name="sitio_web">
+                        </div>
+
+                        <!-- Redes Sociales -->
+                        <div class="mb-3">
+                            <label class="form-label">Redes Sociales</label>
+                            <div class="input-group mb-2">
+                                <span class="input-group-text"><i class="fab fa-facebook"></i></span>
+                                <input type="url" class="form-control" name="facebook" 
+                                       placeholder="URL de Facebook">
+                            </div>
+                            <div class="input-group mb-2">
+                                <span class="input-group-text"><i class="fab fa-instagram"></i></span>
+                                <input type="url" class="form-control" name="instagram" 
+                                       placeholder="URL de Instagram">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fab fa-twitter"></i></span>
+                                <input type="url" class="form-control" name="twitter" 
+                                       placeholder="URL de Twitter">
+                            </div>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Guardar Ubicación y Contacto
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta de Configuración Operativa -->
+        <div class="col-12 mb-4">
+            <div class="card">
+                <div class="card-header bg-success bg-opacity-10">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-cogs me-2"></i>Configuración Operativa
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form id="configOperativaForm">
+                        <div class="row">
+                            <!-- Jornadas -->
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Jornadas de Funcionamiento*</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="jornada_manana">
+                                    <label class="form-check-label">Mañana</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="jornada_tarde">
+                                    <label class="form-check-label">Tarde</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="jornada_completa">
+                                    <label class="form-check-label">Jornada Completa</label>
+                                </div>
+                            </div>
+
+                            <!-- Régimen -->
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Régimen de Evaluación*</label>
+                                <select class="form-select" name="regimen" required>
+                                    <option value="">Seleccionar régimen...</option>
+                                    <option value="SEMESTRAL">Semestral</option>
+                                    <option value="TRIMESTRAL">Trimestral</option>
+                                </select>
+                            </div>
+
+                            <!-- Estado -->
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Estado del Establecimiento*</label>
+                                <select class="form-select" name="estado" required>
+                                    <option value="ACTIVO">Activo</option>
+                                    <option value="INACTIVO">Inactivo</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Guardar Configuración Operativa
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta de Configuración Académica -->
+        <div class="col-12 mb-4">
+            <div class="card">
+                <div class="card-header bg-warning bg-opacity-10">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-graduation-cap me-2"></i>Configuración Académica
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form id="configAcademicaForm">
+                        <div class="row">
+                            <!-- Niveles y Grados -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Niveles de Enseñanza Activos</label>
+                                <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Nivel</th>
+                                                <th>Grados</th>
+                                                <th>Estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Educación Parvularia</td>
+                                                <td>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" name="parvularia_grados" value="NT1">
+                                                        <label class="form-check-label">NT1</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" name="parvularia_grados" value="NT2">
+                                                        <label class="form-check-label">NT2</label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox" name="nivel_parvularia">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Enseñanza Básica</td>
+                                                <td>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" name="basica_grados" value="1">
+                                                        <label class="form-check-label">1°</label>
+                                                    </div>
+                                                    <!-- Repetir para 2° a 8° -->
+                                                </td>
+                                                <td>
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox" name="nivel_basica">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Enseñanza Media HC</td>
+                                                <td>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" name="media_hc_grados" value="1">
+                                                        <label class="form-check-label">I°</label>
+                                                    </div>
+                                                    <!-- Repetir para II° a IV° -->
+                                                </td>
+                                                <td>
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox" name="nivel_media_hc">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Enseñanza Media TP</td>
+                                                <td>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" name="media_tp_grados" value="1">
+                                                        <label class="form-check-label">I°</label>
+                                                    </div>
+                                                    <!-- Repetir para II° a IV° -->
+                                                </td>
+                                                <td>
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox" name="nivel_media_tp">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Configuración de Salas -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Salas Disponibles</label>
+                                <div class="table-responsive">
+                                    <table class="table table-sm" id="tablaSalas">
+                                        <thead>
+                                            <tr>
+                                                <th>Número/Nombre</th>
+                                                <th>Capacidad</th>
+                                                <th>Tipo</th>
+                                                <th>Estado</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Se llenará dinámicamente -->
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="5">
+                                                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="agregarSala()">
+                                                        <i class="fas fa-plus me-1"></i>Agregar Sala
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Configuración de Especialidades TP -->
+                        <div id="configuracionTP" class="row mb-3">
+                            <div class="col-12">
+                                <label class="form-label">Especialidades Técnico-Profesionales</label>
+                                <div class="table-responsive">
+                                    <table class="table table-sm" id="tablaEspecialidades">
+                                        <thead>
+                                            <tr>
+                                                <th>Rama</th>
+                                                <th>Sector Económico</th>
+                                                <th>Especialidad</th>
+                                                <th>Estado</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Se llenará dinámicamente -->
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="5">
+                                                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="agregarEspecialidad()">
+                                                        <i class="fas fa-plus me-1"></i>Agregar Especialidad
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Guardar Configuración Académica
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

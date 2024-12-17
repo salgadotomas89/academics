@@ -1,0 +1,80 @@
+<!-- Pestaña de Calendario -->
+<div class="tab-pane fade" id="calendario" role="tabpanel">
+    <div class="row">
+        <!-- Tarjeta de Año Escolar -->
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-warning bg-opacity-10">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-calendar-alt me-2"></i>Año Escolar
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form id="anoEscolarForm">
+                        <div class="mb-3">
+                            <label class="form-label">Inicio Año Escolar</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-calendar-plus"></i></span>
+                                <input type="date" class="form-control" name="inicio_ano">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Fin Año Escolar</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-calendar-minus"></i></span>
+                                <input type="date" class="form-control" name="fin_ano">
+                            </div>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Guardar Fechas
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta de Semestres -->
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-success bg-opacity-10">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-clock me-2"></i>Períodos Académicos
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form id="semestresForm">
+                        <div class="mb-3">
+                            <label class="form-label">Primer Semestre</label>
+                            <div class="input-group mb-2">
+                                <span class="input-group-text">Inicio</span>
+                                <input type="date" class="form-control" name="semestre1_inicio">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-text">Fin</span>
+                                <input type="date" class="form-control" name="semestre1_fin">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Segundo Semestre</label>
+                            <div class="input-group mb-2">
+                                <span class="input-group-text">Inicio</span>
+                                <input type="date" class="form-control" name="semestre2_inicio">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-text">Fin</span>
+                                <input type="date" class="form-control" name="semestre2_fin">
+                            </div>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Guardar Períodos
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
