@@ -2,10 +2,11 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_protect
-from ceds_models.models import Person, PersonIdentifier, PersonBirthplace, OrganizationPersonRole, PersonRelationship
+from ceds_models.models import Person, PersonIdentifier, PersonBirthplace, OrganizationPersonRole, PersonRelationship, OrganizationIdentifier
 from django.db import transaction
+from django.db.models import Subquery, OuterRef
 
-# Create your views here.
+#vista principal
 def dashboard(request):
     return render(request, 'base.html')
 
@@ -158,3 +159,41 @@ def nuevo_usuario(request):
             'status': 'error',
             'message': str(e)
         }, status=400)
+
+def content_view(request):
+    print("\n=== Iniciando content_view ===")
+    context = {}
+    
+    if request.user.is_authenticated:
+        try:
+            person = Person.objects.get(user=request.user)
+            
+            # Obtener la organización con cualquier rol
+            organization_role = OrganizationPersonRole.objects.filter(
+                person=person
+            ).select_related('organization').first()
+            
+            if organization_role:
+                organization = organization_role.organization
+                
+                # Obtener el RBD
+                rbd = OrganizationIdentifier.objects.filter(
+                    organization=organization,
+                    ref_organization_identification_system_id=1
+                ).values_list('identifier', flat=True).first()
+                
+                # Actualizar el contexto con la información completa
+                context['organization'] = {
+                    'name': organization.name,
+                    'rbd': rbd,
+                    'type': organization.ref_organization_type_id,
+                    'role': organization_role.role_id
+                }
+                
+                print("Contexto actualizado:", context)
+            
+        except Exception as e:
+            print(f"Error al cargar datos: {str(e)}")
+            context['error'] = str(e)
+    
+    return render(request, 'colegio/content.html', context)

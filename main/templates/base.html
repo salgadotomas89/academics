@@ -135,13 +135,13 @@
                 <!--cargamos el contenido de cursos-->
                 {% include 'cursos/content.html' %}
 
-                <!--cargamos el contenido de colegio-->
-                {% include 'colegio/content.html' %}
+                <!--contenedor para el contenido de colegio-->
+                <div id="colegioContent" class="content-section" style="display: none;"></div>
 
                 <!--cargamos el contenido de usuarios-->
                 {% include 'usuarios/content.html' %}
 
-                <!-- Agregar la nueva secci��n de contenido después de los otros content-section -->
+                <!-- Agregar la nueva sección de contenido después de los otros content-section -->
                 <div id="libroClasesContent" class="content-section" style="display: none;">
                     <div class="row">
                         <div class="col-12">
@@ -456,5 +456,39 @@
 
     {% include 'partials/scripts.html' %}
     <script src="{% static 'js/usuarios/usuarios.js' %}"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Manejar el clic en el enlace de colegio
+        document.getElementById('colegioLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Ocultar todas las secciones
+            document.querySelectorAll('.content-section').forEach(el => {
+                el.style.display = 'none';
+            });
+
+            // Mostrar la sección de colegio
+            const colegioContent = document.getElementById('colegioContent');
+            colegioContent.style.display = 'block';
+
+            // Cargar el contenido desde la vista
+            fetch('colegio/content/')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    console.log('Contenido recibido:', html); // Para debug
+                    colegioContent.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    colegioContent.innerHTML = `<div class="alert alert-danger">Error al cargar el contenido: ${error}</div>`;
+                });
+        });
+    });
+    </script>
 </body>
 </html>

@@ -15,11 +15,13 @@
                         <div class="mb-3">
                             <label class="form-label">RBD*</label>
                             <input type="text" class="form-control" name="rbd" required 
-                                   pattern="[0-9]{5}" title="El RBD debe tener 5 dígitos">
+                                   pattern="[0-9]{5}" title="El RBD debe tener 5 dígitos"
+                                   value="{{ organization.rbd }}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Nombre del Establecimiento*</label>
-                            <input type="text" class="form-control" name="nombre_colegio" required>
+                            <input type="text" class="form-control" name="nombre_colegio" required
+                                   value="{{ organization.name }}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Nombre Corto/Sigla</label>
@@ -317,7 +319,7 @@
                                     <table class="table table-sm" id="tablaSalas">
                                         <thead>
                                             <tr>
-                                                <th>Número/Nombre</th>
+                                                <th>N��mero/Nombre</th>
                                                 <th>Capacidad</th>
                                                 <th>Tipo</th>
                                                 <th>Estado</th>

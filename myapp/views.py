@@ -346,9 +346,9 @@ def crear_persona(request):
                 )
                 print("Usuario creado:", user.id)
                 
-                # Crear la persona
+                # Crear la persona y asociarla con el usuario
                 person = Person.objects.create(
-                    user=user,
+                    user=user,  # Aquí está la asociación con el usuario
                     first_name=request.POST['first_name'],
                     last_name=request.POST['last_name'],
                     birthdate='2000-01-01',

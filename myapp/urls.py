@@ -15,8 +15,9 @@ urlpatterns = [
     path('juego', views.juego, name = 'juego'),
     path('seleccion-plan', views.seleccion_plan, name='seleccion_plan'),
     path('demo1', views.demo1, name='demo1'),
-    path('colegios', views.colegios, name='colegios'),
-    path('colegios/crear/', views.crear_colegio, name='crear_colegio'),
-    path('personas/crear/', views.crear_persona, name='crear_persona'),
-    path('colegios/cambiar-admin/', views.cambiar_administrador, name='cambiar_administrador'),
+    #colegios
+    path('colegios', views.colegios, name='colegios'),#listado de colegios  
+    path('colegios/crear/', views.crear_colegio, name='crear_colegio'),#crear colegio
+    path('personas/crear/', views.crear_persona, name='crear_persona'),#crear persona
+    path('colegios/cambiar-admin/', views.cambiar_administrador, name='cambiar_administrador'),#cambiar administrador
 ]
