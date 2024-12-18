@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'ceds_models',
     'main',
     'autenticacion',
+    'usuarios',
 ]
 
 MIDDLEWARE = [

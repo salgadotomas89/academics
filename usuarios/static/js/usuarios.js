@@ -51,8 +51,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Función para cargar usuarios
     function cargarUsuarios() {
-        // Aquí iría la lógica para cargar los usuarios desde el backend
-        // y mostrarlos en la tabla
+        fetch('api/usuarios/')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al cargar usuarios');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.usuarios) {
+                    mostrarUsuariosEnTabla(data.usuarios);
+                } else {
+                    console.error('No se recibieron datos de usuarios');
+                }
+            })
+            .catch(error => {
+                console.error('Error completo:', error);
+                console.error('Mensaje de error:', error.message);
+                console.error('Stack trace:', error.stack);
+                alert('Error al cargar los usuarios. Por favor, intente nuevamente.');
+            });
     }
 
     // Manejadores para los filtros
@@ -80,4 +98,59 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Cargar usuarios inicialmente
     cargarUsuarios();
-}); 
+});
+
+function mostrarUsuariosEnTabla(usuarios) {
+    const tbody = document.getElementById('usuariosTableBody');
+    if (!tbody) return;
+
+    tbody.innerHTML = '';
+
+    usuarios.forEach(usuario => {
+        const tr = document.createElement('tr');
+        
+        // Mapeo de roles para mostrar texto legible
+        const rolesMap = {
+            1: 'Profesor',
+            2: 'Administrador',
+            3: 'Secretaria'
+        };
+
+        tr.innerHTML = `
+            <td>${usuario.first_name || ''}</td>
+            <td>${usuario.last_name || ''}</td>
+            <td>${usuario.email || ''}</td>
+            <td>${rolesMap[usuario.role_id] || 'No definido'}</td>
+            <td>
+                <span class="badge ${usuario.is_active === null ? 'bg-warning' : usuario.is_active ? 'bg-success' : 'bg-danger'}">
+                    ${usuario.is_active === null ? 'Sin estado' : usuario.is_active ? 'Activo' : 'Inactivo'}
+                </span>
+            </td>
+            <td>
+                <button class="btn btn-sm btn-primary" onclick="editarUsuario(${usuario.person_id})" 
+                    title="Editar usuario">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-sm ${usuario.is_active ? 'btn-danger' : 'btn-success'}" 
+                    onclick="cambiarEstadoUsuario(${usuario.person_id}, ${!usuario.is_active})"
+                    title="${usuario.is_active ? 'Desactivar' : 'Activar'} usuario">
+                    <i class="fas fa-${usuario.is_active ? 'times' : 'check'}"></i>
+                </button>
+            </td>
+        `;
+        
+        tbody.appendChild(tr);
+    });
+}
+
+// Función para editar usuario (implementar más tarde)
+function editarUsuario(userId) {
+    console.log('Editar usuario:', userId);
+    // Implementar lógica de edición
+}
+
+// Función para cambiar estado del usuario (implementar más tarde)
+function cambiarEstadoUsuario(userId, nuevoEstado) {
+    console.log('Cambiar estado usuario:', userId, 'nuevo estado:', nuevoEstado);
+    // Implementar lógica de cambio de estado
+} 

@@ -2,9 +2,10 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_protect
-from ceds_models.models import Person, PersonIdentifier, PersonBirthplace, OrganizationPersonRole, PersonRelationship, OrganizationIdentifier
+from ceds_models.models import Person, PersonIdentifier, PersonBirthplace, OrganizationPersonRole, PersonRelationship, OrganizationIdentifier, PersonEmailAddress, User
 from django.db import transaction
 from django.db.models import Subquery, OuterRef
+from django.contrib.auth.models import User
 
 #vista principal
 def dashboard(request):
@@ -101,7 +102,6 @@ from django.contrib.auth.hashers import make_password
 @csrf_protect
 @require_http_methods(["POST"])
 def nuevo_usuario(request):
-    print('hello llegue')
     try:
         with transaction.atomic():
             # Crear Person (usuario base)
@@ -204,3 +204,5 @@ def content_view(request):
             context['error'] = str(e)
     
     return render(request, 'colegio/content.html', context)
+
+

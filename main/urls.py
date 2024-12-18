@@ -10,4 +10,5 @@ urlpatterns = [
     path('crear/nuevo_usuario/', views.nuevo_usuario, name='nuevo_usuario'),
     #vista de colegio
     path('colegio/content/', views.content_view, name='colegio_content'),
+    #api para cargar usuarios
 ]
