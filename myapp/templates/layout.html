@@ -48,14 +48,32 @@
                     <li class="nav-item">
                         <a class="nav-link mx-2" href="{% url 'precios' %}">Precios</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="{% url 'contacto' %}">Contacto</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link mx-2 panel-link" href="{% url 'dashboard' %}">
+                            <i class="bi bi-grid-fill me-1"></i>Panel
+                        </a>
+                    </li>
+                    {% endif %}
                     <div id="menu-background-morph"></div>
                 </ul>
     
                 <!-- Ítem del menú en el lado derecho -->
                 <ul class="navbar-nav ml-auto me-4 position-relative">
+
+                    {% if not user.is_authenticated %}
                     <li class="nav-item contact-item">
-                        <a class="nav-link mx-2" href="{% url 'contacto' %}">Contacto</a>
+                        <a class="nav-link mx-2" href="{% url 'autenticacion:login' %}">Login</a>
                     </li>
+                    {% else %}
+                    <li class="nav-item contact-item">
+                        <a class="nav-link mx-2" href="{% url 'autenticacion:logout' %}">Logout</a>
+                    </li>
+                    {% endif %}
+                    
                     <div id="contact-background-morph"></div>
                 </ul>
             </div>

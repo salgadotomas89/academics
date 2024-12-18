@@ -8,7 +8,14 @@ from django.db.models import Subquery, OuterRef
 
 #vista principal
 def dashboard(request):
-    return render(request, 'base.html')
+    context = {}
+    if request.user.is_authenticated:
+        try:
+            person = Person.objects.get(user=request.user)
+            context['user_full_name'] = f"{person.first_name} {person.last_name}"
+        except Person.DoesNotExist:
+            context['user_full_name'] = request.user.username
+    return render(request, 'base.html', context)
 
 @require_http_methods(["POST"])
 @csrf_protect
