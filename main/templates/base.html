@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Configuración</title>
     {% include 'partials/head_styles.html' %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div class="wrapper">
@@ -463,8 +464,8 @@
     </div>
 
     {% include 'partials/scripts.html' %}
-    <script src="{% static 'js/usuarios/usuarios.js' %}"></script>
 
-    
+    {% csrf_token %}
+
 </body>
 </html>

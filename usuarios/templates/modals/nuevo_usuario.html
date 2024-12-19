@@ -1,8 +1,8 @@
 {% load static %}
 <!-- Modal Nuevo Usuario -->
 <div class="modal fade" id="nuevoUsuarioModal" tabindex="-1" aria-labelledby="nuevoUsuarioModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+    <div class="modal-dialog">
+        <div class="modal-content" id="nuevoUsuarioContent" data-crear-url="{% url 'crear_nuevo_usuario' %}">
             <div class="modal-header">
                 <h5 class="modal-title" id="nuevoUsuarioModalLabel">Agregar Nuevo Usuario</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -11,97 +11,34 @@
                 <form id="nuevoUsuarioForm">
                     {% csrf_token %}
                     <!-- Datos básicos -->
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label">Nombre*</label>
-                            <input type="text" class="form-control" name="first_name" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Apellidos*</label>
-                            <input type="text" class="form-control" name="last_name" required>
-                        </div>
+                    <div class="mb-3">
+                        <label class="form-label">Nombre*</label>
+                        <input type="text" class="form-control" name="first_name" required>
                     </div>
-
-                    <!-- Identificación -->
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label">RUN*</label>
-                            <input type="text" class="form-control" name="run" required 
-                                   placeholder="Ej: 12345678-9">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Email*</label>
-                            <input type="email" class="form-control" name="email" required>
-                        </div>
+                    <div class="mb-3">
+                        <label class="form-label">Apellidos*</label>
+                        <input type="text" class="form-control" name="last_name" required>
                     </div>
-
-                    <!-- Rol y datos de acceso -->
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label">Rol*</label>
-                            <select class="form-select" name="role" id="roleSelect" required>
-                                <option value="">Seleccionar rol...</option>
-                                <option value="admin">Administrador</option>
-                                <option value="profesor">Profesor</option>
-                                <option value="secretaria">Secretaria</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Estado</label>
-                            <select class="form-select" name="status">
-                                <option value="activo">Activo</option>
-                                <option value="inactivo">Inactivo</option>
-                            </select>
-                        </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email*</label>
+                        <input type="email" class="form-control" name="email" required>
                     </div>
-
-                    <!-- Datos específicos para profesores -->
-                    <div id="profesorFields" style="display: none;">
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label class="form-label">Título Profesional*</label>
-                                <input type="text" class="form-control" name="titulo">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Institución que otorgó el título*</label>
-                                <input type="text" class="form-control" name="institucion_titulo">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label class="form-label">Año de titulación</label>
-                                <input type="number" class="form-control" name="año_titulo" 
-                                       min="1900" max="2099">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Especialidad</label>
-                                <input type="text" class="form-control" name="especialidad">
-                            </div>
-                        </div>
+                    <div class="mb-3">
+                        <label class="form-label">Rol*</label>
+                        <select class="form-select" name="role" id="roleSelect" required>
+                            <option value="">Seleccionar rol...</option>
+                            <option value="admin">Administrador</option>
+                            <option value="profesor">Profesor</option>
+                            <option value="secretaria">Secretaria</option>
+                        </select>
                     </div>
-
-                    <!-- Datos de contacto -->
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label">Teléfono</label>
-                            <input type="tel" class="form-control" name="telefono">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Dirección</label>
-                            <input type="text" class="form-control" name="direccion">
-                        </div>
+                    <div class="mb-3">
+                        <label class="form-label">Contraseña*</label>
+                        <input type="password" class="form-control" name="password" required>
                     </div>
-
-                    <!-- Contraseña -->
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label">Contraseña*</label>
-                            <input type="password" class="form-control" name="password" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Confirmar Contraseña*</label>
-                            <input type="password" class="form-control" name="confirm_password" required>
-                        </div>
+                    <div class="mb-3">
+                        <label class="form-label">Confirmar Contraseña*</label>
+                        <input type="password" class="form-control" name="confirm_password" required>
                     </div>
                 </form>
             </div>
@@ -111,6 +48,8 @@
             </div>
         </div>
     </div>
-</div> 
+</div>
 
-<script src="{% static 'js/usuarios/nuevo_usuario.js' %}"></script>
+<!-- Asegurarnos que jQuery está disponible -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/nuevo_usuario.js' %}"></script>

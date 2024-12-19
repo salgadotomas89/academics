@@ -1,5 +1,7 @@
+{% load static %}
 <!-- Contenido de Usuarios -->
-<div id="usuariosContent" class="content-section" style="display: none;">
+<div id="usuariosContent" class="content-section" style="display: none;" 
+     data-cargar-url="{% url 'cargar_usuarios' %}">
     <div class="row">
         <div class="col-12">
             <div class="d-flex justify-content-between align-items-center mb-4">
@@ -86,3 +88,10 @@
         </div>
     </div>
 </div> 
+
+<!-- Los scripts pueden moverse a base.html o a un bloque específico para scripts -->
+<script src="{% static 'js/usuarios.js' %}"></script>
+<script src="{% static 'js/nuevo_usuario.js' %}"></script>
+
+<!-- Al final del archivo, junto con los otros modales -->
+{% include 'modals/editar_usuario.html' %}
