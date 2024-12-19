@@ -20,4 +20,5 @@ urlpatterns = [
     path('colegios/crear/', views.crear_colegio, name='crear_colegio'),#crear colegio
     path('personas/crear/', views.crear_persona, name='crear_persona'),#crear persona
     path('colegios/cambiar-admin/', views.cambiar_administrador, name='cambiar_administrador'),#cambiar administrador
+    path('colegios/get-personas/', views.get_personas_colegio, name='get_personas_colegio'),
 ]

@@ -61,7 +61,7 @@ def cargar_usuarios(request):
             'role_id',
             'email',
             'is_active'
-        )
+        ).distinct()
 
         print(f"Usuarios encontrados: {list(usuarios)}")
 

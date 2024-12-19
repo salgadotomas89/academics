@@ -163,13 +163,9 @@
                     <div class="mb-3">
                         <label class="form-label">Seleccionar Nuevo Administrador</label>
                         <select class="form-select" name="new_admin_id" required>
-                            <option value="">Seleccione una persona</option>
-                            {% for persona in personas %}
-                            <option value="{{ persona.person_id }}">
-                                {{ persona.first_name }} {{ persona.last_name }}
-                            </option>
-                            {% endfor %}
+                            <option value="">Seleccione una persona del establecimiento</option>
                         </select>
+                        <small class="form-text text-muted">Solo se muestran personas del establecimiento</small>
                     </div>
                 </form>
             </div>
@@ -274,6 +270,38 @@ document.addEventListener('DOMContentLoaded', function() {
         var button = event.relatedTarget
         var organizationId = button.getAttribute('data-organization-id')
         document.getElementById('change_organization_id').value = organizationId
+        
+        // Cargar las personas del colegio
+        const formData = new FormData();
+        formData.append('organization_id', organizationId);
+        
+        fetch('/colegios/get-personas/', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                const select = document.querySelector('#cambiarAdminForm select[name="new_admin_id"]');
+                select.innerHTML = '<option value="">Seleccione una persona del establecimiento</option>';
+                
+                data.personas.forEach(persona => {
+                    const option = document.createElement('option');
+                    option.value = persona.person_id;
+                    option.textContent = `${persona.first_name} ${persona.last_name}`;
+                    select.appendChild(option);
+                });
+            } else {
+                alert('Error al cargar las personas: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error al cargar las personas del establecimiento');
+        });
     })
 });
 

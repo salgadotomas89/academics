@@ -275,13 +275,10 @@ def colegios(request):
     total_colegios = colegios.count()
     colegios_list = list(colegios.values('pk', 'rbd', 'name', 'admin_name', 'admin_email'))
 
-    # Obtener todas las personas para el selector de nuevo administrador
-    personas = Person.objects.all().values('person_id', 'first_name', 'last_name')
-    
+    # Ya no necesitamos precargar las personas aquí, las cargaremos dinámicamente
     return render(request, 'colegios.html', {
         'colegios': colegios_list,
-        'total_colegios': total_colegios,
-        'personas': personas
+        'total_colegios': total_colegios
     })
 
 @csrf_protect
@@ -422,6 +419,38 @@ def cambiar_administrador(request):
                     'message': 'Administrador cambiado exitosamente'
                 })
                 
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            })
+    
+    return JsonResponse({
+        'status': 'error',
+        'message': 'Método no permitido'
+    })
+
+# Agregar esta nueva vista para obtener las personas del colegio
+@csrf_protect
+def get_personas_colegio(request):
+    if request.method == 'POST':
+        try:
+            organization_id = request.POST.get('organization_id')
+            
+            # Obtener personas del mismo colegio
+            personas = Person.objects.filter(
+                organizationpersonrole__organization_id=organization_id
+            ).distinct().values(
+                'person_id',
+                'first_name',
+                'last_name'
+            )
+            
+            return JsonResponse({
+                'status': 'success',
+                'personas': list(personas)
+            })
+            
         except Exception as e:
             return JsonResponse({
                 'status': 'error',
