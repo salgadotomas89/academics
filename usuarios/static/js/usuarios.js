@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     headers: {
                         'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
                     },
-                    body: formData
+                    body: formData  // Enviamos el FormData directamente
                 })
                 .then(response => {
                     if (!response.ok) {

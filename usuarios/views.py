@@ -275,11 +275,33 @@ def actualizar_usuario(request, user_id):
             person.last_name = request.POST.get('last_name')
             person.save()
             
-            # Actualizar email si cambió
-            if person.user and person.user.email != request.POST.get('email'):
-                person.user.email = request.POST.get('email')
-                person.user.username = request.POST.get('email')
+            # Actualizar email
+            email = request.POST.get('email')
+            if person.user and email:
+                # Verificar si el email ya existe en otro usuario
+                existing_user = User.objects.filter(email=email).exclude(pk=person.user.pk).first()
+                if existing_user:
+                    return JsonResponse({
+                        'success': False,
+                        'message': 'El email ya está en uso por otro usuario'
+                    }, status=400)
+                
+                person.user.email = email
+                person.user.username = email
                 person.user.save()
+                
+                # Actualizar también en PersonEmailAddress si existe
+                email_address = PersonEmailAddress.objects.filter(person=person).first()
+                if email_address:
+                    email_address.email_address = email
+                    email_address.save()
+                else:
+                    # Crear nuevo PersonEmailAddress si no existe
+                    PersonEmailAddress.objects.create(
+                        person=person,
+                        email_address=email,
+                        ref_email_type_id=1  # Asumiendo que 1 es el ID para email principal
+                    )
             
             # Actualizar rol
             org_role = OrganizationPersonRole.objects.filter(person=person).first()
