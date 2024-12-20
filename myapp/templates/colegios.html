@@ -13,6 +13,7 @@
                         <i class="bi bi-plus-lg"></i> Nuevo Colegio
                     </button>
                 </div>
+                <!-- Tabla de colegios -->
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-hover">
@@ -20,8 +21,9 @@
                                 <tr>
                                     <th>RBD</th>
                                     <th>Nombre</th>
-                                    <th>Administrador</th>
-                                    <th>Correo</th>
+                                    <th>Administrador/s</th>
+                                    <th>Rol</th>
+                                    <th>Fecha de Creación</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -31,30 +33,36 @@
                                     <td>{{ colegio.rbd }}</td>
                                     <td>{{ colegio.name }}</td>
                                     <td>{{ colegio.admin_name|default:"Sin administrador" }}</td>
-                                    <td>{{ colegio.admin_email|default:"-" }}</td>
+                                    <td>{{ colegio.admin_role_name|default:"" }}</td>
+                                    <td>{{ colegio.created_at|date:"d/m/Y H:i" }}</td>
                                     <td>
                                         <button class="btn btn-sm btn-outline-primary">
                                             <i class="bi bi-pencil"></i>
                                         </button>
+                                        <button class="btn btn-sm btn-outline-info" 
+                                                onclick="verUsuariosColegio('{{ colegio.pk }}')"
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#usuariosColegioModal">
+                                            <i class="bi bi-people"></i>
+                                        </button>
+                                        {% if not colegio.admin_role_name %}
                                         <button class="btn btn-sm btn-outline-success" 
                                                 data-bs-toggle="modal" 
                                                 data-bs-target="#nuevaPersonaModal"
                                                 data-organization-id="{{ colegio.pk }}">
                                             <i class="bi bi-person-plus"></i>
                                         </button>
-                                        {% if colegio.admin_name %}
-                                        <button class="btn btn-sm btn-outline-warning" 
-                                                data-bs-toggle="modal" 
-                                                data-bs-target="#cambiarAdminModal"
-                                                data-organization-id="{{ colegio.pk }}">
-                                            <i class="bi bi-person-gear"></i>
-                                        </button>
                                         {% endif %}
+                                        <button class="btn btn-sm btn-outline-danger" 
+                                                onclick="confirmarEliminarColegio('{{ colegio.pk }}', '{{ colegio.name }}')"
+                                                title="Eliminar colegio">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
                                     </td>
                                 </tr>
                                 {% empty %}
                                 <tr>
-                                    <td colspan="5" class="text-center">No hay colegios registrados</td>
+                                    <td colspan="6" class="text-center">No hay colegios registrados</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -74,6 +82,57 @@
                     <div class="d-flex justify-content-between mb-3">
                         <span>Total Colegios:</span>
                         <span class="fw-bold">{{ total_colegios }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Total Personas:</span>
+                        <span class="fw-bold">{{ total_personas }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- tabla de Lista de Personas -->
+        <div class="col-12 mt-4">
+            <div class="card shadow">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">Personas Registradas</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Email</th>
+                                    <th>Rol</th>
+                                    <th>Institución</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for persona in personas %}
+                                <tr>
+                                    <td>{{ persona.first_name }}</td>
+                                    <td>{{ persona.last_name }}</td>
+                                    <td>{{ persona.email|default:"" }}</td>
+                                    <td>{{ persona.role_name|default:"Sin rol" }}</td>
+                                    <td>{{ persona.organization_name|default:"No asignado" }}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-danger" 
+                                                onclick="confirmarEliminarPersona('{{ persona.person_id }}', '{{ persona.first_name }} {{ persona.last_name }}')"
+                                                title="Eliminar persona">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="6" class="text-center">No hay personas registradas</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -110,12 +169,12 @@
     </div>
 </div>
 
-<!-- Modal Nueva Persona -->
+<!-- Modal para agregar el administrador maestro el cual tiene el rol de posteriormente rellenar informacion de la institucion -->
 <div class="modal fade" id="nuevaPersonaModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Registrar Nueva Persona</h5>
+                <h5 class="modal-title">Agregar Administrador Master</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -148,30 +207,73 @@
     </div>
 </div>
 
-<!-- Modal Cambiar Administrador -->
-<div class="modal fade" id="cambiarAdminModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
+<!-- Modal Usuarios del Colegio -->
+<div class="modal fade" id="usuariosColegioModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Cambiar Administrador</h5>
+                <h5 class="modal-title">Usuarios del Colegio</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="cambiarAdminForm">
-                    {% csrf_token %}
-                    <input type="hidden" name="organization_id" id="change_organization_id">
-                    <div class="mb-3">
-                        <label class="form-label">Seleccionar Nuevo Administrador</label>
-                        <select class="form-select" name="new_admin_id" required>
-                            <option value="">Seleccione una persona del establecimiento</option>
-                        </select>
-                        <small class="form-text text-muted">Solo se muestran personas del establecimiento</small>
-                    </div>
-                </form>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Rol</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usuariosColegioTableBody">
+                            <!-- Los usuarios se cargarán dinámicamente aquí -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de confirmación -->
+<div class="modal fade" id="confirmarEliminarModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmar eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea eliminar el colegio <span id="nombreColegioEliminar"></span>?</p>
+                <p class="text-danger">Esta acción no se puede deshacer. Se descargará un archivo con el respaldo de los datos antes de eliminar.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" id="cambiarAdminBtn">Guardar Cambios</button>
+                <button type="button" class="btn btn-danger" id="confirmarEliminarBtn">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Agregar el modal de confirmación para eliminar persona -->
+<div class="modal fade" id="confirmarEliminarPersonaModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmar eliminación de persona</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea eliminar a <span id="nombrePersonaEliminar"></span>?</p>
+                <p class="text-danger">Esta acción no se puede deshacer. Se descargará un archivo con el respaldo de los datos antes de eliminar.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirmarEliminarPersonaBtn">Eliminar</button>
             </div>
         </div>
     </div>
@@ -263,78 +365,155 @@ document.getElementById('guardarPersonaBtn').addEventListener('click', function(
     });
 });
 
-// Capturar el ID de la organización para el modal de cambio de administrador
-document.addEventListener('DOMContentLoaded', function() {
-    var cambiarAdminModal = document.getElementById('cambiarAdminModal')
-    cambiarAdminModal.addEventListener('show.bs.modal', function (event) {
-        var button = event.relatedTarget
-        var organizationId = button.getAttribute('data-organization-id')
-        document.getElementById('change_organization_id').value = organizationId
-        
-        // Cargar las personas del colegio
-        const formData = new FormData();
-        formData.append('organization_id', organizationId);
-        
-        fetch('/colegios/get-personas/', {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
-            }
-        })
+function verUsuariosColegio(colegioId) {
+    fetch(`/colegios/${colegioId}/usuarios/`)
         .then(response => response.json())
         .then(data => {
-            if (data.status === 'success') {
-                const select = document.querySelector('#cambiarAdminForm select[name="new_admin_id"]');
-                select.innerHTML = '<option value="">Seleccione una persona del establecimiento</option>';
-                
-                data.personas.forEach(persona => {
-                    const option = document.createElement('option');
-                    option.value = persona.person_id;
-                    option.textContent = `${persona.first_name} ${persona.last_name}`;
-                    select.appendChild(option);
-                });
-            } else {
-                alert('Error al cargar las personas: ' + data.message);
-            }
+            const tbody = document.getElementById('usuariosColegioTableBody');
+            tbody.innerHTML = '';
+            
+            data.usuarios.forEach(usuario => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${usuario.first_name} ${usuario.last_name}</td>
+                    <td>${usuario.email}</td>
+                    <td>${usuario.role_name}</td>
+                    <td>
+                        ${!data.tiene_admin_maestro && usuario.role_id !== 3 ? `
+                            <button class="btn btn-sm btn-success" 
+                                    onclick="asignarAdminMaestro(${colegioId}, ${usuario.person_id})">
+                                Hacer Admin Maestro
+                            </button>
+                        ` : ''}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Error al cargar las personas del establecimiento');
+            alert('Error al cargar los usuarios');
         });
-    })
-});
+}
 
-// Manejar el cambio de administrador
-document.getElementById('cambiarAdminBtn').addEventListener('click', function() {
-    const form = document.getElementById('cambiarAdminForm');
-    const formData = new FormData(form);
-
-    if (!formData.get('new_admin_id')) {
-        alert('Por favor seleccione un nuevo administrador');
+function asignarAdminMaestro(colegioId, personId) {
+    if (!confirm('¿Está seguro de asignar a este usuario como Administrador Maestro?')) {
         return;
     }
 
-    fetch('/colegios/cambiar-admin/', {
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    
+    fetch(`/colegios/${colegioId}/asignar-admin-maestro/${personId}/`, {
         method: 'POST',
-        body: formData,
         headers: {
-            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            'X-CSRFToken': csrfToken,
+            'Content-Type': 'application/json'
         }
     })
     .then(response => response.json())
     .then(data => {
         if (data.status === 'success') {
-            alert('Administrador cambiado exitosamente');
-            $('#cambiarAdminModal').modal('hide');
+            alert('Administrador Maestro asignado exitosamente');
             location.reload();
         } else {
-            alert('Error: ' + data.message);
+            alert(data.message);
         }
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('Error al cambiar administrador: ' + error);
+        alert('Error al asignar el Administrador Maestro');
+    });
+}
+
+let colegioIdAEliminar = null;
+
+function confirmarEliminarColegio(colegioId, nombreColegio) {
+    colegioIdAEliminar = colegioId;
+    document.getElementById('nombreColegioEliminar').textContent = nombreColegio;
+    const modal = new bootstrap.Modal(document.getElementById('confirmarEliminarModal'));
+    modal.show();
+}
+
+document.getElementById('confirmarEliminarBtn').addEventListener('click', function() {
+    if (!colegioIdAEliminar) return;
+
+    // Realizar la solicitud para eliminar el colegio
+    fetch(`/colegios/${colegioIdAEliminar}/eliminar/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            // Si es exitoso, el servidor enviará el archivo JSON para descargar
+            return response.blob();
+        }
+        return response.json().then(data => {
+            throw new Error(data.message || 'Error al eliminar el colegio');
+        });
+    })
+    .then(blob => {
+        // Descargar el archivo de respaldo
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `colegio_${colegioIdAEliminar}_backup.json`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        
+        // Cerrar el modal y recargar la página
+        bootstrap.Modal.getInstance(document.getElementById('confirmarEliminarModal')).hide();
+        location.reload();
+    })
+    .catch(error => {
+        alert('Error: ' + error.message);
+    });
+});
+
+let personaIdAEliminar = null;
+
+function confirmarEliminarPersona(personaId, nombreCompleto) {
+    personaIdAEliminar = personaId;
+    document.getElementById('nombrePersonaEliminar').textContent = nombreCompleto;
+    const modal = new bootstrap.Modal(document.getElementById('confirmarEliminarPersonaModal'));
+    modal.show();
+}
+
+document.getElementById('confirmarEliminarPersonaBtn').addEventListener('click', function() {
+    if (!personaIdAEliminar) return;
+
+    fetch(`/personas/${personaIdAEliminar}/eliminar/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.blob();
+        }
+        return response.json().then(data => {
+            throw new Error(data.message || 'Error al eliminar la persona');
+        });
+    })
+    .then(blob => {
+        // Descargar el archivo de respaldo
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `persona_${personaIdAEliminar}_backup.json`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        
+        // Cerrar el modal y recargar la página
+        bootstrap.Modal.getInstance(document.getElementById('confirmarEliminarPersonaModal')).hide();
+        location.reload();
+    })
+    .catch(error => {
+        alert('Error: ' + error.message);
     });
 });
 </script>

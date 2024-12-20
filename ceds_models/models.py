@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 class Person(models.Model):
     """
@@ -122,6 +123,7 @@ class Organization(models.Model):
     ref_organization_type_id = models.IntegerField()
     short_name = models.CharField(max_length=30, null=True, blank=True)
     region_geo_json = models.CharField(max_length=2000, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
 class OrganizationPersonRole(models.Model):
     """

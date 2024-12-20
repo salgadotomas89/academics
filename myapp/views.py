@@ -43,6 +43,11 @@ from ceds_models.models import OrganizationPersonRole
 from django.db.models import Subquery, OuterRef, Value, CharField
 from django.db.models.functions import Concat
 from django.db import models
+from django.db.models import Case, When
+
+from django.http import HttpResponse
+from django.core.serializers import serialize
+from django.db.models import Prefetch
 
 logger = logging.getLogger(__name__)
 
@@ -219,31 +224,13 @@ def demo1(request):
     return render(request, 'demo1.html')
 
 def colegios(request):
-    # Verificar todos los roles existentes
-    print("Todos los roles:")
-    all_roles = OrganizationPersonRole.objects.all().values(
-        'organization_id', 
-        'person_id', 
-        'role_id',
-        'person__first_name',
-        'person__last_name'
-    )
-    print(all_roles)
-
-    # Verificar específicamente los roles con role_id=1
-    print("\nRoles de administrador (role_id=1):")
-    admin_roles = OrganizationPersonRole.objects.filter(role_id=1).values(
-        'organization_id', 
-        'person_id', 
-        'role_id',
-        'person__first_name',
-        'person__last_name'
-    )
-    print(admin_roles)
-
-    colegios = Organization.objects.filter(
+    # Primero obtenemos las organizaciones base sin anotaciones
+    colegios_base = Organization.objects.filter(
         ref_organization_type_id=28
-    ).annotate(
+    ).distinct()
+
+    # Luego agregamos las anotaciones
+    colegios = colegios_base.annotate(
         rbd=Subquery(
             OrganizationIdentifier.objects.filter(
                 organization=OuterRef('pk'),
@@ -253,7 +240,7 @@ def colegios(request):
         admin_name=Subquery(
             OrganizationPersonRole.objects.filter(
                 organization=OuterRef('pk'),
-                role_id=1
+                role_id=3
             ).annotate(
                 full_name=Concat(
                     'person__first_name', 
@@ -266,19 +253,75 @@ def colegios(request):
         admin_email=Subquery(
             OrganizationPersonRole.objects.filter(
                 organization=OuterRef('pk'),
-                role_id=1
+                role_id=3
             ).values('person__user__email')[:1]
+        ),
+        admin_role_name=Subquery(
+            OrganizationPersonRole.objects.filter(
+                organization=OuterRef('pk'),
+                role_id=3
+            ).annotate(
+                role_desc=Case(
+                    When(role_id=1, then=Value('Profesor')),
+                    When(role_id=2, then=Value('Administrador')),
+                    When(role_id=3, then=Value('Administrador Maestro')),
+                    When(role_id=4, then=Value('Secretaria')),
+                    default=Value('Sin rol'),
+                    output_field=CharField(),
+                )
+            ).values('role_desc')[:1]
         )
     )
 
-    # Obtener el total antes de convertir a lista
-    total_colegios = colegios.count()
-    colegios_list = list(colegios.values('pk', 'rbd', 'name', 'admin_name', 'admin_email'))
+    # Convertimos a lista y eliminamos duplicados basados en RBD
+    colegios_list = []
+    rbds_vistos = set()
+    
+    for colegio in colegios.values('pk', 'rbd', 'name', 'admin_name', 'admin_email', 'admin_role_name', 'created_at'):
+        if colegio['rbd'] not in rbds_vistos:
+            rbds_vistos.add(colegio['rbd'])
+            colegios_list.append(colegio)
 
-    # Ya no necesitamos precargar las personas aquí, las cargaremos dinámicamente
+    # Obtener todas las personas registradas
+    personas = Person.objects.annotate(
+        email=Subquery(
+            User.objects.filter(
+                person=OuterRef('pk')
+            ).values('email')[:1]
+        ),
+        role_name=Subquery(
+            OrganizationPersonRole.objects.filter(
+                person=OuterRef('pk')
+            ).annotate(
+                role_desc=Case(
+                    When(role_id=1, then=Value('Profesor')),
+                    When(role_id=2, then=Value('Administrador')),
+                    When(role_id=3, then=Value('Administrador Maestro')),
+                    When(role_id=4, then=Value('Secretaria')),
+                    default=Value('Sin rol'),
+                    output_field=CharField(),
+                )
+            ).values('role_desc')[:1]
+        ),
+        organization_name=Subquery(
+            OrganizationPersonRole.objects.filter(
+                person=OuterRef('pk')
+            ).values('organization__name')[:1]
+        )
+    ).values(
+        'person_id',
+        'first_name',
+        'last_name',
+        'email',
+        'role_name',
+        'organization_name'
+    )
+
     return render(request, 'colegios.html', {
         'colegios': colegios_list,
-        'total_colegios': total_colegios
+        'total_colegios': len(colegios_list),
+        'personas': personas,
+        'total_personas': personas.count()
     })
 
 @csrf_protect
@@ -319,20 +362,33 @@ def crear_colegio(request):
 def crear_persona(request):
     if request.method == 'POST':
         try:
-            print("\nDatos recibidos:")
-            print("organization_id:", request.POST.get('organization_id'))
-            print("email:", request.POST.get('email'))
-            print("first_name:", request.POST.get('first_name'))
-            print("last_name:", request.POST.get('last_name'))
-
-            # Verificar si ya existe un usuario con ese email
-            if User.objects.filter(email=request.POST['email']).exists():
-                return JsonResponse({
-                    'status': 'error',
-                    'message': 'Ya existe un usuario con ese correo electrónico'
-                })
-
             with transaction.atomic():
+                # Verificar si ya existe un admin maestro para esta organización
+                organization_id = request.POST['organization_id']
+                admin_maestro_exists = OrganizationPersonRole.objects.filter(
+                    organization_id=organization_id,
+                    role_id=3  # ID para admin maestro
+                ).exists()
+                
+                if admin_maestro_exists:
+                    return JsonResponse({
+                        'status': 'error',
+                        'message': 'Ya existe un Administrador Maestro para esta organización'
+                    })
+
+                print("\nDatos recibidos:")
+                print("organization_id:", request.POST.get('organization_id'))
+                print("email:", request.POST.get('email'))
+                print("first_name:", request.POST.get('first_name'))
+                print("last_name:", request.POST.get('last_name'))
+
+                # Verificar si ya existe un usuario con ese email
+                if User.objects.filter(email=request.POST['email']).exists():
+                    return JsonResponse({
+                        'status': 'error',
+                        'message': 'Ya existe un usuario con ese correo electrónico'
+                    })
+
                 # Crear el usuario de Django
                 user = User.objects.create_user(
                     username=request.POST['email'],
@@ -363,10 +419,11 @@ def crear_persona(request):
                 organization = Organization.objects.get(pk=request.POST['organization_id'])
                 print("Organización encontrada:", organization.pk)
                 
+                # Modificamos para usar role_id=3 para admin maestro
                 role = OrganizationPersonRole.objects.create(
                     organization=organization,
                     person=person,
-                    role_id=1,  # ID para rol de administrador
+                    role_id=3,  # 3 para administrador maestro
                     entry_date=timezone.now()
                 )
                 print("\nRol creado:")
@@ -377,7 +434,7 @@ def crear_persona(request):
                 
                 return JsonResponse({
                     'status': 'success',
-                    'message': 'Persona creada exitosamente'
+                    'message': 'Administrador maestro creado exitosamente'
                 })
                 
         except Exception as e:
@@ -461,3 +518,164 @@ def get_personas_colegio(request):
         'status': 'error',
         'message': 'Método no permitido'
     })
+
+#obtener usuarios de un colegio
+def obtener_usuarios_colegio(request, colegio_id):
+    try:
+        # Verificar si existe un admin maestro
+        tiene_admin_maestro = OrganizationPersonRole.objects.filter(
+            organization_id=colegio_id,
+            role_id=3
+        ).exists()
+
+        # Obtener todos los usuarios del colegio
+        usuarios = Person.objects.filter(
+            organizationpersonrole__organization_id=colegio_id
+        ).annotate(
+            role_id=Subquery(
+                OrganizationPersonRole.objects.filter(
+                    person=OuterRef('pk'),
+                    organization_id=colegio_id
+                ).values('role_id')[:1]
+            ),
+            role_name=Case(
+                When(organizationpersonrole__role_id=1, then=Value('Profesor')),
+                When(organizationpersonrole__role_id=2, then=Value('Administrador')),
+                When(organizationpersonrole__role_id=3, then=Value('Administrador Maestro')),
+                When(organizationpersonrole__role_id=4, then=Value('Secretaria')),
+                default=Value('Sin rol'),
+                output_field=CharField(),
+            )
+        ).values(
+            'person_id',
+            'first_name',
+            'last_name',
+            'user__email',
+            'role_id',
+            'role_name'
+        )
+
+        return JsonResponse({
+            'usuarios': list(usuarios),
+            'tiene_admin_maestro': tiene_admin_maestro
+        })
+    except Exception as e:
+        return JsonResponse({
+            'error': str(e)
+        }, status=500)
+
+@csrf_protect
+def asignar_admin_maestro(request, colegio_id, person_id):
+    if request.method != 'POST':
+        return JsonResponse({'status': 'error', 'message': 'Método no permitido'}, status=405)
+
+    try:
+        with transaction.atomic():
+            # Verificar si ya existe un admin maestro
+            if OrganizationPersonRole.objects.filter(
+                organization_id=colegio_id,
+                role_id=3
+            ).exists():
+                return JsonResponse({
+                    'status': 'error',
+                    'message': 'Ya existe un Administrador Maestro para este colegio'
+                })
+
+            # Actualizar el rol de la persona a admin maestro
+            OrganizationPersonRole.objects.filter(
+                organization_id=colegio_id,
+                person_id=person_id
+            ).update(role_id=3)
+
+            return JsonResponse({
+                'status': 'success',
+                'message': 'Administrador Maestro asignado exitosamente'
+            })
+
+    except Exception as e:
+        return JsonResponse({
+            'status': 'error',
+            'message': str(e)
+        }, status=500)
+
+@csrf_protect
+def eliminar_colegio(request, colegio_id):
+    try:
+        with transaction.atomic():
+            # Obtener el colegio y sus datos relacionados
+            colegio = Organization.objects.get(pk=colegio_id)
+            
+            # Recopilar todos los datos relacionados
+            datos_colegio = {
+                'organization': json.loads(serialize('json', [colegio])),
+                'identifiers': json.loads(serialize('json', colegio.organizationidentifier_set.all())),
+                'roles': json.loads(serialize('json', colegio.organizationpersonrole_set.all())),
+                'locations': json.loads(serialize('json', colegio.organizationlocation_set.all())),
+                'emails': json.loads(serialize('json', colegio.organizationemail_set.all())),
+                'telephones': json.loads(serialize('json', colegio.organizationtelephone_set.all())),
+                'websites': json.loads(serialize('json', colegio.organizationwebsite_set.all() if hasattr(colegio, 'organizationwebsite') else [])),
+            }
+            
+            # Crear el archivo JSON para descargar
+            response = HttpResponse(
+                json.dumps(datos_colegio, indent=4),
+                content_type='application/json'
+            )
+            response['Content-Disposition'] = f'attachment; filename="colegio_{colegio_id}_backup.json"'
+            
+            # Eliminar el colegio y todos sus datos relacionados
+            colegio.delete()
+            
+            return response
+
+    except Organization.DoesNotExist:
+        return JsonResponse({
+            'status': 'error',
+            'message': 'Colegio no encontrado'
+        }, status=404)
+    except Exception as e:
+        return JsonResponse({
+            'status': 'error',
+            'message': str(e)
+        }, status=500)
+
+@csrf_protect
+def eliminar_persona(request, person_id):
+    try:
+        with transaction.atomic():
+            # Obtener la persona y sus datos relacionados
+            persona = Person.objects.get(pk=person_id)
+            
+            # Recopilar datos para el backup
+            datos_persona = {
+                'person': json.loads(serialize('json', [persona])),
+                'roles': json.loads(serialize('json', persona.organizationpersonrole_set.all())),
+                'user': json.loads(serialize('json', [persona.user])) if persona.user else None,
+            }
+            
+            # Crear archivo JSON de respaldo
+            response = HttpResponse(
+                json.dumps(datos_persona, indent=4),
+                content_type='application/json'
+            )
+            response['Content-Disposition'] = f'attachment; filename="persona_{person_id}_backup.json"'
+            
+            # Eliminar usuario asociado si existe
+            if persona.user:
+                persona.user.delete()
+            
+            # Eliminar la persona
+            persona.delete()
+            
+            return response
+
+    except Person.DoesNotExist:
+        return JsonResponse({
+            'status': 'error',
+            'message': 'Persona no encontrada'
+        }, status=404)
+    except Exception as e:
+        return JsonResponse({
+            'status': 'error',
+            'message': str(e)
+        }, status=500)

@@ -182,35 +182,33 @@ function mostrarUsuariosEnTabla(usuarios) {
     usuarios.forEach(usuario => {
         const tr = document.createElement('tr');
         
-        const rolesMap = {
-            1: 'Profesor',
-            2: 'Administrador',
-            3: 'Secretaria'
-        };
-
         tr.innerHTML = `
             <td>${usuario.first_name || ''}</td>
             <td>${usuario.last_name || ''}</td>
             <td>${usuario.email || ''}</td>
-            <td>${rolesMap[usuario.role_id] || 'No definido'}</td>
+            <td>${usuario.role_name}</td>
             <td>
                 <span class="badge ${usuario.is_active === null ? 'bg-warning' : usuario.is_active ? 'bg-success' : 'bg-danger'}">
                     ${usuario.is_active === null ? 'Sin estado' : usuario.is_active ? 'Activo' : 'Inactivo'}
                 </span>
             </td>
             <td>
-                <button class="btn btn-sm btn-primary" onclick="editarUsuario(${usuario.person_id})" 
-                    title="Editar usuario">
+                <button class="btn btn-sm btn-primary" 
+                    onclick="editarUsuario(${usuario.person_id})" 
+                    title="Editar usuario"
+                    ${usuario.role_id === 3 ? 'disabled' : ''}>
                     <i class="fas fa-edit"></i>
                 </button>
                 <button class="btn btn-sm ${usuario.is_active ? 'btn-danger' : 'btn-success'}" 
                     onclick="cambiarEstadoUsuario(${usuario.person_id}, ${!usuario.is_active})"
-                    title="${usuario.is_active ? 'Desactivar' : 'Activar'} usuario">
+                    title="${usuario.is_active ? 'Desactivar' : 'Activar'} usuario"
+                    ${usuario.role_id === 3 ? 'disabled' : ''}>
                     <i class="fas fa-power-off"></i>
                 </button>
                 <button class="btn btn-sm btn-danger" 
                     onclick="confirmarEliminarUsuario(${usuario.person_id})"
-                    title="Eliminar usuario">
+                    title="Eliminar usuario"
+                    ${usuario.role_id === 3 ? 'disabled' : ''}>
                     <i class="fas fa-trash"></i>
                 </button>
             </td>
