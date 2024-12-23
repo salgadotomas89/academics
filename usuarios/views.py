@@ -3,12 +3,14 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_protect
 from ceds_models.models import Person, PersonIdentifier, PersonBirthplace, OrganizationPersonRole, PersonRelationship, OrganizationIdentifier, PersonEmailAddress, User
-from django.db import transaction
+from django.db import transaction, OperationalError
 from django.db.models import Subquery, OuterRef
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 import json
+from django.db.models import Q
+import time
 # Create your views here.
 
 # Definir el mapeo de roles a nivel de módulo
@@ -33,10 +35,33 @@ def cargar_usuarios(request):
             
         organization = org_role.organization
         
-        # Busco los usuarios de la organización
+        # Obtener parámetros de filtro
+        search = request.GET.get('search', '').strip()
+        rol = request.GET.get('rol', '')
+        estado = request.GET.get('estado', '')
+        
+        # Query base
         usuarios = Person.objects.filter(
             organizationpersonrole__organization=organization
-        ).annotate(
+        )
+
+        # Aplicar filtros
+        if search:
+            usuarios = usuarios.filter(
+                Q(first_name__icontains=search) | 
+                Q(last_name__icontains=search) |
+                Q(user__email__icontains=search)
+            )
+
+        if rol:
+            usuarios = usuarios.filter(organizationpersonrole__role_id=rol)
+
+        if estado:
+            is_active = True if estado == 'activo' else False
+            usuarios = usuarios.filter(user__is_active=is_active)
+
+        # Continuar con las anotaciones existentes
+        usuarios = usuarios.annotate(
             role_id=Subquery(
                 OrganizationPersonRole.objects.filter(
                     person=OuterRef('pk'),
@@ -64,11 +89,8 @@ def cargar_usuarios(request):
 
         usuarios_list = list(usuarios)
         for usuario in usuarios_list:
-            # Usar el mapeo definido a nivel de módulo
             usuario['role_name'] = ROLE_MAPPING.get(usuario['role_id'], 'Desconocido')
-            print(f"DEBUG - Usuario: {usuario['first_name']}, Rol ID: {usuario['role_id']}, Rol Name: {usuario['role_name']}")
 
-        print(f"Usuarios encontrados: {usuarios_list}")
         return JsonResponse({'usuarios': usuarios_list})
 
     except Exception as e:
@@ -78,101 +100,128 @@ def cargar_usuarios(request):
 @csrf_protect
 @require_http_methods(["POST"])
 def crear_nuevo_usuario(request):
-    try:
-        with transaction.atomic():
-            # Verificar que el usuario esté autenticado
-            if not request.user.is_authenticated:
+    max_attempts = 3
+    attempt = 0
+    
+    while attempt < max_attempts:
+        try:
+            with transaction.atomic():
+                # Verificar autenticación
+                if not request.user.is_authenticated:
+                    return JsonResponse({
+                        'status': 'error',
+                        'message': 'Usuario no autenticado'
+                    }, status=401)
+
+                # Obtener datos del formulario
+                email = request.POST.get('email')
+                password = request.POST.get('password')
+                first_name = request.POST.get('first_name')
+                last_name = request.POST.get('last_name')
+                role = request.POST.get('role')
+
+                # Validaciones básicas
+                if not all([email, password, first_name, last_name, role]):
+                    return JsonResponse({
+                        'status': 'error',
+                        'message': 'Todos los campos son requeridos'
+                    }, status=400)
+
+                # Obtener el usuario y su organización
+                usuario_actual = Person.objects.get(user=request.user)
+                org_role = OrganizationPersonRole.objects.filter(person=usuario_actual).first()
+                
+                if not org_role:
+                    return JsonResponse({
+                        'status': 'error',
+                        'message': 'Usuario no tiene organización asignada'
+                    }, status=400)
+
+                # No permitir crear admin maestro desde aquí
+                if role == 'admin_maestro':
+                    return JsonResponse({
+                        'status': 'error',
+                        'message': 'Los administradores maestros solo pueden ser creados desde el módulo de colegios'
+                    }, status=400)
+
+                # Validar que el email no exista
+                if User.objects.filter(email=email).exists():
+                    return JsonResponse({
+                        'status': 'error',
+                        'message': 'Ya existe un usuario con ese correo electrónico'
+                    }, status=400)
+
+                # Crear usuario de Django
+                user = User.objects.create_user(
+                    username=email,
+                    email=email,
+                    password=password,
+                    first_name=first_name,
+                    last_name=last_name,
+                    is_active=True
+                )
+
+                # Crear persona y relaciones
+                person = Person.objects.create(
+                    user=user,
+                    first_name=first_name,
+                    last_name=last_name,
+                    birthdate='2000-01-01',
+                    ref_sex_id=1,
+                    hispanic_latino_ethnicity=False,
+                    ref_us_citizenship_status_id=1,
+                    ref_state_of_residence_id=1,
+                    ref_proof_of_residency_type_id=1,
+                    ref_highest_education_level_completed_id=1,
+                    ref_personal_information_verification_id=1
+                )
+
+                # Crear PersonEmailAddress
+                PersonEmailAddress.objects.create(
+                    person=person,
+                    email_address=email,
+                    ref_email_type_id=1  # ID para email principal
+                )
+
+                # Mapeo de roles
+                role_mapping = {
+                    'profesor': 1,          # Profesor
+                    'admin': 2,             # Administrador común
+                    'admin_maestro': 3,     # Administrador maestro
+                    'secretaria': 4         # Secretaria
+                }
+                
+                role_id = role_mapping.get(role)
+                
+                # Crear OrganizationPersonRole
+                OrganizationPersonRole.objects.create(
+                    organization=org_role.organization,
+                    person=person,
+                    role_id=role_id,
+                    entry_date=timezone.now()
+                )
+
+                return JsonResponse({
+                    'status': 'success',
+                    'message': 'Usuario creado exitosamente'
+                })
+
+        except OperationalError as e:
+            attempt += 1
+            if attempt == max_attempts:
+                print(f"Error después de {max_attempts} intentos: {str(e)}")
                 return JsonResponse({
                     'status': 'error',
-                    'message': 'Usuario no autenticado'
-                }, status=401)
-
-            # Obtener el usuario y su organización
-            usuario_actual = Person.objects.get(user=request.user)
-            org_role = OrganizationPersonRole.objects.filter(person=usuario_actual).first()
+                    'message': 'Error temporal en el servidor, por favor intente nuevamente'
+                }, status=503)
+            time.sleep(0.5)  # Esperar medio segundo antes de reintentar
             
-            if not org_role:
-                return JsonResponse({
-                    'status': 'error',
-                    'message': 'Usuario no tiene organización asignada'
-                }, status=400)
-
-            # No permitir crear admin maestro desde aquí
-            role = request.POST.get('role')
-            if role == 'admin_maestro':
-                return JsonResponse({
-                    'status': 'error',
-                    'message': 'Los administradores maestros solo pueden ser creados desde el módulo de colegios'
-                }, status=400)
-
-            # Validar que el email no exista
-            email = request.POST.get('email')
-            if User.objects.filter(email=email).exists():
-                return JsonResponse({
-                    'status': 'error',
-                    'message': 'Ya existe un usuario con ese correo electrónico'
-                }, status=400)
-
-            # Crear usuario de Django
-            user = User.objects.create_user(
-                username=email,
-                email=email,
-                password=request.POST.get('password'),
-                first_name=request.POST.get('first_name'),
-                last_name=request.POST.get('last_name'),
-                is_active=True
-            )
-
-            # Crear persona
-            person = Person.objects.create(
-                user=user,
-                first_name=request.POST.get('first_name'),
-                last_name=request.POST.get('last_name'),
-                birthdate='2000-01-01',  # Valor por defecto
-                ref_sex_id=1,  # Valores por defecto según tu modelo
-                hispanic_latino_ethnicity=False,
-                ref_us_citizenship_status_id=1,
-                ref_state_of_residence_id=1,
-                ref_proof_of_residency_type_id=1,
-                ref_highest_education_level_completed_id=1,
-                ref_personal_information_verification_id=1
-            )
-
-            # Crear PersonEmailAddress
-            PersonEmailAddress.objects.create(
-                person=person,
-                email_address=email,
-                ref_email_type_id=1  # ID para email principal
-            )
-
-            # Mapeo de roles
-            role_mapping = {
-                'profesor': 1,          # Profesor
-                'admin': 2,             # Administrador común
-                'admin_maestro': 3,     # Administrador maestro
-                'secretaria': 4         # Secretaria
-            }
-            
-            role_id = role_mapping.get(role)
-            
-            # Crear OrganizationPersonRole
-            OrganizationPersonRole.objects.create(
-                organization=org_role.organization,
-                person=person,
-                role_id=role_id,
-                entry_date=timezone.now()
-            )
-
+        except Exception as e:
+            print(f"Error al crear usuario: {str(e)}")
             return JsonResponse({
-                'status': 'success',
-                'message': 'Usuario creado exitosamente'
-            })
-
-    except Exception as e:
-        return JsonResponse({
-            'status': 'error',
-            'message': str(e)
-        }, status=500)
+                'status': 'error',
+                'message': 'Error al crear usuario'
+            }, status=500)
 
 @login_required
 @require_http_methods(["DELETE"])

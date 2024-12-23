@@ -60,35 +60,40 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             })
             .then(response => {
-                console.log('Respuesta recibida:', response.status);
-                if (!response.ok) {
-                    throw new Error('Error al crear usuario. Status: ' + response.status);
-                }
-                return response.json();
+                return response.json().then(data => {
+                    if (data.status === 'success') {
+                        return data;
+                    } else {
+                        // Si el servidor devuelve un error específico
+                        throw new Error(data.message || 'Error al crear usuario');
+                    }
+                });
             })
             .then(data => {
-                console.log('Datos recibidos:', data);
-                if (data.status === 'success') {
-                    alert('Usuario creado exitosamente');
-                    form.reset();
-                    // Usar Bootstrap para cerrar el modal
-                    const modalInstance = bootstrap.Modal.getInstance(modal);
-                    modalInstance.hide();
-                    // Recargar la tabla de usuarios usando la función global
-                    if (typeof window.cargarUsuarios === 'function') {
-                        window.cargarUsuarios();
-                    } else {
-                        console.error('La función cargarUsuarios no está disponible');
-                    }
-                } else {
-                    throw new Error(data.message || 'Error al crear usuario');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: 'Usuario creado exitosamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                form.reset();
+                const modalInstance = bootstrap.Modal.getInstance(modal);
+                modalInstance.hide();
+                if (typeof window.cargarUsuarios === 'function') {
+                    window.cargarUsuarios();
                 }
             })
             .catch(error => {
-                console.error('Error completo:', error);
-                console.error('Mensaje de error:', error.message);
-                console.error('Stack trace:', error.stack);
-                alert('Error al crear usuario: ' + error.message);
+                console.error('Error:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: error.message === 'Error temporal en el servidor, por favor intente nuevamente' 
+                        ? error.message 
+                        : 'Error al crear usuario. Por favor, intente nuevamente.',
+                    confirmButtonText: 'Entendido'
+                });
             });
         } else {
             console.log('Formulario inválido');

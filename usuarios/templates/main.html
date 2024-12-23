@@ -38,6 +38,7 @@
                                 <option value="4">Secretaria</option>
                             </select>
                         </div>
+                        <!--
                         <div class="col-md-3">
                             <label class="form-label">Estado</label>
                             <select class="form-select" id="filterEstado">
@@ -45,7 +46,7 @@
                                 <option value="activo">Activo</option>
                                 <option value="inactivo">Inactivo</option>
                             </select>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
@@ -93,6 +94,7 @@
 <!-- Los scripts pueden moverse a base.html o a un bloque específico para scripts -->
 <script src="{% static 'js/usuarios.js' %}"></script>
 <script src="{% static 'js/nuevo_usuario.js' %}"></script>
+<script src="{% static 'js/filtros_usuarios.js' %}"></script>
 
 <!-- Al final del archivo, junto con los otros modales -->
 {% include 'modals/editar_usuario.html' %}

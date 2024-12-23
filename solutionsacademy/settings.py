@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp',
     'ceds_models',
-    'main',
+    'colegio',
     'autenticacion',
     'usuarios',
 ]
@@ -83,6 +83,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        'ATOMIC_REQUESTS': True,
+        'OPTIONS': {
+            'timeout': 20,  # Tiempo de espera en segundos
+        }
     }
 }
 
