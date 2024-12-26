@@ -1,3 +1,4 @@
+{% load static %}
 <!-- Contenido de Cursos -->
 <div id="cursosContent" class="content-section" style="display: none;">
     <div class="row">
@@ -31,6 +32,8 @@
         </div>
     </div>
 </div>
+
+<script src="{% static 'js/nuevo_curso.js' %}"></script>
 
 {% include 'modals/nuevo_curso.html' %}
 {% include 'modals/asignar_clase.html' %} 
