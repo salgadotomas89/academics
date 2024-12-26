@@ -1,0 +1,51 @@
+<!-- Modal para asignar clase -->
+<div class="modal fade" id="asignarClaseModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Asignar Clase</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="asignarClaseForm">
+                    <input type="hidden" id="selectedDay">
+                    <input type="hidden" id="selectedHour">
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Asignatura</label>
+                        <select class="form-select" id="asignaturaSelect" required>
+                            <option value="">Seleccione una asignatura...</option>
+                            <option value="1">Matemáticas</option>
+                            <option value="2">Lenguaje</option>
+                            <option value="3">Ciencias</option>
+                            <option value="4">Historia</option>
+                            <option value="5">Educación Física</option>
+                            <option value="6">Artes</option>
+                            <option value="7">Música</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Profesor</label>
+                        <select class="form-select" id="profesorSelect" required>
+                            <option value="">Seleccione un profesor...</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Color de fondo</label>
+                        <input type="color" class="form-control form-control-color" id="colorSelect" 
+                               value="#0d6efd" title="Elegir color para la asignatura">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger me-auto" id="btnEliminarClase" style="display: none;">
+                    <i class="fas fa-trash me-2"></i>Eliminar
+                </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="guardarClase()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div> 
