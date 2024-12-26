@@ -1,6 +1,6 @@
 <!-- Modal Nuevo Curso -->
 <div class="modal fade" id="nuevoCursoModal" tabindex="-1">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Crear Nuevo Curso</h5>
@@ -9,59 +9,84 @@
             <div class="modal-body">
                 <form id="nuevoCursoForm">
                     <!-- Información Básica -->
-                    <div class="row mb-3">
-                        <div class="col-md-4">
-                            <label class="form-label">Nivel*</label>
-                            <select class="form-select" name="nivel" required>
-                                <option value="">Seleccionar...</option>
-                                <!-- Se llenará dinámicamente desde la config del colegio -->
-                            </select>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h6 class="mb-0">Información Básica</h6>
                         </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Grado*</label>
-                            <select class="form-select" name="grado" required>
-                                <option value="">Seleccionar...</option>
-                                <!-- Se llenará dinámicamente según el nivel -->
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Letra*</label>
-                            <input type="text" class="form-control" name="letra" required maxlength="1" 
-                                   placeholder="Ej: A, B, C..."
-                                   pattern="[A-Za-z]">
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">RBD*</label>
+                                    <input type="text" class="form-control" name="rbd" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Año Escolar*</label>
+                                    <input type="number" class="form-control" name="ano_escolar" readonly>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Asignación de Personal y Espacio -->
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label">Profesor*</label>
-                            <select class="form-select" name="profesor_jefe" required>
-                                <option value="">Seleccio ...</option>
-                                <!-- Se llenará dinámicamente -->
-                            </select>
+                    <!-- Configuración del Curso -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h6 class="mb-0">Configuración del Curso</h6>
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Sala*</label>
-                            <select class="form-select" name="sala" required>
-                                <option value="">Seleccionar sala...</option>
-                                <!-- Se llenará dinámicamente desde la config del colegio -->
-                            </select>
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label class="form-label">Modalidad*</label>
+                                    <select class="form-select" name="modalidad" required>
+                                        <option value="">Seleccionar...</option>
+                                        <!-- Se llenará dinámicamente -->
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Jornada*</label>
+                                    <select class="form-select" name="jornada" required>
+                                        <option value="">Seleccionar...</option>
+                                        <!-- Se llenará dinámicamente -->
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Nivel*</label>
+                                    <select class="form-select" name="nivel" required>
+                                        <option value="">Seleccionar...</option>
+                                        <!-- Se llenará dinámicamente -->
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Grado*</label>
+                                    <select class="form-select" name="grado" required>
+                                        <option value="">Seleccionar...</option>
+                                        <!-- Se llenará dinámicamente -->
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Letra*</label>
+                                    <input type="text" class="form-control" name="letra" required maxlength="1" 
+                                           placeholder="Ej: A, B, C..."
+                                           pattern="[A-Za-z]">
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Capacidad -->
-                    <div class="mb-3">
-                        <label class="form-label">Capacidad Máxima*</label>
-                        <input type="number" class="form-control" name="capacidad_maxima" 
-                               required min="1" max="45">
-                        <small class="text-muted">Máximo permitido: 45 estudiantes</small>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Observaciones</label>
-                        <textarea class="form-control" name="observaciones" rows="2" 
-                                 placeholder="Información adicional relevante..."></textarea>
+                    <!-- Observaciones -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h6 class="mb-0">Información Adicional</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label">Observaciones</label>
+                                <textarea class="form-control" name="observaciones" rows="2" 
+                                         placeholder="Información adicional relevante..."></textarea>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

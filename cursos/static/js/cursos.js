@@ -5,93 +5,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Inicialización del módulo de cursos
 function initializeCursos() {
-    // Cargar datos iniciales desde la configuración del colegio
-    loadNivelesActivos();
-    loadProfesores();
-    loadSalasDisponibles();
+    // Cargar datos iniciales
     loadCursos();
 
     // Event listeners para filtros
-    document.getElementById('searchCurso').addEventListener('input', filterCursos);
-    document.getElementById('filterNivel').addEventListener('change', filterCursos);
-    document.getElementById('filterProfesor').addEventListener('change', filterCursos);
+    document.getElementById('searchCurso')?.addEventListener('input', filterCursos);
+    document.getElementById('filterNivel')?.addEventListener('change', filterCursos);
 
-    // Event listener para el formulario de nuevo curso
+    // Event listeners para el modal de nuevo curso
+    const modalidadSelect = document.querySelector('select[name="modalidad"]');
     const nivelSelect = document.querySelector('select[name="nivel"]');
-    nivelSelect?.addEventListener('change', function() {
-        updateGradoOptions(this.value);
+    
+    modalidadSelect?.addEventListener('change', function() {
+        cargarNiveles();
     });
-}
-
-// Carga los niveles activos desde la configuración del colegio
-async function loadNivelesActivos() {
-    try {
-        const response = await fetch('/api/colegio/niveles-activos/');
-        const data = await response.json();
-        updateSelectOptions('nivel', data);
-    } catch (error) {
-        console.error('Error cargando niveles:', error);
-    }
-}
-
-// Actualiza las opciones de grado según el nivel seleccionado
-async function updateGradoOptions(nivelId) {
-    try {
-        const response = await fetch(`/api/colegio/grados-activos/${nivelId}/`);
-        const data = await response.json();
-        updateSelectOptions('grado', data);
-    } catch (error) {
-        console.error('Error cargando grados:', error);
-    }
-}
-
-// Carga las salas disponibles desde la configuración del colegio
-async function loadSalasDisponibles() {
-    try {
-        const response = await fetch('/api/colegio/salas-disponibles/');
-        const data = await response.json();
-        updateSelectOptions('sala', data);
-    } catch (error) {
-        console.error('Error cargando salas:', error);
-    }
-}
-
-// Guarda un nuevo curso
-async function guardarNuevoCurso() {
-    const form = document.getElementById('nuevoCursoForm');
-    if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-    }
-
-    const formData = new FormData(form);
-    try {
-        const response = await fetch('/api/cursos/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(Object.fromEntries(formData))
-        });
-
-        if (response.ok) {
-            // Cerrar modal y actualizar lista
-            bootstrap.Modal.getInstance(document.getElementById('nuevoCursoModal')).hide();
-            loadCursos();
-            showAlert('Curso creado exitosamente', 'success');
-        } else {
-            throw new Error('Error al crear el curso');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        showAlert('Error al crear el curso', 'danger');
-    }
+    
+    nivelSelect?.addEventListener('change', function() {
+        cargarGrados();
+    });
 }
 
 // Carga y muestra la lista de cursos
 async function loadCursos() {
     try {
-        const response = await fetch('/api/cursos/');
+        const response = await fetch('/cursos/lista/');
         const cursos = await response.json();
         displayCursos(cursos);
     } catch (error) {
@@ -103,6 +40,8 @@ async function loadCursos() {
 // Muestra los cursos en el contenedor
 function displayCursos(cursos) {
     const container = document.getElementById('cursosContainer');
+    if (!container) return;
+    
     container.innerHTML = '';
 
     cursos.forEach(curso => {
@@ -121,28 +60,24 @@ function createCursoCard(curso) {
             </div>
             <div class="card-body">
                 <div class="mb-3">
-                    <small class="text-muted">Profesor Jefe</small>
-                    <p class="mb-0">${curso.profesor_jefe}</p>
+                    <small class="text-muted">Modalidad</small>
+                    <p class="mb-0">${curso.modalidad}</p>
                 </div>
                 <div class="mb-3">
-                    <small class="text-muted">Cantidad de Alumnos</small>
-                    <p class="mb-0">${curso.cantidad_alumnos} estudiantes</p>
+                    <small class="text-muted">Jornada</small>
+                    <p class="mb-0">${curso.jornada}</p>
                 </div>
                 <div class="mb-3">
-                    <small class="text-muted">Sala</small>
-                    <p class="mb-0">${curso.sala}</p>
+                    <small class="text-muted">Nivel</small>
+                    <p class="mb-0">${curso.nivel}</p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mt-3">
-                    <span class="badge bg-${curso.estado === 'ACTIVO' ? 'success' : 'secondary'}">${curso.estado}</span>
                     <div class="btn-group">
                         <button class="btn btn-sm btn-outline-primary" onclick="editarCurso(${curso.id})">
                             <i class="fas fa-edit"></i>
                         </button>
                         <button class="btn btn-sm btn-outline-danger" onclick="eliminarCurso(${curso.id})">
                             <i class="fas fa-trash"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-info" onclick="verHorario(${curso.id})">
-                            <i class="fas fa-clock"></i>
                         </button>
                     </div>
                 </div>
@@ -154,41 +89,64 @@ function createCursoCard(curso) {
 
 // Filtra los cursos según los criterios seleccionados
 function filterCursos() {
-    const searchTerm = document.getElementById('searchCurso').value.toLowerCase();
-    const nivelFilter = document.getElementById('filterNivel').value;
-    const profesorFilter = document.getElementById('filterProfesor').value;
+    const searchTerm = document.getElementById('searchCurso')?.value.toLowerCase() || '';
+    const nivelFilter = document.getElementById('filterNivel')?.value || '';
 
     const cards = document.querySelectorAll('#cursosContainer .col-md-4');
     cards.forEach(card => {
         const curso = card.querySelector('.card');
         const nombre = curso.querySelector('.card-title').textContent.toLowerCase();
-        const nivel = curso.dataset.nivel;
-        const profesor = curso.querySelector('.card-body p').textContent;
+        const nivel = curso.querySelector('.card-body p:nth-child(3)').textContent;
 
         const matchSearch = nombre.includes(searchTerm);
         const matchNivel = !nivelFilter || nivel === nivelFilter;
-        const matchProfesor = !profesorFilter || profesor === profesorFilter;
 
-        card.style.display = matchSearch && matchNivel && matchProfesor ? '' : 'none';
+        card.style.display = matchSearch && matchNivel ? '' : 'none';
     });
 }
 
 // Funciones de utilidad
-function updateSelectOptions(selectName, options) {
-    const select = document.querySelector(`select[name="${selectName}"]`);
-    if (!select) return;
+function showAlert(message, type = 'info') {
+    const alertContainer = document.getElementById('alertContainer');
+    if (!alertContainer) return;
 
-    const currentValue = select.value;
-    select.innerHTML = '<option value="">Seleccionar...</option>';
-    options.forEach(option => {
-        const optElement = document.createElement('option');
-        optElement.value = option.id;
-        optElement.textContent = option.nombre;
-        select.appendChild(optElement);
-    });
-    if (currentValue) select.value = currentValue;
+    const alert = document.createElement('div');
+    alert.className = `alert alert-${type} alert-dismissible fade show`;
+    alert.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+
+    alertContainer.appendChild(alert);
+    setTimeout(() => alert.remove(), 5000);
 }
 
-function showAlert(message, type) {
-    // Implementar sistema de alertas
+// Funciones para editar y eliminar cursos
+function editarCurso(id) {
+    // Implementar edición de curso
+    console.log('Editar curso:', id);
+}
+
+function eliminarCurso(id) {
+    if (!confirm('¿Está seguro de eliminar este curso?')) return;
+    
+    fetch(`/cursos/eliminar/${id}/`, {
+        method: 'DELETE',
+        headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showAlert('Curso eliminado exitosamente', 'success');
+            loadCursos();
+        } else {
+            throw new Error(data.error || 'Error al eliminar el curso');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showAlert('Error al eliminar el curso', 'danger');
+    });
 } 
