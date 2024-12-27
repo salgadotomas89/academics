@@ -1,11 +1,13 @@
 // Manejador de eventos cuando el documento está listo
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOMContentLoaded');
     initializeCursos();
 });
 
 // Inicialización del módulo de cursos
 function initializeCursos() {
     // Cargar datos iniciales
+    console.log('inicializando cursos');
     loadCursos();
 
     // Event listeners para filtros
@@ -28,12 +30,32 @@ function initializeCursos() {
 // Carga y muestra la lista de cursos
 async function loadCursos() {
     try {
-        const response = await fetch('/cursos/lista/');
-        const cursos = await response.json();
-        displayCursos(cursos);
+        const response = await fetch('/cursos/', {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/json'
+            }
+        });
+        
+        const contentType = response.headers.get('content-type');
+        console.log('Content-Type:', contentType);
+        
+        if (!contentType || !contentType.includes('application/json')) {
+            throw new Error('La respuesta no es JSON');
+        }
+        
+        const responseText = await response.text();
+        console.log('Response text:', responseText);
+        
+        const data = JSON.parse(responseText);
+        if (data.error) {
+            throw new Error(data.error);
+        }
+        displayCursos(data.cursos);
     } catch (error) {
         console.error('Error cargando cursos:', error);
-        showAlert('Error al cargar los cursos', 'danger');
+        showAlert('Error al cargar los cursos: ' + error.message, 'danger');
     }
 }
 
@@ -43,6 +65,17 @@ function displayCursos(cursos) {
     if (!container) return;
     
     container.innerHTML = '';
+
+    if (!cursos || cursos.length === 0) {
+        container.innerHTML = `
+            <div class="col-12">
+                <div class="alert alert-info" role="alert">
+                    No hay cursos registrados.
+                </div>
+            </div>
+        `;
+        return;
+    }
 
     cursos.forEach(curso => {
         container.appendChild(createCursoCard(curso));
@@ -127,26 +160,53 @@ function editarCurso(id) {
     console.log('Editar curso:', id);
 }
 
-function eliminarCurso(id) {
-    if (!confirm('¿Está seguro de eliminar este curso?')) return;
-    
-    fetch(`/cursos/eliminar/${id}/`, {
-        method: 'DELETE',
-        headers: {
-            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
+// Función para eliminar un curso
+async function eliminarCurso(cursoId) {
+    if (!confirm('¿Está seguro que desea eliminar este curso? Esta acción no se puede deshacer.')) {
+        return;
+    }
+
+    try {
+        // Obtener el token CSRF de la cookie
+        const csrftoken = getCookie('csrftoken');
+        
+        const response = await fetch(`/cursos/eliminar/${cursoId}/`, {
+            method: 'DELETE',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': csrftoken,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
             showAlert('Curso eliminado exitosamente', 'success');
+            // Recargar la lista de cursos
             loadCursos();
         } else {
             throw new Error(data.error || 'Error al eliminar el curso');
         }
-    })
-    .catch(error => {
+    } catch (error) {
         console.error('Error:', error);
-        showAlert('Error al eliminar el curso', 'danger');
-    });
+        showAlert('Error al eliminar el curso: ' + error.message, 'danger');
+    }
+}
+
+// Función para obtener el token CSRF de las cookies
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 } 

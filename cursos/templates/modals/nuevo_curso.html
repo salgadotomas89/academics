@@ -8,6 +8,7 @@
             </div>
             <div class="modal-body">
                 <form id="nuevoCursoForm">
+                    {% csrf_token %}
                     <!-- Información Básica -->
                     <div class="card mb-3">
                         <div class="card-header">
@@ -38,22 +39,22 @@
                                     <label class="form-label">Modalidad*</label>
                                     <select class="form-select" name="modalidad" required>
                                         <option value="">Seleccionar...</option>
-                                        <!-- Se llenará dinámicamente -->
                                     </select>
+                                    <small class="form-text text-muted">Regular, Especial o Adulto</small>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">Jornada*</label>
                                     <select class="form-select" name="jornada" required>
                                         <option value="">Seleccionar...</option>
-                                        <!-- Se llenará dinámicamente -->
                                     </select>
+                                    <small class="form-text text-muted">Mañana, Tarde, Completa o Vespertina</small>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">Nivel*</label>
                                     <select class="form-select" name="nivel" required>
                                         <option value="">Seleccionar...</option>
-                                        <!-- Se llenará dinámicamente -->
                                     </select>
+                                    <small class="form-text text-muted">Los niveles se filtran según la modalidad seleccionada</small>
                                 </div>
                             </div>
 
@@ -62,14 +63,19 @@
                                     <label class="form-label">Grado*</label>
                                     <select class="form-select" name="grado" required>
                                         <option value="">Seleccionar...</option>
-                                        <!-- Se llenará dinámicamente -->
                                     </select>
+                                    <small class="form-text text-muted">Seleccione el grado según el nivel educativo</small>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Letra*</label>
-                                    <input type="text" class="form-control" name="letra" required maxlength="1" 
-                                           placeholder="Ej: A, B, C..."
-                                           pattern="[A-Za-z]">
+                                    <input type="text" class="form-control" name="letra" required 
+                                           maxlength="1" 
+                                           value="A"
+                                           placeholder="A-Z"
+                                           pattern="[A-Z]"
+                                           style="text-transform: uppercase;"
+                                           oninput="this.value = this.value.toUpperCase()">
+                                    <small class="form-text text-muted">Solo letras mayúsculas (A-Z)</small>
                                 </div>
                             </div>
                         </div>

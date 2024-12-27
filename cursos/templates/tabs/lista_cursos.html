@@ -12,8 +12,6 @@
                     <label class="form-label">Nivel</label>
                     <select class="form-select" id="filterNivel">
                         <option value="">Todos los niveles</option>
-                        <option value="1">1° Básico</option>
-                        <option value="2">2° Básico</option>
                     </select>
                 </div>
                 <div class="col-md-4">
@@ -28,41 +26,66 @@
 
     <!-- Contenedor de Cursos -->
     <div class="row" id="cursosContainer">
-        <!-- Tarjeta de curso -->
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                <div class="card-header bg-primary bg-opacity-10">
-                    <h5 class="card-title mb-0">1° Básico A</h5>
+        {% if error %}
+            <div class="col-12">
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
                 </div>
-                <div class="card-body">
-                    <div class="mb-3">
-                        <small class="text-muted">Profesor Jefe</small>
-                        <p class="mb-0">Juan Pérez</p>
-                    </div>
-                    <div class="mb-3">
-                        <small class="text-muted">Cantidad de Alumnos</small>
-                        <p class="mb-0">35 estudiantes</p>
-                    </div>
-                    <div class="mb-3">
-                        <small class="text-muted">Sala</small>
-                        <p class="mb-0">101</p>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center mt-3">
-                        <span class="badge bg-success">Activo</span>
-                        <div class="btn-group">
-                            <button class="btn btn-sm btn-outline-primary" onclick="editarCurso(1)">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-sm btn-outline-danger" onclick="eliminarCurso(1)">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                            <button class="btn btn-sm btn-outline-info" onclick="verHorario(1)">
-                                <i class="fas fa-clock"></i>
-                            </button>
+            </div>
+        {% endif %}
+
+        {% if cursos %}
+            {% for curso in cursos %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-primary bg-opacity-10">
+                            <h5 class="card-title mb-0">{{ curso.nombre }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <small class="text-muted">Profesor Jefe</small>
+                                <p class="mb-0">{{ curso.profesor_jefe }}</p>
+                            </div>
+                            <div class="mb-3">
+                                <small class="text-muted">Cantidad de Alumnos</small>
+                                <p class="mb-0">{{ curso.cantidad_alumnos }} estudiantes</p>
+                            </div>
+                            <div class="mb-3">
+                                <small class="text-muted">Modalidad</small>
+                                <p class="mb-0">{{ curso.modalidad }}</p>
+                            </div>
+                            <div class="mb-3">
+                                <small class="text-muted">Nivel</small>
+                                <p class="mb-0">{{ curso.nivel }}</p>
+                            </div>
+                            <div class="mb-3">
+                                <small class="text-muted">Jornada</small>
+                                <p class="mb-0">{{ curso.jornada }}</p>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <span class="badge bg-success">Activo</span>
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-outline-primary" onclick="editarCurso('{{ curso.id }}')">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="eliminarCurso('{{ curso.id }}')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-info" onclick="verHorario('{{ curso.id }}')">
+                                        <i class="fas fa-clock"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <div class="alert alert-info" role="alert">
+                    No hay cursos registrados.
+                </div>
             </div>
-        </div>
+        {% endif %}
     </div>
 </div> 

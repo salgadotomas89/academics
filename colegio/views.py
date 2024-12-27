@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_protect
-from ceds_models.models import Person, PersonIdentifier, PersonBirthplace, OrganizationPersonRole, PersonRelationship, OrganizationIdentifier, PersonEmailAddress, User
+from ceds_models.models import Course, K12Course, Person, PersonIdentifier, PersonBirthplace, OrganizationPersonRole, PersonRelationship, OrganizationIdentifier, PersonEmailAddress, User
 from django.db import transaction
 from django.db.models import Subquery, OuterRef
 from django.contrib.auth.models import User
@@ -114,6 +114,36 @@ def content_view(request):
                     organization=organization,
                     ref_organization_identification_system_id=1
                 ).values_list('identifier', flat=True).first()
+
+
+                #obtener los cursos del establecimiento
+                cursos = Course.objects.filter(
+                    organization=organization
+                ).select_related('organization')
+                
+                #recorrer los cursos e imprimi la informacion que agregamos en el modal de agregar curso
+                print("\n=== Cursos del establecimiento ===")
+                for curso in cursos:
+                    print(f"\nCurso ID: {curso.organization}")
+                    print(f"Nombre: {curso.description}")
+                    print(f"Abreviación: {curso.subject_abbreviation}")
+                    print(f"Minutos de instrucción: {curso.instructional_minutes}")
+                    print(f"Créditos: {curso.credit_value}")
+                    print(f"Certificación: {curso.certification_description}")
+                    
+                    # Obtener información del K12Course asociado
+                    try:
+                        k12_curso = K12Course.objects.get(organization=organization)
+                        print(f"Código SCED: {k12_curso.sced_course_code}")
+                        print(f"Rango de grados: {k12_curso.sced_grade_span}")
+                        print(f"Departamento: {k12_curso.course_department_name}")
+                        print(f"Curso académico principal: {'Sí' if k12_curso.core_academic_course else 'No'}")
+                        print(f"Alineado con estándares: {'Sí' if k12_curso.course_aligned_with_standards else 'No'}")
+                    except K12Course.DoesNotExist:
+                        print("No hay información K12 asociada")
+                    
+                    print("-" * 50)
+
                 
                 # Actualizar el contexto con la información completa
                 context['organization'] = {
@@ -122,6 +152,7 @@ def content_view(request):
                     'type': organization.ref_organization_type_id,
                     'role': organization_role.role_id
                 }
+
                 
                 print("Contexto actualizado:", context)
             
