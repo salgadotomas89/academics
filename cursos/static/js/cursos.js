@@ -154,10 +154,172 @@ function showAlert(message, type = 'info') {
     setTimeout(() => alert.remove(), 5000);
 }
 
-// Funciones para editar y eliminar cursos
-function editarCurso(id) {
-    // Implementar edición de curso
-    console.log('Editar curso:', id);
+// Función para cargar los niveles en el select
+function cargarNivelesEdicion(selectElement) {
+    const niveles = [
+        { id: '01', nombre: 'Educación Parvularia' },
+        { id: '02', nombre: 'Enseñanza Básica' },
+        { id: '05', nombre: 'Enseñanza Media HC' }
+    ];
+
+    selectElement.innerHTML = '<option value="">Seleccione un nivel</option>';
+    niveles.forEach(nivel => {
+        const option = document.createElement('option');
+        option.value = nivel.id;
+        option.textContent = nivel.nombre;
+        selectElement.appendChild(option);
+    });
+}
+
+// Función para cargar los grados según el nivel seleccionado
+function cargarGradosEdicion(nivelId, selectElement) {
+    // Si no se proporciona un elemento select, intentar obtenerlo del DOM
+    if (!selectElement) {
+        selectElement = document.getElementById('editGrado');
+        // Si aún no hay elemento, salir de la función
+        if (!selectElement) return;
+    }
+
+    let grados = [];
+    
+    switch(nivelId) {
+        case '01': // Parvularia
+            grados = [
+                { id: '1', nombre: 'Pre-Kinder' },
+                { id: '2', nombre: 'Kinder' }
+            ];
+            break;
+        case '02': // Básica
+            grados = [
+                { id: '1', nombre: '1º' },
+                { id: '2', nombre: '2º' },
+                { id: '3', nombre: '3º' },
+                { id: '4', nombre: '4º' },
+                { id: '5', nombre: '5º' },
+                { id: '6', nombre: '6º' },
+                { id: '7', nombre: '7º' },
+                { id: '8', nombre: '8º' }
+            ];
+            break;
+        case '05': // Media
+            grados = [
+                { id: '1', nombre: '1º' },
+                { id: '2', nombre: '2º' },
+                { id: '3', nombre: '3º' },
+                { id: '4', nombre: '4º' }
+            ];
+            break;
+    }
+
+    selectElement.innerHTML = '<option value="">Seleccione un grado</option>';
+    grados.forEach(grado => {
+        const option = document.createElement('option');
+        option.value = grado.id;
+        option.textContent = grado.nombre;
+        selectElement.appendChild(option);
+    });
+}
+
+// Funciones para editar un curso
+async function editarCurso(id) {
+    try {
+        // Obtener los datos del curso
+        const response = await fetch(`/cursos/editar/${id}/`, {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al obtener los datos del curso');
+        }
+
+        const data = await response.json();
+        
+        // Cargar los niveles en el select
+        const nivelSelect = document.getElementById('editNivel');
+        cargarNivelesEdicion(nivelSelect);
+        
+        // Establecer el nivel seleccionado
+        nivelSelect.value = data.nivel;
+        
+        // Cargar los grados según el nivel
+        const gradoSelect = document.getElementById('editGrado');
+        cargarGradosEdicion(data.nivel, gradoSelect);
+        
+        // Establecer el grado y letra seleccionados
+        gradoSelect.value = data.grado;
+        document.getElementById('editLetra').value = data.letra;
+
+        // Cargar los profesores en el select
+        const profesorSelect = document.getElementById('editProfesorJefe');
+        profesorSelect.innerHTML = '<option value="">Seleccione un profesor</option>';
+        data.profesores.forEach(profesor => {
+            const option = document.createElement('option');
+            option.value = profesor.id;
+            option.textContent = profesor.nombre;
+            profesorSelect.appendChild(option);
+        });
+
+        // Establecer el profesor jefe actual si existe
+        if (data.profesor_jefe_id) {
+            profesorSelect.value = data.profesor_jefe_id;
+        }
+        
+        // Guardar el ID del curso
+        document.getElementById('editCursoId').value = id;
+
+        // Configurar el event listener para el cambio de nivel
+        nivelSelect.addEventListener('change', function() {
+            cargarGradosEdicion(this.value, gradoSelect);
+        });
+
+        // Abrir el modal
+        const modal = new bootstrap.Modal(document.getElementById('editarCursoModal'));
+        modal.show();
+    } catch (error) {
+        console.error('Error:', error);
+        showAlert('Error al cargar los datos del curso: ' + error.message, 'danger');
+    }
+}
+
+// Función para actualizar un curso
+async function actualizarCurso(event) {
+    event.preventDefault();
+    
+    try {
+        const formData = new FormData(event.target);
+        const cursoId = document.getElementById('editCursoId').value;
+        
+        const response = await fetch(`/cursos/editar/${cursoId}/`, {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            // Cerrar el modal
+            bootstrap.Modal.getInstance(document.getElementById('editarCursoModal')).hide();
+            
+            // Mostrar mensaje de éxito
+            showAlert('Curso actualizado exitosamente', 'success');
+            
+            // Recargar la lista de cursos
+            loadCursos();
+        } else {
+            throw new Error(data.error || 'Error al actualizar el curso');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        showAlert('Error al actualizar el curso: ' + error.message, 'danger');
+    }
 }
 
 // Función para eliminar un curso

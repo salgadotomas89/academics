@@ -425,3 +425,116 @@ def eliminar_curso(request, curso_id):
             'error': str(e)
         }, status=500)
 
+@login_required
+def editar_curso(request, curso_id):
+    try:
+        # Obtener la organización del usuario actual
+        org_role = OrganizationPersonRole.objects.filter(person__user=request.user).first()
+        if not org_role:
+            return JsonResponse({'error': 'Usuario no tiene organización asignada'}, status=400)
+        
+        # Obtener las personas con rol de profesor
+        profesores = Person.objects.filter(
+            organizationpersonrole__organization=org_role.organization,
+            organizationpersonrole__role_id=1  # Rol de profesor
+        ).select_related('user')
+
+        # Imprimir el nombre de los profesores
+        print("\n=== Lista de Profesores ===")
+        for profesor in profesores:
+            print(f"Profesor: {profesor.first_name} {profesor.last_name} - Email: {profesor.user.email if profesor.user else 'Sin email'}")
+        print("===========================\n")
+
+        # Obtener el curso
+        curso = Course.objects.select_related('organization').get(organization__organization_id=curso_id)
+        k12_curso = K12Course.objects.get(organization=curso.organization)
+
+        if request.method == 'GET':
+            # Extraer nivel y grado del nombre del curso
+            nombre_partes = curso.description.split()
+            letra = nombre_partes[-1]  # Última parte es la letra
+            
+            # Determinar nivel y grado basado en el nombre
+            nivel = ''
+            grado = ''
+            
+            if 'Básico' in curso.description:
+                nivel = '02'  # Enseñanza Básica
+                grado = nombre_partes[1][0]  # Primer carácter del número (ej: de "1º" toma "1")
+            elif 'Medio' in curso.description:
+                nivel = '05'  # Enseñanza Media
+                grado = nombre_partes[1][0]
+            elif 'Kinder' in curso.description:
+                nivel = '01'  # Educación Parvularia
+                grado = '2' if 'Kinder' in curso.description else '1'
+
+            # Obtener el profesor jefe actual
+            profesor_jefe_actual = OrganizationPersonRole.objects.filter(
+                organization=curso.organization,
+                role_id=2  # Rol de profesor jefe
+            ).select_related('person').first()
+
+            # Preparar lista de profesores para el select
+            profesores_data = [{
+                'id': profesor.person_id,
+                'nombre': f"{profesor.first_name} {profesor.last_name}",
+                'email': profesor.user.email if profesor.user else ''
+            } for profesor in profesores]
+
+            # Devolver los datos del curso
+            return JsonResponse({
+                'nivel': nivel,
+                'grado': grado,
+                'letra': letra,
+                'profesores': profesores_data,
+                'profesor_jefe_id': profesor_jefe_actual.person.person_id if profesor_jefe_actual else None
+            })
+
+        elif request.method == 'POST':
+            # Obtener datos del formulario
+            nivel = request.POST.get('nivel')
+            grado = request.POST.get('grado')
+            letra = request.POST.get('letra').upper()
+
+            # Determinar el nombre del grado según el nivel
+            nombre_grado = ''
+            if nivel == '01':  # Parvularia
+                nombre_grado = 'Kinder' if grado == '2' else 'Pre-Kinder'
+            elif nivel == '02':  # Básica
+                nombre_grado = f'{grado}º Básico'
+            elif nivel == '05':  # Media
+                nombre_grado = f'{grado}º Medio'
+
+            # Crear el nuevo nombre del curso
+            nuevo_nombre = f"Curso {nombre_grado} {letra}"
+
+            # Verificar si ya existe otro curso con el mismo nombre
+            curso_existente = Course.objects.filter(
+                organization__child_relationships__parent_organization=org_role.organization,
+                description=nuevo_nombre
+            ).exclude(organization__organization_id=curso_id).exists()
+
+            if curso_existente:
+                return JsonResponse({
+                    'error': f'Ya existe un curso con el nombre "{nuevo_nombre}"'
+                }, status=400)
+
+            # Actualizar el curso
+            curso.description = nuevo_nombre
+            curso.save()
+
+            # Actualizar la organización
+            curso.organization.name = nuevo_nombre
+            curso.organization.short_name = nuevo_nombre
+            curso.organization.save()
+
+            return JsonResponse({
+                'success': True,
+                'message': 'Curso actualizado exitosamente'
+            })
+
+    except (Course.DoesNotExist, K12Course.DoesNotExist):
+        return JsonResponse({'error': 'Curso no encontrado'}, status=404)
+    except Exception as e:
+        print(f"Error al editar curso: {str(e)}")
+        return JsonResponse({'error': str(e)}, status=500)

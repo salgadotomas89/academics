@@ -10,6 +10,9 @@
                 </button>
             </div>
 
+            <!-- Contenedor de alertas -->
+            <div id="alertContainer"></div>
+
             <!-- Pestañas de navegación -->
             <ul class="nav nav-tabs mb-4" role="tablist">
                 <li class="nav-item">
@@ -33,9 +36,12 @@
     </div>
 </div>
 
+<!-- Incluir modales -->
+{% include 'modals/nuevo_curso.html' %}
+{% include 'modals/editar_curso.html' %}
+{% include 'modals/asignar_clase.html' %}
+
+<!-- Scripts -->
 <script src="{% static 'js/nuevo_curso.js' %}"></script>
 <script src="{% static 'js/lista_cursos.js' %}"></script>
-<script src="{% static 'js/cursos.js' %}"></script>
-
-{% include 'modals/nuevo_curso.html' %}
-{% include 'modals/asignar_clase.html' %} 
+<script src="{% static 'js/cursos.js' %}"></script> 

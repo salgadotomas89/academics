@@ -1,0 +1,50 @@
+<!-- Modal para editar curso -->
+<div class="modal fade" id="editarCursoModal" tabindex="-1" aria-labelledby="editarCursoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarCursoModalLabel">Editar Curso</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!--la función actualizarCurso se encuentra en cursos.js-->
+            <form id="editarCursoForm" onsubmit="actualizarCurso(event)">
+                <div class="modal-body">
+                    <!-- Campo oculto para el ID del curso -->
+                    <input type="hidden" id="editCursoId" name="cursoId" value="">
+                    
+                    <div class="mb-3">
+                        <label for="editNivel" class="form-label">Nivel</label>
+                        <select class="form-select" name="nivel" id="editNivel" required>
+                            <option value="">Seleccione un nivel</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="editGrado" class="form-label">Grado</label>
+                        <select class="form-select" name="grado" id="editGrado" required>
+                            <option value="">Seleccione un grado</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="editLetra" class="form-label">Letra</label>
+                        <input type="text" class="form-control" name="letra" id="editLetra" required maxlength="1" pattern="[A-Za-z]">
+                        <div class="form-text">Ingrese una letra (A-Z)</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <!-- Profesor Jefe -->
+                        <label for="editProfesorJefe" class="form-label">Profesor Jefe</label>
+                        <select class="form-select" name="profesor_jefe" id="editProfesorJefe" required>
+                            <option value="">Seleccione un profesor</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
