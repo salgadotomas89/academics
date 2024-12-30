@@ -79,6 +79,56 @@ function cargarTablaAlumnos() {
         });
 }
 
+// Función para eliminar alumno
+function eliminarAlumno(alumnoId) {
+    // Mostrar modal de confirmación
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "Esta acción no se puede deshacer",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Realizar la petición para eliminar
+            fetch(`/alumnos/eliminar-alumno/${alumnoId}/`, {
+                method: 'POST',
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Mostrar mensaje de éxito
+                    Swal.fire(
+                        '¡Eliminado!',
+                        'El alumno ha sido eliminado.',
+                        'success'
+                    );
+                    // Recargar la tabla
+                    cargarTablaAlumnos();
+                } else {
+                    // Mostrar mensaje de error
+                    Swal.fire(
+                        'Error',
+                        data.message || 'No se pudo eliminar el alumno',
+                        'error'
+                    );
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire(
+                    'Error',
+                    'Ocurrió un error al eliminar el alumno',
+                    'error'
+                );
+            });
+        }
+    });
+}
+
 // Función para aplicar filtros
 function aplicarFiltros() {
     const nombre = document.getElementById('searchNombre').value.toLowerCase();

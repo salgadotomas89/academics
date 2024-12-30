@@ -242,3 +242,58 @@ def obtener_alumnos(request):
             'message': str(e)
         }, status=400)
     
+@csrf_exempt
+@require_http_methods(["POST"])
+def eliminar_alumno(request, alumno_id):
+    try:
+        # Obtener la persona (alumno)
+        alumno = Person.objects.get(person_id=alumno_id)
+        
+        # Verificar que el alumno pertenece a la organización del usuario
+        org_role = OrganizationPersonRole.objects.filter(person__user=request.user).first()
+        if not org_role:
+            return JsonResponse({'error': 'Usuario no tiene organización asignada'}, status=400)
+            
+        alumno_role = OrganizationPersonRole.objects.filter(
+            person=alumno,
+            organization__child_relationships__parent_organization=org_role.organization,
+            role_id=3  # Rol de alumno
+        ).first()
+        
+        if not alumno_role:
+            return JsonResponse({'error': 'No tienes permiso para eliminar este alumno'}, status=403)
+        
+        # Eliminar el alumno y todas sus relaciones
+        with transaction.atomic():
+            # Eliminar identificadores
+            PersonIdentifier.objects.filter(person=alumno).delete()
+            
+            # Eliminar lugar de nacimiento
+            PersonBirthplace.objects.filter(person=alumno).delete()
+            
+            # Eliminar roles en organizaciones
+            OrganizationPersonRole.objects.filter(person=alumno).delete()
+            
+            # Eliminar relaciones con apoderados
+            PersonRelationship.objects.filter(person=alumno).delete()
+            
+            # Eliminar la persona
+            alumno.delete()
+        
+        return JsonResponse({
+            'status': 'success',
+            'message': 'Alumno eliminado exitosamente'
+        })
+        
+    except Person.DoesNotExist:
+        return JsonResponse({
+            'status': 'error',
+            'message': 'Alumno no encontrado'
+        }, status=404)
+    except Exception as e:
+        print('Error al eliminar alumno:', e)
+        return JsonResponse({
+            'status': 'error',
+            'message': str(e)
+        }, status=400)
+    

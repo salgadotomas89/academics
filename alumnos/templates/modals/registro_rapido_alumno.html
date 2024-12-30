@@ -1,12 +1,13 @@
-<!-- Modal de Registro Rápido de Alumno -->
+<!-- Modal de Registro Rápido -->
 <div class="modal fade" id="registroRapidoModal" tabindex="-1" aria-labelledby="registroRapidoModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="registroRapidoModalLabel">Registro Rápido de Alumno</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <div id="alertContainer"></div>
                 <form id="registroRapidoForm" class="needs-validation" novalidate>
                     <!-- Pestañas de navegación -->
                     <ul class="nav nav-tabs mb-3" role="tablist">
@@ -142,6 +143,7 @@
                                     <!-- Se llenará dinámicamente -->
                                 </select>
                             </div>
+
                         </div>
 
                         <!-- Pestaña de Apoderado -->
@@ -242,9 +244,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" onclick="guardarRegistroRapido()">
-                    <i class="fas fa-save me-2"></i>Guardar
-                </button>
+                <button type="button" class="btn btn-primary" onclick="guardarRegistroRapido()">Guardar</button>
             </div>
         </div>
     </div>
