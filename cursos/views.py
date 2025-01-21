@@ -8,6 +8,8 @@ from ceds_models.models import (
 )
 from django.db import transaction
 
+
+# Cursos
 @login_required
 def cursos(request):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
@@ -19,9 +21,6 @@ def cursos(request):
                                  safe=False, 
                                  content_type='application/json')
 
-            print("\n=== Listando cursos en vista cursos ===")
-            print(f"Organización: {org_role.organization.name}")
-                
             # Obtener las organizaciones de tipo curso relacionadas con la organización principal
             org_cursos = Organization.objects.filter(
                 child_relationships__parent_organization=org_role.organization,
@@ -32,14 +31,11 @@ def cursos(request):
             cursos = Course.objects.filter(
                 organization__in=org_cursos
             ).select_related('organization')
-            
-            print(f"Cursos encontrados: {cursos.count()}")
-            
+
+
             # Obtener información adicional de cada curso
             cursos_data = []
-            for curso in cursos:
-                print(f"\nProcesando curso: {curso.description}")
-                
+            for curso in cursos:                
                 # Obtener el profesor jefe
                 profesor_jefe = OrganizationPersonRole.objects.filter(
                     organization=curso.organization,
@@ -80,7 +76,6 @@ def cursos(request):
                     'jornada': 'Jornada completa'  # Esto podría obtenerse de otra relación si existe
                 }
                 
-                print(f"Datos del curso: {curso_data}")
                 cursos_data.append(curso_data)
 
             response_data = {'cursos': cursos_data}
@@ -118,10 +113,6 @@ def obtener_rbd(request):
                     ref_organization_identification_system_id=1
             ).values_list('identifier', flat=True).first()
 
-            
-                
-                
-        
         return JsonResponse({'rbd': rbd })
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
@@ -325,46 +316,57 @@ def crear_curso(request):
             'error': str(e)
         }, status=500)
 
+
+    
 @login_required
-def listar_cursos(request):
+def obtener_cursos(request):
     try:
         # Obtener la organización del usuario actual
         org_role = OrganizationPersonRole.objects.filter(person__user=request.user).first()
         if not org_role:
-            return JsonResponse({'error': 'Usuario no tiene organización asignada'})
-            
-        # Obtener todos los cursos K12 del establecimiento
-        cursos = K12Course.objects.filter(
-            organization=org_role.organization
+            return JsonResponse({'error': 'Usuario no tiene organización asignada'}, status=400)
+
+        # Obtener las organizaciones de tipo curso relacionadas con la organización principal
+        org_cursos = Organization.objects.filter(
+            child_relationships__parent_organization=org_role.organization,
+            ref_organization_type_id=21  # Tipo curso
+        )
+        
+        # Obtener los cursos asociados a esas organizaciones
+        cursos = Course.objects.filter(
+            organization__in=org_cursos
         ).select_related('organization')
         
-        # Obtener información adicional de cada curso
+        # Formatear los cursos para el select
         cursos_data = []
         for curso in cursos:
-            # Obtener el profesor jefe
-            profesor_jefe = OrganizationPersonRole.objects.filter(
-                organization=curso.organization,
-                role__ref_role_id=2  # Rol de profesor jefe
-            ).select_related('person').first()
-            
-            # Obtener cantidad de alumnos
-            cantidad_alumnos = OrganizationPersonRole.objects.filter(
-                organization=curso.organization,
-                role__ref_role_id=3  # Rol de alumno
-            ).count()
-            
-            cursos_data.append({
-                'id': curso.organization.id,
-                'nombre': curso.organization.name,
-                'profesor_jefe': f"{profesor_jefe.person.first_name} {profesor_jefe.person.last_name}" if profesor_jefe else "Sin asignar",
-                'cantidad_alumnos': cantidad_alumnos,
-                'sala': curso.organization.identifier or 'Por asignar'
-            })
+            try:
+                #k12_curso = K12Course.objects.get(organization=curso.organization)
+                
+                # Obtener cantidad de alumnos
+                cantidad_alumnos = OrganizationPersonRole.objects.filter(
+                    organization=curso.organization,
+                    role_id=3  # Rol de alumno
+                ).count()
+                
+                cursos_data.append({
+                    'id': curso.organization.organization_id,
+                    'nombre': f"{curso.description} ({cantidad_alumnos} alumnos)"
+                })
+
+            except K12Course.DoesNotExist:
+                continue
+
         
-        return JsonResponse({'cursos': cursos_data})
-        
+        return JsonResponse({
+            'status': 'success',
+            'cursos': cursos_data
+        })
     except Exception as e:
-        return JsonResponse({'error': str(e)})
+        return JsonResponse({
+            'status': 'error',
+            'message': str(e)
+        }, status=400)
 
 @login_required
 def eliminar_curso(request, curso_id):

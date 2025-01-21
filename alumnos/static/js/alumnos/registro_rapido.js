@@ -1,10 +1,13 @@
+// Variable para controlar si el evento ya fue registrado
+let eventoRegistrado = false;
+
 // Función para cargar los cursos en el select
 function cargarCursos() {
     const selectCurso = document.querySelector('select[name="course_id"]');
     // Limpiar opciones existentes
     selectCurso.innerHTML = '<option value="">Seleccionar...</option>';
     
-    fetch('/alumnos/obtener-cursos/')
+    fetch('/cursos/obtener-cursos/')
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
@@ -302,6 +305,12 @@ function guardarRegistroRapido() {
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', function() {
+    // Evitar registro múltiple de eventos
+    if (eventoRegistrado) {
+        return;
+    }
+    eventoRegistrado = true;
+
     // Inicializar validación del RUN
     const runAlumnoInput = document.querySelector('input[name="run"]');
     if (runAlumnoInput) {
@@ -320,9 +329,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Cargar cursos al abrir el modal
     const modal = document.getElementById('registroRapidoModal');
     if (modal) {
+        // Remover eventos existentes
+        modal.removeEventListener('show.bs.modal', cargarCursos);
+        // Agregar el nuevo evento
+        modal.addEventListener('show.bs.modal', cargarCursos);
+        
+        // Limpiar formulario cuando se abre el modal
         modal.addEventListener('show.bs.modal', function() {
-            cargarCursos();
-            // Limpiar el formulario
             const form = document.getElementById('registroRapidoForm');
             if (form) {
                 form.reset();

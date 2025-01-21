@@ -650,14 +650,4 @@
 </div>
 
 <script src="/static/js/alumnos/validacion_ipe.js"></script>
-<script>
-document.getElementById('nuevoAlumnoModal').addEventListener('shown.bs.modal', function () {
-    console.log('Modal abierto');
-    initIPEValidations();
-});
 
-document.getElementById('healthInsurance').addEventListener('change', function() {
-    const detailsDiv = document.getElementById('healthInsuranceDetails');
-    detailsDiv.style.display = this.checked ? 'block' : 'none';
-});
-</script>
